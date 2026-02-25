@@ -1,156 +1,188 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Reality Anchors — Savings Calculator</title>
-<meta name="description" content="Estimate annual material savings using industry baseline scrap rates and conservative deltas." />
-<link rel="stylesheet" href="../assets/styles.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reality Anchors — Savings Calculator</title>
+  <meta name="description" content="Estimate annual material savings using industry baseline scrap rates and conservative deltas." />
+  <link rel="stylesheet" href="../assets/styles.css" />
 </head>
 <body>
-<header class="topbar">
-<div class="wrap topbar__inner">
-<a class="brand" href="../index.html">
-<span class="brand__mark">RA</span>
-<span class="brand__text">
-<span class="brand__name">Reality Anchors</span>
-<span class="brand__tag">Savings Calculator</span>
-</span>
-</a>
-<nav class="nav">
-<a href="../personal/index.html">Personal</a>
-<a href="../commercial/index.html">Commercial</a>
-<a href="../industrial/index.html">Industrial</a>
-<a class="active pill" href="./index.html">Calculator</a>
-</nav>
-</div>
-</header>
-<main class="wrap">
-<section class="pagehead">
-<h1>Savings Calculator</h1>
-<p class="lead">
-This calculator uses industry baseline scrap rates by segment (not self-reported scrap) and applies conservative improvement deltas to estimate annual material savings.
-</p>
-<div class="soft">Note: This is a v1 front-end estimate tool; onboarding includes a more detailed workflow and instrumentation plan.</div>
-</section>
-<section class="section">
-<div class="grid2">
-<div class="card">
-<div class="card__title">Inputs</div>
-<form class="form" data-form="calculator" id="calcForm">
-<div class="form__row">
-<label>
-<span>Tons per month</span>
-<input id="tonsPerMonth" name="tonsPerMonth" type="number" min="0" step="0.1" value="60" required />
-</label>
-<label>
-<span>Steel cost per ton (USD)</span>
-<input id="steelCost" name="steelCost" type="number" min="0" step="1" value="900" required />
-</label>
-</div>
-<div class="form__row">
-<label class="grow">
-<span>Segment</span>
-<select id="segment" name="segment" required>
-<option value="small_shop">Small commercial shop</option>
-<option value="prefab">Prefab yard</option>
-<option value="industrial">Industrial</option>
-</select>
-</label>
-<label>
-<span>Benches</span>
-<input id="benches" name="benches" type="number" min="1" step="1" value="2" required />
-</label>
-</div>
-<details class="details">
-<summary>Optional labor estimate</summary>
-<div class="form__row">
-<label>
-<span>Loaded labor rate (USD/hr)</span>
-<input id="laborRate" name="laborRate" type="number" min="0" step="1" value="85" />
-</label>
-<label>
-<span>Hours saved per ton (hr/ton)</span>
-<input id="hoursSavedPerTon" name="hoursSavedPerTon" type="number" min="0" step="0.01" value="0.10" />
-</label>
-</div>
-<div class="soft">Labor is optional. Leave as-is for a conservative placeholder.</div>
-</details>
-<button class="btn" type="submit">Calculate</button>
-<button class="btn btn--ghost" type="button" id="resetBtn">Reset</button>
-</form>
-</div>
-<div class="card" id="resultsCard" aria-live="polite">
-<div class="card__title">Results</div>
-<div class="kpi-grid kpi-grid--big">
-<div class="kpi">
-<div class="kpi__label">Baseline scrap (model)</div>
-<div class="kpi__value mono" id="baselineScrap">—</div>
-</div>
-<div class="kpi">
-<div class="kpi__label">Delta scrap (conservative)</div>
-<div class="kpi__value mono" id="deltaScrap">—</div>
-</div>
-<div class="kpi">
-<div class="kpi__label">Annual material savings</div>
-<div class="kpi__value mono" id="materialSavings">—</div>
-</div>
-<div class="kpi">
-<div class="kpi__label">Annual labor savings (optional)</div>
-<div class="kpi__value mono" id="laborSavings">—</div>
-</div>
-</div>
-<div class="divider"></div>
-<div class="resultline">
-<div class="resultline__k">Predicted annual total savings</div>
-<div class="resultline__v mono" id="totalSavings">—</div>
-</div>
-<div class="resultline">
-<div class="resultline__k">Suggested plan tier</div>
-<div class="resultline__v mono" id="planTier">—</div>
-</div>
-<div class="soft">Plan tiers are indicative. Final pricing depends on bench scope, workflow complexity, and instrumentation needs.</div>
-<div class="cta-row">
-<a class="btn" href="../commercial/index.html#contact">Request quote range</a>
-<a class="btn btn--ghost" href="../index.html">Back to home</a>
-</div>
-</div>
-</div>
-</section>
-<section class="section">
-<div class="card">
-<div class="card__title">Assumptions used</div>
-<div class="table">
-<div class="tr th">
-<div>Segment</div><div>Baseline scrap</div><div>Delta scrap</div>
-</div>
-<div class="tr">
-<div>Small commercial shop</div><div class="mono">8.0%</div><div class="mono">2.0%</div>
-</div>
-<div class="tr">
-<div>Prefab yard</div><div class="mono">5.5%</div><div class="mono">1.5%</div>
-</div>
-<div class="tr">
-<div>Industrial</div><div class="mono">3.5%</div><div class="mono">1.0%</div>
-</div>
-</div>
-<div class="soft">These are conservative scaffolds. They should be refined as you collect anonymized distributions.</div>
-</div>
-</section>
-</main>
-<footer class="footer">
-<div class="wrap footer__inner">
-<div class="footer__left">
-<div class="footer__brand">Reality Anchors</div>
-<div class="muted">Savings Calculator</div>
-</div>
-<div class="footer__right">
-<a href="../commercial/index.html">Commercial</a>
-<a href="../industrial/index.html">Industrial</a>
-<a href="../personal/index.html">Personal</a>
-</div>
-</div>
-</footer>
-<script src="../assets/script.js"></script>
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <a class="brand" href="../index.html">
+        <span class="brand__mark">RA</span>
+        <span class="brand__text">
+          <span class="brand__name">Reality Anchors</span>
+          <span class="brand__tag">Savings Calculator</span>
+        </span>
+      </a>
+
+      <nav class="nav">
+        <a href="../personal/index.html">Personal</a>
+        <a href="../commercial/index.html">Commercial</a>
+        <a href="../industrial/index.html">Industrial</a>
+        <a class="active pill" href="./index.html">Calculator</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="pagehead">
+      <h1>Savings Calculator</h1>
+      <p class="lead">
+        This calculator uses industry baseline scrap rates by segment (not self-reported scrap) and applies conservative
+        improvement deltas to estimate annual material savings.
+      </p>
+      <div class="soft">
+        Note: This is a v1 front-end estimate tool; onboarding includes a more detailed workflow and instrumentation plan.
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid2">
+        <div class="card">
+          <div class="card__title">Inputs</div>
+
+          <form class="form" data-form="calculator" id="calcForm">
+            <div class="form__row">
+              <label>
+                <span>Tons per month</span>
+                <input id="tonsPerMonth" name="tonsPerMonth" type="number" min="0" step="0.1" value="60" required />
+              </label>
+
+              <label>
+                <span>Steel cost per ton (USD)</span>
+                <input id="steelCost" name="steelCost" type="number" min="0" step="1" value="900" required />
+              </label>
+            </div>
+
+            <div class="form__row">
+              <label class="grow">
+                <span>Segment</span>
+                <select id="segment" name="segment" required>
+                  <option value="small_shop">Small commercial shop</option>
+                  <option value="prefab">Prefab yard</option>
+                  <option value="industrial">Industrial</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Benches</span>
+                <input id="benches" name="benches" type="number" min="1" step="1" value="2" required />
+              </label>
+            </div>
+
+            <details class="details">
+              <summary>Optional labor estimate</summary>
+              <div class="form__row">
+                <label>
+                  <span>Loaded labor rate (USD/hr)</span>
+                  <input id="laborRate" name="laborRate" type="number" min="0" step="1" value="85" />
+                </label>
+                <label>
+                  <span>Hours saved per ton (hr/ton)</span>
+                  <input id="hoursSavedPerTon" name="hoursSavedPerTon" type="number" min="0" step="0.01" value="0.10" />
+                </label>
+              </div>
+              <div class="soft">
+                Labor is optional. Leave as-is for a conservative placeholder.
+              </div>
+            </details>
+
+            <button class="btn" type="submit">Calculate</button>
+            <button class="btn btn--ghost" type="button" id="resetBtn">Reset</button>
+          </form>
+        </div>
+
+        <div class="card" id="resultsCard" aria-live="polite">
+          <div class="card__title">Results</div>
+
+          <div class="kpi-grid kpi-grid--big">
+            <div class="kpi">
+              <div class="kpi__label">Baseline scrap (model)</div>
+              <div class="kpi__value mono" id="baselineScrap">—</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi__label">Delta scrap (conservative)</div>
+              <div class="kpi__value mono" id="deltaScrap">—</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi__label">Annual material savings</div>
+              <div class="kpi__value mono" id="materialSavings">—</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi__label">Annual labor savings (optional)</div>
+              <div class="kpi__value mono" id="laborSavings">—</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="resultline">
+            <div class="resultline__k">Predicted annual total savings</div>
+            <div class="resultline__v mono" id="totalSavings">—</div>
+          </div>
+
+          <div class="resultline">
+            <div class="resultline__k">Indicative subscription range</div>
+            <div class="resultline__v mono" id="planTier">—</div>
+          </div>
+
+          <div class="soft">
+            Subscription typically represents 10–25% of modeled annual value.
+          </div>
+
+          <div class="soft">
+            Plan tiers are indicative. Final pricing depends on bench scope, workflow complexity, and instrumentation needs.
+          </div>
+
+          <div class="cta-row">
+            <a class="btn" href="../commercial/index.html#contact">Request quote range</a>
+            <a class="btn btn--ghost" href="../index.html">Back to home</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card">
+        <div class="card__title">Assumptions used</div>
+        <div class="table">
+          <div class="tr th">
+            <div>Segment</div><div>Baseline scrap</div><div>Delta scrap</div>
+          </div>
+          <div class="tr">
+            <div>Small commercial shop</div><div class="mono">8.0%</div><div class="mono">2.0%</div>
+          </div>
+          <div class="tr">
+            <div>Prefab yard</div><div class="mono">5.5%</div><div class="mono">1.5%</div>
+          </div>
+          <div class="tr">
+            <div>Industrial</div><div class="mono">3.5%</div><div class="mono">1.0%</div>
+          </div>
+        </div>
+        <div class="soft">
+          Typical modeled delta is generally 1–3 percentage points depending on segment. These assumptions should be refined as you collect anonymized distributions.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <div class="footer__left">
+        <div class="footer__brand">Reality Anchors</div>
+        <div class="muted">Savings Calculator</div>
+      </div>
+      <div class="footer__right">
+        <a href="../commercial/index.html">Commercial</a>
+        <a href="../industrial/index.html">Industrial</a>
+        <a href="../personal/index.html">Personal</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/script.js"></script>
 </body>
 </html>

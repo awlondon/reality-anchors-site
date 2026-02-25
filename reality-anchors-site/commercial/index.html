@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Reality Anchors — Commercial</title>
+<meta name="description" content="Commercial plan: bench-first subscription + usage metering. Pricing based on industry baselines." />
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+<header class="topbar">
+<div class="wrap topbar__inner">
+<a class="brand" href="../index.html">
+<span class="brand__mark">RA</span>
+<span class="brand__text">
+<span class="brand__name">Reality Anchors</span>
+<span class="brand__tag">Commercial</span>
+</span>
+</a>
+<nav class="nav">
+<a href="../personal/index.html">Personal</a>
+<a class="active" href="./index.html">Commercial</a>
+<a href="../industrial/index.html">Industrial</a>
+<a href="../calculator/index.html" class="pill">Savings Calculator</a>
+</nav>
+</div>
+</header>
+<main class="wrap">
+<section class="pagehead">
+<h1>Commercial</h1>
+<p class="lead">
+Bench-first execution for crews and fabrication yards. Pricing is based on industry baselines and modeled value, then scales with usage.
+</p>
+<div class="cta-row">
+<a class="btn" href="../calculator/index.html">Estimate savings</a>
+<a class="btn btn--ghost" href="#contact">Talk to a representative</a>
+</div>
+</section>
+<section class="section">
+<div class="card">
+<div class="card__title">Baseline model (no self-reported scrap)</div>
+<p class="muted">
+We do not rely on reported percentages. We price using industry baseline waste rates by segment, then model conservative improvement deltas based on throughput and complexity.
+</p>
+<div class="table">
+<div class="tr th">
+<div>Segment</div><div>Typical scrap range</div><div>Model baseline</div>
+</div>
+<div class="tr">
+<div>Small commercial shop</div><div class="mono">6–10%</div><div class="mono">8.0%</div>
+</div>
+<div class="tr">
+<div>Prefab yard</div><div class="mono">4–7%</div><div class="mono">5.5%</div>
+</div>
+<div class="tr">
+<div>Industrial (for reference)</div><div class="mono">2–5%</div><div class="mono">3.5%</div>
+</div>
+</div>
+<div class="soft">
+Baselines are refined over time using anonymized operational distributions. Contracts reference the published baseline model version.
+</div>
+</div>
+</section>
+<section class="section">
+<div class="grid2">
+<div class="card">
+<div class="card__title">Savings model (conceptual)</div>
+<p class="muted">
+The savings estimate combines a material delta (scrap reduction) and a labor delta (rework/time reduction). We remain conservative by default.
+</p>
+<pre class="codeblock">AnnualSavings ≈ (Tons/month × 12 × SteelCost/ton × ScrapDelta) + (Tons/month × 12 × LaborHoursDelta × LoadedRate)</pre>
+<div class="soft">
+In onboarding, we align metrics to what you already track (or implement minimal measurement where needed).
+</div>
+</div>
+<div class="card">
+<div class="card__title">What gets instrumented</div>
+<ul class="list">
+<li>Scrap percent and offcut inventory</li>
+<li>Miscut / rework events</li>
+<li>Throughput indicators (tons, bars, work orders)</li>
+<li>Operator actions, timestamps, machine profiles</li>
+<li>Audit exports (job-level and run-level)</li>
+</ul>
+<div class="soft">The product must record defensible metrics. “Diffusion” becomes a data problem, not a debate.</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="card">
+<div class="card__title">Subscription based on modeled value</div>
+<p class="muted">
+You receive a suggested plan based on predicted annual value, then a usage layer scales with bench activity.
+</p>
+<div class="table">
+<div class="tr th">
+<div>Predicted annual savings</div><div>Estimated plan</div><div>Intended fit</div>
+</div>
+<div class="tr">
+<div class="mono">&lt; $15k</div><div class="mono">$2k/year</div><div>Small bench, low volume</div>
+</div>
+<div class="tr">
+<div class="mono">$15k–$50k</div><div class="mono">$6k/year</div><div>Typical small-to-mid shop</div>
+</div>
+<div class="tr">
+<div class="mono">$50k–$150k</div><div class="mono">$15k/year</div><div>High utilization benches</div>
+</div>
+<div class="tr">
+<div class="mono">$150k+</div><div class="mono">Custom</div><div>Multi-bench / multi-facility</div>
+</div>
+</div>
+<div class="divider"></div>
+<div class="grid2">
+<div>
+<div class="subhead">Usage layer</div>
+<ul class="list">
+<li>Per active bench (monthly)</li>
+<li>or per ton processed above baseline (monthly)</li>
+<li>or per optimization run batch (event-based)</li>
+</ul>
+</div>
+<div>
+<div class="subhead">Why hybrid</div>
+<ul class="list">
+<li>Predictable base cost</li>
+<li>Scales fairly with heavy use</li>
+<li>Avoids performance-audit disputes</li>
+</ul>
+</div>
+</div>
+<div class="cta-row">
+<a class="btn" href="../calculator/index.html">Estimate savings</a>
+<a class="btn btn--ghost" href="#contact">Request a quote range</a>
+</div>
+</div>
+</section>
+<section class="section" id="contact">
+<div class="card">
+<div class="card__title">Request a quote range</div>
+<p class="muted">This form logs locally (no backend wired yet). Use it to define your target segment.</p>
+<form class="form" data-form="commercial-quote">
+<div class="form__row">
+<label>
+<span>Company</span>
+<input name="company" required placeholder="Company name" />
+</label>
+<label>
+<span>Email</span>
+<input name="email" required type="email" placeholder="you@company.com" />
+</label>
+</div>
+<div class="form__row">
+<label>
+<span>Tons per month</span>
+<input name="tonsPerMonth" required type="number" min="0" step="0.1" placeholder="e.g., 60" />
+</label>
+<label>
+<span>Benches</span>
+<input name="benches" required type="number" min="1" step="1" placeholder="e.g., 2" />
+</label>
+</div>
+<div class="form__row">
+<label class="grow">
+<span>Segment</span>
+<select name="segment" required>
+<option value="">Select…</option>
+<option value="small_shop">Small commercial shop</option>
+<option value="prefab">Prefab yard</option>
+</select>
+</label>
+</div>
+<label class="grow">
+<span>Notes (optional)</span>
+<textarea name="notes" rows="4" placeholder="Project mix, machine types, workflow constraints, etc."></textarea>
+</label>
+<button class="btn" type="submit">Submit</button>
+<div class="soft">
+You’ll receive a range estimate. Final terms depend on bench scope and instrumentation needs.
+</div>
+</form>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="wrap footer__inner">
+<div class="footer__left">
+<div class="footer__brand">Reality Anchors</div>
+<div class="muted">Commercial</div>
+</div>
+<div class="footer__right">
+<a href="../index.html">Home</a>
+<a href="../personal/index.html">Personal</a>
+<a href="../industrial/index.html">Industrial</a>
+</div>
+</div>
+</footer>
+<script src="../assets/script.js"></script>
+</body>
+</html>

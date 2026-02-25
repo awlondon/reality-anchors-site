@@ -63,13 +63,17 @@ a:hover{ text-decoration: underline; text-underline-offset: 3px; }
   gap: 12px;
 }
 .brand__mark{
-  width: 40px; height: 40px;
-  display:grid; place-items:center;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(106,160,255,.25), rgba(88,227,181,.15));
-  border: 1px solid rgba(34,48,77,.9);
-  font-weight: 800;
-  letter-spacing: .03em;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: #dce8fb;
+}
+
+.brand__mark img{
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 .brand__text{ display:flex; flex-direction:column; line-height: 1.05; }
 .brand__name{ font-weight: 750; }

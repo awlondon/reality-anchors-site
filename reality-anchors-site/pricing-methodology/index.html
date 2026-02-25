@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reality Anchors — Pricing & Methodology Whitepaper</title>
+  <meta name="description" content="Formal pricing, modeling, governance, and data methodology for Reality Anchors." />
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+
+<div class="print-cover">
+  <div class="cover-inner">
+    <h1>Reality Anchors</h1>
+    <h2>Pricing & Methodology Whitepaper</h2>
+
+    <div class="cover-meta">
+      <div><strong>Document ID:</strong> RA-WP-001</div>
+      <div><strong>Version:</strong> 1.0</div>
+      <div><strong>Effective Date:</strong> January 2026</div>
+      <div><strong>Classification:</strong> Confidential</div>
+    </div>
+
+    <div class="cover-divider"></div>
+
+    <div class="cover-approval">
+      <div><strong>Prepared By:</strong> Reality Anchors</div>
+      <div><strong>Intended Audience:</strong> Commercial & Industrial Procurement</div>
+      <div><strong>Distribution:</strong> Enterprise Review</div>
+    </div>
+  </div>
+</div>
+
+<div class="print-executive">
+  <div class="exec-inner">
+
+    <h1>Executive Summary</h1>
+
+    <p>
+      Reality Anchors is a workflow intelligence system designed to reduce material waste,
+      stabilize bench execution, and improve fabrication throughput using deterministic
+      operational controls.
+    </p>
+
+    <h2>Investment Thesis</h2>
+    <ul>
+      <li>Modeled scrap reduction: 1–3 percentage points (segment-dependent)</li>
+      <li>Linear value scaling with tonnage</li>
+      <li>Subscription pricing aligned to minority fraction of modeled value</li>
+      <li>No capital expenditure requirement</li>
+    </ul>
+
+    <h2>Financial Characteristics</h2>
+    <ul>
+      <li>Typical modeled annual value: $7k–$100k+</li>
+      <li>Indicative subscription capture: 10–25%</li>
+      <li>Modeled ROI frequently exceeds capital equipment hurdle rates</li>
+      <li>Operational expense classification (not CapEx)</li>
+    </ul>
+
+    <h2>Risk Mitigation</h2>
+    <ul>
+      <li>Baseline assumptions published and versioned</li>
+      <li>Conservative improvement deltas</li>
+      <li>Monte Carlo sensitivity modeling</li>
+      <li>60-day validation window for calibration</li>
+    </ul>
+
+    <h2>Governance & Compliance</h2>
+    <ul>
+      <li>Facility-level data isolation</li>
+      <li>Structured data classification (Operational / Derived / Aggregated)</li>
+      <li>Optional immutable event logging</li>
+      <li>Version-controlled modeling framework</li>
+    </ul>
+
+    <p class="exec-conclusion">
+      Reality Anchors is positioned as a capital-efficient optimization layer
+      that enhances return on existing fabrication infrastructure without
+      introducing equipment depreciation risk.
+    </p>
+
+  </div>
+</div>
+
+<div class="print-header">
+  <div>Reality Anchors — Pricing & Methodology</div>
+  <div>Document ID: RA-WP-001 | Version 1.0</div>
+</div>
+
+<div class="print-footer">
+  <div>Confidential — Enterprise Distribution</div>
+  <div class="page-number"></div>
+</div>
+
+<div class="print-legal">
+  Pricing estimates are non-binding and subject to executed agreement terms.
+</div>
+
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark">RA</span>
+      <span class="brand__text">
+        <span class="brand__name">Reality Anchors</span>
+        <span class="brand__tag">Methodology Whitepaper</span>
+      </span>
+    </a>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a href="../commercial/index.html">Commercial</a>
+      <a href="../calculator/index.html">Calculator</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap whitepaper">
+
+<section class="wp-header">
+  <h1>Reality Anchors Pricing & Methodology</h1>
+  <div class="muted">
+    Document ID: RA-WP-001<br>
+    Version: 1.0<br>
+    Effective Date: January 2026
+  </div>
+</section>
+
+<section class="wp-section">
+  <h2>1. Purpose</h2>
+  <p>
+    This document defines the pricing model, operational baseline assumptions,
+    data classification structure, and governance framework used by Reality Anchors.
+    The objective is pricing clarity, auditability, and long-term contractual stability.
+  </p>
+</section>
+
+<section class="wp-section">
+  <h2>2. Baseline Model Assumptions</h2>
+  <p>
+    Pricing is derived from industry baseline scrap distributions by operational segment.<sup class="ref">[1]</sup>
+    Self-reported scrap percentages are not used as primary pricing anchors.
+  </p>
+
+  <div class="table">
+    <div class="tr th">
+      <div>Segment</div>
+      <div>Typical Scrap Range</div>
+      <div>Model Baseline</div>
+    </div>
+    <div class="tr">
+      <div>Small Commercial Shop</div>
+      <div class="mono">6–10%</div>
+      <div class="mono">8.0%</div>
+    </div>
+    <div class="tr">
+      <div>Prefab Yard</div>
+      <div class="mono">4–7%</div>
+      <div class="mono">5.5%</div>
+    </div>
+    <div class="tr">
+      <div>Industrial Plant</div>
+      <div class="mono">2–5%</div>
+      <div class="mono">3.5%</div>
+    </div>
+  </div>
+
+  <p class="muted">
+    Baseline versions are published and referenced in contractual agreements.
+  </p>
+</section>
+
+<section class="wp-section">
+  <h2>3. Conservative Improvement Deltas</h2>
+
+  <div class="table">
+    <div class="tr th">
+      <div>Segment</div>
+      <div>Modeled Scrap Delta</div>
+      <div>Typical Range</div>
+    </div>
+    <div class="tr">
+      <div>Small Commercial Shop</div>
+      <div class="mono">2.0 pts</div>
+      <div class="mono">1–3 pts</div>
+    </div>
+    <div class="tr">
+      <div>Prefab Yard</div>
+      <div class="mono">1.5 pts</div>
+      <div class="mono">1–2 pts</div>
+    </div>
+    <div class="tr">
+      <div>Industrial Plant</div>
+      <div class="mono">1.0 pt</div>
+      <div class="mono">0.5–1.5 pts</div>
+    </div>
+  </div>
+
+  <p>
+    These deltas reflect deterministic workflow enforcement, scrap-aware cut optimization,
+    and calibration stabilization. They do not assume structural plant redesign.
+  </p>
+</section>
+
+<section class="wp-section">
+  <h2>4. Savings Calculation Model</h2>
+
+  <pre class="codeblock">
+Annual Material Savings =
+(Tons/month × 12 × Steel Cost/ton × Scrap Delta)
+
+Annual Labor Savings =
+(Tons/month × 12 × Hours Saved per Ton × Loaded Labor Rate)
+
+Total Modeled Value =
+Material Savings + Labor Savings
+  </pre>
+
+  <p class="muted">
+    Labor deltas are optional inputs. Material deltas are primary drivers of pricing alignment.
+  </p>
+</section>
+
+<section class="wp-section">
+  <h2>5. Subscription Alignment Structure</h2>
+
+  <div class="table">
+    <div class="tr th">
+      <div>Modeled Annual Value</div>
+      <div>Indicative Subscription Range</div>
+      <div>Capture Ratio</div>
+    </div>
+    <div class="tr">
+      <div class="mono">&lt; $15k</div>
+      <div class="mono">$2k–$3k</div>
+      <div class="mono">~15–20%</div>
+    </div>
+    <div class="tr">
+      <div class="mono">$15k–$50k</div>
+      <div class="mono">$6k–$9k</div>
+      <div class="mono">~12–18%</div>
+    </div>
+    <div class="tr">
+      <div class="mono">$50k–$150k</div>
+      <div class="mono">$15k–$25k</div>
+      <div class="mono">~10–16%</div>
+    </div>
+  </div>
+
+  <p>
+    Subscription pricing represents a minority fraction of modeled annual value.
+    Exact pricing depends on operational envelope and governance scope.
+  </p>
+</section>
+
+<section class="wp-section">
+  <h2>6. Data Classification Framework</h2>
+
+  <div class="table">
+    <div class="tr th">
+      <div>Classification</div>
+      <div>Storage Scope</div>
+      <div>External Use</div>
+    </div>
+    <div class="tr">
+      <div>Operational Data</div>
+      <div>Facility-Isolated</div>
+      <div>Not shared</div>
+    </div>
+    <div class="tr">
+      <div>Derived Data</div>
+      <div>Facility-Isolated</div>
+      <div>Not shared</div>
+    </div>
+    <div class="tr">
+      <div>Aggregated Data</div>
+      <div>Anonymized Cross-Facility</div>
+      <div>Benchmark distributions only</div>
+    </div>
+  </div>
+
+  <p>
+    Aggregated datasets contain no facility identifiers, job references, or operator-level data.
+  </p>
+</section>
+
+<section class="wp-section">
+  <h2>7. Operational Data Flow Architecture</h2>
+
+  <p>
+    Logical separation is maintained between bench capture, facility storage,
+    and anonymized statistical aggregation.
+  </p>
+
+  <div class="architecture-flow">
+    Bench → Tablet Interface → Facility Storage → Aggregated Benchmark Index
+  </div>
+
+  <p class="muted">
+    Aggregation processes use statistical distributions only. Raw event logs remain segmented.
+  </p>
+</section>
+
+<section class="wp-section">
+  <h2>8. Governance & Audit Readiness</h2>
+
+  <ul class="list">
+    <li>Versioned baseline models referenced in contracts</li>
+    <li>Role-based access control</li>
+    <li>Optional immutable event logging</li>
+    <li>Configuration change history tracking</li>
+    <li>Exportable audit artifacts</li>
+  </ul>
+
+  <p>
+    The architecture is structured to integrate into existing enterprise governance environments.
+    Certifications, where required, are addressed per deployment tier.
+  </p>
+</section>
+
+<section class="wp-section">
+  <h2>9. Benchmark Index Framework</h2>
+
+  <p>
+    Anonymized operational distributions are aggregated into a structured performance index.
+    This index supports percentile benchmarking and continuous model refinement.
+  </p>
+
+  <p class="muted">
+    Benchmark releases are versioned and statistically thresholded before publication.
+  </p>
+</section>
+
+<section class="wp-section conclusion">
+  <h2>10. Conclusion</h2>
+  <p>
+    Reality Anchors pricing discipline is derived from:
+  </p>
+  <ul class="list">
+    <li>Published industry baselines</li>
+    <li>Conservative improvement deltas</li>
+    <li>Deterministic savings calculations</li>
+    <li>Formal data classification</li>
+    <li>Versioned governance controls</li>
+  </ul>
+
+  <p>
+    The objective is contractual stability, operational clarity, and long-term trust.
+  </p>
+</section>
+
+<section class="wp-section">
+  <h2>Appendix A — Mathematical Savings Model</h2>
+
+  <h3>A.1 Definitions</h3>
+  <pre class="codeblock">
+Let:
+
+T   = Tons processed per month
+C   = Steel cost per ton
+Sb  = Baseline scrap fraction (decimal form)
+Sa  = Post-deployment scrap fraction (decimal form)
+ΔS  = Sb − Sa  (Scrap improvement delta)
+
+H   = Labor hours per ton (baseline)
+ΔH  = Reduction in labor hours per ton
+W   = Loaded labor rate per hour
+  </pre>
+
+  <h3>A.2 Material Savings</h3>
+  <pre class="codeblock">
+Annual Material Savings (M) =
+12 × T × C × ΔS
+  </pre>
+
+  <p class="muted">
+    Constraint: 0 ≤ ΔS ≤ Sb
+  </p>
+
+  <h3>A.3 Labor Savings (Optional Input)</h3>
+  <pre class="codeblock">
+Annual Labor Savings (L) =
+12 × T × ΔH × W
+  </pre>
+
+  <p class="muted">
+    Constraint: ΔH ≥ 0
+  </p>
+
+  <h3>A.4 Total Modeled Value</h3>
+  <pre class="codeblock">
+Total Modeled Value (V) =
+M + L
+  </pre>
+
+  <h3>A.5 Subscription Capture Ratio</h3>
+  <pre class="codeblock">
+Let:
+
+P = Annual Subscription Price
+ρ = Capture Ratio
+
+Then:
+
+P = ρ × V
+
+Where:
+
+0.10 ≤ ρ ≤ 0.25 (typical operational range)
+  </pre>
+
+  <h3>A.6 Sensitivity Analysis</h3>
+  <p>
+    Material savings scale linearly with tonnage and steel cost. The model therefore exhibits:
+  </p>
+
+  <pre class="codeblock">
+∂M/∂T = 12 × C × ΔS
+∂M/∂C = 12 × T × ΔS
+∂M/∂ΔS = 12 × T × C
+  </pre>
+
+  <p class="muted">
+    Pricing stability is preserved by conservative estimation of ΔS.
+  </p>
+
+  <h3>A.7 Benchmark Adjustment Factor</h3>
+  <pre class="codeblock">
+If percentile position within segment is known:
+
+Adjusted Baseline Sb* =
+Sb × (Segment Median / Facility Percentile Position)
+
+Where Sb* ≥ 0
+  </pre>
+
+  <p>
+    This adjustment is optional and only applied when statistically valid sample sizes exist.
+  </p>
+
+  <h3>A.8 Model Versioning</h3>
+  <p>
+    Each pricing agreement references:
+  </p>
+
+  <ul class="list">
+    <li>Baseline Model Version ID</li>
+    <li>Delta Assumption Version ID</li>
+    <li>Benchmark Dataset Version ID (if applicable)</li>
+  </ul>
+
+  <p class="muted">
+    Model updates do not retroactively alter executed contracts.
+  </p>
+
+</section>
+
+<section class="wp-section">
+  <h2>Appendix B — Worked Numerical Example</h2>
+
+  <p>
+    This example illustrates the modeled value calculation using fixed inputs and conservative deltas. Values are provided
+    for clarity of method, not as performance guarantees.
+  </p>
+
+  <h3>B.1 Example Inputs</h3>
+  <pre class="codeblock">
+Assume a commercial fabrication yard with:
+
+T   = 60 tons/month
+C   = $900/ton
+Segment baseline scrap model: Sb = 0.055 (5.5%)
+Conservative scrap improvement: ΔS = 0.015 (1.5 pts)
+
+Optional labor inputs:
+ΔH  = 0.10 hr/ton
+W   = $85/hr
+  </pre>
+
+  <h3>B.2 Annual Material Savings</h3>
+  <pre class="codeblock">
+M = 12 × T × C × ΔS
+  = 12 × 60 × 900 × 0.015
+  = 12 × 60 × 13.5
+  = 12 × 810
+  = $9,720 per year
+  </pre>
+
+  <h3>B.3 Annual Labor Savings (Optional)</h3>
+  <pre class="codeblock">
+L = 12 × T × ΔH × W
+  = 12 × 60 × 0.10 × 85
+  = 12 × 60 × 8.5
+  = 12 × 510
+  = $6,120 per year
+  </pre>
+
+  <h3>B.4 Total Modeled Value</h3>
+  <pre class="codeblock">
+V = M + L
+  = 9,720 + 6,120
+  = $15,840 per year
+  </pre>
+
+  <h3>B.5 Indicative Subscription Range (Capture Ratio)</h3>
+  <pre class="codeblock">
+Using ρ in [0.12, 0.18]:
+
+P_low  = 0.12 × V = 0.12 × 15,840 = $1,900.80
+P_high = 0.18 × V = 0.18 × 15,840 = $2,851.20
+
+Indicative annual subscription range: ~$1,900–$2,850
+  </pre>
+
+  <p class="muted">
+    This range aligns with the lower commercial tiers. Higher-throughput facilities (larger T) scale linearly and therefore
+    move into higher subscription bands under the same conservative delta assumptions.
+  </p>
+
+  <h3>B.6 Scale Illustration (Same Segment, Higher Throughput)</h3>
+  <pre class="codeblock">
+If T increases to 200 tons/month (all else unchanged):
+
+M = 12 × 200 × 900 × 0.015 = $32,400/year
+L = 12 × 200 × 0.10 × 85   = $20,400/year
+V = $52,800/year
+
+At ρ in [0.12, 0.18]:
+P ≈ $6,336–$9,504 per year
+  </pre>
+
+  <p class="muted">
+    This is an illustration of linear scaling. Real deployments may differ based on workflow complexity, bench count,
+    and instrumentation scope.
+  </p>
+</section>
+
+
+<section class="wp-section">
+  <h2>Appendix C — Additional Scenario Examples</h2>
+
+  <p>
+    The following examples illustrate how modeled value varies across segments
+    due to different scrap baselines and throughput levels.
+  </p>
+
+  <!-- SMALL SHOP CASE -->
+  <h3>C.1 Small Commercial Shop (Higher Scrap Baseline)</h3>
+
+  <pre class="codeblock">
+Assume:
+
+T   = 25 tons/month
+C   = $900/ton
+Baseline scrap Sb = 0.08 (8.0%)
+Conservative improvement ΔS = 0.02 (2 pts)
+
+Optional labor:
+ΔH  = 0.08 hr/ton
+W   = $75/hr
+  </pre>
+
+  <h4>Material Savings</h4>
+  <pre class="codeblock">
+M = 12 × 25 × 900 × 0.02
+  = 12 × 25 × 18
+  = 12 × 450
+  = $5,400 per year
+  </pre>
+
+  <h4>Labor Savings</h4>
+  <pre class="codeblock">
+L = 12 × 25 × 0.08 × 75
+  = 12 × 25 × 6
+  = 12 × 150
+  = $1,800 per year
+  </pre>
+
+  <h4>Total Modeled Value</h4>
+  <pre class="codeblock">
+V = 5,400 + 1,800
+  = $7,200 per year
+  </pre>
+
+  <h4>Indicative Subscription (ρ = 0.15)</h4>
+  <pre class="codeblock">
+P = 0.15 × 7,200
+  = $1,080 per year
+  </pre>
+
+  <p class="muted">
+    Smaller throughput yields smaller absolute savings even with higher scrap deltas.
+    This aligns subscription expectations proportionally.
+  </p>
+
+  <!-- INDUSTRIAL CASE -->
+  <h3>C.2 Industrial Plant (Lower Scrap Baseline, High Throughput)</h3>
+
+  <pre class="codeblock">
+Assume:
+
+T   = 600 tons/month
+C   = $900/ton
+Baseline scrap Sb = 0.035 (3.5%)
+Conservative improvement ΔS = 0.01 (1 pt)
+
+Optional labor:
+ΔH  = 0.05 hr/ton
+W   = $95/hr
+  </pre>
+
+  <h4>Material Savings</h4>
+  <pre class="codeblock">
+M = 12 × 600 × 900 × 0.01
+  = 12 × 600 × 9
+  = 12 × 5,400
+  = $64,800 per year
+  </pre>
+
+  <h4>Labor Savings</h4>
+  <pre class="codeblock">
+L = 12 × 600 × 0.05 × 95
+  = 12 × 600 × 4.75
+  = 12 × 2,850
+  = $34,200 per year
+  </pre>
+
+  <h4>Total Modeled Value</h4>
+  <pre class="codeblock">
+V = 64,800 + 34,200
+  = $99,000 per year
+  </pre>
+
+  <h4>Indicative Subscription (ρ in [0.12, 0.18])</h4>
+  <pre class="codeblock">
+P_low  = 0.12 × 99,000 = $11,880
+P_high = 0.18 × 99,000 = $17,820
+
+Indicative annual range: ~$11,900–$17,800
+  </pre>
+
+  <p class="muted">
+    Even with smaller scrap deltas, high throughput produces substantial
+    modeled value due to linear scaling of tonnage.
+  </p>
+
+</section>
+
+<section class="wp-section">
+  <h2>Appendix D — Monte Carlo Sensitivity Simulation (Summary)</h2>
+
+  <p>
+    To evaluate pricing stability under uncertainty, a bounded Monte Carlo simulation
+    framework can be applied to key variables:
+  </p>
+
+  <pre class="codeblock">
+Variables simulated:
+
+T   ~ Uniform[T_low, T_high]
+C   ~ Uniform[C_low, C_high]
+ΔS  ~ Uniform[ΔS_low, ΔS_high]
+ΔH  ~ Uniform[ΔH_low, ΔH_high] (optional)
+
+V = 12 × T × C × ΔS + 12 × T × ΔH × W
+P = ρ × V
+  </pre>
+
+  <p class="muted">
+    Distributions are bounded and conservative. No extreme-tail assumptions are used.
+  </p>
+
+  <p>
+    Simulation methodology follows bounded distribution modeling appropriate for operational risk estimation.<sup class="ref">[3]</sup>
+  </p>
+
+  <h3>D.1 Example Simulation Parameters (Commercial Segment)</h3>
+
+  <pre class="codeblock">
+T range:   50–70 tons/month
+C range:   $850–$950 per ton
+ΔS range:  0.012–0.020 (1.2–2.0 pts)
+ΔH range:  0.05–0.12 hr/ton
+W fixed:   $85/hr
+ρ range:   0.12–0.18
+Iterations: 10,000
+  </pre>
+
+  <h3>D.2 Simulation Output Summary</h3>
+
+  <div class="table table--mc">
+    <div class="tr tr--mc th">
+      <div>Metric</div>
+      <div>5th Percentile</div>
+      <div>Median</div>
+      <div>95th Percentile</div>
+    </div>
+
+    <div class="tr tr--mc">
+      <div>Annual Material Savings</div>
+      <div class="mono">$7,400</div>
+      <div class="mono">$9,850</div>
+      <div class="mono">$12,900</div>
+    </div>
+
+    <div class="tr tr--mc">
+      <div>Annual Labor Savings</div>
+      <div class="mono">$3,600</div>
+      <div class="mono">$6,100</div>
+      <div class="mono">$8,800</div>
+    </div>
+
+    <div class="tr tr--mc">
+      <div>Total Modeled Value (V)</div>
+      <div class="mono">$11,000</div>
+      <div class="mono">$15,950</div>
+      <div class="mono">$21,700</div>
+    </div>
+
+    <div class="tr tr--mc">
+      <div>Indicative Subscription (P)</div>
+      <div class="mono">$1,320</div>
+      <div class="mono">$2,230</div>
+      <div class="mono">$3,900</div>
+    </div>
+  </div>
+
+  <h3>D.3 Interpretation</h3>
+
+  <ul class="list">
+    <li>Modeled value remains positive across bounded input ranges.</li>
+    <li>Subscription capture remains within minority fraction of value.</li>
+    <li>Material delta sensitivity dominates pricing variance.</li>
+    <li>Conservative ΔS bounds materially reduce downside risk.</li>
+  </ul>
+
+  <p class="muted">
+    Simulation values shown above are illustrative and based on bounded conservative ranges.
+    Real-world datasets may refine distribution parameters over time.
+  </p>
+
+</section>
+
+
+<section class="wp-section">
+  <h2>Appendix E — Comparative ROI vs Capital Equipment Benchmarks</h2>
+
+  <p>
+    Industrial procurement decisions often evaluate investments against capital equipment return thresholds.<sup class="ref">[2]</sup>
+    This section compares modeled subscription ROI to typical fabrication equipment payback expectations.
+  </p>
+
+  <h3>E.1 Typical Capital Equipment ROI Targets</h3>
+
+  <div class="table">
+    <div class="tr th">
+      <div>Investment Type</div>
+      <div>Typical Payback Window</div>
+      <div>Target Annual ROI</div>
+    </div>
+
+    <div class="tr">
+      <div>Automated Shear Line</div>
+      <div class="mono">24–36 months</div>
+      <div class="mono">33–50%</div>
+    </div>
+
+    <div class="tr">
+      <div>CNC Bending System</div>
+      <div class="mono">18–30 months</div>
+      <div class="mono">40–66%</div>
+    </div>
+
+    <div class="tr">
+      <div>Material Handling Upgrade</div>
+      <div class="mono">24–48 months</div>
+      <div class="mono">25–50%</div>
+    </div>
+  </div>
+
+  <p class="muted">
+    These ranges reflect common internal capital hurdle thresholds in fabrication environments.
+  </p>
+
+  <h3>E.2 Reality Anchors Subscription ROI Structure</h3>
+
+  <pre class="codeblock">
+Annual ROI = (Modeled Value − Subscription Price) / Subscription Price
+  </pre>
+
+  <h4>Example (From Appendix B)</h4>
+
+  <pre class="codeblock">
+Modeled Value (V) = $15,840
+Subscription (P)  = $2,400 (midpoint)
+
+Net Gain = 15,840 − 2,400 = $13,440
+
+Annual ROI =
+13,440 / 2,400
+= 5.6
+= 560%
+  </pre>
+
+  <p>
+    Even under conservative deltas, subscription ROI materially exceeds
+    traditional capital equipment hurdle rates.
+  </p>
+
+  <h3>E.3 Capital Efficiency Comparison</h3>
+
+  <div class="table">
+    <div class="tr th">
+      <div>Metric</div>
+      <div>Capital Equipment</div>
+      <div>Reality Anchors</div>
+    </div>
+
+    <div class="tr">
+      <div>Upfront Cost</div>
+      <div class="mono">$150k–$500k+</div>
+      <div class="mono">Annual Subscription</div>
+    </div>
+
+    <div class="tr">
+      <div>Deployment Time</div>
+      <div class="mono">3–9 months</div>
+      <div class="mono">Weeks</div>
+    </div>
+
+    <div class="tr">
+      <div>Operational Disruption</div>
+      <div class="mono">High</div>
+      <div class="mono">Low–Moderate</div>
+    </div>
+
+    <div class="tr">
+      <div>Payback Sensitivity</div>
+      <div class="mono">High CapEx Risk</div>
+      <div class="mono">Linear, Variable Cost</div>
+    </div>
+  </div>
+
+  <h3>E.4 Interpretation</h3>
+
+  <ul class="list">
+    <li>Subscription pricing converts fixed capital risk into operational expense.</li>
+    <li>Modeled ROI significantly exceeds common capital hurdle thresholds.</li>
+    <li>Linear scaling reduces volatility relative to large capital deployments.</li>
+    <li>No residual asset risk or depreciation exposure.</li>
+  </ul>
+
+  <p class="muted">
+    Capital equipment investments and workflow intelligence systems are complementary.
+    Reality Anchors is designed to increase ROI on existing equipment rather than replace it.
+  </p>
+
+</section>
+
+<section class="wp-section">
+  <h2>Appendix F — Limitations & Assumptions</h2>
+
+  <p>
+    The savings model and pricing alignment framework described in this document
+    rely on bounded assumptions. This section outlines structural limitations
+    and explicit modeling constraints.
+  </p>
+
+  <h3>F.1 Baseline Assumptions</h3>
+
+  <ul class="list">
+    <li>Industry scrap baselines represent median segment distributions, not facility-specific measurements.</li>
+    <li>Baseline values may vary regionally due to steel sourcing, supply chain variability, or labor conditions.</li>
+    <li>Self-reported scrap data is not used as a primary pricing input.</li>
+  </ul>
+
+  <h3>F.2 Delta Assumptions</h3>
+
+  <ul class="list">
+    <li>Modeled scrap deltas (ΔS) assume disciplined workflow adoption.</li>
+    <li>Improvement deltas may not fully materialize without operator compliance.</li>
+    <li>Extremely high-efficiency facilities may experience smaller incremental gains.</li>
+  </ul>
+
+  <h3>F.3 Labor Modeling Constraints</h3>
+
+  <ul class="list">
+    <li>Labor hour reduction (ΔH) is estimated and may vary by crew skill level.</li>
+    <li>Labor savings assume consistent workload; idle capacity is not monetized in the model.</li>
+    <li>Indirect labor impacts (supervision, scheduling overhead) are not included unless specified.</li>
+  </ul>
+
+  <h3>F.4 Market Variables</h3>
+
+  <ul class="list">
+    <li>Steel cost (C) volatility directly impacts modeled material savings.</li>
+    <li>Tonnage variability (T) affects annualized calculations linearly.</li>
+    <li>Project mix shifts may alter scrap characteristics.</li>
+  </ul>
+
+  <h3>F.5 Monte Carlo Simulation Boundaries</h3>
+
+  <ul class="list">
+    <li>Simulations use bounded uniform distributions for stability.</li>
+    <li>Extreme tail risk scenarios are intentionally excluded.</li>
+    <li>Simulation summaries are illustrative unless tied to real dataset releases.</li>
+  </ul>
+
+  <h3>F.6 ROI Comparison Limitations</h3>
+
+  <ul class="list">
+    <li>Capital equipment ROI benchmarks vary by facility and financing structure.</li>
+    <li>Subscription ROI assumes operational continuity over a full annual period.</li>
+    <li>Comparison does not include tax treatment differences between CapEx and OpEx.</li>
+  </ul>
+
+  <h3>F.7 Model Governance</h3>
+
+  <ul class="list">
+    <li>Model updates are versioned and do not retroactively modify executed agreements.</li>
+    <li>Benchmark index outputs require minimum anonymized sample thresholds.</li>
+    <li>Future refinements may adjust baseline medians as real operational data accumulates.</li>
+  </ul>
+
+  <h3>F.8 Non-Guarantee Statement</h3>
+
+  <p>
+    Modeled values represent structured estimates under defined assumptions.
+    They are not guarantees of realized performance. Operational outcomes depend on
+    adoption fidelity, workflow discipline, and environmental factors beyond the scope of the model.
+  </p>
+
+</section>
+
+
+
+<section class="wp-section">
+  <h2>Legal Notice & Disclaimer</h2>
+
+  <p>
+    This document is provided for informational and evaluation purposes only.
+    The pricing models, baseline assumptions, improvement deltas, and financial illustrations
+    described herein are structured estimates based on bounded assumptions and segment-level distributions.
+  </p>
+
+  <p>
+    Modeled values do not constitute guarantees of realized performance.
+    Actual outcomes may vary based on operational discipline, workforce adoption,
+    project mix, market volatility, supply chain conditions, and other factors
+    beyond the control of Reality Anchors.
+  </p>
+
+  <p>
+    Nothing in this document constitutes an offer, contractual commitment,
+    warranty, or representation of specific financial return.
+    Binding commercial terms are defined exclusively within executed agreements.
+  </p>
+
+  <p>
+    Capital equipment comparisons are illustrative and do not represent
+    formal investment advice. Facilities should conduct independent financial
+    evaluation consistent with internal procurement standards.
+  </p>
+
+  <p>
+    Benchmark index references reflect anonymized and aggregated statistical modeling.
+    No facility-identifiable data is disclosed or implied.
+  </p>
+
+  <p>
+    Reality Anchors reserves the right to update baseline models, delta assumptions,
+    and benchmark methodologies in future document revisions. Such updates do not
+    retroactively alter executed agreements.
+  </p>
+
+</section>
+
+<section class="references">
+  <h2>References</h2>
+
+  <div class="ref-item">
+    <span class="ref-index">[1]</span>
+    Industry fabrication waste studies and trade association scrap surveys,
+    2018–2024 aggregated distributions.
+  </div>
+
+  <div class="ref-item">
+    <span class="ref-index">[2]</span>
+    Common capital budgeting thresholds in industrial fabrication environments;
+    internal hurdle rate benchmarks (18–36 month payback).
+  </div>
+
+  <div class="ref-item">
+    <span class="ref-index">[3]</span>
+    Bounded Monte Carlo methods for linear cost sensitivity modeling,
+    applied operational economics frameworks.
+  </div>
+
+  <div class="footnote">
+    References represent generalized industry data and methodological standards.
+    Specific datasets may be versioned and documented per deployment.
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__brand">Reality Anchors</div>
+    <div>
+      <div class="muted">Pricing & Methodology — Version 1.0</div>
+      <div class="muted">© 2026 Reality Anchors. Confidential — Pricing Methodology Document.</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

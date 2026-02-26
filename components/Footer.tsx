@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="border-t border-line bg-bg py-10">
       <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="flex items-center gap-3">
-          <Image src="/assets/brand/logo-ra-dark.png" alt="Reality Anchors" width={36} height={36} className="h-9 w-auto" />
+          <Image src="/assets/brand/svg/logo-ra-speed-square-dark.svg" alt="Reality Anchors" width={36} height={36} className="h-9 w-auto" />
           <div>
             <div className="text-sm font-semibold text-txt">Reality Anchors Limited</div>
             <div className="text-xs text-muted">Measured. Anchored. Deterministic.</div>

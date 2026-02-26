@@ -34,7 +34,7 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
         {/* Logo + wordmark */}
         <Link href="/" className="flex items-center gap-3 shrink-0" aria-label="Reality Anchors home">
           <Image
-            src="/assets/brand/logo-ra-dark.png"
+            src="/assets/brand/svg/logo-ra-speed-square-dark.svg"
             alt="Reality Anchors"
             width={48}
             height={48}

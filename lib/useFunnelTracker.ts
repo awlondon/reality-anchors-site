@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import { useExperiment } from '@/components/ExperimentProvider';
 import { setLastRegime } from '@/lib/funnelContext';
-import type { FunnelEvent } from '@/lib/funnelModel';
 import { hashEvent } from '@/lib/hashEvent';
 import { getSessionId } from '@/lib/session';
 import { useTrafficAttribution } from '@/lib/useTrafficAttribution';
@@ -42,13 +41,11 @@ export function useFunnelTracker() {
 
   useEffect(() => {
     const track = (detail: Record<string, unknown>) => {
-      const eventPayload: FunnelEvent = {
-        ...(detail as Omit<FunnelEvent, 'timestamp'>),
-        timestamp: Date.now(),
-      };
+      const stage = detail.stage;
+      const regimeId = detail.regimeId;
 
-      if (eventPayload.stage === 'regime_enter' && eventPayload.regimeId) {
-        setLastRegime(eventPayload.regimeId);
+      if (stage === 'regime_enter' && typeof regimeId === 'string') {
+        setLastRegime(regimeId);
       }
 
       void sendEvent(detail, experimentId, variant, attribution);

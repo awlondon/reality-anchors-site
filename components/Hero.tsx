@@ -83,28 +83,8 @@ export default function Hero() {
             );
           })}
 
-          <text
-            x="500"
-            y="496"
-            textAnchor="middle"
-            fill="rgb(125 211 252 / 0.75)"
-            fontSize="20"
-            letterSpacing="4"
-            style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}
-          >
-            SYMBOL-VECTOR
-          </text>
-          <text
-            x="500"
-            y="528"
-            textAnchor="middle"
-            fill="rgb(148 163 184 / 0.7)"
-            fontSize="15"
-            letterSpacing="3"
-            style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}
-          >
-            1ST LEVEL HLSF · REAL-TIME CONTROL TRACKING
-          </text>
+          <circle cx="500" cy="500" r="66" fill="rgb(2 6 23 / 0.24)" stroke="rgb(148 163 184 / 0.25)" strokeWidth="0.8" />
+          <circle cx="500" cy="500" r="38" fill="none" stroke="rgb(125 211 252 / 0.3)" strokeWidth="0.8" strokeDasharray="3 9" />
         </svg>
       </motion.div>
 

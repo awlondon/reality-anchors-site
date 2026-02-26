@@ -1,16 +1,39 @@
 <svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1200" y2="700" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0B1220"/>
-      <stop offset="1" stop-color="#1A2E47"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#090F19"/>
+      <stop offset="1" stop-color="#1F2C40"/>
     </linearGradient>
   </defs>
-  <rect width="1200" height="700" fill="url(#g)"/>
-  <rect x="60" y="60" width="1080" height="580" rx="24" fill="#0F1B2D" stroke="#2E7DEB" stroke-opacity="0.35"/>
-  <circle cx="250" cy="240" r="100" fill="#2E7DEB" fill-opacity="0.15"/>
-  <circle cx="930" cy="420" r="140" fill="#4AA8FF" fill-opacity="0.12"/>
-  <path d="M180 500H1020" stroke="#6FB0FF" stroke-opacity="0.5" stroke-width="6" stroke-linecap="round"/>
-  <rect x="200" y="340" width="220" height="120" rx="14" fill="#15283F" stroke="#6FB0FF" stroke-opacity="0.45"/>
-  <rect x="470" y="280" width="260" height="180" rx="14" fill="#15283F" stroke="#6FB0FF" stroke-opacity="0.45"/>
-  <rect x="780" y="250" width="180" height="210" rx="14" fill="#15283F" stroke="#6FB0FF" stroke-opacity="0.45"/>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <rect x="58" y="58" width="1084" height="584" rx="24" fill="#0E1A2A" stroke="#7A87FF" stroke-opacity="0.32"/>
+
+  <circle cx="420" cy="355" r="190" fill="#131F34" stroke="#8D98FF" stroke-opacity="0.45"/>
+  <circle cx="420" cy="355" r="145" fill="#1A2E47" stroke="#A2ABFF" stroke-opacity="0.5"/>
+  <circle cx="420" cy="355" r="10" fill="#D6DBFF"/>
+  <path d="M420 355L535 280" stroke="#C3CBFF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M420 355L420 220" stroke="#C3CBFF" stroke-opacity="0.55" stroke-width="3" stroke-dasharray="8 8"/>
+  <path d="M420 355L555 355" stroke="#C3CBFF" stroke-opacity="0.55" stroke-width="3" stroke-dasharray="8 8"/>
+
+  <path d="M572 355C572 438.947 503.947 507 420 507" stroke="#8C9AFF" stroke-width="5"/>
+  <text x="540" y="345" fill="#CED5FF" font-size="20" font-family="Arial">±0.2° band</text>
+
+  <rect x="660" y="145" width="430" height="410" rx="18" fill="#122239" stroke="#7E8DFF" stroke-opacity="0.45"/>
+  <text x="700" y="195" fill="#D7DCFF" font-size="26" font-family="Arial" font-weight="700">Calibration Console</text>
+
+  <rect x="700" y="230" width="350" height="55" rx="12" fill="#263A58"/>
+  <text x="725" y="266" fill="#B8C2FF" font-size="20" font-family="Arial">Machine: Bench-03</text>
+
+  <rect x="700" y="305" width="350" height="110" rx="12" fill="#1D304A"/>
+  <text x="725" y="345" fill="#A9B6FF" font-size="18" font-family="Arial">Stretch profile v14.2 deployed</text>
+  <text x="725" y="378" fill="#8E9BFF" font-size="16" font-family="Arial">Overrides down 31% (30-day window)</text>
+
+  <rect x="700" y="438" width="160" height="70" rx="10" fill="#4759FF" fill-opacity="0.7"/>
+  <text x="725" y="480" fill="#EEF1FF" font-size="18" font-family="Arial" font-weight="700">Recalibrate</text>
+
+  <rect x="885" y="438" width="165" height="70" rx="10" fill="#233952"/>
+  <text x="915" y="480" fill="#B8C3FF" font-size="18" font-family="Arial">14 days</text>
+
+  <rect x="260" y="555" width="320" height="38" rx="10" fill="#2B3A55"/>
+  <text x="286" y="580" fill="#BBC5FF" font-size="17" font-family="Arial">live angle telemetry stream</text>
 </svg>

@@ -14,7 +14,8 @@
     "anchors": ["bar_diameter", "bend_angle", "stretch_allowance", "stock_length", "machine_profile"],
     "dataSources": ["tablet OCR", "BLE bend telemetry", "operator correction logs", "scrap remainder scans"],
     "pipeline": ["parse", "validate", "optimize", "execute", "learn"],
-    "roi": "Average monthly material impact observed: 6–10 tons recovered per 200-ton shop."
+    "roi": "Average monthly material impact observed: 6–10 tons recovered per 200-ton shop.",
+    "animationPreset": "fadeUp"
   },
   {
     "id": "multi-project-optimization",
@@ -31,7 +32,8 @@
     "anchors": ["stock_length", "project_compatibility", "scrap_threshold", "delivery_window"],
     "dataSources": ["job schedule imports", "leftover tags", "purchase order logs", "bench throughput events"],
     "pipeline": ["aggregate", "normalize", "score", "route", "feedback"],
-    "roi": "Observed planning compression: 4–12 hours per week with lower material over-ordering."
+    "roi": "Observed planning compression: 4–12 hours per week with lower material over-ordering.",
+    "animationPreset": "slideIn"
   },
   {
     "id": "machine-calibration",
@@ -48,7 +50,8 @@
     "anchors": ["machine_profile", "bend_angle", "stretch_delta", "tolerance_band"],
     "dataSources": ["BLE angle packets", "manual overrides", "maintenance notes", "run outcomes"],
     "pipeline": ["capture", "compare", "correct", "version", "deploy"],
-    "roi": "Lower drift volatility and fewer corrective reruns during high-throughput shifts."
+    "roi": "Lower drift volatility and fewer corrective reruns during high-throughput shifts.",
+    "animationPreset": "minimal"
   },
   {
     "id": "fleet-grip",
@@ -65,7 +68,8 @@
     "anchors": ["lateral_limit", "friction_coeff", "load_distribution", "slip_threshold"],
     "dataSources": ["IMU telemetry", "wheel speed", "steering angle", "weather stream"],
     "pipeline": ["sense", "classify", "forecast", "alert", "retrain"],
-    "roi": "Improves incident prevention and insurance telemetry quality for mixed terrain operations."
+    "roi": "Improves incident prevention and insurance telemetry quality for mixed terrain operations.",
+    "animationPreset": "scaleIn"
   },
   {
     "id": "ar-execution",

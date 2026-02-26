@@ -1,3 +1,5 @@
+export type AnimationPreset = 'fadeUp' | 'slideIn' | 'scaleIn' | 'minimal';
+
 export type RegimeStat = {
   label: string;
   value: string;
@@ -16,4 +18,5 @@ export type RegimeContent = {
   ctaHref: string;
   order: number;
   published: boolean;
+  animationPreset?: AnimationPreset;
 };

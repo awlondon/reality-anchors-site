@@ -1,9 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { trackEvent } from '@/lib/analytics';
 import { fadeUp } from '@/lib/motion';
+import { getLastRegime } from '@/lib/funnelContext';
+import { getSessionId } from '@/lib/session';
+import { upsertSalesAlert } from '@/lib/salesNotifications';
 
 interface FormData {
   name: string;
@@ -20,6 +23,17 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent('analytics', {
+        detail: {
+          type: 'lead_form_view',
+          stage: 'lead_form_view',
+        },
+      })
+    );
+  }, []);
 
   const validate = () => {
     const e: Partial<FormData> = {};
@@ -40,7 +54,43 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
     await new Promise((r) => setTimeout(r, 800));
     setLoading(false);
     setSubmitted(true);
-    trackEvent('lead_submitted', { role: data.role });
+    const attributedRegime = getLastRegime();
+
+    window.dispatchEvent(
+      new CustomEvent('analytics', {
+        detail: {
+          type: 'lead_form_submit',
+          stage: 'lead_form_submit',
+          regimeId: attributedRegime ?? undefined,
+          role: data.role,
+        },
+      })
+    );
+
+    const sessionId = getSessionId() ?? 'unknown';
+    const sanitizedData = { email: data.email, company: data.company, role: data.role };
+
+    void fetch('/api/sales/notify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'form_submit',
+        sessionId,
+        formData: sanitizedData,
+        regimeId: attributedRegime ?? undefined,
+      }),
+    });
+
+    const alert = {
+      id: `${sessionId}_form_submit`,
+      type: 'form_submit' as const,
+      sessionId,
+      createdAt: Date.now(),
+    };
+    upsertSalesAlert(alert);
+    window.dispatchEvent(new CustomEvent('analytics', { detail: { type: 'sales_notification', notificationType: alert.type, ...alert } }));
+
+    trackEvent('lead_submitted', { role: data.role, regimeId: attributedRegime ?? 'unknown' });
   };
 
   const field = (

@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import ProgressBar from '@/components/ProgressBar';
+import AnalyticsProvider from '@/components/AnalyticsProvider';
+import ExperimentProvider from '@/components/ExperimentProvider';
+import { HOME_EXPERIMENT } from '@/lib/experiments/config';
 
 export const metadata: Metadata = {
   title: {
@@ -28,9 +31,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body>
+        <ExperimentProvider config={HOME_EXPERIMENT}>
+          <AnalyticsProvider />
         <ProgressBar />
         <Navbar />
-        {children}
+          {children}
+        </ExperimentProvider>
       </body>
     </html>
   );

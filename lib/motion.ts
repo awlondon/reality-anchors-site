@@ -19,6 +19,8 @@ export const stagger: Variants = {
   visible: { transition: { staggerChildren: 0.12 } },
 };
 
+export const staggerContainer = stagger;
+
 export const slideLeft: Variants = {
   hidden: { opacity: 0, x: 32 },
   visible: {

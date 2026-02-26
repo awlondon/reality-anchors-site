@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-label="Abstract structured field background placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b0f17"/>
+      <stop offset="100%" stop-color="#121a2b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <g stroke="#2e75ff" stroke-opacity="0.18">
+    <path d="M0 200 H1920"/><path d="M0 360 H1920"/><path d="M0 520 H1920"/><path d="M0 680 H1920"/><path d="M0 840 H1920"/>
+    <path d="M260 0 V1080"/><path d="M560 0 V1080"/><path d="M860 0 V1080"/><path d="M1160 0 V1080"/><path d="M1460 0 V1080"/><path d="M1760 0 V1080"/>
+  </g>
+</svg>

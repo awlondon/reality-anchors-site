@@ -187,18 +187,20 @@ export default function EnterpriseRollup({
       };
     });
 
-    function buildScenarioSnapshot(multiplier: number) {
-      const scenarioEbitda = perFacilityEbitdaIncrease * multiplier;
+    function buildScenarioSnapshot(multiplier: number, benefitHaircut = 1, deploymentSlowdown = 1) {
+      const scenarioEbitda = perFacilityEbitdaIncrease * multiplier * benefitHaircut;
       const scenarioCohorts: Cohort[] = [];
       const scenarioArrByYear: number[] = [];
       const scenarioSaasEbitda: number[] = [];
       const scenarioCashFlows: number[] = [0];
+      const effectiveDeploymentYears = Math.max(1, Math.ceil(safeDeploymentYears * deploymentSlowdown));
+      const scenarioFacilitiesPerYear = totalFacilities / effectiveDeploymentYears;
       let scenarioCumulativeNet = 0;
       let scenarioPaybackYear: number | null = null;
 
       for (let year = 1; year <= safeProjectionYears; year++) {
-        const deployed = year <= safeDeploymentYears ? facilitiesPerYear * year : totalFacilities;
-        const newlyDeployed = year <= safeDeploymentYears ? facilitiesPerYear : 0;
+        const deployed = year <= effectiveDeploymentYears ? scenarioFacilitiesPerYear * year : totalFacilities;
+        const newlyDeployed = year <= effectiveDeploymentYears ? scenarioFacilitiesPerYear : 0;
 
         const annualBenefit = deployed * scenarioEbitda;
         const annualCapex = newlyDeployed * (hardwareCost + implementationCost);
@@ -282,6 +284,7 @@ export default function EnterpriseRollup({
         base: buildScenarioSnapshot(SCENARIO_MULTIPLIER.base),
         high: buildScenarioSnapshot(SCENARIO_MULTIPLIER.high),
       },
+      downsideSnapshot: buildScenarioSnapshot(SCENARIO_MULTIPLIER.base, 0.8, 1.25),
     };
   }, [
     annualSubscription,
@@ -308,66 +311,95 @@ export default function EnterpriseRollup({
 
 
   async function exportBoardDeck() {
-    const payload = {
-      meta: {
-        companyName: 'Reality Anchors',
-        docTitle: 'Board Brief',
-        confidentialityLine: 'Confidential — Board Use Only',
-        baseUrl: typeof window !== 'undefined' ? window.location.origin : '',
-        logoPath: '/ra-logo.png',
-      },
-      customerEconomics: {
-        materialSaved: perFacilityEbitdaIncrease * 0.45,
-        laborSaved: perFacilityEbitdaIncrease * 0.2,
-        throughput: perFacilityEbitdaIncrease * 0.25,
-        oversight: perFacilityEbitdaIncrease * 0.1,
-        totalEbitda: perFacilityEbitdaIncrease,
-        marginDeltaPct: perFacilityRevenue > 0 ? (perFacilityEbitdaIncrease / perFacilityRevenue) * 100 : 0,
-        pricingLow: perFacilityEbitdaIncrease * 0.08,
-        pricingBase: perFacilityEbitdaIncrease * 0.12,
-        pricingHigh: perFacilityEbitdaIncrease * 0.15,
-      },
-      ramp: {
-        totalFacilities,
-        deploymentYears,
-        projectionYears: model.safeProjectionYears,
-        annualNetCashFlows: model.annualNetCashFlows,
-        paybackYear: model.paybackYear,
-        npv: model.npv,
-        irr: model.irr,
-      },
-      saasEconomics: {
-        finalARR: model.finalYearARR,
-        arrCAGR: model.arrCagr,
-        nrrPct: model.netRevenueRetentionPct,
-        grossMarginPct,
-        finalEbitda: model.finalYearSaasEbitda,
-        ebitdaMarginPct: model.saasEbitdaMarginPct,
-        arrValuation: model.arrValuationImpact,
-        ebitdaValuation: model.ebitdaValuationImpact,
-      },
-      scenarios: model.scenarioSnapshots,
-    };
+    try {
+      const payload = {
+        meta: {
+          companyName: 'Reality Anchors',
+          docTitle: 'Board Brief',
+          schemaVersion: '1.0.0',
+          confidentialityLine: 'Confidential — Board Use Only',
+          baseUrl: typeof window !== 'undefined' ? window.location.origin : '',
+          logoPath: '/ra-logo.png',
+        },
+        customerEconomics: {
+          materialSaved: perFacilityEbitdaIncrease * 0.45,
+          laborSaved: perFacilityEbitdaIncrease * 0.2,
+          throughput: perFacilityEbitdaIncrease * 0.25,
+          oversight: perFacilityEbitdaIncrease * 0.1,
+          totalEbitda: perFacilityEbitdaIncrease,
+          marginDeltaPct: perFacilityRevenue > 0 ? (perFacilityEbitdaIncrease / perFacilityRevenue) * 100 : 0,
+          pricingLow: perFacilityEbitdaIncrease * 0.08,
+          pricingBase: perFacilityEbitdaIncrease * 0.12,
+          pricingHigh: perFacilityEbitdaIncrease * 0.15,
+        },
+        ramp: {
+          totalFacilities,
+          deploymentYears,
+          projectionYears: model.safeProjectionYears,
+          annualNetCashFlows: model.annualNetCashFlows,
+          paybackYear: model.paybackYear,
+          npv: model.npv,
+          irr: model.irr,
+        },
+        saasEconomics: {
+          finalARR: model.finalYearARR,
+          arrCAGR: model.arrCagr,
+          nrrPct: model.netRevenueRetentionPct,
+          grossMarginPct,
+          finalEbitda: model.finalYearSaasEbitda,
+          ebitdaMarginPct: model.saasEbitdaMarginPct,
+          arrValuation: model.arrValuationImpact,
+          ebitdaValuation: model.ebitdaValuationImpact,
+        },
+        scenarios: model.scenarioSnapshots,
+        downsideScenario: model.downsideSnapshot,
+        evidenceTags: {
+          totalEbitda: "Estimated",
+          npv: "Modeled",
+          irr: "Modeled",
+          arrCAGR: "Modeled",
+          netRevenueRetention: "Assumed",
+          ebitdaMargin: "Modeled",
+        },
+      };
 
-    const res = await fetch('/api/export-board-deck', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+      const res = await fetch('/api/export-board-deck', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-    if (!res.ok) {
-      const msg = await res.text();
-      throw new Error(msg || 'Unable to export board deck.');
+      if (!res.ok) {
+        let msg = 'Unable to export board deck.';
+        try {
+          const err = await res.json();
+          msg = err?.message || msg;
+          if (err?.error === 'PDF_ENGINE_UNAVAILABLE' && err?.htmlPreview) {
+            const preview = window.open('', '_blank');
+            if (preview) {
+              preview.document.open();
+              preview.document.write(err.htmlPreview);
+              preview.document.close();
+            }
+          }
+        } catch {
+          msg = await res.text();
+        }
+        throw new Error(msg || 'Unable to export board deck.');
+      }
+
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'RA-Board-Deck.pdf';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      window.alert(error instanceof Error ? error.message : 'Unable to export board deck.');
     }
-
-    const blob = await res.blob();
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'RA-Board-Deck.pdf';
-    a.click();
-    window.URL.revokeObjectURL(url);
   }
+
 
   const InvestorSummaryView = () => (
     <section id="investor-summary-print" className="bg-neutral-900 text-white rounded-xl p-10 space-y-10">

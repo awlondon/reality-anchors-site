@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useInView, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
+import { motion, useInView, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
 type Props = {
@@ -32,6 +32,7 @@ export default function AnimatedKPI({
     stiffness: 120,
     duration,
   });
+  const formattedValue = useTransform(spring, (latest) => `${prefix}${latest.toFixed(decimals)}${suffix}`);
 
   useEffect(() => {
     if (reduceMotion) {
@@ -67,7 +68,7 @@ export default function AnimatedKPI({
       transition={{ duration: 0.6 }}
       className="inline-block"
     >
-      {spring.to((latest) => `${prefix}${latest.toFixed(decimals)}${suffix}`)}
+      {formattedValue}
     </motion.span>
   );
 }

@@ -44,7 +44,7 @@ export function useHighIntentNotifier(sessionAggregate: SessionAggregate, regime
       };
 
       upsertSalesAlert(alert);
-      window.dispatchEvent(new CustomEvent('analytics', { detail: { type: 'sales_notification', notificationType: alert.type, ...alert } }));
+      window.dispatchEvent(new CustomEvent('analytics', { detail: { ...alert, type: 'sales_notification', notificationType: alert.type } }));
     }
   }, [regimesSeen, sessionAggregate]);
 }

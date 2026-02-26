@@ -88,7 +88,7 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
       createdAt: Date.now(),
     };
     upsertSalesAlert(alert);
-    window.dispatchEvent(new CustomEvent('analytics', { detail: { type: 'sales_notification', notificationType: alert.type, ...alert } }));
+    window.dispatchEvent(new CustomEvent('analytics', { detail: { ...alert, type: 'sales_notification', notificationType: alert.type } }));
 
     trackEvent('lead_submitted', { role: data.role, regimeId: attributedRegime ?? 'unknown' });
   };

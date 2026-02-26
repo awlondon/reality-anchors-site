@@ -6,7 +6,7 @@ import { regimeCatalog } from '@/lib/siteData';
 
 export const metadata: Metadata = {
   title: 'Personal',
-  description: 'Curated regimes for individuals and small shops. Pre-built, pre-tested, and versioned before release.',
+  description: 'Curated programs for individuals and small shops, designed for dependable day-to-day execution.',
 };
 
 
@@ -29,10 +29,10 @@ export default function PersonalPage() {
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions / Personal</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">Personal</h1>
           <p className="text-xl text-muted max-w-2xl leading-relaxed">
-            Curated regimes for individuals and small shops. Quality-controlled modes only: pre-built, pre-tested, and versioned before release.
+            Curated programs for individuals and small shops focused on dependable execution and practical outcomes.
           </p>
           <div className="flex flex-wrap gap-2 mt-6">
-            {['$5–$50/month', 'Curated regimes', 'Offline-first'].map((t) => (
+            {['$5–$50/month', 'Curated programs', 'Offline-first'].map((t) => (
               <span key={t} className="text-xs font-semibold px-3 py-1.5 rounded-full border border-line text-muted">{t}</span>
             ))}
           </div>
@@ -44,7 +44,7 @@ export default function PersonalPage() {
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-4">Who it&apos;s for</h2>
             <ul className="flex flex-col gap-2.5">
-              {['Individual operators', 'Training and skill reinforcement', 'Small shops wanting standardized steps', 'Anyone who prefers deterministic procedures over "feel"'].map((i) => (
+              {['Individual operators', 'Training and skill reinforcement', 'Small shops wanting standardized steps', 'Anyone who prefers repeatable workflows over guesswork'].map((i) => (
                 <li key={i} className="flex gap-3 text-sm text-muted">
                   <span className="text-accent mt-0.5">›</span>{i}
                 </li>
@@ -54,7 +54,7 @@ export default function PersonalPage() {
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-4">What it solves</h2>
             <ul className="flex flex-col gap-2.5">
-              {['Reduces mental math and hand transcription', 'Enforces admissibility gates (GO/NO-GO)', 'Provides consistent step sequences and counters', 'Creates a lightweight personal audit log'].map((i) => (
+              {['Reduces mental math and hand transcription', 'Validates key steps before work proceeds', 'Provides consistent step sequences and counters', 'Creates a lightweight personal audit log'].map((i) => (
                 <li key={i} className="flex gap-3 text-sm text-muted">
                   <span className="text-accent mt-0.5">›</span>{i}
                 </li>
@@ -67,9 +67,9 @@ export default function PersonalPage() {
       <section className="py-8 pb-16">
         <div className="max-w-4xl mx-auto px-6">
           <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-2">Regime subscriptions</h2>
+            <h2 className="text-lg font-semibold text-txt mb-2">Program subscriptions</h2>
             <p className="text-muted text-sm mb-6">
-              Regimes are curated packages: a deterministic rule set, UI flows, validation gates, and known-good calibration defaults. New regimes are released only after internal testing.
+              Programs are curated packages with guided workflows, practical safeguards, and deployment-ready defaults. New programs are released only after internal testing.
             </p>
             <div className="overflow-x-auto">
               <table className="ra-table">
@@ -77,9 +77,9 @@ export default function PersonalPage() {
                   <tr><th>Tier</th><th>Monthly</th><th>Includes</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>Core</td><td className="font-mono text-accent-2">$5</td><td className="text-muted text-sm">Single workflow regime, standard validation gates</td></tr>
-                  <tr><td>Pro</td><td className="font-mono text-accent-2">$20</td><td className="text-muted text-sm">Multiple regimes, saved templates, extended logging</td></tr>
-                  <tr><td>Specialty</td><td className="font-mono text-accent-2">$50</td><td className="text-muted text-sm">Niche regimes, advanced constraints, priority releases</td></tr>
+                  <tr><td>Core</td><td className="font-mono text-accent-2">$5</td><td className="text-muted text-sm">Single workflow program with core validation support</td></tr>
+                  <tr><td>Pro</td><td className="font-mono text-accent-2">$20</td><td className="text-muted text-sm">Multiple programs, saved templates, and extended logging</td></tr>
+                  <tr><td>Specialty</td><td className="font-mono text-accent-2">$50</td><td className="text-muted text-sm">Specialized programs and priority releases</td></tr>
                 </tbody>
               </table>
             </div>
@@ -90,7 +90,7 @@ export default function PersonalPage() {
 
       <section className="pb-16">
         <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-lg font-semibold text-txt mb-4">Curated regime examples</h2>
+          <h2 className="text-lg font-semibold text-txt mb-4">Curated program examples</h2>
           <div className="flex gap-4 overflow-x-auto pb-2">
             {personalRegimes.map((regime) => (
               <article key={regime.id} className="min-w-[290px] border border-line bg-card rounded-2xl p-5">

@@ -6,7 +6,7 @@ import { regimeCatalog } from '@/lib/siteData';
 
 export const metadata: Metadata = {
   title: 'Commercial',
-  description: 'Bench-first execution for crews and fabrication yards. Pricing based on industry baselines and modeled value.',
+  description: 'Execution intelligence for crews and fabrication yards that increases the measurable value of existing digital fabrication systems.',
 };
 
 const commercialRegimes = regimeCatalog.filter((regime) => ['structural-fabrication', 'multi-project-optimization', 'machine-calibration'].includes(regime.id));
@@ -20,7 +20,7 @@ export default function CommercialPage() {
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions / Commercial</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">Commercial</h1>
           <p className="text-xl text-muted max-w-2xl leading-relaxed">
-            Bench-first execution for crews and fabrication yards. Pricing is based on industry baselines and modeled value, then scales with usage.
+            Execution intelligence for crews and fabrication yards. Designed to reinforce upstream planning tools through verified downstream execution outcomes.
           </p>
           <div className="flex flex-wrap gap-3 mt-8">
             <Link href="/calculator/" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
@@ -33,16 +33,16 @@ export default function CommercialPage() {
         </div>
       </section>
 
-      {/* How pricing works */}
+      {/* Strategic deployment model */}
       <section className="py-14">
         <div className="max-w-4xl mx-auto px-6">
           <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-3">How pricing works</h2>
+            <h2 className="text-lg font-semibold text-txt mb-3">Strategic deployment model</h2>
             <p className="text-muted text-sm mb-4">
-              Reality Anchors uses a <strong className="text-txt">Value-Aligned Subscription Model</strong> based on modeled operational value, not self-reported scrap percentages.
+              Reality Anchors uses a <strong className="text-txt">value-amplification deployment model</strong> based on measurable execution impact and facility rollout scope.
             </p>
             <p className="text-muted text-sm mb-5">
-              We classify your facility by segment and throughput, apply conservative industry baseline waste rates, and model expected improvement under deterministic bench workflows.
+              We scope deployment by facility profile, throughput, and execution complexity, then align commercial terms to expected margin and performance improvement.
             </p>
             <ul className="flex flex-col gap-2 mb-5">
               {['A predicted annual savings range', 'A suggested subscription range aligned to that value', 'A usage layer that scales with bench activity'].map((i) => (
@@ -164,7 +164,7 @@ export default function CommercialPage() {
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-3">Regimes commonly deployed in commercial benches</h2>
             <p className="text-muted text-sm mb-6">
-              These regimes are typically paired with the baseline integrity model and the 60-day validation window.
+              These programs are typically paired with a baseline implementation and a 60-day validation window.
             </p>
             <div className="grid md:grid-cols-3 gap-4">
               {commercialRegimes.map((regime) => (

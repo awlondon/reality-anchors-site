@@ -8,7 +8,7 @@
   "measuredOutcomes": [
     { "value": 8, "suffix": "%", "label": "Average scrap reduction", "sub": "across structural fabrication cohorts" },
     { "value": 4, "suffix": "s", "label": "Median plan generation", "sub": "from schedule ingest to cut plan" },
-    { "value": 99, "suffix": "%", "label": "Execution admissibility", "sub": "actions completed inside gate constraints" },
+    { "value": 99, "suffix": "%", "label": "Execution reliability", "sub": "actions completed without preventable rework" },
     { "value": 14, "suffix": " days", "label": "Calibration convergence", "sub": "to stable machine-specific profiles" }
   ],
   "valueBridge": {

@@ -7,9 +7,9 @@ import { stagger, fadeUp } from '@/lib/motion';
 
 const regimes = [
   {
-    name: 'Structural Fabrication Regime',
+    name: 'Structural Fabrication Program',
     description:
-      'Anchor-controlled bending and cut-stock planning with machine-specific calibration loops and operator-safe execution.',
+      'Clear, confirmed instructions at the workstation to reduce waste and improve consistency.',
     stat: '8% avg scrap reduction',
     statTwo: '<1% fabrication error rate',
     cta: 'See Fabrication Intelligence',
@@ -19,9 +19,9 @@ const regimes = [
     accent: 'bg-sky-500/20 text-sky-200 border-sky-400/40',
   },
   {
-    name: 'Cross-Project Optimization Regime',
+    name: 'Cross-Project Optimization Program',
     description:
-      'Merge multi-job cut plans, convert leftovers into tagged inventory, and route reusable stock before new purchase orders.',
+      'Consolidate cut demand across active jobs, improve reusable stock visibility, and return cleaner material insights upstream.',
     stat: '18–35% scrap reutilization increase',
     statTwo: '4–12 hrs/week planning saved',
     cta: 'Optimize Across Jobs',
@@ -31,9 +31,9 @@ const regimes = [
     accent: 'bg-emerald-500/20 text-emerald-200 border-emerald-400/40',
   },
   {
-    name: 'Machine Calibration Regime',
+    name: 'Machine Calibration Program',
     description:
-      'BLE angle telemetry and stretch-table learning detect drift in real time and continuously tune machine profiles.',
+      'Monitor machine behavior in operation so teams can maintain stable output across shifts.',
     stat: 'Real-time angle tracking',
     statTwo: 'Drift alerts + stretch profile updates',
     cta: 'See Calibration Mode',
@@ -43,10 +43,10 @@ const regimes = [
     accent: 'bg-indigo-500/20 text-indigo-200 border-indigo-400/40',
   },
   {
-    name: 'Vehicle Stability & Grip Regime',
+    name: 'Vehicle Stability & Grip Program',
     description:
-      'Speed × surface × load envelopes provide threshold proximity alerts before slip events become safety incidents.',
-    stat: 'Live slip-threshold detection',
+      'Live operating-condition alerts help crews address risk early and maintain safer fleet operations.',
+    stat: 'Live slip-risk alerts',
     statTwo: 'Insurance-grade telemetry stream',
     cta: 'Explore Fleet Safety Layer',
     href: '/commercial/',
@@ -55,9 +55,9 @@ const regimes = [
     accent: 'bg-amber-500/20 text-amber-200 border-amber-400/40',
   },
   {
-    name: 'AR Execution Regime',
+    name: 'AR Execution Program',
     description:
-      'Overlay allowable execution states directly on the work zone and gate action with deterministic GO / NO-GO checks.',
+      'Deliver point-of-work guidance that helps operators execute accurately under real shop conditions.',
     stat: 'Hands-free workflow guidance',
     statTwo: 'Live bend verification + audit logs',
     cta: 'See AR Execution',
@@ -67,11 +67,11 @@ const regimes = [
     accent: 'bg-cyan-500/20 text-cyan-200 border-cyan-400/40',
   },
   {
-    name: 'AI Governance Regime',
+    name: 'AI Oversight Program',
     description:
-      'Model quorum checks, confidence decay monitoring, and rollback triggers keep decision outputs deterministic and auditable.',
-    stat: 'Disagreement frequency tracking',
-    statTwo: 'Drift alerts + schema validation',
+      'Strengthen platform fidelity with audit-ready records, reliability trends, and execution-grounded accountability.',
+    stat: 'Reliability trend tracking',
+    statTwo: 'Drift alerts + audit-ready logs',
     cta: 'Review Governance Controls',
     href: '/pricing-methodology/',
     image: '/assets/regimes/ai-governance.svg',
@@ -91,12 +91,12 @@ export default function Features() {
           variants={fadeUp}
           className="mb-14"
         >
-          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Regime Playbook</p>
+          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Strategic Role in the Fabrication Stack</p>
           <h2 className="text-3xl md:text-4xl font-semibold text-txt max-w-3xl leading-tight">
-            Sector-specific regimes staged as proof-of-capability anchors between funnel steps
+            Closed-loop execution intelligence for fabrication operations
           </h2>
           <p className="mt-4 text-muted max-w-2xl">
-            Each block combines a visual context panel, measurable KPI deltas, and a route to the next conversion action.
+            We complement detailing and ERP systems by converting planning intent into verified execution outcomes and feedback-ready telemetry.
           </p>
         </motion.div>
 

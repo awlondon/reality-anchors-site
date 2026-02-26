@@ -207,7 +207,7 @@ input, select, textarea {
 .logo-dark { display: none; }
 .site-logo {
   display: block;
-  max-height: 48px;
+  max-height: 64px;
   width: auto;
 }
 .hero-logo-wrap {
@@ -333,7 +333,7 @@ input, select, textarea {
   }
 
   .site-logo {
-    max-height: 36px;
+    max-height: 48px;
   }
 }
 

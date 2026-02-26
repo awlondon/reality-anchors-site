@@ -8,8 +8,8 @@ import { fadeIn, fadeUp, staggerContainer } from "@/lib/motion";
 
 const cards = [
   {
-    title: "Deterministic Workflow Enforcement",
-    desc: "No guesswork. Controlled execution states with hard governance boundaries.",
+    title: "Consistent Workflow Execution",
+    desc: "Reduce guesswork with guided steps, built-in checks, and operator-ready instructions.",
   },
   {
     title: "Cross-Project Optimization",
@@ -17,7 +17,7 @@ const cards = [
   },
   {
     title: "Real-Time Validation + Logs",
-    desc: "Every decision is tracked for review, compliance, and field accountability.",
+    desc: "Each job is documented for review, compliance readiness, and field accountability.",
   },
 ];
 
@@ -59,8 +59,8 @@ export default function ScrollStory() {
 
       <StorySection
         id="solutions"
-        title="A deterministic execution engine"
-        body="Structured parsing, rule-governed allowances, and validation checkpoints turn planning into dependable execution."
+        title="Execution guidance where planning ends"
+        body="Reality Anchors operates at the workstation: turning job instructions into action-ready steps with real-time confirmation."
         media={<div className="h-full w-full bg-[radial-gradient(circle_at_30%_30%,#1A2A40,transparent_45%),linear-gradient(#0B0F17,#0B0F17)]" />}
       />
 
@@ -98,7 +98,7 @@ export default function ScrollStory() {
             {["17% scrap reduction", "11% schedule lift", "9% precision gain"].map((metric) => (
               <article key={metric} className="rounded-xl border border-white/10 bg-white/[0.03] p-6">
                 <p className="text-2xl font-semibold text-cyan-200">{metric}</p>
-                <p className="mt-2 text-sm text-white/70">Validated through governed rollout templates and continuous monitoring.</p>
+                <p className="mt-2 text-sm text-white/70">Validated through phased rollouts and continuous operational monitoring.</p>
               </article>
             ))}
           </div>
@@ -115,7 +115,7 @@ export default function ScrollStory() {
         >
           <h2 className="text-3xl font-semibold">Ready to modernize fabrication?</h2>
           <p className="mx-auto mt-3 max-w-2xl text-white/75">
-            Move from fragmented planning to governed optimization with measurable operational outcomes.
+            If your systems end at planning, this closes the execution gap with measurable operational outcomes.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a

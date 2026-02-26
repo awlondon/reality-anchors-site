@@ -108,7 +108,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight text-txt max-w-4xl"
         >
-          Structurally Governed AI Optimization Systems
+          The Execution Layer for Fabrication Systems
         </motion.h1>
 
         <motion.p
@@ -117,7 +117,7 @@ export default function Hero() {
           transition={{ duration: 0.55, delay: 0.32 }}
           className="mt-6 text-lg text-muted max-w-2xl leading-relaxed"
         >
-          Deterministic bench workflows, measurable scrap reduction, and traceable execution records — deployed from day one.
+          Enterprise platforms plan the work. Reality Anchors ensures the work is executed correctly where specifications become irreversible physical actions.
         </motion.p>
 
         <motion.div
@@ -131,14 +131,14 @@ export default function Hero() {
             className="px-7 py-4 rounded-lg bg-accent hover:bg-blue-500 text-white font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/25"
             onClick={() => trackEvent('hero_cta_primary')}
           >
-            Request Enterprise Assessment
+            Explore Strategic Integration
           </Link>
           <Link
-            href="/pricing-methodology/"
+            href="/board-strategy/"
             className="px-7 py-4 rounded-lg border border-white/25 hover:border-white/50 hover:bg-white/6 text-txt font-semibold transition-all hover:-translate-y-0.5"
             onClick={() => trackEvent('hero_cta_secondary')}
           >
-            Explore Platform Architecture
+            Read Board-Level Strategic Narrative
           </Link>
         </motion.div>
 

@@ -5,7 +5,7 @@ export default function CTASection() {
     <section className="bg-slate-950 py-16">
       <div className="mx-auto max-w-5xl rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-10 text-center">
         <h2 className="text-3xl font-semibold">Ready to modernize fabrication?</h2>
-        <p className="mt-3 text-white/75">Launch governed workflows, validate decisions, and accelerate measurable outcomes.</p>
+        <p className="mt-3 text-white/75">Launch reliable workflows, improve decision quality, and accelerate measurable outcomes.</p>
         <div className="mt-7 flex flex-wrap justify-center gap-3">
           <a
             href="#contact"

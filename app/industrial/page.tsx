@@ -19,7 +19,7 @@ export default function IndustrialPage() {
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions / Industrial</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">Industrial</h1>
           <p className="text-xl text-muted max-w-2xl leading-relaxed">
-            High-volume environments require traceability, calibration governance, and integration readiness. Reality Anchors is engineered to become the execution record of truth.
+            High-volume environments need an execution layer that increases planning-system fidelity, traceability, and margin control at scale.
           </p>
           <div className="flex flex-wrap gap-2 mt-6">
             {['Throughput', 'Traceability', 'Calibration', 'Integration'].map((t) => (
@@ -40,13 +40,13 @@ export default function IndustrialPage() {
             </ul>
           </div>
           <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-4">Integration posture</h2>
+            <h2 className="text-lg font-semibold text-txt mb-4">Integration model</h2>
             <ul className="flex flex-col gap-2.5 mb-4">
               {['Imports from digital schedules (when available)', 'Structured exports for ERP / QA systems', 'Role-based access and immutable event logs', 'Device fleet management constraints'].map((i) => (
                 <li key={i} className="flex gap-3 text-sm text-muted"><span className="text-accent">›</span>{i}</li>
               ))}
             </ul>
-            <p className="text-xs text-muted/70">The product is designed to be auditable: deterministic decisions, logged gates, and reproducible runs.</p>
+            <p className="text-xs text-muted/70">Designed to complement ERP and QA systems with reliable execution records from the workstation.</p>
           </div>
         </div>
       </section>
@@ -54,15 +54,15 @@ export default function IndustrialPage() {
       <section className="pb-14">
         <div className="max-w-4xl mx-auto px-6">
           <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-3">What &quot;record of truth&quot; means</h2>
+            <h2 className="text-lg font-semibold text-txt mb-3">Strategic fit for detailing and ERP leaders</h2>
             <p className="text-muted text-sm mb-6">
-              Industrial failure modes are often governance failures: drift, undocumented overrides, and untraceable changes. Reality Anchors treats calibration and gating as first-class, versioned assets.
+              Reality Anchors complements ERP and detailing platforms by validating physical execution and returning clean feedback data that improves planning accuracy over time.
             </p>
             <div className="grid md:grid-cols-2 gap-8">
               <div>
-                <h3 className="text-sm font-semibold text-muted uppercase tracking-wide mb-3">Governance primitives</h3>
+                <h3 className="text-sm font-semibold text-muted uppercase tracking-wide mb-3">Operational controls</h3>
                 <ul className="flex flex-col gap-2">
-                  {['Machine profiles (versioned)', 'Regimes (released only after QA)', 'Admissibility gates (GO/NO-GO)', 'Immutable event streams (optional)'].map((i) => (
+                  {['Machine profiles (versioned)', 'Programs (released only after QA)', 'Step validation checkpoints', 'Immutable event streams (optional)'].map((i) => (
                     <li key={i} className="flex gap-3 text-sm text-muted"><span className="text-accent">›</span>{i}</li>
                   ))}
                 </ul>
@@ -97,8 +97,8 @@ export default function IndustrialPage() {
       <section className="pb-14">
         <div className="max-w-4xl mx-auto px-6">
           <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-3">Industrial regime set</h2>
-            <p className="text-muted text-sm mb-5">Machine calibration governance, traceable execution, and compliance-grade decision controls for ERP-connected plants.</p>
+            <h2 className="text-lg font-semibold text-txt mb-3">Industrial program set</h2>
+            <p className="text-muted text-sm mb-5">Machine calibration support, traceable execution, and compliance-ready controls for ERP-connected plants.</p>
             <div className="grid md:grid-cols-3 gap-4">
               {industrialRegimes.map((regime) => (
                 <article key={regime.id} className="rounded-xl border border-line/80 bg-bg/60 p-4">

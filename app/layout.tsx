@@ -8,11 +8,11 @@ import { HOME_EXPERIMENT } from '@/lib/experiments/config';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Reality Anchors Limited | Structural Governance Platform',
+    default: 'Reality Anchors Limited | Operational Validation Platform',
     template: '%s | Reality Anchors',
   },
   description:
-    'Reality Anchors delivers deterministic AI-governed optimization for fabrication, field, and operations teams — measurable scrap reduction, traceable workflows, field-ready deployment.',
+    'Reality Anchors delivers AI-assisted operational validation for fabrication, field, and operations teams — measurable scrap reduction, traceable workflows, and field-ready deployment.',
   metadataBase: new URL('https://ra.primarydesignco.com'),
   openGraph: {
     siteName: 'Reality Anchors Limited',

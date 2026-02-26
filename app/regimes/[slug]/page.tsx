@@ -16,11 +16,11 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: Props): Metadata {
   const regime = getRegimeById(params.slug);
   if (!regime) {
-    return { title: 'Regime not found' };
+    return { title: 'Program not found' };
   }
 
   return {
-    title: `${regime.title} Regime`,
+    title: `${regime.title} Program`,
     description: regime.description,
   };
 }
@@ -34,7 +34,7 @@ export default function RegimeDetailPage({ params }: Props) {
     <main className="pt-20">
       <section className="py-14 border-b border-line">
         <div className="max-w-5xl mx-auto px-6">
-          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Regimes / {regime.tier}</p>
+          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Programs / {regime.tier}</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">{regime.title}</h1>
           <p className="text-xl text-muted max-w-3xl leading-relaxed">{regime.description}</p>
         </div>
@@ -51,36 +51,36 @@ export default function RegimeDetailPage({ params }: Props) {
       <section className="pb-12">
         <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-6">
           <article className="border border-line bg-card rounded-2xl p-6">
-            <h2 className="text-lg font-semibold text-txt mb-3">Reality anchors</h2>
+            <h2 className="text-lg font-semibold text-txt mb-3">Operational outcomes</h2>
             <ul className="flex flex-col gap-2">
-              {regime.anchors.map((anchor) => (
-                <li key={anchor} className="text-sm text-muted flex gap-3"><span className="text-accent">›</span><code>{anchor}</code></li>
+              {[
+                'Fewer preventable errors during execution',
+                'Improved consistency across operators and shifts',
+                'Clear documentation for review and accountability',
+                'Faster ramp-up for new team members',
+              ].map((item) => (
+                <li key={item} className="text-sm text-muted flex gap-3">
+                  <span className="text-accent">›</span>
+                  {item}
+                </li>
               ))}
             </ul>
           </article>
           <article className="border border-line bg-card rounded-2xl p-6">
-            <h2 className="text-lg font-semibold text-txt mb-3">Live data sources</h2>
+            <h2 className="text-lg font-semibold text-txt mb-3">Deployment profile</h2>
             <ul className="flex flex-col gap-2">
-              {regime.dataSources.map((source) => (
-                <li key={source} className="text-sm text-muted flex gap-3"><span className="text-accent">›</span>{source}</li>
+              {[
+                'Works in shop-floor and field environments',
+                'Supports phased rollout by team or location',
+                'Designed for measurable KPI tracking from day one',
+                'Built for audit readiness and operational traceability',
+              ].map((item) => (
+                <li key={item} className="text-sm text-muted flex gap-3">
+                  <span className="text-accent">›</span>
+                  {item}
+                </li>
               ))}
             </ul>
-          </article>
-        </div>
-      </section>
-
-      <section className="pb-12">
-        <div className="max-w-5xl mx-auto px-6">
-          <article className="border border-line bg-card rounded-2xl p-6">
-            <h2 className="text-lg font-semibold text-txt mb-3">Real-time processing loop</h2>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {regime.pipeline.map((step) => (
-                <span key={step} className="text-xs uppercase tracking-wide px-3 py-1.5 rounded-full border border-line text-muted">{step}</span>
-              ))}
-            </div>
-            <p className="text-sm text-muted">
-              Incoming telemetry is normalized to the regime schema, gated against admissibility thresholds, optimized for execution, then fed into calibration and routing updates.
-            </p>
           </article>
         </div>
       </section>
@@ -99,7 +99,7 @@ export default function RegimeDetailPage({ params }: Props) {
             </div>
             <p className="text-sm text-muted">{regime.roi}</p>
             <Link href="/#contact" className="inline-flex mt-5 px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
-              Talk to engineering about this regime
+              Talk to our team about this program
             </Link>
           </article>
         </div>

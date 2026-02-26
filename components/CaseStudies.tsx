@@ -3,11 +3,11 @@ import Image from "next/image";
 const studies = [
   {
     title: "Industrial Precast Group",
-    summary: "Reduced scrap by 17% across two plants in 90 days by implementing rule-governed planning templates.",
+    summary: "Reduced scrap by 17% across two plants in 90 days by standardizing planning workflows and field validation practices.",
   },
   {
     title: "Commercial Rebar Network",
-    summary: "Improved schedule adherence by 11% with deterministic routing and validation before dispatch.",
+    summary: "Improved schedule adherence by 11% with stronger pre-dispatch validation and clearer execution handoffs.",
   },
   {
     title: "Independent Fabricators",

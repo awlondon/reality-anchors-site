@@ -1,0 +1,82 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Reality Anchors monogram logo">
+  <title>Reality Anchors structural monogram</title>
+
+  <!-- Primary Asymmetric Speed Square -->
+  <polyline points="80,432 432,432 432,96 80,432"
+            fill="none"
+            stroke="#E6EDF5"
+            stroke-width="6"
+            stroke-linejoin="miter"/>
+
+  <!-- Invariance Lines (Base, 80%, 2px gap from outer stroke) -->
+  <line x1="100" y1="424" x2="430" y2="424"
+        stroke="#7FAED4"
+        stroke-width="1.5"
+        opacity="0.35"/>
+
+  <line x1="110" y1="416" x2="430" y2="416"
+        stroke="#7FAED4"
+        stroke-width="1.5"
+        opacity="0.25"/>
+
+  <!-- Invariance Lines (Vertical, 80%, 2px gap from outer stroke) -->
+  <line x1="424" y1="115" x2="424" y2="430"
+        stroke="#7FAED4"
+        stroke-width="1.5"
+        opacity="0.35"/>
+
+  <line x1="416" y1="125" x2="416" y2="430"
+        stroke="#7FAED4"
+        stroke-width="1.5"
+        opacity="0.25"/>
+
+  <!-- Hollow Recursive Corner -->
+  <rect x="96" y="84"
+        width="24"
+        height="24"
+        fill="none"
+        stroke="#E6EDF5"
+        stroke-width="5"/>
+
+  <!-- Recursive Steel Bands -->
+  <rect x="99" y="87"
+        width="18"
+        height="18"
+        fill="none"
+        stroke="#7FAED4"
+        stroke-width="2"/>
+
+  <rect x="102" y="90"
+        width="12"
+        height="12"
+        fill="none"
+        stroke="#A9C7E3"
+        stroke-width="1.5"/>
+
+  <rect x="105" y="93"
+        width="6"
+        height="6"
+        fill="none"
+        stroke="#C8DFF0"
+        stroke-width="1"/>
+
+  <!-- R -->
+  <text x="150" y="238"
+        font-family="'IBM Plex Sans', 'Inter', Arial, sans-serif"
+        font-size="138"
+        font-weight="600"
+        letter-spacing="2"
+        fill="#E6EDF5">
+        R
+  </text>
+
+  <!-- A -->
+  <text x="305" y="418"
+        font-family="'IBM Plex Sans', 'Inter', Arial, sans-serif"
+        font-size="138"
+        font-weight="600"
+        letter-spacing="2"
+        fill="#E6EDF5">
+        A
+  </text>
+</svg>

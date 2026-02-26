@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { fadeUp } from '@/lib/motion';
+import { siteMetrics } from '@/lib/siteData';
 
 export default function ValueBridge() {
   return (
@@ -80,7 +81,7 @@ export default function ValueBridge() {
               <tspan x="30" dy="15">never guesswork.</tspan>
             </text>
             {/* metric */}
-            <text x="30" y="171" fontFamily="'IBM Plex Mono',Consolas,monospace" fontSize="21" fontWeight="700" fill="#6fb0ff">{'< 1%'}</text>
+            <text x="30" y="171" fontFamily="'IBM Plex Mono',Consolas,monospace" fontSize="21" fontWeight="700" fill="#6fb0ff">{siteMetrics.valueBridge.governMetric}</text>
             <text x="84" y="171" fontFamily="Inter,system-ui,sans-serif" fontSize="10" fill="#8aa8c8"> fabrication errors</text>
 
             {/* ── CONNECTOR 1 ── */}
@@ -109,7 +110,7 @@ export default function ValueBridge() {
               <tspan x="402" dy="15">modelled before contract signature.</tspan>
             </text>
             {/* metric */}
-            <text x="402" y="171" fontFamily="'IBM Plex Mono',Consolas,monospace" fontSize="21" fontWeight="700" fill="#6fb0ff">30%</text>
+            <text x="402" y="171" fontFamily="'IBM Plex Mono',Consolas,monospace" fontSize="21" fontWeight="700" fill="#6fb0ff">{siteMetrics.valueBridge.optimizeMetric}</text>
             <text x="442" y="171" fontFamily="Inter,system-ui,sans-serif" fontSize="10" fill="#8aa8c8"> max scrap reduction</text>
 
             {/* ── CONNECTOR 2 ── */}
@@ -139,7 +140,7 @@ export default function ValueBridge() {
               <tspan x="774" dy="15">traceability, versioned calibration.</tspan>
             </text>
             {/* metric */}
-            <text x="774" y="171" fontFamily="'IBM Plex Mono',Consolas,monospace" fontSize="21" fontWeight="700" fill="#6fb0ff">99%</text>
+            <text x="774" y="171" fontFamily="'IBM Plex Mono',Consolas,monospace" fontSize="21" fontWeight="700" fill="#6fb0ff">{siteMetrics.valueBridge.traceMetric}</text>
             <text x="818" y="171" fontFamily="Inter,system-ui,sans-serif" fontSize="10" fill="#8aa8c8"> execution accuracy</text>
           </svg>
         </motion.div>

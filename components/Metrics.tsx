@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import { fadeUp, stagger } from '@/lib/motion';
+import { siteMetrics } from '@/lib/siteData';
 
 function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -30,12 +31,6 @@ function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
-const stats = [
-  { value: 30, suffix: '%', label: 'Max scrap reduction', sub: 'in production pilots' },
-  { value: 5, suffix: 's', label: 'Plan generation', sub: 'deterministic, not estimated' },
-  { value: 99, suffix: '%', label: 'Execution accuracy', sub: 'validated across deployments' },
-  { value: 60, suffix: ' days', label: 'To calibrated value', sub: 'validation window included' },
-];
 
 export default function Metrics() {
   return (
@@ -58,7 +53,7 @@ export default function Metrics() {
           variants={stagger}
           className="grid grid-cols-2 md:grid-cols-4 gap-8"
         >
-          {stats.map(({ value, suffix, label, sub }) => (
+          {siteMetrics.measuredOutcomes.map(({ value, suffix, label, sub }) => (
             <motion.div key={label} variants={fadeUp} className="text-center">
               <div className="text-4xl md:text-5xl font-bold text-txt font-mono mb-2">
                 <Counter target={value} suffix={suffix} />

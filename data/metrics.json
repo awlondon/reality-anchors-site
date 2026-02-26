@@ -1,0 +1,19 @@
+{
+  "hero": [
+    { "value": "1.8 pts", "label": "Median scrap delta" },
+    { "value": "4.2s", "label": "Plan generation" },
+    { "value": "0.7%", "label": "Fabrication error rate" },
+    { "value": "97.4%", "label": "Offline uptime" }
+  ],
+  "measuredOutcomes": [
+    { "value": 8, "suffix": "%", "label": "Average scrap reduction", "sub": "across structural fabrication cohorts" },
+    { "value": 4, "suffix": "s", "label": "Median plan generation", "sub": "from schedule ingest to cut plan" },
+    { "value": 99, "suffix": "%", "label": "Execution admissibility", "sub": "actions completed inside gate constraints" },
+    { "value": 14, "suffix": " days", "label": "Calibration convergence", "sub": "to stable machine-specific profiles" }
+  ],
+  "valueBridge": {
+    "governMetric": "< 0.7%",
+    "optimizeMetric": "8%",
+    "traceMetric": "99%"
+  }
+}

@@ -1,54 +1,81 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { stagger, fadeUp } from '@/lib/motion';
 
-const features = [
+const regimes = [
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-          d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    title: 'Deterministic Workflow Enforcement',
-    desc: 'No guesswork. Every decision flows through versioned rulesets with admissibility gates. Operators follow structured step sequences — GO/NO-GO enforced at every threshold.',
+    name: 'Structural Fabrication Regime',
+    description:
+      'Anchor-controlled bending and cut-stock planning with machine-specific calibration loops and operator-safe execution.',
+    stat: '8% avg scrap reduction',
+    statTwo: '<1% fabrication error rate',
+    cta: 'See Fabrication Intelligence',
+    href: '/commercial/',
+    bg: 'from-slate-900 via-slate-800 to-slate-950',
+    accent: 'bg-sky-500/20 text-sky-200 border-sky-400/40',
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-          d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
-      </svg>
-    ),
-    title: 'Cross-Project Optimization Engine',
-    desc: 'Unified planning across benches and facilities. Conservative industry baselines eliminate self-reported scrap disputes. Material and labor savings modeled before contract signature.',
+    name: 'Cross-Project Optimization Regime',
+    description:
+      'Merge multi-job cut plans, convert leftovers into tagged inventory, and route reusable stock before new purchase orders.',
+    stat: '18–35% scrap reutilization increase',
+    statTwo: '4–12 hrs/week planning saved',
+    cta: 'Optimize Across Jobs',
+    href: '/industrial/',
+    bg: 'from-zinc-900 via-slate-800 to-zinc-950',
+    accent: 'bg-emerald-500/20 text-emerald-200 border-emerald-400/40',
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-          d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
-      </svg>
-    ),
-    title: 'Full Execution Record of Truth',
-    desc: 'Immutable event streams. Per-run scrap accounting. Operator traceability and versioned machine calibration profiles. Every decision logged and reproducible for audit.',
+    name: 'Machine Calibration Regime',
+    description:
+      'BLE angle telemetry and stretch-table learning detect drift in real time and continuously tune machine profiles.',
+    stat: 'Real-time angle tracking',
+    statTwo: 'Drift alerts + stretch profile updates',
+    cta: 'See Calibration Mode',
+    href: '/industrial/',
+    bg: 'from-slate-950 via-indigo-950 to-slate-900',
+    accent: 'bg-indigo-500/20 text-indigo-200 border-indigo-400/40',
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-          d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
-      </svg>
-    ),
-    title: 'Field-Ready, Offline-First Deployment',
-    desc: 'Local-first architecture. Works without connectivity. Device fleet management, structured ERP exports, and role-based access — designed for shop floor realities, not office assumptions.',
+    name: 'Vehicle Stability & Grip Regime',
+    description:
+      'Speed × surface × load envelopes provide threshold proximity alerts before slip events become safety incidents.',
+    stat: 'Live slip-threshold detection',
+    statTwo: 'Insurance-grade telemetry stream',
+    cta: 'Explore Fleet Safety Layer',
+    href: '/commercial/',
+    bg: 'from-zinc-900 via-neutral-800 to-slate-950',
+    accent: 'bg-amber-500/20 text-amber-200 border-amber-400/40',
+  },
+  {
+    name: 'AR Execution Regime',
+    description:
+      'Overlay allowable execution states directly on the work zone and gate action with deterministic GO / NO-GO checks.',
+    stat: 'Hands-free workflow guidance',
+    statTwo: 'Live bend verification + audit logs',
+    cta: 'See AR Execution',
+    href: '/commercial/',
+    bg: 'from-slate-900 via-cyan-950 to-slate-950',
+    accent: 'bg-cyan-500/20 text-cyan-200 border-cyan-400/40',
+  },
+  {
+    name: 'AI Governance Regime',
+    description:
+      'Model quorum checks, confidence decay monitoring, and rollback triggers keep decision outputs deterministic and auditable.',
+    stat: 'Disagreement frequency tracking',
+    statTwo: 'Drift alerts + schema validation',
+    cta: 'Review Governance Controls',
+    href: '/pricing-methodology/',
+    bg: 'from-slate-950 via-violet-950 to-slate-900',
+    accent: 'bg-violet-500/20 text-violet-200 border-violet-400/40',
   },
 ];
 
 export default function Features() {
   return (
-    <section className="py-24 bg-bg-2">
+    <section className="py-24 bg-bg-2 border-y border-line/70">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -57,10 +84,13 @@ export default function Features() {
           variants={fadeUp}
           className="mb-14"
         >
-          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Platform Capabilities</p>
-          <h2 className="text-3xl md:text-4xl font-semibold text-txt max-w-xl leading-tight">
-            Built for the last mile of steel fabrication
+          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Regime Playbook</p>
+          <h2 className="text-3xl md:text-4xl font-semibold text-txt max-w-3xl leading-tight">
+            Sector-specific regimes staged as proof-of-capability anchors between funnel steps
           </h2>
+          <p className="mt-4 text-muted max-w-2xl">
+            Each block combines a visual context panel, measurable KPI deltas, and a route to the next conversion action.
+          </p>
         </motion.div>
 
         <motion.div
@@ -68,18 +98,32 @@ export default function Features() {
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
           variants={stagger}
-          className="grid md:grid-cols-2 gap-6"
+          className="grid lg:grid-cols-2 gap-6"
         >
-          {features.map((f) => (
-            <motion.div
-              key={f.title}
+          {regimes.map((regime) => (
+            <motion.article
+              key={regime.name}
               variants={fadeUp}
-              className="group border border-line bg-card rounded-2xl p-7 hover:border-accent/40 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-black/30"
+              className={`relative overflow-hidden rounded-2xl border border-line/70 bg-gradient-to-br ${regime.bg}`}
             >
-              <div className="text-accent mb-4">{f.icon}</div>
-              <h3 className="text-lg font-semibold text-txt mb-3">{f.title}</h3>
-              <p className="text-muted text-sm leading-relaxed">{f.desc}</p>
-            </motion.div>
+              <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.25),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(46,125,235,0.2),transparent_35%)]" />
+              <div className="relative p-7 md:p-8 min-h-[280px] flex flex-col">
+                <h3 className="text-xl font-semibold text-white mb-3">{regime.name}</h3>
+                <p className="text-slate-200/90 text-sm leading-relaxed max-w-xl">{regime.description}</p>
+
+                <div className="mt-6 grid sm:grid-cols-2 gap-3">
+                  <div className={`rounded-lg border px-3 py-2 text-xs font-semibold ${regime.accent}`}>{regime.stat}</div>
+                  <div className={`rounded-lg border px-3 py-2 text-xs font-semibold ${regime.accent}`}>{regime.statTwo}</div>
+                </div>
+
+                <Link
+                  href={regime.href}
+                  className="mt-auto pt-7 text-sm font-semibold text-white hover:text-accent-2 transition-colors"
+                >
+                  {regime.cta} →
+                </Link>
+              </div>
+            </motion.article>
           ))}
         </motion.div>
       </div>

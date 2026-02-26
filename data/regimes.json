@@ -1,0 +1,104 @@
+[
+  {
+    "id": "structural-fabrication",
+    "title": "Structural Fabrication",
+    "description": "Anchor-controlled bending and cut-stock sequencing for deterministic bench execution.",
+    "image": "/assets/regimes/structural-fabrication.svg",
+    "tier": "Core",
+    "learnMoreHref": "/regimes/structural-fabrication",
+    "metrics": [
+      { "label": "Scrap Δ", "value": "1.8 pts median" },
+      { "label": "Fabrication errors", "value": "0.7%" },
+      { "label": "Plan time", "value": "4.2s" }
+    ],
+    "anchors": ["bar_diameter", "bend_angle", "stretch_allowance", "stock_length", "machine_profile"],
+    "dataSources": ["tablet OCR", "BLE bend telemetry", "operator correction logs", "scrap remainder scans"],
+    "pipeline": ["parse", "validate", "optimize", "execute", "learn"],
+    "roi": "Average monthly material impact observed: 6–10 tons recovered per 200-ton shop."
+  },
+  {
+    "id": "multi-project-optimization",
+    "title": "Multi-Project Optimization",
+    "description": "Cross-job cut planning that converts leftovers into active inventory across benches.",
+    "image": "/assets/regimes/multi-project-optimization.svg",
+    "tier": "Pro",
+    "learnMoreHref": "/regimes/multi-project-optimization",
+    "metrics": [
+      { "label": "Reuse uplift", "value": "23%" },
+      { "label": "Planner hours", "value": "-7.4 h/week" },
+      { "label": "Stock-outs", "value": "-18%" }
+    ],
+    "anchors": ["stock_length", "project_compatibility", "scrap_threshold", "delivery_window"],
+    "dataSources": ["job schedule imports", "leftover tags", "purchase order logs", "bench throughput events"],
+    "pipeline": ["aggregate", "normalize", "score", "route", "feedback"],
+    "roi": "Observed planning compression: 4–12 hours per week with lower material over-ordering."
+  },
+  {
+    "id": "machine-calibration",
+    "title": "Machine Calibration",
+    "description": "Machine-aware stretch profile tuning using live angle telemetry and drift detection.",
+    "image": "/assets/regimes/machine-calibration.svg",
+    "tier": "Pro",
+    "learnMoreHref": "/regimes/machine-calibration",
+    "metrics": [
+      { "label": "Drift band", "value": "±0.2°" },
+      { "label": "Recalibration cycle", "value": "14 days" },
+      { "label": "Override rate", "value": "-31%" }
+    ],
+    "anchors": ["machine_profile", "bend_angle", "stretch_delta", "tolerance_band"],
+    "dataSources": ["BLE angle packets", "manual overrides", "maintenance notes", "run outcomes"],
+    "pipeline": ["capture", "compare", "correct", "version", "deploy"],
+    "roi": "Lower drift volatility and fewer corrective reruns during high-throughput shifts."
+  },
+  {
+    "id": "fleet-grip",
+    "title": "Fleet / Grip",
+    "description": "Stability envelopes for speed-surface-load conditions with slip-threshold proximity alerts.",
+    "image": "/assets/regimes/fleet-grip.svg",
+    "tier": "Specialty",
+    "learnMoreHref": "/regimes/fleet-grip",
+    "metrics": [
+      { "label": "Slip alerts", "value": "2.1s lead time" },
+      { "label": "Surface model precision", "value": "93%" },
+      { "label": "Harsh events", "value": "-19%" }
+    ],
+    "anchors": ["lateral_limit", "friction_coeff", "load_distribution", "slip_threshold"],
+    "dataSources": ["IMU telemetry", "wheel speed", "steering angle", "weather stream"],
+    "pipeline": ["sense", "classify", "forecast", "alert", "retrain"],
+    "roi": "Improves incident prevention and insurance telemetry quality for mixed terrain operations."
+  },
+  {
+    "id": "ar-execution",
+    "title": "AR Execution",
+    "description": "Visual admissibility overlays that gate actions with GO / NO-GO checks in real time.",
+    "image": "/assets/regimes/ar-execution.svg",
+    "tier": "Specialty",
+    "learnMoreHref": "/regimes/ar-execution",
+    "metrics": [
+      { "label": "Hands-free steps", "value": "84%" },
+      { "label": "Tolerance violations", "value": "-27%" },
+      { "label": "Audit capture", "value": "100% event logs" }
+    ],
+    "anchors": ["alignment_tolerance", "execution_state", "gesture_command", "verification_marker"],
+    "dataSources": ["AR mapping", "object detection", "gesture events", "deviation logs"],
+    "pipeline": ["map", "overlay", "gate", "record", "adapt"],
+    "roi": "Accelerates onboarding and reduces tolerance misses on complex assemblies."
+  },
+  {
+    "id": "ai-governance",
+    "title": "AI Governance",
+    "description": "Confidence and drift controls across model outputs with deterministic schema validation.",
+    "image": "/assets/regimes/ai-governance.svg",
+    "tier": "Specialty",
+    "learnMoreHref": "/regimes/ai-governance",
+    "metrics": [
+      { "label": "Quorum agreement", "value": "96.8%" },
+      { "label": "Schema validity", "value": "99.5%" },
+      { "label": "Rollback trigger", "value": "<300ms" }
+    ],
+    "anchors": ["confidence_score", "disagreement_rate", "drift_threshold", "output_schema"],
+    "dataSources": ["multi-model outputs", "shadow eval logs", "latency traces", "validation failures"],
+    "pipeline": ["evaluate", "adjudicate", "score", "guardrail", "reweight"],
+    "roi": "Compliance-grade decision governance for regulated and audit-heavy buyers."
+  }
+]

@@ -20,7 +20,7 @@ export default function RegimeStorySection({ id, children }: Props) {
     offset: ['start start', 'end start'],
   });
 
-  const opacity = reduceMotion ? 1 : useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
+  const opacity = reduceMotion ? 1 : useTransform(scrollYProgress, [0, 0.85, 1], [1, 1, 0]);
   const scale = reduceMotion ? 1 : useTransform(scrollYProgress, [0, 1], [1, 0.96]);
 
   return (

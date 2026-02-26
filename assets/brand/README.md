@@ -1,17 +1,28 @@
-# Brand binary placeholders
+# Brand binary generation
 
-This folder is the canonical location for production brand binaries referenced by the website:
+This website references PNG brand binaries at these paths:
 
 - `reality-anchors-lockup.png`
 - `reality-anchors-lockup-dark.png`
-- `favicon-light.ico`
-- `favicon-dark.ico`
+- `favicon-light.png`
+- `favicon-dark.png`
 - `apple-touch-icon.png`
 
-Codex has updated HTML/CSS references to these paths.
+These files are intentionally not committed in this repository.
 
-## Manual export workflow (binary files are not stored in this repo)
+## Generate PNGs from SVG sources
 
-1. Export PNG/ICO assets locally from `assets/brand/svg/` source files.
-2. Place generated binaries into this folder.
-3. Provide these binaries at deploy time (artifact step/CDN/static host upload), keeping Git source-only.
+1. Serve the repo root locally:
+   - `python -m http.server 4173`
+2. In a second terminal, run:
+   - `python scripts/export_brand_pngs.py --base-url http://127.0.0.1:4173`
+
+### Script requirements
+
+- Python package: `playwright`
+- Browser runtime: Chromium installed via Playwright
+
+Install example:
+
+- `python -m pip install playwright`
+- `python -m playwright install chromium`

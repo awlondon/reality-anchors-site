@@ -17,18 +17,19 @@ export function computeSourcePosteriors(events: ExecEvent[], trafficSource: stri
   const sourceByRegime = new Map<string, { exposures: number; submits: number }>();
 
   for (const event of events) {
-    if (!event.regimeId) continue;
+    const regimeId = 'regimeId' in event ? event.regimeId : undefined;
+    if (!regimeId) continue;
 
-    const all = allByRegime.get(event.regimeId) ?? { exposures: 0, submits: 0 };
+    const all = allByRegime.get(regimeId) ?? { exposures: 0, submits: 0 };
     if (event.type === 'regime_enter') all.exposures += 1;
     if (event.type === 'lead_form_submit') all.submits += 1;
-    allByRegime.set(event.regimeId, all);
+    allByRegime.set(regimeId, all);
 
     if ((event.trafficSource ?? 'unknown') !== trafficSource) continue;
-    const src = sourceByRegime.get(event.regimeId) ?? { exposures: 0, submits: 0 };
+    const src = sourceByRegime.get(regimeId) ?? { exposures: 0, submits: 0 };
     if (event.type === 'regime_enter') src.exposures += 1;
     if (event.type === 'lead_form_submit') src.submits += 1;
-    sourceByRegime.set(event.regimeId, src);
+    sourceByRegime.set(regimeId, src);
   }
 
   const posteriors: Record<string, SourcePosterior> = {};

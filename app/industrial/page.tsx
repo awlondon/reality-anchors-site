@@ -2,11 +2,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import LeadForm from '@/components/LeadForm';
+import { regimeCatalog } from '@/lib/siteData';
 
 export const metadata: Metadata = {
   title: 'Industrial',
   description: 'High-volume environments with traceability, calibration governance, and integration readiness.',
 };
+
+const industrialRegimes = regimeCatalog.filter((regime) => ['machine-calibration', 'ai-governance', 'ar-execution'].includes(regime.id));
 
 export default function IndustrialPage() {
   return (
@@ -87,6 +90,24 @@ export default function IndustrialPage() {
             <Link href="#contact" className="inline-flex px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
               Schedule a technical review
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-14">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="border border-line bg-card rounded-2xl p-7">
+            <h2 className="text-lg font-semibold text-txt mb-3">Industrial regime set</h2>
+            <p className="text-muted text-sm mb-5">Machine calibration governance, traceable execution, and compliance-grade decision controls for ERP-connected plants.</p>
+            <div className="grid md:grid-cols-3 gap-4">
+              {industrialRegimes.map((regime) => (
+                <article key={regime.id} className="rounded-xl border border-line/80 bg-bg/60 p-4">
+                  <h3 className="text-sm font-semibold text-txt">{regime.title}</h3>
+                  <p className="text-xs text-muted mt-2">{regime.metrics[1]?.label}: {regime.metrics[1]?.value}</p>
+                  <Link href={regime.learnMoreHref} className="inline-block mt-3 text-xs font-semibold text-accent hover:text-blue-400">Details →</Link>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>

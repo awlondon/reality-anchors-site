@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 import StructuredFieldBackground from '@/components/StructuredFieldBackground';
 import { trackEvent } from '@/lib/analytics';
+import { siteMetrics } from '@/lib/siteData';
 
 export default function Hero() {
   const reduce = useReducedMotion();
@@ -74,18 +75,13 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl"
         >
-          {[
-            { v: '1–3 pts', l: 'Typical scrap delta' },
-            { v: '< 5s', l: 'Plan generation' },
-            { v: '< 1%', l: 'Fabrication errors' },
-            { v: 'Offline', l: 'Deployment mode' },
-          ].map(({ v, l }) => (
+          {siteMetrics.hero.map(({ value, label }) => (
             <div
-              key={l}
+              key={label}
               className="border border-line/70 bg-card/50 backdrop-blur-sm rounded-xl px-4 py-3"
             >
-              <div className="text-xl font-bold text-accent-2 font-mono">{v}</div>
-              <div className="text-xs text-muted mt-1">{l}</div>
+              <div className="text-xl font-bold text-accent-2 font-mono">{value}</div>
+              <div className="text-xs text-muted mt-1">{label}</div>
             </div>
           ))}
         </motion.div>

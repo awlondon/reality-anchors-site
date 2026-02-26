@@ -2,6 +2,7 @@ import Hero from '@/components/Hero';
 import ValueBridge from '@/components/ValueBridge';
 import Features from '@/components/Features';
 import Metrics from '@/components/Metrics';
+import RegimeExamples from '@/components/RegimeExamples';
 import Tiers from '@/components/Tiers';
 import LeadForm from '@/components/LeadForm';
 import Footer from '@/components/Footer';
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <ValueBridge />
       <Features />
+      <RegimeExamples />
       <Metrics />
       <Tiers />
       <LeadForm />

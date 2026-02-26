@@ -2,11 +2,15 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import LeadForm from '@/components/LeadForm';
+import { regimeCatalog } from '@/lib/siteData';
 
 export const metadata: Metadata = {
   title: 'Personal',
   description: 'Curated regimes for individuals and small shops. Pre-built, pre-tested, and versioned before release.',
 };
+
+
+const personalRegimes = regimeCatalog.filter((regime) => ['Core', 'Pro'].includes(regime.tier)).slice(0, 3);
 
 const features = [
   { cap: 'Manual job entry', inc: true, note: 'First-class. Always available.' },
@@ -80,6 +84,25 @@ export default function PersonalPage() {
               </table>
             </div>
             <p className="text-xs text-muted/60 mt-4">AR overlays are planned; not required for personal v1.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-16">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-lg font-semibold text-txt mb-4">Curated regime examples</h2>
+          <div className="flex gap-4 overflow-x-auto pb-2">
+            {personalRegimes.map((regime) => (
+              <article key={regime.id} className="min-w-[290px] border border-line bg-card rounded-2xl p-5">
+                <p className="text-[11px] uppercase tracking-wide text-accent mb-2">{regime.tier}</p>
+                <h3 className="text-base font-semibold text-txt">{regime.title}</h3>
+                <p className="text-sm text-muted mt-2">{regime.description}</p>
+                <p className="text-sm text-accent-2 font-semibold mt-3">{regime.metrics[0]?.label}: {regime.metrics[0]?.value}</p>
+                <Link href={regime.learnMoreHref} className="inline-block mt-3 text-sm font-semibold text-accent hover:text-blue-400">
+                  Quick view →
+                </Link>
+              </article>
+            ))}
           </div>
         </div>
       </section>

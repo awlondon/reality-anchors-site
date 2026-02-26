@@ -11,7 +11,7 @@ const tiers = [
     href: '/personal/',
     price: '$5–$50/mo',
     desc: 'Curated regimes for individual operators and small shops. Pre-built, pre-tested, versioned before release.',
-    tags: ['Curated regimes', 'Offline-first', 'Continuous use'],
+    tags: ['Core: Structural Fabrication', 'Pro: Multi-Project', 'Offline-first'],
     cta: 'Explore Personal',
   },
   {
@@ -19,7 +19,7 @@ const tiers = [
     href: '/commercial/',
     price: '$2k–$25k/yr',
     desc: 'Bench-first execution for crews and fabrication yards. Pricing based on modeled value, not self-reported scrap.',
-    tags: ['Bench-first', 'Savings modeled', 'Audit logs'],
+    tags: ['Fabrication + Calibration', 'Multi-bench optimization', 'Audit logs'],
     cta: 'Explore Commercial',
     highlight: true,
   },
@@ -28,7 +28,7 @@ const tiers = [
     href: '/industrial/',
     price: 'Custom agreement',
     desc: 'High-volume plants with traceability, machine calibration governance, and ERP integration readiness.',
-    tags: ['Throughput', 'Traceability', 'Integration'],
+    tags: ['Governance + QA', 'ERP integration', 'Traceability'],
     cta: 'Explore Industrial',
   },
 ];

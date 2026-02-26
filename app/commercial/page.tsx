@@ -2,11 +2,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import LeadForm from '@/components/LeadForm';
+import { regimeCatalog } from '@/lib/siteData';
 
 export const metadata: Metadata = {
   title: 'Commercial',
   description: 'Bench-first execution for crews and fabrication yards. Pricing based on industry baselines and modeled value.',
 };
+
+const commercialRegimes = regimeCatalog.filter((regime) => ['structural-fabrication', 'multi-project-optimization', 'machine-calibration'].includes(regime.id));
 
 export default function CommercialPage() {
   return (
@@ -151,6 +154,27 @@ export default function CommercialPage() {
               <Link href="#contact" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
                 Request a quote range
               </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-14">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="border border-line bg-card rounded-2xl p-7">
+            <h2 className="text-lg font-semibold text-txt mb-3">Regimes commonly deployed in commercial benches</h2>
+            <p className="text-muted text-sm mb-6">
+              These regimes are typically paired with the baseline integrity model and the 60-day validation window.
+            </p>
+            <div className="grid md:grid-cols-3 gap-4">
+              {commercialRegimes.map((regime) => (
+                <article key={regime.id} className="rounded-xl border border-line/80 bg-bg/60 p-4">
+                  <p className="text-[11px] uppercase tracking-wide text-accent mb-2">{regime.tier}</p>
+                  <h3 className="text-sm font-semibold text-txt">{regime.title}</h3>
+                  <p className="text-xs text-muted mt-2">{regime.metrics[0]?.label}: {regime.metrics[0]?.value}</p>
+                  <Link href={regime.learnMoreHref} className="inline-block mt-3 text-xs font-semibold text-accent hover:text-blue-400">Learn more →</Link>
+                </article>
+              ))}
             </div>
           </div>
         </div>

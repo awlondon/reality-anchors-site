@@ -1,36 +1,36 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Navbar from "@/components/Navbar";
+import type { Metadata } from 'next';
+import './globals.css';
+import Navbar from '@/components/Navbar';
+import ProgressBar from '@/components/ProgressBar';
 
 export const metadata: Metadata = {
-  title: "Reality Anchors Limited | Structural Intelligence Platform",
+  title: {
+    default: 'Reality Anchors Limited | Structural Governance Platform',
+    template: '%s | Reality Anchors',
+  },
   description:
-    "Enterprise structural intelligence workflows for deterministic optimization, validation, and measurable outcomes.",
+    'Reality Anchors delivers deterministic AI-governed optimization for fabrication, field, and operations teams — measurable scrap reduction, traceable workflows, field-ready deployment.',
+  metadataBase: new URL('https://ra.primarydesignco.com'),
   openGraph: {
-    title: "Reality Anchors Limited",
-    description:
-      "Move from estimation to governed optimization with enterprise-safe AI workflows.",
-    images: ["/fallback-hero.svg"],
-    type: "website",
+    siteName: 'Reality Anchors Limited',
+    type: 'website',
+    locale: 'en_AU',
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <meta name="theme-color" content="#0B0F17" />
+        <link rel="icon" href="/assets/brand/favicon-dark.png" />
+        <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preload" as="video" href="/hero-loop.webm" type="video/webm" />
       </head>
-      <body className="bg-graphite text-white antialiased">
+      <body>
+        <ProgressBar />
         <Navbar />
-        <main>{children}</main>
+        {children}
       </body>
     </html>
   );

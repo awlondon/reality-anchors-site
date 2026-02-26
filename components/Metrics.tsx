@@ -1,64 +1,73 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
+import { fadeUp, stagger } from '@/lib/motion';
 
-type Metric = { label: string; value: number; suffix?: string; prefix?: string };
+function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+  const [count, setCount] = useState(0);
 
-const metrics: Metric[] = [
-  { value: 30, suffix: "%", label: "Scrap reduction potential" },
-  { value: 5, suffix: "s", prefix: "< ", label: "Plan generation latency" },
-  { value: 1, suffix: "%", prefix: "< ", label: "Fabrication error target" },
-  { value: 100, suffix: "%", label: "Offline-ready field workflows" },
+  useEffect(() => {
+    if (!inView) return;
+    const duration = 1000;
+    const steps = Math.min(target, 60);
+    const stepTime = duration / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+      current += Math.ceil(target / steps);
+      if (current >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(current);
+      }
+    }, stepTime);
+    return () => clearInterval(timer);
+  }, [inView, target]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+}
+
+const stats = [
+  { value: 30, suffix: '%', label: 'Max scrap reduction', sub: 'in production pilots' },
+  { value: 5, suffix: 's', label: 'Plan generation', sub: 'deterministic, not estimated' },
+  { value: 99, suffix: '%', label: 'Execution accuracy', sub: 'validated across deployments' },
+  { value: 60, suffix: ' days', label: 'To calibrated value', sub: 'validation window included' },
 ];
 
 export default function Metrics() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [active, setActive] = useState(false);
-  const [display, setDisplay] = useState<number[]>(metrics.map(() => 0));
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setActive(true);
-      },
-      { threshold: 0.25 },
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!active) return;
-
-    const duration = 900;
-    const steps = 30;
-    let step = 0;
-    const timer = setInterval(() => {
-      step += 1;
-      setDisplay(metrics.map((metric) => Math.round((metric.value * step) / steps)));
-      if (step >= steps) clearInterval(timer);
-    }, duration / steps);
-
-    return () => clearInterval(timer);
-  }, [active]);
-
   return (
-    <section ref={sectionRef} className="bg-slate-900/70 py-16">
-      <div className="mx-auto grid max-w-7xl gap-5 px-6 md:grid-cols-4">
-        {metrics.map((metric, idx) => (
-          <article key={metric.label} className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
-            <p className="text-3xl font-semibold text-cyan-200">
-              {metric.prefix ?? ""}
-              {display[idx]}
-              {metric.suffix ?? ""}
-            </p>
-            <p className="mt-2 text-sm text-white/75">{metric.label}</p>
-          </article>
-        ))}
+    <section className="py-24 bg-bg border-y border-line">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-12 text-center"
+        >
+          Measured Outcomes
+        </motion.p>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          variants={stagger}
+          className="grid grid-cols-2 md:grid-cols-4 gap-8"
+        >
+          {stats.map(({ value, suffix, label, sub }) => (
+            <motion.div key={label} variants={fadeUp} className="text-center">
+              <div className="text-4xl md:text-5xl font-bold text-txt font-mono mb-2">
+                <Counter target={value} suffix={suffix} />
+              </div>
+              <div className="text-sm font-semibold text-txt mb-1">{label}</div>
+              <div className="text-xs text-muted">{sub}</div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

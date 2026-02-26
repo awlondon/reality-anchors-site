@@ -1,95 +1,110 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
-import { trackEvent } from "@/lib/analytics";
+import { motion, useReducedMotion } from 'framer-motion';
+import Link from 'next/link';
+import StructuredFieldBackground from '@/components/StructuredFieldBackground';
+import { trackEvent } from '@/lib/analytics';
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    const video = videoRef.current;
-    if (!section || !video) return;
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (!reducedMotion) {
-      const onMove = (event: PointerEvent) => {
-        const x = (event.clientX / window.innerWidth - 0.5) * 8;
-        const y = (event.clientY / window.innerHeight - 0.5) * 8;
-        video.style.transform = `translate3d(${x}px, ${y}px, 0) scale(1.05)`;
-      };
-      section.addEventListener("pointermove", onMove);
-      return () => section.removeEventListener("pointermove", onMove);
-    }
-  }, []);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            void video.play().catch(() => undefined);
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { threshold: 0.2 },
-    );
-
-    observer.observe(video);
-    return () => observer.disconnect();
-  }, []);
+  const reduce = useReducedMotion();
 
   return (
-    <section id="top" ref={sectionRef} className="relative flex min-h-screen items-center overflow-hidden">
-      <video
-        ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/fallback-hero.svg"
-        aria-label="Abstract industrial geometry video background"
-      >
-        <source src="/hero-loop.webm" type="video/webm" />
-        <source src="/hero-loop.mp4" type="video/mp4" />
-      </video>
-      <div className="absolute inset-0 bg-gradient-to-b from-graphite/85 via-graphite/70 to-graphite/90" />
+    <section className="relative h-screen w-full overflow-hidden bg-bg flex items-center">
+      {/* Three.js field */}
+      <StructuredFieldBackground className="absolute inset-0 w-full h-full" intensity={0.65} />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-24">
-        <p className="mb-3 text-xs tracking-[0.18em] text-cyan-200/85">REALITY ANCHORS LIMITED</p>
-        <h1 className="max-w-4xl text-4xl font-semibold leading-tight md:text-6xl">
-          Precision Intelligence for Structural Systems
-        </h1>
-        <p className="mt-4 max-w-2xl text-base text-white/85 md:text-lg">
-          Deterministic optimization, real-time validation, and field-ready workflows that convert planning decisions into measurable outcomes.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a
-            href="#contact"
-            onClick={() => trackEvent("cta_click", { location: "hero", cta: "request_demo" })}
-            className="rounded-md bg-indigoCalm px-5 py-3 font-medium transition hover:-translate-y-0.5 hover:bg-indigo-400"
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-bg/70 via-bg/55 to-bg/85 pointer-events-none" />
+
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-16">
+        <motion.p
+          initial={reduce ? {} : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-xs font-bold tracking-[0.2em] uppercase text-muted mb-4"
+        >
+          Reality Anchors Limited
+        </motion.p>
+
+        <motion.h1
+          initial={reduce ? {} : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight text-txt max-w-4xl"
+        >
+          Structurally Governed AI Optimization Systems
+        </motion.h1>
+
+        <motion.p
+          initial={reduce ? {} : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.32 }}
+          className="mt-6 text-lg text-muted max-w-2xl leading-relaxed"
+        >
+          Deterministic bench workflows, measurable scrap reduction, and traceable execution records — deployed from day one.
+        </motion.p>
+
+        <motion.div
+          initial={reduce ? {} : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.44 }}
+          className="mt-10 flex flex-wrap gap-4"
+        >
+          <Link
+            href="/commercial/#contact"
+            className="px-7 py-4 rounded-lg bg-accent hover:bg-blue-500 text-white font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/25"
+            onClick={() => trackEvent('hero_cta_primary')}
           >
-            Request Demo
-          </a>
-          <a
-            href="#case-studies"
-            onClick={() => trackEvent("cta_click", { location: "hero", cta: "view_case_studies" })}
-            className="rounded-md border border-white/35 px-5 py-3 font-medium transition hover:-translate-y-0.5 hover:bg-white/10"
+            Request Enterprise Assessment
+          </Link>
+          <Link
+            href="/pricing-methodology/"
+            className="px-7 py-4 rounded-lg border border-white/25 hover:border-white/50 hover:bg-white/6 text-txt font-semibold transition-all hover:-translate-y-0.5"
+            onClick={() => trackEvent('hero_cta_secondary')}
           >
-            View Case Studies
-          </a>
-        </div>
-        <div className="mt-16 animate-bounce text-sm text-white/60">Scroll ↓</div>
+            Explore Platform Architecture
+          </Link>
+        </motion.div>
+
+        {/* KPIs */}
+        <motion.div
+          initial={reduce ? {} : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl"
+        >
+          {[
+            { v: '1–3 pts', l: 'Typical scrap delta' },
+            { v: '< 5s', l: 'Plan generation' },
+            { v: '< 1%', l: 'Fabrication errors' },
+            { v: 'Offline', l: 'Deployment mode' },
+          ].map(({ v, l }) => (
+            <div
+              key={l}
+              className="border border-line/70 bg-card/50 backdrop-blur-sm rounded-xl px-4 py-3"
+            >
+              <div className="text-xl font-bold text-accent-2 font-mono">{v}</div>
+              <div className="text-xs text-muted mt-1">{l}</div>
+            </div>
+          ))}
+        </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.6 }}
+      >
+        <span className="text-[10px] text-muted/60 tracking-widest uppercase">Scroll</span>
+        <motion.div
+          className="w-px h-8 bg-gradient-to-b from-muted/50 to-transparent"
+          animate={reduce ? {} : { scaleY: [1, 0.4, 1] }}
+          transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
+        />
+      </motion.div>
     </section>
   );
 }

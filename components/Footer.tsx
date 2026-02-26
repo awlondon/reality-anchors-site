@@ -1,20 +1,31 @@
+import Link from 'next/link';
+import Image from 'next/image';
+
 export default function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-slate-950 px-6 py-10 text-sm text-white/70">
-      <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-3">
-        <p>Reality Anchors Limited helps structural teams move from estimation to governed optimization.</p>
-        <div>
-          <p className="font-medium text-white">Links</p>
-          <a href="#solutions" className="block hover:text-white">Solutions</a>
-          <a href="#case-studies" className="block hover:text-white">Case Studies</a>
-          <a href="#contact" className="block hover:text-white">Contact</a>
+    <footer className="border-t border-line bg-bg py-10">
+      <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="flex items-center gap-3">
+          <Image src="/assets/brand/logo-ra-dark.png" alt="Reality Anchors" width={36} height={36} className="h-9 w-auto" />
+          <div>
+            <div className="text-sm font-semibold text-txt">Reality Anchors Limited</div>
+            <div className="text-xs text-muted">Measured. Anchored. Deterministic.</div>
+          </div>
         </div>
-        <div>
-          <p className="font-medium text-white">Contact</p>
-          <a href="mailto:hello@realityanchors.example" className="block hover:text-white">hello@realityanchors.example</a>
+
+        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted" aria-label="Footer navigation">
+          <Link href="/personal/" className="hover:text-txt transition-colors">Personal</Link>
+          <Link href="/commercial/" className="hover:text-txt transition-colors">Commercial</Link>
+          <Link href="/industrial/" className="hover:text-txt transition-colors">Industrial</Link>
+          <Link href="/calculator/" className="hover:text-txt transition-colors">Calculator</Link>
+          <Link href="/pricing-methodology/" className="hover:text-txt transition-colors">Methodology</Link>
+          <Link href="/commercial/#contact" className="hover:text-txt transition-colors">Contact</Link>
+        </nav>
+
+        <div className="text-xs text-muted/60">
+          © {new Date().getFullYear()} Reality Anchors Limited
         </div>
       </div>
-      <p className="mx-auto mt-6 max-w-7xl text-xs text-white/50">© {new Date().getFullYear()} Reality Anchors Limited</p>
     </footer>
   );
 }

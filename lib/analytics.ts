@@ -1,9 +1,11 @@
-export function trackEvent(name: string, data: Record<string, unknown> = {}) {
-  if (typeof window === "undefined") return;
+type EventData = Record<string, string | number | boolean>;
 
-  if ((window as Window & { gtag?: (...args: unknown[]) => void }).gtag) {
-    (window as Window & { gtag: (...args: unknown[]) => void }).gtag("event", name, data);
+export function trackEvent(name: string, data?: EventData): void {
+  if (typeof window === 'undefined') return;
+
+  // Wire to your analytics provider here (e.g. Segment, Plausible, GA4)
+  // Example: window.gtag?.('event', name, data);
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[analytics]', name, data);
   }
-
-  console.log("trackEvent", name, data);
 }

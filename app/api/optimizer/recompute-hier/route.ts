@@ -24,10 +24,10 @@ export async function POST(req: NextRequest) {
 
     const result: Record<string, unknown> = {};
 
-    for (const [regimeId, bySrc] of agg.entries()) {
+    for (const [regimeId, bySrc] of Array.from(agg.entries())) {
       let N = 0;
       let K = 0;
-      for (const { n, k } of bySrc.values()) {
+      for (const { n, k } of Array.from(bySrc.values())) {
         N += n;
         K += k;
       }
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
       const global = globalPosterior(K, N, 1, 9);
       const sources: Record<string, unknown> = {};
 
-      for (const [trafficSource, { n, k }] of bySrc.entries()) {
+      for (const [trafficSource, { n, k }] of Array.from(bySrc.entries())) {
         sources[trafficSource] = sourcePosteriorFromGlobal(k, n, global.mean, 30, regimeId);
       }
 

@@ -33,7 +33,7 @@ export function computeSourcePosteriors(events: ExecEvent[], trafficSource: stri
 
   const posteriors: Record<string, SourcePosterior> = {};
 
-  for (const [regimeId, globalStats] of allByRegime.entries()) {
+  for (const [regimeId, globalStats] of Array.from(allByRegime.entries())) {
     const srcStats = sourceByRegime.get(regimeId) ?? { exposures: 0, submits: 0 };
     const g = globalPosterior(globalStats.submits, globalStats.exposures);
     const s = sourcePosteriorFromGlobal(srcStats.submits, srcStats.exposures, g.mean, 30, regimeId);

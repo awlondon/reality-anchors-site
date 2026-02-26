@@ -9,6 +9,7 @@ type LegacyRegime = {
   tier: 'Core' | 'Pro' | 'Specialty';
   learnMoreHref: string;
   metrics: Array<{ label: string; value: string }>;
+  animationPreset?: RegimeContent['animationPreset'];
 };
 
 const tierMap: Record<LegacyRegime['tier'], RegimeContent['visualTier']> = {
@@ -35,6 +36,7 @@ export async function getRegimes(): Promise<RegimeContent[]> {
       ctaHref: regime.learnMoreHref,
       order: index + 1,
       published: true,
+      animationPreset: regime.animationPreset,
     }))
     .filter((regime) => regime.published)
     .sort((a, b) => a.order - b.order);

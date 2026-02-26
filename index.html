@@ -34,28 +34,153 @@
         </div>
         <div class="hero-eyebrow">REALITY ANCHORS LIMITED</div>
         <div class="hero-platform">Structural Intelligence Platform</div>
-        <h1>Structurally Governed AI Optimization Systems</h1>
-        <p class="lead hero-sub">Our platform enables regime-determined guidance, continuously validated and refined — transforming operational workflows into expert, world-class systems from initial deployment.</p>
+        <h1>Move from estimation to governed optimization in 30 days.</h1>
+        <p class="lead hero-sub">Reality Anchors gives fabrication, field, and operations teams measurable waste reduction using rule-governed AI workflows built for enterprise safety and accountability.</p>
+        <div class="hero-metrics">
+          <span><strong>12% avg.</strong> material optimization in pilot programs</span>
+          <span><strong>4 weeks</strong> to first measurable workflow outcome</span>
+          <span><strong>99.95%</strong> guided decision uptime with validation logs</span>
+          <span><strong>1 platform</strong> for planning, execution, and analytics</span>
+        </div>
         <div class="cta-grid hero-actions">
-          <a class="btn btn-primary" href="/reality-anchors-site/commercial/index.html#contact">Request Enterprise Assessment</a>
-          <a class="btn" href="/reality-anchors-site/pricing-methodology/index.html">Explore Platform Architecture</a>
+          <a class="btn btn-primary" href="#contact-form">Request an Enterprise Assessment</a>
+          <a class="btn" href="#proof">View Customer Outcomes</a>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container three-col">
+    <section id="proof" class="section">
+      <div class="container stack">
+        <div>
+          <h2>Outcomes that qualify serious buyers quickly</h2>
+          <p class="lead">Use these benchmarks to evaluate fit before a full technical workshop.</p>
+        </div>
+        <div class="three-col">
+          <article class="card">
+            <h3>Industrial Precast Group</h3>
+            <p><strong>17%</strong> scrap reduction across two plants in 90 days.</p>
+            <a href="/reality-anchors-site/industrial/index.html">Read industrial workflow</a>
+          </article>
+          <article class="card">
+            <h3>Commercial Rebar Network</h3>
+            <p><strong>11%</strong> increase in schedule adherence after guided planning rollout.</p>
+            <a href="/reality-anchors-site/commercial/index.html">Read commercial workflow</a>
+          </article>
+          <article class="card">
+            <h3>Independent Fabricators</h3>
+            <p><strong>9%</strong> improvement in cut-list precision from first-month deployment.</p>
+            <a href="/reality-anchors-site/personal/index.html">Read personal workflow</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container split-grid">
         <article class="card">
-          <h2>Personal</h2>
-          <p>Individual operators &amp; small shops</p>
+          <h2>How the platform works</h2>
+          <ol class="step-list">
+            <li><strong>Map:</strong> Capture process constraints, site conditions, and baseline loss metrics.</li>
+            <li><strong>Govern:</strong> Apply deterministic guardrails and role-based workflow controls.</li>
+            <li><strong>Optimize:</strong> Activate guided AI recommendations with full decision traceability.</li>
+            <li><strong>Scale:</strong> Expand validated templates across crews, facilities, and regions.</li>
+          </ol>
+        </article>
+        <article class="card" aria-labelledby="roi-preview-title">
+          <h2 id="roi-preview-title">ROI trend preview</h2>
+          <p class="lead">Indicative six-month savings trajectory from recent enterprise onboarding cohorts.</p>
+          <div class="mini-chart" role="img" aria-label="Bar chart showing monthly savings growth from 18k in month 1 to 74k in month 6">
+            <span style="--bar:24%">M1</span>
+            <span style="--bar:36%">M2</span>
+            <span style="--bar:48%">M3</span>
+            <span style="--bar:62%">M4</span>
+            <span style="--bar:76%">M5</span>
+            <span style="--bar:92%">M6</span>
+          </div>
+          <p class="mono">Median annualized savings potential: $412,000</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact-form" class="section">
+      <div class="container split-grid">
+        <article>
+          <h2>Request a scoped consultation</h2>
+          <p class="lead">Complete three quick steps. We will return with a fit assessment, suggested rollout scope, and a timeline for value realization.</p>
+          <ul class="feature-list">
+            <li>Get role-specific solution mapping for operations, engineering, and procurement.</li>
+            <li>Receive estimated savings ranges by segment and material throughput.</li>
+            <li>Optional technical deep-dive with architecture and governance review.</li>
+          </ul>
         </article>
         <article class="card">
-          <h2>Commercial</h2>
-          <p>Crews &amp; fabrication yards</p>
-        </article>
-        <article class="card">
-          <h2>Industrial</h2>
-          <p>High-volume prefab plants</p>
+          <form id="leadForm" class="capture-form lead-form" data-form="enterprise-intake">
+            <div class="form-progress" aria-live="polite">Step <span id="leadStepNumber">1</span> of 3</div>
+
+            <fieldset class="lead-step" data-step="0">
+              <legend>Evaluation goals</legend>
+              <label>
+                Primary intent
+                <select name="intent" required>
+                  <option value="">Select…</option>
+                  <option>Request demo</option>
+                  <option>Request pricing</option>
+                  <option>Technical consult</option>
+                </select>
+              </label>
+              <label>
+                Your role
+                <select name="role" required>
+                  <option value="">Select…</option>
+                  <option>Operations</option>
+                  <option>Engineering</option>
+                  <option>IT / Security</option>
+                  <option>Executive</option>
+                </select>
+              </label>
+              <div class="form-actions">
+                <button type="button" class="btn btn-primary js-next">Next</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="lead-step" data-step="1" hidden>
+              <legend>Company profile</legend>
+              <label>
+                Company name
+                <input name="company" required minlength="2" />
+              </label>
+              <label>
+                Company size
+                <select name="company_size" required>
+                  <option value="">Select…</option>
+                  <option>1–50</option>
+                  <option>51–200</option>
+                  <option>201–1,000</option>
+                  <option>1,001+</option>
+                </select>
+              </label>
+              <div class="form-actions">
+                <button type="button" class="btn js-back">Back</button>
+                <button type="button" class="btn btn-primary js-next">Next</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="lead-step" data-step="2" hidden>
+              <legend>Contact details</legend>
+              <label>
+                Work email
+                <input name="email" type="email" autocomplete="email" required />
+              </label>
+              <label>
+                Describe the workflow challenge
+                <textarea name="message" rows="4" required minlength="20"></textarea>
+              </label>
+              <div class="form-actions">
+                <button type="button" class="btn js-back">Back</button>
+                <button type="submit" class="btn btn-primary">Request contact</button>
+              </div>
+            </fieldset>
+          </form>
         </article>
       </div>
     </section>
@@ -63,7 +188,7 @@
 
   <footer class="site-footer" id="contact">
     <div class="container footer-grid">
-      <a href="#contact">Contact</a>
+      <a href="#contact-form">Contact</a>
       <a href="mailto:placeholder@example.com">placeholder@example.com</a>
       <a href="https://github.com/placeholder" target="_blank" rel="noopener">GitHub</a>
     </div>

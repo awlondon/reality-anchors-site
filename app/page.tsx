@@ -8,7 +8,6 @@ import LeadForm from '@/components/LeadForm';
 import Footer from '@/components/Footer';
 import { getRegimes } from '@/lib/getRegimes';
 import { HOME_EXPERIMENT } from '@/lib/experiments/config';
-import { getServerVariant } from '@/lib/experiments/serverVariant';
 
 function orderByList<T extends { slug: string }>(items: T[], slugs: string[]) {
   const map = new Map(items.map((item) => [item.slug, item]));
@@ -19,7 +18,7 @@ function orderByList<T extends { slug: string }>(items: T[], slugs: string[]) {
 
 export default async function Home() {
   const regimes = await getRegimes();
-  const variant = getServerVariant();
+  const variant = 'A';
 
   const order = HOME_EXPERIMENT.narrative.regimeOrder?.[variant];
   const regimesOrdered = order ? orderByList(regimes, order) : regimes;

@@ -31,8 +31,8 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
       }`}
     >
       <div className="max-w-6xl mx-auto px-5 flex items-center justify-between h-16">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0" aria-label="Reality Anchors home">
+        {/* Logo + wordmark */}
+        <Link href="/" className="flex items-center gap-3 shrink-0" aria-label="Reality Anchors home">
           <Image
             src="/assets/brand/logo-ra-dark.png"
             alt="Reality Anchors"
@@ -41,6 +41,9 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
             className="h-12 w-auto"
             priority
           />
+          <span className="hidden sm:block text-xs font-semibold tracking-widest uppercase text-txt/80 leading-tight">
+            Reality Anchors Ltd.
+          </span>
         </Link>
 
         {/* Desktop nav */}

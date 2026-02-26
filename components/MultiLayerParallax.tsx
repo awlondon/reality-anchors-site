@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 export type ParallaxLayer = {
   src: string;
@@ -10,6 +10,7 @@ export type ParallaxLayer = {
   depth: number;
   opacity?: number;
   scale?: number;
+  fallbackSrc?: string;
 };
 
 type Props = {
@@ -18,6 +19,7 @@ type Props = {
 
 export default function MultiLayerParallax({ layers }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const [failedLayers, setFailedLayers] = useState<Record<number, boolean>>({});
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -28,6 +30,7 @@ export default function MultiLayerParallax({ layers }: Props) {
     <div ref={ref} className="absolute inset-0 overflow-hidden [perspective:1000px]">
       {layers.map((layer, index) => {
         const y = reduceMotion ? 0 : useTransform(scrollYProgress, [0, 1], [-layer.depth, layer.depth]);
+        const source = failedLayers[index] && layer.fallbackSrc ? layer.fallbackSrc : layer.src;
 
         return (
           <motion.div key={`${layer.src}-${index}`} style={{ y }} className="absolute inset-0">
@@ -38,7 +41,18 @@ export default function MultiLayerParallax({ layers }: Props) {
                 transform: `scale(${layer.scale ?? 1}) translateZ(0)`,
               }}
             >
-              <Image src={layer.src} alt={layer.alt} fill priority={false} className="object-cover" />
+              <Image
+                src={source}
+                alt={layer.alt}
+                fill
+                priority={false}
+                className="object-cover"
+                onError={() => {
+                  if (layer.fallbackSrc && !failedLayers[index]) {
+                    setFailedLayers((prev) => ({ ...prev, [index]: true }));
+                  }
+                }}
+              />
             </div>
           </motion.div>
         );

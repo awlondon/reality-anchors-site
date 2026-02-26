@@ -71,15 +71,6 @@ function getTierDepths(tier: NonNullable<RegimeSectionProps['visualTier']>) {
   }
 }
 
-function makeLayerSource(imageSrc: string, suffix: '-bg' | '-mid' | '-fg') {
-  const dotIndex = imageSrc.lastIndexOf('.');
-  if (dotIndex < 0) return imageSrc;
-  const base = imageSrc.slice(0, dotIndex);
-  const ext = imageSrc.slice(dotIndex);
-  const fgExt = suffix === '-fg' ? '.png' : ext;
-  return `${base}${suffix}${fgExt}`;
-}
-
 export default function RegimeSection({
   id,
   title,
@@ -132,21 +123,21 @@ export default function RegimeSection({
           <MultiLayerParallax
             layers={[
               {
-                src: makeLayerSource(imageSrc, '-bg'),
+                src: imageSrc,
                 alt: `${imageAlt} background layer`,
                 depth: bgDepth,
                 opacity: 0.9,
                 scale: 1.05,
               },
               {
-                src: makeLayerSource(imageSrc, '-mid'),
+                src: imageSrc,
                 alt: `${imageAlt} middle layer`,
                 depth: midDepth,
                 opacity: 1,
                 scale: 1.1,
               },
               {
-                src: makeLayerSource(imageSrc, '-fg'),
+                src: imageSrc,
                 alt: `${imageAlt} foreground layer`,
                 depth: fgDepth,
                 opacity: 1,

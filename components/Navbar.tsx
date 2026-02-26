@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { href: '/personal/', label: 'Personal' },
   { href: '/commercial/', label: 'Commercial' },
   { href: '/industrial/', label: 'Industrial' },
-  { href: '/calculator/', label: 'Calculator' },
+  { href: '/margin-impact/', label: 'Margin Model' },
 ];
 
 export default function Navbar({ activePath = '' }: { activePath?: string }) {

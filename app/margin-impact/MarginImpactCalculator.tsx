@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { computeMarginImpact } from '@/lib/marginModel';
 import InputSection from './InputSection';
 import ResultPanel from './ResultPanel';
@@ -27,6 +27,13 @@ export default function MarginImpactCalculator() {
   const [inputs, setInputs] = useState(defaultInputs);
   const [results, setResults] = useState<any>(null);
   const [error, setError] = useState('');
+  const resultsRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (results) {
+      resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [results]);
 
   function handleCalculate() {
     try {
@@ -64,13 +71,13 @@ export default function MarginImpactCalculator() {
       {error && <p className="text-sm text-red-600 text-center">{error}</p>}
 
       {results && (
-        <>
+        <div ref={resultsRef} className="space-y-12">
           <ResultPanel results={results} />
           <EnterpriseRollup
             perFacilityEbitdaIncrease={results.totals.annualEbitdaIncrease}
             perFacilityRevenue={inputs.annualFabricationRevenue}
           />
-        </>
+        </div>
       )}
     </div>
   );

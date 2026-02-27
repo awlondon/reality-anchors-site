@@ -13,11 +13,32 @@ export const metadata: Metadata = {
 const personalRegimes = regimeCatalog.filter((regime) => ['Core', 'Pro'].includes(regime.tier)).slice(0, 3);
 
 const features = [
-  { cap: 'Manual job entry', inc: true, note: 'First-class. Always available.' },
-  { cap: 'Photo import / OCR', inc: true, note: 'Optional; always confirmable.' },
-  { cap: 'Cut workflow', inc: true, note: 'Step + counter + stop logic.' },
-  { cap: 'Bend workflow', inc: true, note: 'Mark positions + angles + gating.' },
-  { cap: 'Offline mode', inc: true, note: 'Local-first. Sync optional.' },
+  { cap: 'Manual job entry', inc: true, note: 'First-class for every plan.' },
+  { cap: 'Photo import + OCR assist', inc: true, note: 'Optional import with manual verification.' },
+  { cap: 'Cut + bend execution guidance', inc: true, note: 'Step sequence, counters, and hold points.' },
+  { cap: 'Offline-first operation', inc: true, note: 'Works on device; sync when connected.' },
+  { cap: 'Progressive upgrade path', inc: true, note: 'Move from personal to commercial workflows without rework.' },
+];
+
+const pricingTiers = [
+  {
+    tier: 'Solo',
+    monthly: '$19',
+    includes: '1 operator seat, core execution workflows, personal job history',
+    fit: 'Independent tradesperson or side business',
+  },
+  {
+    tier: 'Studio',
+    monthly: '$79',
+    includes: 'Up to 3 seats, shared templates, QA checkpoints, exportable work logs',
+    fit: 'Small shop standardizing repeatable work',
+  },
+  {
+    tier: 'Crew',
+    monthly: '$199',
+    includes: 'Up to 8 seats, supervisor view, calibration packs, onboarding support',
+    fit: 'Growing team preparing for commercial-grade operations',
+  },
 ];
 
 export default function PersonalPage() {
@@ -29,10 +50,10 @@ export default function PersonalPage() {
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions / Personal</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">Personal</h1>
           <p className="text-xl text-muted max-w-2xl leading-relaxed">
-            Curated programs for individuals and small shops focused on dependable execution and practical outcomes.
+            A practical execution layer for solo operators and small teams that need fewer errors, cleaner handoffs, and a clear path into larger-scale deployments.
           </p>
           <div className="flex flex-wrap gap-2 mt-6">
-            {['$5–$50/month', 'Curated programs', 'Offline-first'].map((t) => (
+            {['$19–$199/month', 'Built for 1–8 seats', 'Scales into Commercial'].map((t) => (
               <span key={t} className="text-xs font-semibold px-3 py-1.5 rounded-full border border-line text-muted">{t}</span>
             ))}
           </div>
@@ -44,7 +65,7 @@ export default function PersonalPage() {
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-4">Who it&apos;s for</h2>
             <ul className="flex flex-col gap-2.5">
-              {['Individual operators', 'Training and skill reinforcement', 'Small shops wanting standardized steps', 'Anyone who prefers repeatable workflows over guesswork'].map((i) => (
+              {['Independent operators', 'Two-to-eight person fabrication crews', 'Shops replacing whiteboards and ad-hoc notes', 'Teams that want to graduate into commercial operations'].map((i) => (
                 <li key={i} className="flex gap-3 text-sm text-muted">
                   <span className="text-accent mt-0.5">›</span>{i}
                 </li>
@@ -54,7 +75,7 @@ export default function PersonalPage() {
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-4">What it solves</h2>
             <ul className="flex flex-col gap-2.5">
-              {['Reduces mental math and hand transcription', 'Validates key steps before work proceeds', 'Provides consistent step sequences and counters', 'Creates a lightweight personal audit log'].map((i) => (
+              {['Reduces rework from missed bends, mis-reads, and sequence drift', 'Creates repeatable operator behavior without heavy SOP overhead', 'Captures execution proof that can feed customer updates and QA reviews', 'Establishes workflow discipline before moving into multi-project environments'].map((i) => (
                 <li key={i} className="flex gap-3 text-sm text-muted">
                   <span className="text-accent mt-0.5">›</span>{i}
                 </li>
@@ -67,23 +88,28 @@ export default function PersonalPage() {
       <section className="py-8 pb-16">
         <div className="max-w-4xl mx-auto px-6">
           <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-2">Program subscriptions</h2>
+            <h2 className="text-lg font-semibold text-txt mb-2">Personal SaaS plans</h2>
             <p className="text-muted text-sm mb-6">
-              Programs are curated packages with guided workflows, practical safeguards, and deployment-ready defaults. New programs are released only after internal testing.
+              Personal pricing is seat-based so small teams can start quickly, then transition into Commercial plans without retraining or data migration. Every tier includes the same workflow foundation; higher tiers add coordination and governance.
             </p>
             <div className="overflow-x-auto">
               <table className="ra-table">
                 <thead>
-                  <tr><th>Tier</th><th>Monthly</th><th>Includes</th></tr>
+                  <tr><th>Tier</th><th>Monthly</th><th>Includes</th><th>Intended fit</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>Core</td><td className="font-mono text-accent-2">$5</td><td className="text-muted text-sm">Single workflow program with core validation support</td></tr>
-                  <tr><td>Pro</td><td className="font-mono text-accent-2">$20</td><td className="text-muted text-sm">Multiple programs, saved templates, and extended logging</td></tr>
-                  <tr><td>Specialty</td><td className="font-mono text-accent-2">$50</td><td className="text-muted text-sm">Specialized programs and priority releases</td></tr>
+                  {pricingTiers.map((tier) => (
+                    <tr key={tier.tier}>
+                      <td>{tier.tier}</td>
+                      <td className="font-mono text-accent-2">{tier.monthly}</td>
+                      <td className="text-muted text-sm">{tier.includes}</td>
+                      <td className="text-muted text-sm">{tier.fit}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-muted/60 mt-4">AR overlays are planned; not required for personal v1.</p>
+            <p className="text-xs text-muted/60 mt-4">Need more than 8 seats, cross-project rollups, or formal compliance controls? Move to Commercial or Industrial packaging without changing your bench workflow foundation.</p>
           </div>
         </div>
       </section>

@@ -26,12 +26,20 @@ const defaultInputs = {
 export default function MarginImpactCalculator() {
   const [inputs, setInputs] = useState(defaultInputs);
   const [results, setResults] = useState<any>(null);
+  const [showAnnualImpact, setShowAnnualImpact] = useState(false);
   const [error, setError] = useState('');
   const resultsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (results) {
+      setShowAnnualImpact(false);
       resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      const revealTimer = window.setTimeout(() => {
+        setShowAnnualImpact(true);
+      }, 1500);
+
+      return () => window.clearTimeout(revealTimer);
     }
   }, [results]);
 
@@ -72,7 +80,7 @@ export default function MarginImpactCalculator() {
 
       {results && (
         <div ref={resultsRef} className="space-y-12">
-          <ResultPanel results={results} />
+          {showAnnualImpact && <ResultPanel results={results} />}
           <EnterpriseRollup
             perFacilityEbitdaIncrease={results.totals.annualEbitdaIncrease}
             perFacilityRevenue={inputs.annualFabricationRevenue}

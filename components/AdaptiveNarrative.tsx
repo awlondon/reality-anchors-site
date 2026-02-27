@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import IntentHeatmapOverlay from '@/components/IntentHeatmapOverlay';
-import IntentTraceOverlay from '@/components/IntentTraceOverlay';
 import RegimeSection from '@/components/RegimeSection';
 import RegimeStorySection from '@/components/RegimeStorySection';
 import { reorderBySource, reorderRegimes } from '@/lib/narrativeReorder';
@@ -33,8 +31,6 @@ export default function AdaptiveNarrative({ initialRegimes }: Props) {
     totalFormSubmits: 0,
     kpiReveals: 0,
   });
-  const [showHeatmap, setShowHeatmap] = useState(false);
-
   const { trafficSource } = useTrafficAttribution();
   const { events } = useLiveIntentStream();
   const sourcePosteriors = useSourcePosteriors(events, trafficSource);
@@ -127,18 +123,6 @@ export default function AdaptiveNarrative({ initialRegimes }: Props) {
 
   return (
     <section className="bg-bg">
-      <button
-        onClick={() => setShowHeatmap((v) => !v)}
-        className="fixed bottom-4 right-4 z-50 rounded border border-white/20 bg-black/50 px-3 py-2 text-xs text-white"
-      >
-        Heatmap
-      </button>
-      {showHeatmap ? (
-        <>
-          <IntentHeatmapOverlay />
-          <IntentTraceOverlay />
-        </>
-      ) : null}
       {rendered.map((regime, index) => (
         <RegimeStorySection key={regime.id} id={regime.slug}>
           <RegimeSection

@@ -24,6 +24,7 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     window.dispatchEvent(
@@ -45,29 +46,75 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
     return e;
   };
 
+  const withTimeout = async (request: Promise<Response>, timeoutMs = 8000) => {
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    try {
+      const timeoutPromise = new Promise<Response>((_, reject) => {
+        timer = setTimeout(() => reject(new Error('request_timeout')), timeoutMs);
+      });
+      return await Promise.race([request, timeoutPromise]);
+    } finally {
+      if (timer) clearTimeout(timer);
+    }
+  };
+
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
     const e = validate();
     if (Object.keys(e).length) { setErrors(e); return; }
     setErrors({});
+    setSubmitError(null);
     setLoading(true);
     const attributedRegime = getLastRegime();
     const sessionId = getSessionId() ?? 'unknown';
     try {
-      await saveLead({
-        name: data.name,
-        email: data.email,
-        company: data.company,
-        role: data.role,
-        message: data.message,
+      const leadPayload = {
+        ...data,
         sessionId,
         regimeId: attributedRegime,
-      });
+        source: 'request_contact_form',
+        submittedAt: new Date().toISOString(),
+      };
+
+      const [persistResult, emailResult] = await Promise.allSettled([
+        saveLead({
+          name: data.name,
+          email: data.email,
+          company: data.company,
+          role: data.role,
+          message: data.message,
+          sessionId,
+          regimeId: attributedRegime,
+        }),
+        withTimeout(
+          fetch('/api/lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(leadPayload),
+          })
+        ),
+      ]);
+
+      if (persistResult.status === 'rejected') {
+        console.error('Failed to save lead:', persistResult.reason);
+      }
+
+      if (emailResult.status === 'rejected') {
+        console.error('Failed to send lead email:', emailResult.reason);
+        setSubmitError('Your request was captured, but we could not confirm email delivery. Please try again in a minute.');
+      } else if (!emailResult.value.ok) {
+        const details = await emailResult.value.text().catch(() => 'unknown_error');
+        console.error('Lead email endpoint failed:', details);
+        setSubmitError('Your request was captured, but email delivery failed. Please try again in a minute.');
+      } else {
+        setSubmitted(true);
+      }
     } catch (err) {
-      console.error('Failed to save lead:', err);
+      console.error('Lead submit flow failed:', err);
+      setSubmitError('Something went wrong while submitting your request. Please try again.');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-    setSubmitted(true);
 
     window.dispatchEvent(
       new CustomEvent('analytics', {
@@ -223,6 +270,10 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
                       className="ra-input resize-none"
                     />
                   </label>
+
+                  {submitError && (
+                    <p className="text-sm text-amber-300" role="status">{submitError}</p>
+                  )}
 
                   <button
                     type="submit"

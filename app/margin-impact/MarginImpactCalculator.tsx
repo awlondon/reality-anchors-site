@@ -5,6 +5,7 @@ import { computeMarginImpact } from '@/lib/marginModel';
 import InputSection from './InputSection';
 import ResultPanel from './ResultPanel';
 import EnterpriseRollup from './EnterpriseRollup';
+import AcronymHint from './AcronymHint';
 
 const defaultInputs = {
   annualTonsProcessed: 25000,
@@ -26,12 +27,20 @@ const defaultInputs = {
 export default function MarginImpactCalculator() {
   const [inputs, setInputs] = useState(defaultInputs);
   const [results, setResults] = useState<any>(null);
+  const [showAnnualImpact, setShowAnnualImpact] = useState(false);
   const [error, setError] = useState('');
   const resultsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (results) {
+      setShowAnnualImpact(false);
       resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      const revealTimer = window.setTimeout(() => {
+        setShowAnnualImpact(true);
+      }, 1500);
+
+      return () => window.clearTimeout(revealTimer);
     }
   }, [results]);
 
@@ -51,7 +60,7 @@ export default function MarginImpactCalculator() {
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div>
             <h2 className="text-lg font-medium">Execution errors quietly erode margin.</h2>
-            <p className="mt-2 text-sm text-neutral-600">This model estimates EBITDA impact from material efficiency, labor efficiency, throughput capacity, and oversight risk reduction.</p>
+            <p className="mt-2 text-sm text-neutral-600">This model estimates <AcronymHint acronym="EBITDA" caption="Earnings Before Interest, Taxes, Depreciation, and Amortization" /> impact from material efficiency, labor efficiency, throughput capacity, and oversight risk reduction.</p>
           </div>
           <div className="rounded-lg border border-neutral-200 p-4 text-sm min-w-56">
             <div className="text-neutral-500">Signal</div>
@@ -72,7 +81,7 @@ export default function MarginImpactCalculator() {
 
       {results && (
         <div ref={resultsRef} className="space-y-12">
-          <ResultPanel results={results} />
+          {showAnnualImpact && <ResultPanel results={results} />}
           <EnterpriseRollup
             perFacilityEbitdaIncrease={results.totals.annualEbitdaIncrease}
             perFacilityRevenue={inputs.annualFabricationRevenue}

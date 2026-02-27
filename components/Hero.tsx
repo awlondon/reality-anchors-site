@@ -35,7 +35,7 @@ export default function Hero() {
       >
         <svg
           viewBox="0 0 1000 1000"
-          className="h-[150vmin] w-[150vmin] min-h-[680px] min-w-[680px] opacity-55"
+          className="h-[150vmin] w-[150vmin] opacity-55"
           aria-hidden="true"
         >
           <defs>

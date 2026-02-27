@@ -7,6 +7,8 @@ import RegimeSection from '@/components/RegimeSection';
 import RegimeStorySection from '@/components/RegimeStorySection';
 import { reorderBySource, reorderRegimes } from '@/lib/narrativeReorder';
 import { getSessionId } from '@/lib/session';
+import { HOME_EXPERIMENT } from '@/lib/experiments/config';
+import { assignVariant } from '@/lib/experiments/assign';
 import { useHighIntentNotifier } from '@/lib/useHighIntentNotifier';
 import { useLiveIntentStream } from '@/lib/useLiveIntentStream';
 import { useSessionIntent } from '@/lib/useSessionIntent';
@@ -44,6 +46,26 @@ export default function AdaptiveNarrative({ initialRegimes }: Props) {
   const { intent } = useSessionIntent(aggregate);
 
   useHighIntentNotifier(aggregate, seen);
+
+  // Apply A/B experiment ordering on first client render
+  useEffect(() => {
+    if (!HOME_EXPERIMENT.isEnabled) return;
+    const sessionId = getSessionId();
+    if (!sessionId) return;
+    const variant = assignVariant(sessionId, HOME_EXPERIMENT.traffic);
+    const order = HOME_EXPERIMENT.narrative.regimeOrder?.[variant];
+    if (!order || order.length === 0) return;
+    const slugMap = new Map(initialRegimes.map((r) => [r.slug, r]));
+    const ordered = order.map((slug) => slugMap.get(slug)).filter(Boolean) as RegimeContent[];
+    const remainder = initialRegimes.filter((r) => !order.includes(r.slug));
+    setRegimes([...ordered, ...remainder]);
+    window.dispatchEvent(
+      new CustomEvent('analytics', {
+        detail: { type: 'experiment_exposure', experimentId: HOME_EXPERIMENT.id, variant },
+      })
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const handler = (event: Event) => {

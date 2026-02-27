@@ -1,10 +1,39 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
 import { formatPct, formatUSD } from '@/lib/marginModel';
 import { calculateIRR, calculateNPV } from '@/lib/finance';
 
-function Input({ label, value, onChange }: { label: string; value: number; onChange: (n: number) => void }) {
+function AcronymHint({ acronym, caption }: { acronym: string; caption: string }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isPinned, setIsPinned] = useState(false);
+  const isOpen = isHovered || isPinned;
+
+  return (
+    <span className="relative inline-flex items-center gap-1">
+      <button
+        type="button"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onFocus={() => setIsHovered(true)}
+        onBlur={() => setIsHovered(false)}
+        onClick={() => setIsPinned((prev) => !prev)}
+        className="underline decoration-dotted underline-offset-4 hover:text-neutral-900"
+        aria-expanded={isOpen}
+        aria-label={`${acronym}: ${caption}`}
+      >
+        {acronym}
+      </button>
+      {isOpen ? (
+        <span className="absolute left-0 top-full z-20 mt-1 w-64 rounded-md bg-neutral-900 px-3 py-2 text-[11px] font-normal normal-case tracking-normal text-white shadow-lg">
+          {caption}
+        </span>
+      ) : null}
+    </span>
+  );
+}
+
+function Input({ label, value, onChange }: { label: ReactNode; value: number; onChange: (n: number) => void }) {
   return (
     <label className="block">
       <span className="block text-sm text-neutral-600 mb-2">{label}</span>
@@ -18,7 +47,7 @@ function Input({ label, value, onChange }: { label: string; value: number; onCha
   );
 }
 
-function SummaryCard({ title, value }: { title: string; value: string }) {
+function SummaryCard({ title, value }: { title: ReactNode; value: string }) {
   return (
     <div>
       <div className="text-sm text-neutral-500">{title}</div>
@@ -27,7 +56,7 @@ function SummaryCard({ title, value }: { title: string; value: string }) {
   );
 }
 
-function Metric({ label, value }: { label: string; value: string }) {
+function Metric({ label, value }: { label: ReactNode; value: string }) {
   return (
     <div>
       <div className="text-neutral-400 text-xs uppercase tracking-wide">{label}</div>
@@ -63,6 +92,19 @@ export default function EnterpriseRollup({
   perFacilityEbitdaIncrease: number;
   perFacilityRevenue: number;
 }) {
+  const term = {
+    EBITDA: () => <AcronymHint acronym="EBITDA" caption="Earnings Before Interest, Taxes, Depreciation, and Amortization" />,
+    ARR: () => <AcronymHint acronym="ARR" caption="Annual Recurring Revenue" />,
+    NRR: () => <AcronymHint acronym="NRR" caption="Net Revenue Retention" />,
+    LTV: () => <AcronymHint acronym="LTV" caption="Lifetime Value" />,
+    ROI: () => <AcronymHint acronym="ROI" caption="Return on Investment" />,
+    NPV: () => <AcronymHint acronym="NPV" caption="Net Present Value" />,
+    IRR: () => <AcronymHint acronym="IRR" caption="Internal Rate of Return" />,
+    SaaS: () => <AcronymHint acronym="SaaS" caption="Software as a Service" />,
+    RD: () => <AcronymHint acronym="R&D" caption="Research and Development" />,
+    GA: () => <AcronymHint acronym="G&A" caption="General and Administrative" />,
+  };
+
   const [investorMode, setInvestorMode] = useState(false);
   const [scenario, setScenario] = useState<Scenario>('base');
   const [captureBand, setCaptureBand] = useState<Scenario>('base');
@@ -420,20 +462,20 @@ export default function EnterpriseRollup({
       </div>
 
       <div className="grid md:grid-cols-3 gap-8">
-        <Metric label="Final Year ARR" value={formatUSD(model.finalYearARR)} />
-        <Metric label="ARR CAGR" value={formatPct(model.arrCagr * 100)} />
+        <Metric label={<>Final Year {term.ARR()}</>} value={formatUSD(model.finalYearARR)} />
+        <Metric label={<>{term.ARR()} CAGR</>} value={formatPct(model.arrCagr * 100)} />
         <Metric label="Net Revenue Retention" value={formatPct(model.netRevenueRetentionPct)} />
 
         <Metric label="Gross Margin" value={formatPct(grossMarginPct)} />
-        <Metric label="Final Year EBITDA" value={formatUSD(model.finalYearSaasEbitda)} />
-        <Metric label="EBITDA Margin" value={formatPct(model.saasEbitdaMarginPct)} />
+        <Metric label={<>Final Year {term.EBITDA()}</>} value={formatUSD(model.finalYearSaasEbitda)} />
+        <Metric label={<>{term.EBITDA()} Margin</>} value={formatPct(model.saasEbitdaMarginPct)} />
 
-        <Metric label="IRR" value={model.irr !== null ? formatPct(model.irr * 100) : 'N/A'} />
-        <Metric label={`${model.safeProjectionYears}-Year NPV`} value={formatUSD(model.npv)} />
+        <Metric label={term.IRR()} value={model.irr !== null ? formatPct(model.irr * 100) : 'N/A'} />
+        <Metric label={<>{model.safeProjectionYears}-Year {term.NPV()}</>} value={formatUSD(model.npv)} />
         <Metric label="Payback Period" value={model.paybackYear ? `${model.paybackYear} yrs` : 'N/A'} />
 
-        <Metric label="ARR Valuation" value={formatUSD(model.arrValuationImpact)} />
-        <Metric label="EBITDA Valuation" value={formatUSD(model.ebitdaValuationImpact)} />
+        <Metric label={<>{term.ARR()} Valuation</>} value={formatUSD(model.arrValuationImpact)} />
+        <Metric label={<>{term.EBITDA()} Valuation</>} value={formatUSD(model.ebitdaValuationImpact)} />
         <Metric label="Rule of 40" value={formatPct(model.ruleOf40Pct)} />
       </div>
 
@@ -487,7 +529,7 @@ export default function EnterpriseRollup({
           </div>
 
           <div className="space-y-3 border-t border-neutral-200 pt-6">
-            <div className="text-sm font-semibold text-neutral-700">ARR Capture Band</div>
+            <div className="text-sm font-semibold text-neutral-700">{term.ARR()} Capture Band</div>
             <div className="flex gap-2 flex-wrap">
               {(['low', 'base', 'high'] as Scenario[]).map((s) => (
                 <button key={s} type="button" onClick={() => setCaptureBand(s)} className={`px-4 py-2 rounded-md text-sm font-medium border ${captureBand === s ? 'bg-black text-white border-black' : 'bg-white text-neutral-700 border-neutral-300'}`}>
@@ -511,8 +553,8 @@ export default function EnterpriseRollup({
             <Input label="Deployment Duration (Years)" value={deploymentYears} onChange={setDeploymentYears} />
             <Input label="Projection Horizon (Years)" value={projectionYears} onChange={setProjectionYears} />
             <Input label="Discount Rate (%)" value={discountRate} onChange={setDiscountRate} />
-            <Input label="EBITDA Valuation Multiple" value={valuationMultiple} onChange={setValuationMultiple} />
-            <Input label="ARR Valuation Multiple" value={arrMultiple} onChange={setArrMultiple} />
+            <Input label={<>{term.EBITDA()} Valuation Multiple</>} value={valuationMultiple} onChange={setValuationMultiple} />
+            <Input label={<>{term.ARR()} Valuation Multiple</>} value={arrMultiple} onChange={setArrMultiple} />
           </div>
 
           <div className="border-t border-neutral-200 pt-6 space-y-6">
@@ -525,25 +567,25 @@ export default function EnterpriseRollup({
           </div>
 
           <div className="border-t border-neutral-200 pt-6 space-y-6">
-            <h3 className="text-sm font-semibold text-neutral-700">SaaS Operating Assumptions</h3>
+            <h3 className="text-sm font-semibold text-neutral-700">{term.SaaS()} Operating Assumptions</h3>
             <div className="grid md:grid-cols-4 gap-6">
               <Input label="Gross Margin (%)" value={grossMarginPct} onChange={setGrossMarginPct} />
               <Input label="Sales & Marketing (%)" value={salesPct} onChange={setSalesPct} />
-              <Input label="R&D (%)" value={rdPct} onChange={setRdPct} />
-              <Input label="G&A (%)" value={gaPct} onChange={setGaPct} />
+              <Input label={<>{term.RD()} (%)</>} value={rdPct} onChange={setRdPct} />
+              <Input label={<>{term.GA()} (%)</>} value={gaPct} onChange={setGaPct} />
             </div>
           </div>
 
           <div className="border-t border-neutral-200 pt-6 grid md:grid-cols-3 gap-6">
-            <SummaryCard title="Annual Portfolio EBITDA Lift" value={formatUSD(model.annualPortfolioImpact)} />
+            <SummaryCard title={<>Annual Portfolio {term.EBITDA()} Lift</>} value={formatUSD(model.annualPortfolioImpact)} />
             <SummaryCard title="Portfolio Margin Improvement" value={formatPct(model.portfolioMarginLiftPct)} />
-            <SummaryCard title={`${model.safeProjectionYears}-Year Gross EBITDA Lift`} value={formatUSD(model.cumulativeImpact)} />
+            <SummaryCard title={<>{model.safeProjectionYears}-Year Gross {term.EBITDA()} Lift</>} value={formatUSD(model.cumulativeImpact)} />
           </div>
 
           <div className="border-t border-neutral-200 pt-6 grid md:grid-cols-3 gap-6">
             <SummaryCard title="Cumulative Net Benefit" value={formatUSD(model.cumulativeNet)} />
             <SummaryCard title="Payback Period" value={model.paybackYear ? `${model.paybackYear} Year(s)` : 'Beyond Projection'} />
-            <SummaryCard title="ROI Multiple" value={`${model.roiMultiple.toFixed(2)}×`} />
+            <SummaryCard title={<>{term.ROI()} Multiple</>} value={`${model.roiMultiple.toFixed(2)}×`} />
           </div>
 
           <div className="border-t border-neutral-200 pt-6 grid md:grid-cols-3 gap-6">
@@ -553,7 +595,7 @@ export default function EnterpriseRollup({
           </div>
 
           <div className="border-t border-neutral-200 pt-8">
-            <h3 className="text-sm font-semibold text-neutral-700 mb-4">ARR Ramp (NRR + Capture)</h3>
+            <h3 className="text-sm font-semibold text-neutral-700 mb-4">{term.ARR()} Ramp ({term.NRR()} + Capture)</h3>
             <div className="space-y-2 text-sm">
               {model.arrByYear.map((value, index) => (
                 <div key={index} className="flex justify-between border-b border-neutral-100 pb-2"><span>Year {index + 1}</span><span>{formatUSD(value)}</span></div>
@@ -562,23 +604,23 @@ export default function EnterpriseRollup({
           </div>
 
           <div className="border-t border-neutral-200 pt-6 grid md:grid-cols-4 gap-6">
-            <SummaryCard title="Final Year ARR" value={formatUSD(model.finalYearARR)} />
-            <SummaryCard title="ARR Multiple" value={`${arrMultiple}×`} />
-            <SummaryCard title="Implied ARR Valuation" value={formatUSD(model.arrValuationImpact)} />
-            <SummaryCard title="Per-Facility LTV (Approx.)" value={model.ltvPerFacility ? formatUSD(model.ltvPerFacility) : 'N/A'} />
+            <SummaryCard title={<>Final Year {term.ARR()}</>} value={formatUSD(model.finalYearARR)} />
+            <SummaryCard title={<>{term.ARR()} Multiple</>} value={`${arrMultiple}×`} />
+            <SummaryCard title={<>Implied {term.ARR()} Valuation</>} value={formatUSD(model.arrValuationImpact)} />
+            <SummaryCard title={<>Per-Facility {term.LTV()} (Approx.)</>} value={model.ltvPerFacility ? formatUSD(model.ltvPerFacility) : 'N/A'} />
           </div>
 
           <div className="border-t border-neutral-200 pt-8">
-            <h3 className="text-sm font-semibold text-neutral-700 mb-4">SaaS EBITDA Projection</h3>
+            <h3 className="text-sm font-semibold text-neutral-700 mb-4">{term.SaaS()} {term.EBITDA()} Projection</h3>
             <div className="space-y-2 text-sm mb-6">
               {model.saasEbitdaByYear.map((value, index) => (
                 <div key={index} className="flex justify-between border-b border-neutral-100 pb-2"><span>Year {index + 1}</span><span>{formatUSD(value)}</span></div>
               ))}
             </div>
             <div className="grid md:grid-cols-3 gap-6">
-              <SummaryCard title="Final Year SaaS EBITDA" value={formatUSD(model.finalYearSaasEbitda)} />
-              <SummaryCard title="EBITDA Margin" value={formatPct(model.saasEbitdaMarginPct)} />
-              <SummaryCard title="EBITDA Valuation Impact" value={formatUSD(model.ebitdaValuationImpact)} />
+              <SummaryCard title={<>Final Year {term.SaaS()} {term.EBITDA()}</>} value={formatUSD(model.finalYearSaasEbitda)} />
+              <SummaryCard title={<>{term.EBITDA()} Margin</>} value={formatPct(model.saasEbitdaMarginPct)} />
+              <SummaryCard title={<>{term.EBITDA()} Valuation Impact</>} value={formatUSD(model.ebitdaValuationImpact)} />
             </div>
           </div>
 
@@ -601,7 +643,7 @@ export default function EnterpriseRollup({
                   <div key={s.name} className="border border-neutral-200 rounded-md p-4">
                     <div className="text-neutral-500 mb-2">{s.name} Case</div>
                     <div className="text-lg font-semibold">{formatUSD(portfolioImpact)}</div>
-                    <div className="text-neutral-500 mt-1">Annual Portfolio EBITDA Lift</div>
+                    <div className="text-neutral-500 mt-1">Annual Portfolio {term.EBITDA()} Lift</div>
                   </div>
                 );
               })}

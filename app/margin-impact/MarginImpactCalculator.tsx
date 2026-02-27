@@ -40,13 +40,20 @@ export default function MarginImpactCalculator() {
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const startY = window.scrollY;
-    const targetY = Math.max(0, resultsRef.current.getBoundingClientRect().top + window.scrollY - 24);
+    const targetY = Math.max(
+      0,
+      resultsRef.current.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.35,
+    );
 
     if (reduceMotion) {
       window.scrollTo({ top: targetY, behavior: 'auto' });
       setShowAnnualImpact(true);
       return;
     }
+
+    const revealTimer = window.setTimeout(() => {
+      setShowAnnualImpact(true);
+    }, 0);
 
     let animationFrame = 0;
     const startTime = performance.now();
@@ -71,6 +78,7 @@ export default function MarginImpactCalculator() {
 
     return () => {
       if (animationFrame) window.cancelAnimationFrame(animationFrame);
+      window.clearTimeout(revealTimer);
     };
   }, [results]);
 

@@ -75,25 +75,33 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'missing_email_configuration' }, { status: 500 });
   }
 
-  const ipAddress = request.headers.get('x-forwarded-for');
+  const forwardedFor = request.headers.get('x-forwarded-for');
+  const ipAddress = forwardedFor?.split(',')[0]?.trim() ?? null;
   const userAgent = request.headers.get('user-agent');
   const { text, html, submittedAt } = buildLeadEmail(payload, ipAddress, userAgent);
 
-  const resendResponse = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${resendApiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: fromEmail,
-      to: RECIPIENTS,
-      reply_to: payload.email,
-      subject: `New Request Contact submission from ${payload.company}`,
-      text,
-      html,
-    }),
-  });
+  let resendResponse: Response;
+  try {
+    resendResponse = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${resendApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      signal: AbortSignal.timeout(8000),
+      body: JSON.stringify({
+        from: fromEmail,
+        to: RECIPIENTS,
+        reply_to: payload.email,
+        subject: `New Request Contact submission from ${payload.company}`,
+        text,
+        html,
+      }),
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'unknown_error';
+    return NextResponse.json({ error: 'email_request_failed', details: message }, { status: 502 });
+  }
 
   if (!resendResponse.ok) {
     const errorText = await resendResponse.text().catch(() => 'unknown_error');

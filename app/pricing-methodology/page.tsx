@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Pricing Methodology',
-  description: 'Transparent pricing methodology for Reality Anchors platform. Baseline model assumptions, conservative improvement deltas, and value-aligned subscription structure.',
+  description: 'Transparent pricing methodology for Reality Anchors platform. Baseline model assumptions for scrap and rework, conservative improvement deltas, and value-aligned subscription structure.',
 };
 
 export default function PricingMethodologyPage() {
@@ -49,13 +49,13 @@ export default function PricingMethodologyPage() {
 
         {/* Baseline Model */}
         <section className="border border-line bg-card rounded-2xl p-8">
-          <h2 className="text-xl font-semibold text-txt mb-4">2. Baseline Model Assumptions</h2>
+          <h2 className="text-xl font-semibold text-txt mb-4">2. Baseline Model Assumptions (Scrap + Rework)</h2>
           <p className="text-muted text-sm mb-6">
-            Segment classifications and baseline scrap rates are derived from published Australian Standards, industry surveys, and fabrication industry benchmarks. All rates are conservative mid-points of observable ranges.
+            Segment classifications and baseline scrap/rework rates are derived from published Australian Standards, fabrication surveys, and operator benchmark studies. All rates are conservative mid-points of observable ranges.
           </p>
-          <div className="overflow-x-auto mb-4">
+          <div className="overflow-x-auto mb-6">
             <table className="ra-table">
-              <thead><tr><th>Segment</th><th>Industry range</th><th>Model baseline</th><th>Basis</th></tr></thead>
+              <thead><tr><th>Segment</th><th>Scrap range</th><th>Scrap model baseline</th><th>Basis</th></tr></thead>
               <tbody>
                 <tr>
                   <td>Small commercial shop</td>
@@ -78,6 +78,25 @@ export default function PricingMethodologyPage() {
               </tbody>
             </table>
           </div>
+          <div className="overflow-x-auto mb-4">
+            <table className="ra-table">
+              <thead><tr><th>Rework metric</th><th>Industry range</th><th>Model baseline</th><th>Basis</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Fabrication remake rate (% of pieces)</td>
+                  <td className="font-mono text-accent-2">1.0–3.0%</td>
+                  <td className="font-mono text-txt">1.5%</td>
+                  <td className="text-muted text-sm">Conservative benchmark midpoint</td>
+                </tr>
+                <tr>
+                  <td>Blended remake cost per affected piece</td>
+                  <td className="font-mono text-accent-2">$8–$40</td>
+                  <td className="font-mono text-txt">$20</td>
+                  <td className="text-muted text-sm">Material + labor + bench disruption allowance</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <p className="text-xs text-muted/70">Contracts reference the published baseline model version number for contractual stability.</p>
         </section>
 
@@ -85,7 +104,7 @@ export default function PricingMethodologyPage() {
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">3. Conservative Improvement Deltas</h2>
           <p className="text-muted text-sm mb-6">
-            Improvement deltas represent the expected reduction in scrap percentage attributable to structured bench workflow enforcement. Values are set at the lower bound of observable improvements to ensure conservative estimates.
+            Improvement deltas represent expected reduction in scrap and preventable rework attributable to structured workflow enforcement. Values are set at lower observable bounds to preserve conservative estimates.
           </p>
           <div className="overflow-x-auto mb-6">
             <table className="ra-table">
@@ -112,11 +131,33 @@ export default function PricingMethodologyPage() {
               </tbody>
             </table>
           </div>
+          <div className="overflow-x-auto mb-6">
+            <table className="ra-table">
+              <thead><tr><th>Rework metric</th><th>Baseline</th><th>Conservative delta</th><th>Post-deployment model</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Remake rate (% of pieces)</td>
+                  <td className="font-mono">1.5%</td>
+                  <td className="font-mono text-accent-2">0.8 pts</td>
+                  <td className="font-mono text-txt">0.7%</td>
+                </tr>
+                <tr>
+                  <td>Relative improvement</td>
+                  <td className="font-mono">—</td>
+                  <td className="font-mono text-accent-2">40–70%</td>
+                  <td className="font-mono text-txt">Steady-state target band</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <div className="codeblock text-xs">{`AnnualMaterialSavings =
   TonsPerMonth × 12 × SteelCostPerTon × ScrapDelta
 
 AnnualLaborSavings (optional) =
-  TonsPerMonth × 12 × HoursSavedPerTon × LoadedLaborRate`}</div>
+  TonsPerMonth × 12 × HoursSavedPerTon × LoadedLaborRate
+
+AnnualReworkSavings =
+  PiecesPerMonth × 12 × (ReworkBaseline - ReworkPost) × BlendedReworkCostPerPiece`}</div>
         </section>
 
         {/* Subscription structure */}

@@ -26,11 +26,15 @@ async function sendEvent(
 
   const eventId = await hashEvent(payload);
 
-  await fetch('/api/analytics/ingest', {
+  const response = await fetch('/api/analytics/ingest/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ ...payload, eventId }),
   });
+
+  if (!response.ok) {
+    throw new Error(`analytics_ingest_failed:${response.status}`);
+  }
 
   window.dispatchEvent(new CustomEvent('analytics', { detail: payload }));
 }
@@ -48,7 +52,11 @@ export function useFunnelTracker() {
         setLastRegime(regimeId);
       }
 
-      void sendEvent(detail, experimentId, variant, attribution);
+      void sendEvent(detail, experimentId, variant, attribution).catch((error) => {
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('Analytics event failed to send:', error);
+        }
+      });
     };
 
     track({ type: 'landing_view', stage: 'landing_view' });

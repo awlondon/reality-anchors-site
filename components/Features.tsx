@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
 import { stagger, fadeUp } from '@/lib/motion';
 
 const regimes = [
@@ -14,7 +13,8 @@ const regimes = [
     statTwo: '<1% fabrication error rate',
     cta: 'See Fabrication Intelligence',
     href: '/commercial/',
-    image: '/assets/regimes/structural-fabrication.svg',
+    imageDesktop: '/assets/regimes/structural-fabrication.svg',
+    imageMobile: '/assets/regimes/structural-fabrication-mobile.svg',
     bg: 'from-slate-900 via-slate-800 to-slate-950',
     accent: 'bg-sky-500/20 text-sky-200 border-sky-400/40',
   },
@@ -26,7 +26,8 @@ const regimes = [
     statTwo: '4–12 hrs/week planning saved',
     cta: 'Optimize Across Jobs',
     href: '/industrial/',
-    image: '/assets/regimes/multi-project-optimization.svg',
+    imageDesktop: '/assets/regimes/multi-project-optimization.svg',
+    imageMobile: '/assets/regimes/multi-project-optimization-mobile.svg',
     bg: 'from-zinc-900 via-slate-800 to-zinc-950',
     accent: 'bg-emerald-500/20 text-emerald-200 border-emerald-400/40',
   },
@@ -38,7 +39,8 @@ const regimes = [
     statTwo: 'Drift alerts + stretch profile updates',
     cta: 'See Calibration Mode',
     href: '/industrial/',
-    image: '/assets/regimes/machine-calibration.svg',
+    imageDesktop: '/assets/regimes/machine-calibration.svg',
+    imageMobile: '/assets/regimes/machine-calibration-mobile.svg',
     bg: 'from-slate-950 via-indigo-950 to-slate-900',
     accent: 'bg-indigo-500/20 text-indigo-200 border-indigo-400/40',
   },
@@ -50,7 +52,8 @@ const regimes = [
     statTwo: 'Insurance-grade telemetry stream',
     cta: 'Explore Fleet Safety Layer',
     href: '/commercial/',
-    image: '/assets/regimes/fleet-grip.svg',
+    imageDesktop: '/assets/regimes/fleet-grip.svg',
+    imageMobile: '/assets/regimes/fleet-grip-mobile.svg',
     bg: 'from-zinc-900 via-neutral-800 to-slate-950',
     accent: 'bg-amber-500/20 text-amber-200 border-amber-400/40',
   },
@@ -62,7 +65,8 @@ const regimes = [
     statTwo: 'Live bend verification + audit logs',
     cta: 'See AR Execution',
     href: '/commercial/',
-    image: '/assets/regimes/ar-execution.svg',
+    imageDesktop: '/assets/regimes/ar-execution.svg',
+    imageMobile: '/assets/regimes/ar-execution-mobile.svg',
     bg: 'from-slate-900 via-cyan-950 to-slate-950',
     accent: 'bg-cyan-500/20 text-cyan-200 border-cyan-400/40',
   },
@@ -74,7 +78,8 @@ const regimes = [
     statTwo: 'Drift alerts + audit-ready logs',
     cta: 'Review Governance Controls',
     href: '/pricing-methodology/',
-    image: '/assets/regimes/ai-governance.svg',
+    imageDesktop: '/assets/regimes/ai-governance.svg',
+    imageMobile: '/assets/regimes/ai-governance-mobile.svg',
     bg: 'from-slate-950 via-violet-950 to-slate-900',
     accent: 'bg-violet-500/20 text-violet-200 border-violet-400/40',
   },
@@ -115,14 +120,17 @@ export default function Features() {
             >
               <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.25),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(46,125,235,0.2),transparent_35%)]" />
               <div className="absolute inset-y-0 right-0 w-28 sm:w-44 md:w-48 opacity-70 pointer-events-none">
-                <Image
-                  src={regime.image}
-                  alt=""
-                  fill
-                  aria-hidden
-                  className="object-contain object-right p-3"
-                  sizes="192px"
-                />
+                <picture>
+                  <source media="(max-width: 767px)" srcSet={regime.imageMobile} />
+                  <img
+                    src={regime.imageDesktop}
+                    alt=""
+                    aria-hidden
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-contain object-right p-3"
+                  />
+                </picture>
               </div>
               <div className="relative p-7 md:p-8 min-h-[280px] flex flex-col">
                 <h3 className="text-xl font-semibold text-white mb-3">{regime.name}</h3>

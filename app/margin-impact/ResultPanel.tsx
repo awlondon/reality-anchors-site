@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import { formatPct, formatUSD } from '@/lib/marginModel';
 import AcronymHint from './AcronymHint';
 
@@ -15,6 +16,30 @@ function ResultCard({ title, value }: { title: string; value: string }) {
 }
 
 export default function ResultPanel({ results }: { results: Results }) {
+  const annualEbitdaRef = useRef<HTMLDivElement | null>(null);
+  const [isAnnualEbitdaVisible, setIsAnnualEbitdaVisible] = useState(false);
+
+  useEffect(() => {
+    const element = annualEbitdaRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsAnnualEbitdaVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <section className="bg-neutral-900 text-white rounded-xl p-8 space-y-8">
       <div>
@@ -29,7 +54,12 @@ export default function ResultPanel({ results }: { results: Results }) {
         </div>
       </div>
 
-      <div className="border-t border-neutral-700 pt-6">
+      <div
+        ref={annualEbitdaRef}
+        className={`border-t border-neutral-700 pt-6 transition-all duration-500 ease-out ${
+          isAnnualEbitdaVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
+      >
         <div className="text-3xl font-semibold">{formatUSD(results.totals.annualEbitdaIncrease)}</div>
         <div className="text-neutral-400 mt-2">
           EBITDA Margin Improvement: +{formatPct(results.totals.ebitdaMarginImprovementPct)}

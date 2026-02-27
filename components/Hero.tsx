@@ -22,6 +22,38 @@ export default function Hero() {
     'STATE',
   ];
 
+  const hlsfNodePositions = hlsfNodes.map((_, index) => {
+    const angle = (index / hlsfNodes.length) * Math.PI * 2;
+
+    return {
+      angle,
+      x: 500 + Math.cos(angle) * 342,
+      y: 500 + Math.sin(angle) * 342,
+      connectorX: 500 + Math.cos(angle) * 328,
+      connectorY: 500 + Math.sin(angle) * 328,
+    };
+  });
+
+  const hlsfInterconnects = hlsfNodePositions.flatMap((source, sourceIndex) =>
+    hlsfNodePositions.slice(sourceIndex + 1).map((target, offsetIndex) => {
+      const targetIndex = sourceIndex + offsetIndex + 1;
+      const separation = Math.abs(targetIndex - sourceIndex);
+      const wrappedSeparation = Math.min(separation, hlsfNodes.length - separation);
+      const opacity = 0.028 + (1 - wrappedSeparation / hlsfNodes.length) * 0.08;
+      const strokeWidth = 0.33 + (1 - wrappedSeparation / hlsfNodes.length) * 0.35;
+
+      return {
+        key: `${sourceIndex}-${targetIndex}`,
+        x1: source.connectorX,
+        y1: source.connectorY,
+        x2: target.connectorX,
+        y2: target.connectorY,
+        opacity,
+        strokeWidth,
+      };
+    }),
+  );
+
   return (
     <section className="relative h-screen w-full overflow-hidden bg-bg flex items-center">
       {/* Three.js field */}
@@ -50,12 +82,20 @@ export default function Hero() {
           <circle cx="500" cy="500" r="342" fill="none" stroke="rgb(148 163 184 / 0.38)" strokeWidth="1.2" strokeDasharray="5 10" />
           <circle cx="500" cy="500" r="328" fill="none" stroke="rgb(59 130 246 / 0.45)" strokeWidth="0.9" strokeDasharray="2 14" />
 
+          {hlsfInterconnects.map(({ key, x1, y1, x2, y2, opacity, strokeWidth }) => (
+            <line
+              key={key}
+              x1={x1}
+              y1={y1}
+              x2={x2}
+              y2={y2}
+              stroke={`rgb(125 211 252 / ${opacity})`}
+              strokeWidth={strokeWidth}
+            />
+          ))}
+
           {hlsfNodes.map((node, index) => {
-            const angle = (index / hlsfNodes.length) * Math.PI * 2;
-            const x = 500 + Math.cos(angle) * 342;
-            const y = 500 + Math.sin(angle) * 342;
-            const connectorX = 500 + Math.cos(angle) * 328;
-            const connectorY = 500 + Math.sin(angle) * 328;
+            const { x, y, connectorX, connectorY } = hlsfNodePositions[index];
 
             return (
               <g key={node}>

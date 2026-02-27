@@ -1,236 +1,60 @@
-# AI Prompt + Hero Background Implementation
+# Sora 2 Prompt — Looping Fabrication Yard Hero Visual
 
-## 10-Second Looping Video Prompt
+## Recommended Homepage Placement
 
-Use this prompt in your video model (Runway/Pika/Sora-class):
+Use this clip as the **homepage hero background** (behind headline + CTA) with a subtle dark gradient overlay for text readability.
+
+## Prompt for Sora 2 (15-second seamless loop)
 
 ```text
-Create a seamless 10-second looping cinematic background video for a typography-first enterprise software website hero section.
+Create a seamless 15-second cinematic looping video for a website homepage hero section.
 
-Scene: abstract, minimal, slow-moving geometric field suggesting precision engineering and structured intelligence.
+Scene:
+A modern industrial fabrication yard at golden hour turning into cool dusk tones. Wide composition with steel beams, stacked fabricated components, gantry cranes, welding stations, and marked work zones. No visible brand logos.
+
+Core concept:
+The scene should feel like a real, working fabrication yard augmented by a clean AR data layer.
+
+AR overlay requirements:
+- Persistent vector point markers anchored to physical objects (beams, joints, crane hooks, pallets, stations)
+- Thin geometric tracking lines and subtle triangulation meshes
+- Floating technical labels near key objects (examples: "Beam A12", "Weld Node 07", "Tolerance ±0.8mm", "Stage: QA", "Lift Path")
+- Depth-correct overlays that stay locked to objects as camera moves
+- Occasional soft pulse on selected data points
+- Overlay style is minimal, precise, and engineering-grade (not sci-fi HUD clutter)
 
 Visual style:
-- Dark graphite and deep steel-blue palette
-- Subtle volumetric light beams
-- Fine-line floating grids and parametric wireframe structures
-- Gentle parallax depth
-- Faint node-intersection glow pulses
-- Clean and modern, never flashy
-- No text, no logos, no UI elements
-- No fast camera movement, no jitter
+- Photorealistic footage base
+- Premium enterprise-tech aesthetic
+- Controlled contrast, clean highlights, realistic shadows
+- Palette: industrial neutrals (graphite, steel, concrete) with AR accents in cyan/teal/soft white
+- No people in close foreground; if workers are present, keep them small/background and non-identifiable
 
-Mood: intelligent, controlled, trustworthy, premium enterprise software.
+Camera & motion:
+- Slow lateral dolly with slight parallax
+- Calm, stable movement (no fast pans, no jitter)
+- Motion should support seamless looping
 
-Motion: very slow drift with slight depth changes for soft parallax.
-
-Texture: sparse atmospheric particles with low contrast.
-
-Looping requirement: first and last frames must align for a perfect seamless loop (no visible jump cut).
+Looping requirement:
+- First and last frames must align perfectly for an invisible loop
+- Keep object and overlay continuity consistent across loop boundary
 
 Output specs:
-- 1920x1080
-- 16:9
-- 10 seconds
-- 24fps
-- High bitrate
-- Web background optimized
-- Deliver both MP4 (H.264) and WebM (VP9)
+- Duration: 15 seconds
+- Aspect ratio: 16:9
+- Resolution: 1920x1080 minimum (4K master preferred)
+- Frame rate: 24fps
+- Deliverables: MP4 (H.264 high bitrate) and WebM (VP9)
+- Optimized for autoplaying muted web hero background
+
+Negative constraints:
+- No logos, no UI mockups, no subtitles, no watermark
+- No chaotic sparks/explosions or dramatic action
+- No extreme depth-of-field blur that hides yard detail
 ```
 
-## HTML
+## Optional Variant Prompt (Darker, More Technical)
 
-```html
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hero Video Background</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <section class="hero" aria-label="Intro section">
-    <video
-      class="hero-video"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="metadata"
-      poster="hero-fallback.jpg"
-    >
-      <source src="hero-loop.webm" type="video/webm" />
-      <source src="hero-loop.mp4" type="video/mp4" />
-    </video>
-
-    <div class="hero-overlay" aria-hidden="true"></div>
-
-    <div class="hero-content">
-      <p class="eyebrow">REALITY ANCHORS LIMITED</p>
-      <h1>Precision Intelligence for Structural Systems</h1>
-      <p class="subhead">
-        Real-time validation, deterministic optimization, and field-ready AI workflows.
-      </p>
-      <div class="cta-group">
-        <button class="cta-primary" type="button">Request Demo</button>
-        <button class="cta-secondary" type="button">View Case Study</button>
-      </div>
-    </div>
-  </section>
-
-  <script src="app.js"></script>
-</body>
-</html>
-```
-
-## CSS
-
-```css
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root {
-  --bg: #0b0f17;
-  --text: #ffffff;
-  --overlay-top: rgba(5, 8, 15, 0.85);
-  --overlay-bottom: rgba(5, 8, 15, 0.7);
-  --primary: #4c8eff;
-  --primary-hover: #3a6fd6;
-}
-
-body {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
-
-.hero {
-  position: relative;
-  min-height: 100vh;
-  width: 100%;
-  overflow: hidden;
-}
-
-.hero-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(1.05);
-  will-change: transform;
-  z-index: 1;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(var(--overlay-top), var(--overlay-bottom));
-  z-index: 2;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 3;
-  max-width: 900px;
-  padding: clamp(24px, 4vw, 48px);
-  padding-top: 16vh;
-}
-
-.eyebrow {
-  letter-spacing: 0.08em;
-  font-size: 0.8rem;
-  opacity: 0.8;
-  margin-bottom: 1rem;
-}
-
-h1 {
-  font-size: clamp(2.25rem, 5vw, 4rem);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  margin-bottom: 1rem;
-  max-width: 14ch;
-}
-
-.subhead {
-  font-size: clamp(1rem, 1.8vw, 1.25rem);
-  line-height: 1.5;
-  opacity: 0.9;
-  max-width: 52ch;
-  margin-bottom: 2rem;
-}
-
-.cta-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-button {
-  border-radius: 8px;
-  padding: 0.8rem 1.1rem;
-  font-size: 0.98rem;
-  cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.cta-primary {
-  background: var(--primary);
-  color: #fff;
-  border: 0;
-}
-
-.cta-primary:hover {
-  background: var(--primary-hover);
-  transform: translateY(-1px);
-}
-
-.cta-secondary {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.45);
-}
-
-.cta-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-1px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-video {
-    transform: none;
-  }
-}
-```
-
-## JS
-
-```js
-const hero = document.querySelector('.hero');
-const video = document.querySelector('.hero-video');
-
-if (hero && video && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-  hero.addEventListener('pointermove', (event) => {
-    const x = (event.clientX / window.innerWidth - 0.5) * 8;
-    const y = (event.clientY / window.innerHeight - 0.5) * 8;
-    video.style.transform = `scale(1.05) translate(${x}px, ${y}px)`;
-  });
-}
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      video.play().catch(() => {});
-    } else {
-      video.pause();
-    }
-  });
-}, { threshold: 0.15 });
-
-if (video) {
-  observer.observe(video);
-}
+```text
+Generate the same scene and loop behavior, but with cooler dusk lighting, slightly reduced atmospheric haze, and denser AR point labeling for a more technical "digital twin" feel while preserving readability and minimalism.
 ```

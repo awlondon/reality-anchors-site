@@ -63,6 +63,18 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
         sessionId,
         regimeId: attributedRegime,
       });
+
+      await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...data,
+          sessionId,
+          regimeId: attributedRegime,
+          source: 'request_contact_form',
+          submittedAt: new Date().toISOString(),
+        }),
+      });
     } catch (err) {
       console.error('Failed to save lead:', err);
     }

@@ -115,7 +115,7 @@ export default function RegimeSection({
         <motion.div
           variants={sectionAnimation}
           className={cn(
-            'relative h-[420px] overflow-hidden rounded-xl border md:h-[520px]',
+            'relative h-[260px] sm:h-[420px] overflow-hidden rounded-xl border md:h-[520px]',
             tierBorder(visualTier),
             align === 'right' && 'lg:order-2'
           )}

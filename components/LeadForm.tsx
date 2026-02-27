@@ -7,6 +7,7 @@ import { fadeUp } from '@/lib/motion';
 import { getLastRegime } from '@/lib/funnelContext';
 import { getSessionId } from '@/lib/session';
 import { upsertSalesAlert } from '@/lib/salesNotifications';
+import { saveLead } from '@/lib/saveLead';
 
 interface FormData {
   name: string;
@@ -50,11 +51,23 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
     if (Object.keys(e).length) { setErrors(e); return; }
     setErrors({});
     setLoading(true);
-    // Wire to your backend / Formspree / email service here
-    await new Promise((r) => setTimeout(r, 800));
+    const attributedRegime = getLastRegime();
+    const sessionId = getSessionId() ?? 'unknown';
+    try {
+      await saveLead({
+        name: data.name,
+        email: data.email,
+        company: data.company,
+        role: data.role,
+        message: data.message,
+        sessionId,
+        regimeId: attributedRegime,
+      });
+    } catch (err) {
+      console.error('Failed to save lead:', err);
+    }
     setLoading(false);
     setSubmitted(true);
-    const attributedRegime = getLastRegime();
 
     window.dispatchEvent(
       new CustomEvent('analytics', {
@@ -67,7 +80,6 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
       })
     );
 
-    const sessionId = getSessionId() ?? 'unknown';
     const sanitizedData = { email: data.email, company: data.company, role: data.role };
 
     void fetch('/api/sales/notify', {
@@ -119,7 +131,7 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
   return (
     <section id={id} className="py-24 bg-bg border-t border-line">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-start">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-start">
           {/* Copy */}
           <motion.div
             initial="hidden"

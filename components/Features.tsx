@@ -114,7 +114,7 @@ export default function Features() {
               className={`relative overflow-hidden rounded-2xl border border-line/70 bg-gradient-to-br ${regime.bg}`}
             >
               <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.25),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(46,125,235,0.2),transparent_35%)]" />
-              <div className="absolute inset-y-0 right-0 w-44 md:w-48 opacity-70 pointer-events-none">
+              <div className="absolute inset-y-0 right-0 w-28 sm:w-44 md:w-48 opacity-70 pointer-events-none">
                 <Image
                   src={regime.image}
                   alt=""
@@ -126,7 +126,7 @@ export default function Features() {
               </div>
               <div className="relative p-7 md:p-8 min-h-[280px] flex flex-col">
                 <h3 className="text-xl font-semibold text-white mb-3">{regime.name}</h3>
-                <p className="text-slate-200/90 text-sm leading-relaxed max-w-[70%] md:max-w-[72%]">{regime.description}</p>
+                <p className="text-slate-200/90 text-sm leading-relaxed max-w-[80%] sm:max-w-[70%] md:max-w-[72%]">{regime.description}</p>
 
                 <div className="mt-6 grid sm:grid-cols-2 gap-3">
                   <div className={`rounded-lg border px-3 py-2 text-xs font-semibold ${regime.accent}`}>{regime.stat}</div>

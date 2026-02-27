@@ -92,7 +92,7 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
 
       {/* Mobile menu */}
       {open && (
-        <nav className="md:hidden px-5 pb-4 flex flex-col gap-4 border-t border-line" aria-label="Mobile navigation">
+        <nav className="md:hidden px-5 pb-4 flex flex-col gap-4 border-t border-line max-h-[80vh] overflow-y-auto" aria-label="Mobile navigation">
           {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}

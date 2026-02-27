@@ -3,35 +3,7 @@
 import { ReactNode, useMemo, useState } from 'react';
 import { formatPct, formatUSD } from '@/lib/marginModel';
 import { calculateIRR, calculateNPV } from '@/lib/finance';
-
-function AcronymHint({ acronym, caption }: { acronym: string; caption: string }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isPinned, setIsPinned] = useState(false);
-  const isOpen = isHovered || isPinned;
-
-  return (
-    <span className="relative inline-flex items-center gap-1">
-      <button
-        type="button"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onFocus={() => setIsHovered(true)}
-        onBlur={() => setIsHovered(false)}
-        onClick={() => setIsPinned((prev) => !prev)}
-        className="underline decoration-dotted underline-offset-4 hover:text-neutral-900"
-        aria-expanded={isOpen}
-        aria-label={`${acronym}: ${caption}`}
-      >
-        {acronym}
-      </button>
-      {isOpen ? (
-        <span className="absolute left-0 top-full z-20 mt-1 w-64 rounded-md bg-neutral-900 px-3 py-2 text-[11px] font-normal normal-case tracking-normal text-white shadow-lg">
-          {caption}
-        </span>
-      ) : null}
-    </span>
-  );
-}
+import AcronymHint from './AcronymHint';
 
 function Input({ label, value, onChange }: { label: ReactNode; value: number; onChange: (n: number) => void }) {
   return (

@@ -5,6 +5,7 @@ import { computeMarginImpact } from '@/lib/marginModel';
 import InputSection from './InputSection';
 import ResultPanel from './ResultPanel';
 import EnterpriseRollup from './EnterpriseRollup';
+import AcronymHint from './AcronymHint';
 
 const defaultInputs = {
   annualTonsProcessed: 25000,
@@ -59,7 +60,7 @@ export default function MarginImpactCalculator() {
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div>
             <h2 className="text-lg font-medium">Execution errors quietly erode margin.</h2>
-            <p className="mt-2 text-sm text-neutral-600">This model estimates EBITDA impact from material efficiency, labor efficiency, throughput capacity, and oversight risk reduction.</p>
+            <p className="mt-2 text-sm text-neutral-600">This model estimates <AcronymHint acronym="EBITDA" caption="Earnings Before Interest, Taxes, Depreciation, and Amortization" /> impact from material efficiency, labor efficiency, throughput capacity, and oversight risk reduction.</p>
           </div>
           <div className="rounded-lg border border-neutral-200 p-4 text-sm min-w-56">
             <div className="text-neutral-500">Signal</div>

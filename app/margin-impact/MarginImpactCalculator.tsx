@@ -5,6 +5,7 @@ import { computeMarginImpact } from '@/lib/marginModel';
 import InputSection from './InputSection';
 import ResultPanel from './ResultPanel';
 import EnterpriseRollup from './EnterpriseRollup';
+import AcronymHint from './AcronymHint';
 
 const defaultInputs = {
   annualTonsProcessed: 25000,
@@ -23,16 +24,62 @@ const defaultInputs = {
   errorReductionPct: 30,
 };
 
+const REVEAL_DURATION_MS = 2500;
+
 export default function MarginImpactCalculator() {
   const [inputs, setInputs] = useState(defaultInputs);
   const [results, setResults] = useState<any>(null);
+  const [showAnnualImpact, setShowAnnualImpact] = useState(false);
   const [error, setError] = useState('');
   const resultsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (results) {
-      resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!results || !resultsRef.current) return;
+
+    setShowAnnualImpact(false);
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const startY = window.scrollY;
+    const targetY = Math.max(
+      0,
+      resultsRef.current.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.35,
+    );
+
+    if (reduceMotion) {
+      window.scrollTo({ top: targetY, behavior: 'auto' });
+      setShowAnnualImpact(true);
+      return;
     }
+
+    const revealTimer = window.setTimeout(() => {
+      setShowAnnualImpact(true);
+    }, 0);
+
+    let animationFrame = 0;
+    const startTime = performance.now();
+
+    const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+    const animateScroll = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / REVEAL_DURATION_MS, 1);
+      const easedProgress = easeInOutCubic(progress);
+      const nextY = startY + (targetY - startY) * easedProgress;
+      window.scrollTo(0, nextY);
+
+      if (progress < 1) {
+        animationFrame = window.requestAnimationFrame(animateScroll);
+      } else {
+        setShowAnnualImpact(true);
+      }
+    };
+
+    animationFrame = window.requestAnimationFrame(animateScroll);
+
+    return () => {
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+      window.clearTimeout(revealTimer);
+    };
   }, [results]);
 
   function handleCalculate() {
@@ -51,7 +98,7 @@ export default function MarginImpactCalculator() {
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div>
             <h2 className="text-lg font-medium">Execution errors quietly erode margin.</h2>
-            <p className="mt-2 text-sm text-neutral-600">This model estimates EBITDA impact from material efficiency, labor efficiency, throughput capacity, and oversight risk reduction.</p>
+            <p className="mt-2 text-sm text-neutral-600">This model estimates <AcronymHint acronym="EBITDA" caption="Earnings Before Interest, Taxes, Depreciation, and Amortization" /> impact from material efficiency, labor efficiency, throughput capacity, and oversight risk reduction.</p>
           </div>
           <div className="rounded-lg border border-neutral-200 p-4 text-sm min-w-56">
             <div className="text-neutral-500">Signal</div>
@@ -72,7 +119,13 @@ export default function MarginImpactCalculator() {
 
       {results && (
         <div ref={resultsRef} className="space-y-12">
-          <ResultPanel results={results} />
+          <div
+            className={`overflow-hidden transition-all duration-[2500ms] ease-out ${
+              showAnnualImpact ? 'max-h-[1200px] translate-y-0 opacity-100' : 'max-h-0 translate-y-6 opacity-0'
+            }`}
+          >
+            <ResultPanel results={results} />
+          </div>
           <EnterpriseRollup
             perFacilityEbitdaIncrease={results.totals.annualEbitdaIncrease}
             perFacilityRevenue={inputs.annualFabricationRevenue}

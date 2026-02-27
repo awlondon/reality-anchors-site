@@ -1,6 +1,7 @@
 'use client';
 
 import { formatPct, formatUSD } from '@/lib/marginModel';
+import AcronymHint from './AcronymHint';
 
 type Results = any;
 
@@ -17,7 +18,9 @@ export default function ResultPanel({ results }: { results: Results }) {
   return (
     <section className="bg-neutral-900 text-white rounded-xl p-8 space-y-8">
       <div>
-        <h2 className="text-xl font-semibold mb-6">Annual EBITDA Impact</h2>
+        <h2 className="text-xl font-semibold mb-6">
+          Annual <AcronymHint acronym="EBITDA" caption="Earnings Before Interest, Taxes, Depreciation, and Amortization" /> Impact
+        </h2>
         <div className="grid md:grid-cols-4 gap-6 text-sm">
           <ResultCard title="Material Savings" value={formatUSD(results.material.dollarsSaved)} />
           <ResultCard title="Labor Savings" value={formatUSD(results.labor.dollarsSaved)} />

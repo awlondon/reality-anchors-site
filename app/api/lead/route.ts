@@ -110,3 +110,12 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json({ ok: true, recipients: RECIPIENTS, submittedAt });
 }
+
+
+export async function GET() {
+  return NextResponse.json({ error: 'method_not_allowed' }, { status: 405 });
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204 });
+}

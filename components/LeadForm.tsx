@@ -46,10 +46,10 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
     return e;
   };
 
-  const withTimeout = async (request: Promise<Response>, timeoutMs = 8000) => {
+  const withTimeout = async <T,>(request: Promise<T>, timeoutMs = 8000) => {
     let timer: ReturnType<typeof setTimeout> | null = null;
     try {
-      const timeoutPromise = new Promise<Response>((_, reject) => {
+      const timeoutPromise = new Promise<T>((_, reject) => {
         timer = setTimeout(() => reject(new Error('request_timeout')), timeoutMs);
       });
       return await Promise.race([request, timeoutPromise]);
@@ -87,7 +87,7 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
           regimeId: attributedRegime,
         }),
         withTimeout(
-          fetch('/api/lead', {
+          fetch('/api/lead/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(leadPayload),
@@ -129,7 +129,7 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
 
     const sanitizedData = { email: data.email, company: data.company, role: data.role };
 
-    void fetch('/api/sales/notify', {
+    void fetch('/api/sales/notify/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

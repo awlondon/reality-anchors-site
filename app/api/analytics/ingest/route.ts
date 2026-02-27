@@ -21,3 +21,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'server_error' }, { status: 500 });
   }
 }
+
+
+export async function GET() {
+  return NextResponse.json({ status: 'ok' });
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204 });
+}

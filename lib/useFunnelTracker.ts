@@ -26,17 +26,17 @@ async function sendEvent(
 
   const eventId = await hashEvent(payload);
 
-  const response = await fetch('/api/analytics/ingest/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ ...payload, eventId }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`analytics_ingest_failed:${response.status}`);
+  // Best-effort: API route only works with a Node server,
+  // not on static export / GitHub Pages hosting
+  try {
+    await fetch('/api/analytics/ingest/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...payload, eventId }),
+    });
+  } catch {
+    // Silently ignore — expected on static hosting
   }
-
-  window.dispatchEvent(new CustomEvent('analytics', { detail: payload }));
 }
 
 export function useFunnelTracker() {
@@ -52,10 +52,8 @@ export function useFunnelTracker() {
         setLastRegime(regimeId);
       }
 
-      void sendEvent(detail, experimentId, variant, attribution).catch((error) => {
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('Analytics event failed to send:', error);
-        }
+      void sendEvent(detail, experimentId, variant, attribution).catch(() => {
+        // Silently ignore — expected on static hosting
       });
     };
 

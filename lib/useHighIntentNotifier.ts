@@ -27,11 +27,12 @@ export function useHighIntentNotifier(sessionAggregate: SessionAggregate, regime
         timestamp: Date.now(),
       };
 
+      // Best-effort: API route only works with a Node server
       void fetch('/api/sales/notify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
-      });
+      }).catch(() => {});
 
       const alert = {
         id: `${sessionAggregate.sessionId}_high_intent`,

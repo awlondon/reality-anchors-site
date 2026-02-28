@@ -23,7 +23,7 @@ export default function Footer() {
           <Link href="/commercial/#contact" className="hover:text-txt transition-colors">Contact</Link>
         </nav>
 
-        <div className="text-xs text-muted/60">
+        <div className="text-xs text-muted/80">
           © {new Date().getFullYear()} Reality Anchors Limited
         </div>
       </div>

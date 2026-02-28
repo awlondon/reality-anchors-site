@@ -1,0 +1,33 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A121E"/>
+      <stop offset="1" stop-color="#203548"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <rect x="58" y="58" width="1084" height="584" rx="24" fill="#0E1B2B" stroke="#35D4C1" stroke-opacity="0.32"/>
+
+  <rect x="130" y="440" width="940" height="110" rx="16" fill="#1A3041"/>
+  <path d="M140 500H1060" stroke="#34556D" stroke-width="3" stroke-dasharray="10 10"/>
+
+  <rect x="250" y="300" width="530" height="150" rx="20" fill="#253D53"/>
+  <rect x="320" y="250" width="230" height="90" rx="18" fill="#2E4A63"/>
+  <rect x="560" y="260" width="170" height="60" rx="14" fill="#2E4A63"/>
+  <circle cx="340" cy="500" r="54" fill="#0E1B2B" stroke="#9CCDC8" stroke-width="6"/>
+  <circle cx="340" cy="500" r="24" fill="#3E647C"/>
+  <circle cx="730" cy="500" r="54" fill="#0E1B2B" stroke="#9CCDC8" stroke-width="6"/>
+  <circle cx="730" cy="500" r="24" fill="#3E647C"/>
+
+  <path d="M340 500C325 462 325 428 340 392" stroke="#4EDCCA" stroke-width="4" stroke-dasharray="7 8"/>
+  <path d="M730 500C715 462 715 428 730 392" stroke="#4EDCCA" stroke-width="4" stroke-dasharray="7 8"/>
+
+  <rect x="810" y="150" width="270" height="220" rx="16" fill="#132739" stroke="#42D8C6" stroke-opacity="0.45"/>
+  <text x="840" y="196" fill="#BDF4EE" font-size="22" font-family="Arial" font-weight="700">Stability Envelope</text>
+  <rect x="840" y="220" width="210" height="18" rx="9" fill="#26455C"/>
+  <rect x="840" y="250" width="188" height="18" rx="9" fill="#3FD3C1" fill-opacity="0.65"/>
+  <rect x="840" y="280" width="160" height="18" rx="9" fill="#2D9EEB" fill-opacity="0.75"/>
+  <text x="840" y="325" fill="#A8DDD7" font-size="18" font-family="Arial">Slip alert lead: 2.1s</text>
+
+  <path d="M760 390C850 350 862 290 840 282" stroke="#61E8D9" stroke-width="3" stroke-dasharray="8 8"/>
+</svg>

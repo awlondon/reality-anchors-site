@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 import StructuredFieldBackground from '@/components/StructuredFieldBackground';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import { trackEvent } from '@/lib/analytics';
 import { siteMetrics } from '@/lib/siteData';
 
@@ -57,7 +58,9 @@ export default function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-bg flex items-center">
       {/* Three.js field */}
-      <StructuredFieldBackground className="absolute inset-0 w-full h-full" intensity={0.65} />
+      <ErrorBoundary>
+        <StructuredFieldBackground className="absolute inset-0 w-full h-full" intensity={0.65} />
+      </ErrorBoundary>
 
       {/* Symbol-vector level-1 HLSF ring */}
       <motion.div

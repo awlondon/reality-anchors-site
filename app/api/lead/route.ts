@@ -30,7 +30,7 @@ const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 // Remove entries whose window has already expired.
 function sweepExpiredEntries() {
   const now = Date.now();
-  for (const [ip, entry] of rateLimitMap) {
+  for (const [ip, entry] of Array.from(rateLimitMap.entries())) {
     if (now > entry.resetAt) rateLimitMap.delete(ip);
   }
 }

@@ -8,6 +8,7 @@ import { getLastRegime } from '@/lib/funnelContext';
 import { getSessionId } from '@/lib/session';
 import { upsertSalesAlert } from '@/lib/salesNotifications';
 import { saveLead } from '@/lib/saveLead';
+import { getCalculatorContext } from '@/lib/calculatorContext';
 
 interface FormData {
   name: string;
@@ -15,12 +16,14 @@ interface FormData {
   company: string;
   role: string;
   message: string;
+  /** Honeypot — hidden from real users, left empty; bots that auto-fill forms populate this */
+  _hp: string;
 }
 
 const ROLES = ['Operations', 'Engineering', 'IT / Security', 'Executive', 'Other'];
 
 export default function LeadForm({ id = 'contact' }: { id?: string }) {
-  const [data, setData] = useState<FormData>({ name: '', email: '', company: '', role: '', message: '' });
+  const [data, setData] = useState<FormData>({ name: '', email: '', company: '', role: '', message: '', _hp: '' });
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -67,6 +70,7 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
     setLoading(true);
     const attributedRegime = getLastRegime();
     const sessionId = getSessionId() ?? 'unknown';
+    const calculatorContext = getCalculatorContext();
     try {
       const leadPayload = {
         ...data,
@@ -74,6 +78,7 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
         regimeId: attributedRegime,
         source: 'request_contact_form',
         submittedAt: new Date().toISOString(),
+        calculatorContext: calculatorContext ?? undefined,
       };
 
       const [persistResult, emailResult] = await Promise.allSettled([
@@ -224,9 +229,12 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="text-center py-8"
+                  role="status"
+                  aria-live="polite"
+                  aria-atomic="true"
                 >
-                  <div className="w-12 h-12 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <div className="w-12 h-12 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center mx-auto mb-4" aria-hidden="true">
+                    <svg className="w-6 h-6 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
@@ -253,11 +261,12 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
                       onChange={(e) => setData((d) => ({ ...d, role: e.target.value }))}
                       className={`ra-input ${errors.role ? 'border-red-500/60' : ''}`}
                       aria-invalid={!!errors.role}
+                      aria-describedby={errors.role ? 'role-error' : undefined}
                     >
                       <option value="">Select…</option>
                       {ROLES.map((r) => <option key={r} value={r}>{r}</option>)}
                     </select>
-                    {errors.role && <span className="text-xs text-red-400">{errors.role}</span>}
+                    {errors.role && <span id="role-error" className="text-xs text-red-400">{errors.role}</span>}
                   </label>
 
                   <label className="flex flex-col gap-1.5">
@@ -271,6 +280,20 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
                     />
                   </label>
 
+                  {/* Honeypot — visually hidden, must stay empty for real submissions */}
+                  <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>
+                    <label htmlFor="_hp_field">Leave this blank</label>
+                    <input
+                      id="_hp_field"
+                      type="text"
+                      name="_hp"
+                      value={data._hp}
+                      onChange={(e) => setData((d) => ({ ...d, _hp: e.target.value }))}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
                   {submitError && (
                     <p className="text-sm text-amber-300" role="status">{submitError}</p>
                   )}
@@ -278,6 +301,8 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
                   <button
                     type="submit"
                     disabled={loading}
+                    aria-busy={loading}
+                    aria-label={loading ? 'Sending your request…' : 'Submit contact request'}
                     className="w-full py-3.5 rounded-lg bg-accent hover:bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold transition-all hover:-translate-y-px mt-1"
                   >
                     {loading ? 'Sending…' : 'Request Contact'}

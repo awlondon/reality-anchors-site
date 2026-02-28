@@ -84,7 +84,7 @@ export default function BoardStrategyPage() {
           <p className="text-sm text-muted mb-5">
             Illustrative assumptions: $40M revenue, 8% EBITDA margin, 25,000 tons annual throughput, $850/ton steel cost, 8% baseline scrap.
           </p>
-          <div className="overflow-x-auto mb-6">
+          <div className="table-scroll-wrapper overflow-x-auto mb-6">
             <table className="ra-table">
               <thead><tr><th>Driver</th><th>Illustrative impact</th><th>Annual EBITDA effect</th></tr></thead>
               <tbody>
@@ -105,7 +105,7 @@ export default function BoardStrategyPage() {
           <p className="text-sm text-muted mb-5">
             Based on ~<span className="font-mono text-txt">$575k</span> annual customer EBITDA uplift, sustainable early capture is typically <span className="font-mono text-txt">8–15%</span> of created value to preserve adoption velocity and procurement acceptance.
           </p>
-          <div className="overflow-x-auto mb-5">
+          <div className="table-scroll-wrapper overflow-x-auto mb-5">
             <table className="ra-table">
               <thead><tr><th>Scenario</th><th>Annual price</th><th>Capture of value</th><th>Customer ROI multiple</th></tr></thead>
               <tbody>
@@ -125,7 +125,7 @@ export default function BoardStrategyPage() {
           <p className="text-sm text-muted mb-5">
             Model assumptions: <span className="font-mono text-txt">$70k ACV</span> per facility, early churn moderation, and net revenue retention expansion as execution workflows embed into daily operations.
           </p>
-          <div className="overflow-x-auto mb-5">
+          <div className="table-scroll-wrapper overflow-x-auto mb-5">
             <table className="ra-table">
               <thead><tr><th>Year</th><th>Facilities</th><th>ARR</th><th>Ramp note</th></tr></thead>
               <tbody>
@@ -144,7 +144,7 @@ export default function BoardStrategyPage() {
 
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">Sensitivity: Scrap Improvement vs EBITDA</h2>
-          <div className="overflow-x-auto mb-4">
+          <div className="table-scroll-wrapper overflow-x-auto mb-4">
             <table className="ra-table">
               <thead><tr><th>Absolute scrap reduction</th><th>Estimated EBITDA uplift</th></tr></thead>
               <tbody>

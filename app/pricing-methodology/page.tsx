@@ -57,7 +57,7 @@ export default function PricingMethodologyPage() {
           <p className="text-muted text-sm mb-6">
             Segment classifications and baseline scrap/rework rates are derived from published Australian Standards, fabrication surveys, and operator benchmark studies. All rates are conservative mid-points of observable ranges.
           </p>
-          <div className="overflow-x-auto mb-6">
+          <div className="table-scroll-wrapper overflow-x-auto mb-6">
             <table className="ra-table">
               <thead><tr><th>Segment</th><th>Scrap range</th><th>Scrap model baseline</th><th>Basis</th></tr></thead>
               <tbody>
@@ -82,7 +82,7 @@ export default function PricingMethodologyPage() {
               </tbody>
             </table>
           </div>
-          <div className="overflow-x-auto mb-4">
+          <div className="table-scroll-wrapper overflow-x-auto mb-4">
             <table className="ra-table">
               <thead><tr><th>Rework metric</th><th>Industry range</th><th>Model baseline</th><th>Basis</th></tr></thead>
               <tbody>
@@ -110,7 +110,7 @@ export default function PricingMethodologyPage() {
           <p className="text-muted text-sm mb-6">
             Improvement deltas represent expected reduction in scrap and preventable rework attributable to structured workflow enforcement. Values are set at lower observable bounds to preserve conservative estimates.
           </p>
-          <div className="overflow-x-auto mb-6">
+          <div className="table-scroll-wrapper overflow-x-auto mb-6">
             <table className="ra-table">
               <thead><tr><th>Segment</th><th>Baseline</th><th>Conservative delta</th><th>Post-deployment model</th></tr></thead>
               <tbody>
@@ -135,7 +135,7 @@ export default function PricingMethodologyPage() {
               </tbody>
             </table>
           </div>
-          <div className="overflow-x-auto mb-6">
+          <div className="table-scroll-wrapper overflow-x-auto mb-6">
             <table className="ra-table">
               <thead><tr><th>Rework metric</th><th>Baseline</th><th>Conservative delta</th><th>Post-deployment model</th></tr></thead>
               <tbody>
@@ -170,7 +170,7 @@ AnnualReworkSavings =
           <p className="text-muted text-sm mb-6">
             Subscription tiers are set at 10–25% of modeled annual savings. This fraction keeps the upside strongly in the buyer&apos;s favor while maintaining commercial sustainability and full product support.
           </p>
-          <div className="overflow-x-auto mb-6">
+          <div className="table-scroll-wrapper overflow-x-auto mb-6">
             <table className="ra-table">
               <thead><tr><th>Modeled annual value</th><th>Typical subscription</th><th>Notes</th></tr></thead>
               <tbody>

@@ -48,6 +48,9 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
 
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
+    const form = evt.target as HTMLFormElement;
+    const honeypot = form.elements.namedItem('website') as HTMLInputElement;
+    if (honeypot?.value) return; // Bot detected, silently ignore
     const e = validate();
     if (Object.keys(e).length) { setErrors(e); return; }
     setErrors({});
@@ -243,6 +246,16 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
                       className="ra-input resize-none"
                     />
                   </label>
+
+                  {/* Honeypot field — hidden from humans, traps bots */}
+                  <input
+                    type="text"
+                    name="website"
+                    autoComplete="off"
+                    className="absolute opacity-0 h-0 w-0 overflow-hidden"
+                    tabIndex={-1}
+                    aria-hidden="true"
+                  />
 
                   {submitError && (
                     <p className="text-sm text-amber-300" role="status">{submitError}</p>

@@ -19,6 +19,7 @@ export default function Footer() {
           <Link href="/industrial/" className="hover:text-txt transition-colors">Industrial</Link>
           <Link href="/margin-impact/" className="hover:text-txt transition-colors">Margin Model</Link>
           <Link href="/pricing-methodology/" className="hover:text-txt transition-colors">Methodology</Link>
+          <Link href="/board-strategy/" className="hover:text-txt transition-colors">Strategy</Link>
           <Link href="/commercial/#contact" className="hover:text-txt transition-colors">Contact</Link>
         </nav>
 

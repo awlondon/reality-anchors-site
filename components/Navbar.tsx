@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: '/commercial/', label: 'Commercial' },
   { href: '/industrial/', label: 'Industrial' },
   { href: '/margin-impact/', label: 'Margin Model' },
+  { href: '/board-strategy/', label: 'Strategy' },
 ];
 
 export default function Navbar({ activePath = '' }: { activePath?: string }) {

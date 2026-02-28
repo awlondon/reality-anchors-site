@@ -46,18 +46,6 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
     return e;
   };
 
-  const withTimeout = async <T,>(request: Promise<T>, timeoutMs = 8000) => {
-    let timer: ReturnType<typeof setTimeout> | null = null;
-    try {
-      const timeoutPromise = new Promise<T>((_, reject) => {
-        timer = setTimeout(() => reject(new Error('request_timeout')), timeoutMs);
-      });
-      return await Promise.race([request, timeoutPromise]);
-    } finally {
-      if (timer) clearTimeout(timer);
-    }
-  };
-
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
     const e = validate();
@@ -67,55 +55,41 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
     setLoading(true);
     const attributedRegime = getLastRegime();
     const sessionId = getSessionId() ?? 'unknown';
+
     try {
-      const leadPayload = {
-        ...data,
+      // Primary: persist to Firebase
+      await saveLead({
+        name: data.name,
+        email: data.email,
+        company: data.company,
+        role: data.role,
+        message: data.message,
         sessionId,
         regimeId: attributedRegime,
-        source: 'request_contact_form',
-        submittedAt: new Date().toISOString(),
-      };
-
-      const [persistResult, emailResult] = await Promise.allSettled([
-        saveLead({
-          name: data.name,
-          email: data.email,
-          company: data.company,
-          role: data.role,
-          message: data.message,
-          sessionId,
-          regimeId: attributedRegime,
-        }),
-        withTimeout(
-          fetch('/api/lead/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(leadPayload),
-          })
-        ),
-      ]);
-
-      if (persistResult.status === 'rejected') {
-        console.error('Failed to save lead:', persistResult.reason);
-      }
-
-      if (emailResult.status === 'rejected') {
-        console.error('Failed to send lead email:', emailResult.reason);
-        setSubmitError('Your request was captured, but we could not confirm email delivery. Please try again in a minute.');
-      } else if (!emailResult.value.ok) {
-        const details = await emailResult.value.text().catch(() => 'unknown_error');
-        console.error('Lead email endpoint failed:', details);
-        setSubmitError('Your request was captured, but email delivery failed. Please try again in a minute.');
-      } else {
-        setSubmitted(true);
-      }
+      });
+      setSubmitted(true);
     } catch (err) {
-      console.error('Lead submit flow failed:', err);
+      console.error('Lead save failed:', err);
       setSubmitError('Something went wrong while submitting your request. Please try again.');
     } finally {
       setLoading(false);
     }
 
+    // Best-effort: email notification (will fail on static hosting, which is fine)
+    const leadPayload = {
+      ...data,
+      sessionId,
+      regimeId: attributedRegime,
+      source: 'request_contact_form',
+      submittedAt: new Date().toISOString(),
+    };
+    fetch('/api/lead/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(leadPayload),
+    }).catch(() => {});
+
+    // Analytics events
     window.dispatchEvent(
       new CustomEvent('analytics', {
         detail: {
@@ -127,18 +101,17 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
       })
     );
 
-    const sanitizedData = { email: data.email, company: data.company, role: data.role };
-
-    void fetch('/api/sales/notify/', {
+    // Best-effort: sales notification
+    fetch('/api/sales/notify/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         type: 'form_submit',
         sessionId,
-        formData: sanitizedData,
+        formData: { email: data.email, company: data.company, role: data.role },
         regimeId: attributedRegime ?? undefined,
       }),
-    });
+    }).catch(() => {});
 
     const alert = {
       id: `${sessionId}_form_submit`,

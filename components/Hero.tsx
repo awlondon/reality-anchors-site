@@ -1,11 +1,16 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import StructuredFieldBackground from '@/components/StructuredFieldBackground';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { trackEvent } from '@/lib/analytics';
 import { siteMetrics } from '@/lib/siteData';
+
+const StructuredFieldBackground = dynamic(
+  () => import('@/components/StructuredFieldBackground'),
+  { ssr: false }
+);
 
 export default function Hero() {
   const reduce = useReducedMotion();

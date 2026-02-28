@@ -22,7 +22,7 @@ export default function BoardStrategyPage() {
             <Link href="/commercial/#contact" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
               Discuss strategic integration
             </Link>
-            <Link href="/calculator/" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
+            <Link href="/margin-impact/" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
               Review value inputs
             </Link>
           </div>

@@ -26,7 +26,7 @@ export default function PricingMethodologyPage() {
             <Link href="/commercial/" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
               Explore commercial plans
             </Link>
-            <Link href="/calculator/" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
+            <Link href="/margin-impact/" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
               Run the calculator
             </Link>
           </div>
@@ -208,7 +208,7 @@ AnnualReworkSavings =
           <Link href="/commercial/#contact" className="px-6 py-3.5 rounded-lg bg-accent hover:bg-blue-500 text-white font-semibold transition-all hover:-translate-y-px">
             Request enterprise assessment
           </Link>
-          <Link href="/calculator/" className="px-6 py-3.5 rounded-lg border border-line hover:border-accent/40 text-txt font-semibold transition-all">
+          <Link href="/margin-impact/" className="px-6 py-3.5 rounded-lg border border-line hover:border-accent/40 text-txt font-semibold transition-all">
             Run savings calculator
           </Link>
         </div>

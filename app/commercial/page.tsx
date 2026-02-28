@@ -23,7 +23,7 @@ export default function CommercialPage() {
             Execution intelligence for crews and fabrication yards. Designed to reinforce upstream planning tools through verified downstream execution outcomes.
           </p>
           <div className="flex flex-wrap gap-3 mt-8">
-            <Link href="/calculator/" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
+            <Link href="/margin-impact/" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
               Estimate savings
             </Link>
             <Link href="#contact" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
@@ -148,7 +148,7 @@ export default function CommercialPage() {
             <p className="text-xs text-muted/70 mb-5">Final pricing depends on bench count, instrumentation scope, calibration governance requirements, and multi-project optimization complexity.</p>
 
             <div className="flex flex-wrap gap-3">
-              <Link href="/calculator/" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
+              <Link href="/margin-impact/" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
                 Estimate savings
               </Link>
               <Link href="#contact" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">

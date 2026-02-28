@@ -22,8 +22,14 @@ export default function Footer() {
           <Link href="/commercial/#contact" className="hover:text-txt transition-colors">Contact</Link>
         </nav>
 
-        <div className="text-xs text-muted/60">
-          © {new Date().getFullYear()} Reality Anchors Limited
+        <div className="flex flex-col items-end gap-1">
+          <div className="text-xs text-muted/60">
+            © {new Date().getFullYear()} Reality Anchors Limited
+          </div>
+          <div className="flex gap-4 text-xs text-muted/50">
+            <Link href="/privacy/" className="hover:text-muted transition-colors">Privacy</Link>
+            <Link href="/terms/" className="hover:text-muted transition-colors">Terms</Link>
+          </div>
         </div>
       </div>
     </footer>

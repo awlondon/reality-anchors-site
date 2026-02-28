@@ -78,10 +78,11 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
         <button
           className="md:hidden text-muted hover:text-txt p-1"
           onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
+          aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
+          aria-controls="mobile-nav"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             {open
               ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -92,7 +93,7 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
 
       {/* Mobile menu */}
       {open && (
-        <nav className="md:hidden px-5 pb-4 flex flex-col gap-4 border-t border-line max-h-[80vh] overflow-y-auto" aria-label="Mobile navigation">
+        <nav id="mobile-nav" className="md:hidden px-5 pb-4 flex flex-col gap-4 border-t border-line max-h-[80vh] overflow-y-auto" aria-label="Mobile navigation">
           {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}

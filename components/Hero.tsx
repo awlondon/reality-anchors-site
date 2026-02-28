@@ -2,9 +2,16 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
-import StructuredFieldBackground from '@/components/StructuredFieldBackground';
+import dynamic from 'next/dynamic';
 import { trackEvent } from '@/lib/analytics';
 import { siteMetrics } from '@/lib/siteData';
+
+// Three.js is large (~600 kB). Dynamic import splits it into its own chunk so it
+// doesn't block the initial page parse. The canvas renders client-side only.
+const StructuredFieldBackground = dynamic(
+  () => import('@/components/StructuredFieldBackground'),
+  { ssr: false },
+);
 
 export default function Hero() {
   const reduce = useReducedMotion();
@@ -207,6 +214,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.6 }}
+        aria-hidden="true"
       >
         <span className="text-[10px] text-muted/60 tracking-widest uppercase">Scroll</span>
         <motion.div

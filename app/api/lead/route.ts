@@ -1,5 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// In-memory rate limiter: max 5 submissions per IP per 60 seconds.
+// This resets on cold start; for persistent limiting use an external store (Redis/KV).
+const RATE_WINDOW_MS = 60_000;
+const RATE_MAX_REQUESTS = 5;
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
+    return false;
+  }
+  entry.count += 1;
+  return entry.count > RATE_MAX_REQUESTS;
+}
+
 const RECIPIENTS = [
   'russell.d.brunner@gmail.com',
   'alexlwlondon@gmail.com',
@@ -16,6 +33,8 @@ interface LeadPayload {
   regimeId?: string | null;
   source?: string;
   submittedAt?: string;
+  /** Honeypot — must be empty; bots that auto-fill fields will populate this */
+  _hp?: string;
 }
 
 function asText(value?: string | null) {
@@ -63,9 +82,21 @@ function buildLeadEmail(payload: LeadPayload, ipAddress: string | null, userAgen
 }
 
 export async function POST(request: NextRequest) {
+  const forwardedFor = request.headers.get('x-forwarded-for');
+  const ipAddress = forwardedFor?.split(',')[0]?.trim() ?? 'unknown';
+
+  if (isRateLimited(ipAddress)) {
+    return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  }
+
   const payload = (await request.json().catch(() => null)) as LeadPayload | null;
   if (!payload?.name || !payload?.email || !payload?.company || !payload?.role) {
     return NextResponse.json({ error: 'invalid_payload' }, { status: 400 });
+  }
+
+  // Reject if honeypot field is filled (bot behaviour)
+  if (payload._hp) {
+    return NextResponse.json({ ok: true }, { status: 200 });
   }
 
   const resendApiKey = process.env.RESEND_API_KEY;
@@ -75,8 +106,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'missing_email_configuration' }, { status: 500 });
   }
 
-  const forwardedFor = request.headers.get('x-forwarded-for');
-  const ipAddress = forwardedFor?.split(',')[0]?.trim() ?? null;
   const userAgent = request.headers.get('user-agent');
   const { text, html, submittedAt } = buildLeadEmail(payload, ipAddress, userAgent);
 

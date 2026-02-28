@@ -1,10 +1,44 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// In-memory rate limiter: max 5 submissions per IP per 60 seconds.
-// This resets on cold start; for persistent limiting use an external store (Redis/KV).
+// ---------------------------------------------------------------------------
+// In-memory rate limiter — max 5 submissions per IP per 60 seconds.
+//
+// Limitations of this approach:
+//   - State resets on every cold start / server restart.
+//   - Does NOT protect against distributed spam across multiple serverless
+//     instances (each instance has its own Map).
+//
+// To upgrade to persistent, cross-instance rate limiting:
+//   1. Install @upstash/ratelimit and @upstash/redis:
+//        npm i @upstash/ratelimit @upstash/redis
+//   2. Replace this block with:
+//        import { Ratelimit } from '@upstash/ratelimit';
+//        import { Redis } from '@upstash/redis';
+//        const ratelimit = new Ratelimit({
+//          redis: Redis.fromEnv(),
+//          limiter: Ratelimit.slidingWindow(5, '60 s'),
+//        });
+//      Then call: const { success } = await ratelimit.limit(ip);
+//   3. Add UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN to env vars.
+// ---------------------------------------------------------------------------
 const RATE_WINDOW_MS = 60_000;
 const RATE_MAX_REQUESTS = 5;
+// Periodic sweep interval prevents unbounded map growth under sustained traffic.
+const CLEANUP_INTERVAL_MS = 5 * 60_000;
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+// Remove entries whose window has already expired.
+function sweepExpiredEntries() {
+  const now = Date.now();
+  for (const [ip, entry] of rateLimitMap) {
+    if (now > entry.resetAt) rateLimitMap.delete(ip);
+  }
+}
+
+// Run cleanup on a timer so long-running server processes don't accumulate stale keys.
+if (typeof setInterval !== 'undefined') {
+  setInterval(sweepExpiredEntries, CLEANUP_INTERVAL_MS);
+}
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();

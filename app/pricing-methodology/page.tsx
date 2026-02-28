@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function PricingMethodologyPage() {
   return (
-    <main className="pt-20">
+    <main id="main-content" className="pt-20">
       {/* Header */}
       <section className="py-16 border-b border-line">
         <div className="max-w-4xl mx-auto px-6">

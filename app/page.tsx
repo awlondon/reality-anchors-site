@@ -12,7 +12,7 @@ export default async function Home() {
   const regimes = await getRegimes();
 
   return (
-    <main className="snap-y">
+    <main id="main-content" className="snap-y">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

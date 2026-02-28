@@ -17,7 +17,7 @@ const industrialRegimes = regimeCatalog.filter((regime) => ['machine-calibration
 
 export default function IndustrialPage() {
   return (
-    <main className="pt-20">
+    <main id="main-content" className="pt-20">
       <section className="py-16 border-b border-line">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions / Industrial</p>

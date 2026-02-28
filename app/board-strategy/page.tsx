@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function BoardStrategyPage() {
   return (
-    <main className="pt-20">
+    <main id="main-content" className="pt-20">
       <section className="py-16 border-b border-line">
         <div className="max-w-5xl mx-auto px-6">
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Executive Brief · Fabrication Strategy</p>

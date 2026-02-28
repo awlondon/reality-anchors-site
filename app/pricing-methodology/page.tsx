@@ -3,8 +3,12 @@ import Link from 'next/link';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Pricing Methodology',
-  description: 'Transparent pricing methodology for Reality Anchors platform. Baseline model assumptions for scrap and rework, conservative improvement deltas, and value-aligned subscription structure.',
+  title: 'Pricing Methodology — Transparent Value-Aligned Pricing',
+  description: 'Published baseline models, conservative improvement deltas, and value-aligned subscription structure. No percentage-of-savings contracts.',
+  openGraph: {
+    title: 'Pricing Methodology | Reality Anchors',
+    description: 'Transparent pricing methodology with published baseline models and conservative improvement deltas.',
+  },
 };
 
 export default function PricingMethodologyPage() {

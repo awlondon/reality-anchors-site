@@ -13,6 +13,18 @@ export default async function Home() {
 
   return (
     <main className="snap-y">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Reality Anchors Limited',
+            url: 'https://ra.primarydesignco.com',
+            description: 'AI-assisted operational validation for fabrication, field, and operations teams.',
+          }),
+        }}
+      />
       <Hero />
       <ValueBridge />
       <Features />

@@ -5,8 +5,12 @@ import LeadForm from '@/components/LeadForm';
 import { regimeCatalog } from '@/lib/siteData';
 
 export const metadata: Metadata = {
-  title: 'Commercial',
-  description: 'Execution intelligence for crews and fabrication yards that increases the measurable value of existing digital fabrication systems.',
+  title: 'Commercial Solutions — Execution Intelligence for Fabrication Yards',
+  description: 'Execution-layer infrastructure for crews and yards. Value-amplification pricing aligned to measurable scrap reduction and margin improvement.',
+  openGraph: {
+    title: 'Commercial Solutions | Reality Anchors',
+    description: 'Execution intelligence for fabrication yards — measurable scrap reduction, audit-ready workflows, and value-aligned pricing.',
+  },
 };
 
 const commercialRegimes = regimeCatalog.filter((regime) => ['structural-fabrication', 'multi-project-optimization', 'machine-calibration'].includes(regime.id));

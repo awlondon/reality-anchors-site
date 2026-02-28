@@ -3,9 +3,12 @@ import Link from 'next/link';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Board-Level Strategic Narrative',
-  description:
-    'Executive narrative on why execution-layer validation is inevitable fabrication infrastructure, including EBITDA uplift, SaaS capture strategy, and 5-year ARR ramp framing.',
+  title: 'Board-Level Strategic Narrative — Completing the Digital Fabrication Stack',
+  description: 'Executive narrative on why execution-layer validation is inevitable fabrication infrastructure, including EBITDA uplift, SaaS capture strategy, and 5-year ARR ramp framing.',
+  openGraph: {
+    title: 'Board-Level Strategic Narrative | Reality Anchors',
+    description: 'Executive narrative on execution-layer validation as inevitable fabrication infrastructure.',
+  },
 };
 
 export default function BoardStrategyPage() {

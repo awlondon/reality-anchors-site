@@ -8,6 +8,7 @@ import { getLastRegime } from '@/lib/funnelContext';
 import { getSessionId } from '@/lib/session';
 import { upsertSalesAlert } from '@/lib/salesNotifications';
 import { saveLead } from '@/lib/saveLead';
+import { getCalculatorContext } from '@/lib/calculatorContext';
 
 interface FormData {
   name: string;
@@ -69,6 +70,7 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
     setLoading(true);
     const attributedRegime = getLastRegime();
     const sessionId = getSessionId() ?? 'unknown';
+    const calculatorContext = getCalculatorContext();
     try {
       const leadPayload = {
         ...data,
@@ -76,6 +78,7 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
         regimeId: attributedRegime,
         source: 'request_contact_form',
         submittedAt: new Date().toISOString(),
+        calculatorContext: calculatorContext ?? undefined,
       };
 
       const [persistResult, emailResult] = await Promise.allSettled([

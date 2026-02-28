@@ -57,6 +57,15 @@ const RECIPIENTS = [
   'primarydesigncompany@gmail.com',
 ];
 
+interface CalculatorContext {
+  annualTons?: number;
+  scrapRatePct?: number;
+  costPerTon?: number;
+  estimatedEbitda?: number;
+  estimatedMaterialSavings?: number;
+  estimatedTonsSaved?: number;
+}
+
 interface LeadPayload {
   name: string;
   email: string;
@@ -69,14 +78,22 @@ interface LeadPayload {
   submittedAt?: string;
   /** Honeypot — must be empty; bots that auto-fill fields will populate this */
   _hp?: string;
+  /** Calculator state captured from /calculator before form submission */
+  calculatorContext?: CalculatorContext;
 }
 
 function asText(value?: string | null) {
   return value?.trim() || 'N/A';
 }
 
+function fmtUSD(value?: number) {
+  if (value == null || !Number.isFinite(value)) return 'N/A';
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
+}
+
 function buildLeadEmail(payload: LeadPayload, ipAddress: string | null, userAgent: string | null) {
   const submittedAt = payload.submittedAt ?? new Date().toISOString();
+  const ctx = payload.calculatorContext;
 
   const fields = [
     ['Name', asText(payload.name)],
@@ -92,10 +109,19 @@ function buildLeadEmail(payload: LeadPayload, ipAddress: string | null, userAgen
     ['User Agent', asText(userAgent)],
   ];
 
+  const calcFields: [string, string][] = ctx ? [
+    ['Calculator — Annual Tonnage', ctx.annualTons != null ? `${ctx.annualTons.toLocaleString()} t` : 'N/A'],
+    ['Calculator — Scrap Rate', ctx.scrapRatePct != null ? `${ctx.scrapRatePct.toFixed(1)}%` : 'N/A'],
+    ['Calculator — Cost per Ton', fmtUSD(ctx.costPerTon)],
+    ['Calculator — Est. Material Savings', fmtUSD(ctx.estimatedMaterialSavings)],
+    ['Calculator — Est. Total EBITDA Impact', fmtUSD(ctx.estimatedEbitda)],
+  ] : [];
+
   const text = [
     'Reality Anchors - Request Contact Submission',
     '',
     ...fields.map(([key, value]) => `${key}: ${value}`),
+    ...(calcFields.length ? ['', '— Calculator Context —', ...calcFields.map(([key, value]) => `${key}: ${value}`)] : []),
   ].join('\n');
 
   const html = `
@@ -108,6 +134,10 @@ function buildLeadEmail(payload: LeadPayload, ipAddress: string | null, userAgen
               `<tr><th align="left" style="background:#f5f5f5;">${key}</th><td>${value}</td></tr>`
           )
           .join('')}
+        ${calcFields.length ? `
+        <tr><th colspan="2" align="left" style="background:#eff6ff; color:#1d4ed8;">Calculator Context (from /calculator)</th></tr>
+        ${calcFields.map(([key, value]) => `<tr><th align="left" style="background:#f5f5f5;">${key}</th><td><strong>${value}</strong></td></tr>`).join('')}
+        ` : ''}
       </tbody>
     </table>
   `;

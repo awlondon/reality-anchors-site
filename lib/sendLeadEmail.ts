@@ -33,6 +33,8 @@ export async function sendLeadEmail(payload: LeadEmailPayload): Promise<void> {
 
   const ctx = payload.calculatorContext;
 
+  const now = new Date();
+
   const templateParams: Record<string, string> = {
     name: payload.name || 'N/A',
     email: payload.email || 'N/A',
@@ -42,7 +44,8 @@ export async function sendLeadEmail(payload: LeadEmailPayload): Promise<void> {
     sessionId: payload.sessionId || 'N/A',
     regimeId: payload.regimeId || 'N/A',
     source: payload.source || 'request_contact_form',
-    submittedAt: payload.submittedAt || new Date().toISOString(),
+    submittedAt: payload.submittedAt || now.toISOString(),
+    time: now.toLocaleString(),
     // Calculator context — pre-formatted for the template
     calcAnnualTons: ctx?.annualTons != null ? `${ctx.annualTons.toLocaleString()} t` : 'N/A',
     calcScrapRate: ctx?.scrapRatePct != null ? `${ctx.scrapRatePct.toFixed(1)}%` : 'N/A',

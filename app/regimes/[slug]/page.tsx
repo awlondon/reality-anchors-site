@@ -3,7 +3,9 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
+import TestimonialBreak from '@/components/TestimonialBreak';
 import { getRegimeById, regimeCatalog } from '@/lib/siteData';
+import { getTestimonialsForPage } from '@/data/testimonials';
 
 interface Props {
   params: { slug: string };
@@ -29,6 +31,8 @@ export default function RegimeDetailPage({ params }: Props) {
   const regime = getRegimeById(params.slug);
 
   if (!regime) notFound();
+
+  const testimonial = getTestimonialsForPage(`regime:${params.slug}`)[0];
 
   return (
     <main className="pt-20">
@@ -84,6 +88,16 @@ export default function RegimeDetailPage({ params }: Props) {
           </article>
         </div>
       </section>
+
+      {testimonial && (
+        <TestimonialBreak
+          id={testimonial.id}
+          quote={testimonial.quote}
+          attribution={testimonial.attribution}
+          company={testimonial.company}
+          backgroundSrc={testimonial.backgroundSrc}
+        />
+      )}
 
       <section className="pb-16">
         <div className="max-w-5xl mx-auto px-6">

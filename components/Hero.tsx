@@ -215,6 +215,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.6 }}
+        aria-hidden="true"
       >
         <span className="text-[10px] text-muted/60 tracking-widest uppercase">Scroll</span>
         <motion.div

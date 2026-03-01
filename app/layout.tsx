@@ -14,10 +14,25 @@ export const metadata: Metadata = {
   description:
     'Reality Anchors delivers AI-assisted operational validation for fabrication, field, and operations teams — measurable scrap reduction, traceable workflows, and field-ready deployment.',
   metadataBase: new URL('https://ra.primarydesignco.com'),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     siteName: 'Reality Anchors Limited',
     type: 'website',
     locale: 'en_AU',
+    images: [
+      {
+        url: '/assets/brand/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Reality Anchors Limited — Operational Validation Platform',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/assets/brand/og-image.png'],
   },
 };
 

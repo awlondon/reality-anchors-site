@@ -6,6 +6,7 @@ import AdaptiveNarrative from '@/components/AdaptiveNarrative';
 import Tiers from '@/components/Tiers';
 import LeadForm from '@/components/LeadForm';
 import Footer from '@/components/Footer';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import { getRegimes } from '@/lib/getRegimes';
 
 export default async function Home() {

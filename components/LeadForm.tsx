@@ -81,54 +81,57 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
       setLoading(false);
     }
 
-    // Best-effort: email notification (will fail on static hosting, which is fine)
-    const leadPayload = {
-      ...data,
-      sessionId,
-      regimeId: attributedRegime,
-      source: 'request_contact_form',
-      submittedAt: new Date().toISOString(),
-    };
-    fetch('/api/lead/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(leadPayload),
-    }).catch(() => {});
-
-    // Analytics events
-    window.dispatchEvent(
-      new CustomEvent('analytics', {
-        detail: {
-          type: 'lead_form_submit',
-          stage: 'lead_form_submit',
-          regimeId: attributedRegime ?? undefined,
-          role: data.role,
-        },
-      })
-    );
-
-    // Best-effort: sales notification
-    fetch('/api/sales/notify/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        type: 'form_submit',
+    // Best-effort side effects — wrapped so unhandled throws can't crash the component
+    try {
+      const leadPayload = {
+        ...data,
         sessionId,
-        formData: { email: data.email, company: data.company, role: data.role },
-        regimeId: attributedRegime ?? undefined,
-      }),
-    }).catch(() => {});
+        regimeId: attributedRegime,
+        source: 'request_contact_form',
+        submittedAt: new Date().toISOString(),
+      };
+      fetch('/api/lead/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(leadPayload),
+      }).catch(() => {});
 
-    const alert = {
-      id: `${sessionId}_form_submit`,
-      type: 'form_submit' as const,
-      sessionId,
-      createdAt: Date.now(),
-    };
-    upsertSalesAlert(alert);
-    window.dispatchEvent(new CustomEvent('analytics', { detail: { ...alert, type: 'sales_notification', notificationType: alert.type } }));
+      window.dispatchEvent(
+        new CustomEvent('analytics', {
+          detail: {
+            type: 'lead_form_submit',
+            stage: 'lead_form_submit',
+            regimeId: attributedRegime ?? undefined,
+            role: data.role,
+          },
+        })
+      );
 
-    trackEvent('lead_submitted', { role: data.role, regimeId: attributedRegime ?? 'unknown' });
+      fetch('/api/sales/notify/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'form_submit',
+          sessionId,
+          formData: { email: data.email, company: data.company, role: data.role },
+          regimeId: attributedRegime ?? undefined,
+        }),
+      }).catch(() => {});
+
+      const alert = {
+        id: `${sessionId}_form_submit`,
+        type: 'form_submit' as const,
+        sessionId,
+        createdAt: Date.now(),
+      };
+      upsertSalesAlert(alert);
+      window.dispatchEvent(new CustomEvent('analytics', { detail: { ...alert, type: 'sales_notification', notificationType: alert.type } }));
+
+      trackEvent('lead_submitted', { role: data.role, regimeId: attributedRegime ?? 'unknown' });
+    } catch {
+      // Non-critical side effects — log but don't block form completion
+      console.warn('Post-submit side effects failed (non-critical)');
+    }
   };
 
   const field = (

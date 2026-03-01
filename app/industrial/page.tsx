@@ -104,11 +104,34 @@ export default function IndustrialPage() {
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-3">Commercial structure for industrial deployments</h2>
             <p className="text-muted text-sm mb-4">
-              Enterprise agreements are structured around facility count, governance requirements, integration scope, and compliance documentation needs.
+              Enterprise agreements are structured around facility count, governance requirements, integration scope, and compliance documentation needs. Subscription is aligned to 8–15% of modeled annual value, keeping ROI firmly in your favor.
             </p>
-            <Link href="#contact" className="inline-flex px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
-              Schedule a technical review
-            </Link>
+
+            <div className="border border-line/50 rounded-xl bg-bg/50 px-5 py-4 mb-5">
+              <h3 className="text-sm font-semibold text-txt mb-3">Representative value framing</h3>
+              <p className="text-xs text-muted mb-3">Mid-size plant: 25,000 t/yr · $850/ton steel · 8% baseline scrap</p>
+              <div className="overflow-x-auto mb-3">
+                <table className="ra-table">
+                  <thead><tr><th>Driver</th><th>Annual impact</th></tr></thead>
+                  <tbody>
+                    <tr><td>Scrap reduction (1.5 pts)</td><td className="font-mono text-accent-2">~$319k</td></tr>
+                    <tr><td>Labor rework reduction</td><td className="font-mono text-accent-2">~$96k</td></tr>
+                    <tr><td>Throughput / capacity</td><td className="font-mono text-accent-2">~$160k</td></tr>
+                    <tr><td className="font-semibold text-txt">Total EBITDA uplift</td><td className="font-mono text-txt font-semibold">~$575k</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-[10px] text-muted/50">Illustrative estimates; final scope depends on facility profile. Oversight/risk savings modeled separately during assessment.</p>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <Link href="/margin-impact/" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
+                Model your facility
+              </Link>
+              <Link href="#contact" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
+                Schedule a technical review
+              </Link>
+            </div>
           </div>
         </div>
       </section>

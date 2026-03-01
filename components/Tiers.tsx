@@ -19,7 +19,7 @@ const tiers = [
   {
     name: 'Commercial',
     href: '/commercial/',
-    price: '$2k–$25k/yr',
+    price: '$1.5k–$25k/yr',
     badge: 'Pro',
     desc: 'Value-aligned execution infrastructure for fabrication yards. Reinforces upstream planning tools through verified bench-level outcomes.',
     tags: ['Bench execution', 'Scrap reduction', 'Audit logs'],

@@ -23,6 +23,21 @@ const testimonial = getTestimonialsForPage('industrial').find((t) => t.id === 'q
 export default function IndustrialPage() {
   return (
     <main id="main-content" className="pt-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Reality Anchors Industrial',
+            provider: { '@type': 'Organization', name: 'Reality Anchors Limited' },
+            description: 'Enterprise execution validation — ERP integration, compliance traceability, and high-volume operational controls.',
+            url: 'https://ra.primarydesignco.com/industrial/',
+            areaServed: 'AU',
+            serviceType: 'Industrial Execution Validation Software',
+          }),
+        }}
+      />
       <section className="relative overflow-hidden py-16 border-b border-line">
         <PhotoBackground src="/images/industrial-factory.jpg" opacity={0.18} position="center 40%" />
         <div className="relative z-10 max-w-4xl mx-auto px-6">
@@ -155,7 +170,11 @@ export default function IndustrialPage() {
         </div>
       </section>
 
-      <LeadForm id="contact" />
+      <LeadForm
+        id="contact"
+        heading="Schedule a technical review"
+        description="Share your facility profile and we'll return with a scoped assessment, integration requirements, and deployment timeline."
+      />
       <Footer />
     </main>
   );

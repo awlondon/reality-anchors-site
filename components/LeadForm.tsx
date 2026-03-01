@@ -24,7 +24,13 @@ interface FormData {
 
 const ROLES = ['Operations', 'Engineering', 'IT / Security', 'Executive', 'Other'];
 
-export default function LeadForm({ id = 'contact' }: { id?: string }) {
+interface LeadFormProps {
+  id?: string;
+  heading?: string;
+  description?: string;
+}
+
+export default function LeadForm({ id = 'contact', heading, description }: LeadFormProps) {
   const [data, setData] = useState<FormData>({ name: '', email: '', company: '', role: '', message: '', _hp: '' });
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [loading, setLoading] = useState(false);
@@ -186,10 +192,10 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
           >
             <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-4">Get in Touch</p>
             <h2 className="text-3xl md:text-4xl font-semibold text-txt mb-5 leading-tight">
-              Request a scoped consultation
+              {heading || 'Request a scoped consultation'}
             </h2>
             <p className="text-muted leading-relaxed mb-8">
-              Complete the form and we&apos;ll return with a fit assessment, suggested rollout scope, and a timeline for value realization.
+              {description || 'Complete the form and we\'ll return with a fit assessment, suggested rollout scope, and a timeline for value realization.'}
             </p>
             <ul className="flex flex-col gap-3">
               {[

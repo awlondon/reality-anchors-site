@@ -28,7 +28,7 @@ export default async function Home() {
             '@context': 'https://schema.org',
             '@type': 'Organization',
             name: 'Reality Anchors Limited',
-            url: 'https://ra.primarydesignco.com',
+            url: 'https://realityanchorsltd.com',
             description: 'AI-assisted operational validation for fabrication, field, and operations teams.',
           }),
         }}

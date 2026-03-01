@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /executive/
 
-Sitemap: https://ra.primarydesignco.com/sitemap.xml
+Sitemap: https://realityanchorsltd.com/sitemap.xml

@@ -177,7 +177,7 @@ export default function QuickEstimateCalculator() {
             </div>
             <div style={{ textAlign: 'right', fontSize: '0.75rem', color: '#94a3b8' }}>
               <div>Generated {today}</div>
-              <div>ra.primarydesignco.com</div>
+              <div>realityanchorsltd.com</div>
             </div>
           </div>
 

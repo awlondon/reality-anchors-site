@@ -33,7 +33,7 @@ export default function CommercialPage() {
             name: 'Reality Anchors Commercial',
             provider: { '@type': 'Organization', name: 'Reality Anchors Limited' },
             description: 'Execution intelligence for fabrication yards — measurable scrap reduction, audit-ready workflows, and value-aligned pricing.',
-            url: 'https://ra.primarydesignco.com/commercial/',
+            url: 'https://realityanchorsltd.com/commercial/',
             areaServed: 'AU',
             serviceType: 'Fabrication Execution Software',
           }),

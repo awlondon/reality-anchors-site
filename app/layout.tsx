@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   description:
     'Reality Anchors delivers AI-assisted operational validation for fabrication, field, and operations teams — measurable scrap reduction, traceable workflows, and field-ready deployment.',
-  metadataBase: new URL('https://ra.primarydesignco.com'),
+  metadataBase: new URL('https://realityanchorsltd.com'),
   alternates: {
     canonical: '/',
   },

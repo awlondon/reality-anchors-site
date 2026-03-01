@@ -27,6 +27,34 @@ const C = {
   steelDk:  '#2a4060',
 } as const;
 
+/** Render alternating diagonal ridge marks along a straight rebar section.
+    Real rebar has two longitudinal ribs + transverse ridges alternating direction. */
+function rebarRidges(x: number, y: number, w: number, h: number, spacing = 16, op = 0.3) {
+  const count = Math.floor((w - 8) / spacing);
+  return (
+    <g>
+      {/* Longitudinal ribs */}
+      <line x1={x + 4} y1={y + 2} x2={x + w - 4} y2={y + 2}
+        stroke="#5a7a9a" strokeWidth="0.7" opacity={op * 0.7} />
+      <line x1={x + 4} y1={y + h - 2} x2={x + w - 4} y2={y + h - 2}
+        stroke="#5a7a9a" strokeWidth="0.7" opacity={op * 0.7} />
+      {/* Transverse ridges alternating / and \ */}
+      {Array.from({ length: count }, (_, i) => {
+        const rx = x + 6 + i * spacing;
+        const even = i % 2 === 0;
+        return (
+          <line key={i}
+            x1={even ? rx - 1.5 : rx + 1.5} y1={y + 1.5}
+            x2={even ? rx + 1.5 : rx - 1.5} y2={y + h - 1.5}
+            stroke="#5a7a9a" strokeWidth="1.3" opacity={op}
+            strokeLinecap="round"
+          />
+        );
+      })}
+    </g>
+  );
+}
+
 /* ═══════════════════════════════════════════════════════════════
    SCENE 1 — THE RAW MATERIAL
    Rebar yard at dawn: bundled bars stacked on supports with
@@ -64,11 +92,8 @@ function Scene1() {
             {/* Bar body — long cylinder */}
             <rect x="110" y={y + xOff + 200} width="580" height="12" rx="6"
               fill={`url(#barGrad)`} opacity={0.85} />
-            {/* Ribs along bar */}
-            {Array.from({ length: 24 }, (_, j) => (
-              <rect key={j} x={130 + j * 24} y={y + xOff + 200} width="2" height="12" rx="1"
-                fill={C.accent2} opacity="0.12" />
-            ))}
+            {/* Rebar ridges */}
+            {rebarRidges(110, y + xOff + 200, 580, 12)}
           </g>
         );
       })}
@@ -76,8 +101,11 @@ function Scene1() {
       {[0, 1, 2].map(i => {
         const xOff = -16 + i * 16;
         return (
-          <rect key={`t${i}`} x="130" y={188 + xOff} width="540" height="12" rx="6"
-            fill={`url(#barGrad)`} opacity={0.75} />
+          <g key={`t${i}`}>
+            <rect x="130" y={188 + xOff} width="540" height="12" rx="6"
+              fill={`url(#barGrad)`} opacity={0.75} />
+            {rebarRidges(130, 188 + xOff, 540, 12, 16, 0.25)}
+          </g>
         );
       })}
 
@@ -160,8 +188,10 @@ function Scene2() {
       {/* ── Rebar passing through ─────────────────────────────── */}
       {/* Left side (feed) */}
       <rect x="40" y="284" width="330" height="12" rx="6" fill="url(#barGrad2)" />
+      {rebarRidges(40, 284, 330, 12)}
       {/* Right side (cut) */}
       <rect x="420" y="284" width="340" height="12" rx="6" fill="url(#barGrad2)" opacity="0.6" />
+      {rebarRidges(420, 284, 340, 12, 16, 0.2)}
 
       {/* ── Shear blade ───────────────────────────────────────── */}
       <rect x="370" y="260" width="60" height="0" fill={C.accent2} opacity="0.9" rx="2">
@@ -266,6 +296,7 @@ function Scene3() {
       {/* ── Rebar being bent ──────────────────────────────────── */}
       {/* Horizontal feed section */}
       <rect x="60" y="252" width="322" height="14" rx="7" fill="url(#barGrad3)" />
+      {rebarRidges(60, 252, 322, 14)}
       {/* Bend arc */}
       <path d="M382,259 Q400,259 400,241" fill="none" stroke={C.steel} strokeWidth="14" strokeLinecap="round" />
       {/* Vertical section after bend */}
@@ -393,21 +424,24 @@ function BendingLoop() {
 
       {/* ── REBAR — incoming straight bar ─────────────────────── */}
       {/* This bar slides in from far left to the mandrel */}
-      <rect y="262" width="340" height="14" rx="7" fill="url(#bendBarGrad)">
-        {/* x: starts off-screen (-400), feeds to mandrel (60) */}
-        <animate attributeName="x" values="-400;60;60;60;60;-400"
+      <g>
+        <animateTransform attributeName="transform" type="translate"
+          values="-400,0;60,0;60,0;60,0;60,0;-400,0"
           keyTimes="0;0.2;0.53;0.7;0.9;1" dur={DUR} repeatCount="indefinite" />
-        {/* Fade out once bend starts */}
         <animate attributeName="opacity" values="0;1;1;0;0;0"
           keyTimes="0;0.15;0.2;0.35;0.9;1" dur={DUR} repeatCount="indefinite" />
-      </rect>
+        <rect x="0" y="262" width="340" height="14" rx="7" fill="url(#bendBarGrad)" />
+        {rebarRidges(0, 262, 340, 14)}
+      </g>
 
       {/* ── REBAR — the bent piece (animated from straight to 90°) ── */}
       {/* Horizontal portion that stays at the mandrel */}
-      <rect x="60" y="262" width="332" height="14" rx="7" fill="url(#bendBarGrad)" opacity="0">
+      <g opacity="0">
         <animate attributeName="opacity" values="0;0;1;1;1;0"
           keyTimes="0;0.19;0.22;0.7;0.88;0.92" dur={DUR} repeatCount="indefinite" />
-      </rect>
+        <rect x="60" y="262" width="332" height="14" rx="7" fill="url(#bendBarGrad)" />
+        {rebarRidges(60, 262, 332, 14)}
+      </g>
       {/* Bend arc — appears during the bend */}
       <path d="M392,270 Q400,270 400,250" fill="none" stroke={C.steel} strokeWidth="14"
         strokeLinecap="round" opacity="0">
@@ -428,6 +462,7 @@ function BendingLoop() {
           values="0,0;0,0;0,0;350,0;350,0"
           keyTimes="0;0.69;0.72;0.9;1" dur={DUR} repeatCount="indefinite" />
         <rect x="60" y="262" width="332" height="14" rx="7" fill={C.accent} opacity="0.5" />
+        {rebarRidges(60, 262, 332, 14, 16, 0.15)}
         <path d="M392,270 Q400,270 400,250" fill="none" stroke={C.accent} strokeWidth="14" strokeLinecap="round" opacity="0.5" />
         <rect x="393" y="100" width="14" height="150" rx="7" fill={C.accent} opacity="0.5" />
       </g>
@@ -590,6 +625,7 @@ export default function VideoShowcase() {
         loopCount.current += 1;
         if (loopCount.current >= LOOPS_BEFORE_SETTLE) {
           setSettled(true);
+          return prev; // stay on current scene — settled flag overrides key
         }
       }
       return next;
@@ -643,7 +679,7 @@ export default function VideoShowcase() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.6 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <ActiveScene />
                 </motion.g>

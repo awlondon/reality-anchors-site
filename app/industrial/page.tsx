@@ -3,7 +3,9 @@ import Link from 'next/link';
 import Footer from '@/components/Footer';
 import LeadForm from '@/components/LeadForm';
 import PhotoBackground from '@/components/PhotoBackground';
+import TestimonialBreak from '@/components/TestimonialBreak';
 import { regimeCatalog } from '@/lib/siteData';
+import { getTestimonialsForPage } from '@/data/testimonials';
 
 export const metadata: Metadata = {
   title: 'Industrial Solutions — Enterprise Execution Validation at Scale',
@@ -15,6 +17,8 @@ export const metadata: Metadata = {
 };
 
 const industrialRegimes = regimeCatalog.filter((regime) => ['machine-calibration', 'ai-governance', 'ar-execution'].includes(regime.id));
+
+const testimonial = getTestimonialsForPage('industrial').find((t) => t.id === 'quality-manager-precast')!;
 
 export default function IndustrialPage() {
   return (
@@ -86,6 +90,14 @@ export default function IndustrialPage() {
           </div>
         </div>
       </section>
+
+      <TestimonialBreak
+        id={testimonial.id}
+        quote={testimonial.quote}
+        attribution={testimonial.attribution}
+        company={testimonial.company}
+        backgroundSrc={testimonial.backgroundSrc}
+      />
 
       <section className="pb-14">
         <div className="max-w-4xl mx-auto px-6">

@@ -3,7 +3,9 @@ import Link from 'next/link';
 import Footer from '@/components/Footer';
 import LeadForm from '@/components/LeadForm';
 import PhotoBackground from '@/components/PhotoBackground';
+import TestimonialBreak from '@/components/TestimonialBreak';
 import { regimeCatalog } from '@/lib/siteData';
+import { getTestimonialsForPage } from '@/data/testimonials';
 import { ScrapRanges } from './Charts';
 
 export const metadata: Metadata = {
@@ -16,6 +18,8 @@ export const metadata: Metadata = {
 };
 
 const commercialRegimes = regimeCatalog.filter((regime) => ['structural-fabrication', 'multi-project-optimization', 'machine-calibration'].includes(regime.id));
+
+const testimonial = getTestimonialsForPage('commercial').find((t) => t.id === 'procurement-lead-supply')!;
 
 export default function CommercialPage() {
   return (
@@ -167,6 +171,14 @@ export default function CommercialPage() {
           </div>
         </div>
       </section>
+
+      <TestimonialBreak
+        id={testimonial.id}
+        quote={testimonial.quote}
+        attribution={testimonial.attribution}
+        company={testimonial.company}
+        backgroundSrc={testimonial.backgroundSrc}
+      />
 
       <section className="relative overflow-hidden pb-14">
         <PhotoBackground src="/images/quality-control.jpg" opacity={0.05} gradient="from-bg/95 via-bg/90 to-bg/95" position="center 50%" />

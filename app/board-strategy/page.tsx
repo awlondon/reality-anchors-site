@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import PhotoBackground from '@/components/PhotoBackground';
+import TestimonialBreak from '@/components/TestimonialBreak';
+import { getTestimonialsForPage } from '@/data/testimonials';
 import { EbitdaWaterfall, ArrRamp, ScrapSensitivity } from './Charts';
 
 export const metadata: Metadata = {
@@ -12,6 +14,8 @@ export const metadata: Metadata = {
     description: 'Executive narrative on execution-layer validation as inevitable fabrication infrastructure.',
   },
 };
+
+const testimonial = getTestimonialsForPage('board-strategy').find((t) => t.id === 'it-director-multisite')!;
 
 export default function BoardStrategyPage() {
   return (
@@ -105,6 +109,14 @@ export default function BoardStrategyPage() {
             EBITDA moves from approximately <span className="font-mono text-txt">$3.2M</span> to <span className="font-mono text-txt">$3.775M</span> (8.0% → 9.4% margin), or ~17–18% EBITDA uplift.
           </p>
         </section>
+
+        <TestimonialBreak
+          id={testimonial.id}
+          quote={testimonial.quote}
+          attribution={testimonial.attribution}
+          company={testimonial.company}
+          backgroundSrc={testimonial.backgroundSrc}
+        />
 
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">SaaS Pricing Capture Strategy (Value Extraction Range)</h2>

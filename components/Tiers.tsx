@@ -11,6 +11,7 @@ const tiers = [
     name: 'Personal',
     href: '/personal/',
     price: '$19–$199/mo',
+    badge: 'Basic',
     desc: 'Execution guidance for solo operators and small crews. Offline-first, 1–8 seats, with a clean upgrade path into commercial workflows.',
     tags: ['Execution guidance', 'Offline-first', '1–8 seats'],
     cta: 'Explore Personal',
@@ -19,6 +20,7 @@ const tiers = [
     name: 'Commercial',
     href: '/commercial/',
     price: '$2k–$25k/yr',
+    badge: 'Pro',
     desc: 'Value-aligned execution infrastructure for fabrication yards. Reinforces upstream planning tools through verified bench-level outcomes.',
     tags: ['Bench execution', 'Scrap reduction', 'Audit logs'],
     cta: 'Explore Commercial',
@@ -28,6 +30,7 @@ const tiers = [
     name: 'Industrial',
     href: '/industrial/',
     price: 'Custom agreement',
+    badge: 'Advanced',
     desc: 'Enterprise execution standardization for high-volume plants with ERP integration, calibration governance, and compliance-grade traceability.',
     tags: ['Throughput', 'ERP integration', 'Traceability'],
     cta: 'Explore Industrial',
@@ -72,11 +75,13 @@ export default function Tiers() {
                   : 'border-line bg-card hover:border-line/80'
               }`}
             >
-              {t.highlight && (
-                <div className="absolute -top-3 left-7 px-3 py-0.5 bg-accent text-white text-[11px] font-bold tracking-wide rounded-full uppercase">
-                  Most popular
-                </div>
-              )}
+              <div className={`absolute -top-3 left-7 px-3 py-0.5 text-[11px] font-bold tracking-wide rounded-full uppercase ${
+                t.highlight
+                  ? 'bg-accent text-white'
+                  : 'bg-card border border-line text-muted'
+              }`}>
+                {t.badge}
+              </div>
 
               <div>
                 <div className="text-lg font-semibold text-txt">{t.name}</div>

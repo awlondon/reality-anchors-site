@@ -1,5 +1,6 @@
 import emailjs from '@emailjs/browser';
 import type { CalculatorContext } from '@/lib/calculatorContext';
+import { reportError } from '@/lib/errorReporting';
 
 const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? '';
 const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? '';
@@ -7,6 +8,12 @@ const CONFIRM_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_CONFIRM_TEMPLATE_ID 
 const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? '';
 
 const SEND_TIMEOUT_MS = 10_000;
+const MAX_RETRIES = 2;
+const RETRY_DELAY_MS = 1_500;
+
+if (typeof window !== 'undefined' && (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY)) {
+  console.warn('[EmailJS] Missing env vars — email notifications will be skipped');
+}
 
 interface LeadEmailPayload {
   name: string;
@@ -26,14 +33,51 @@ function fmtUSD(value?: number): string {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
 }
 
-export async function sendLeadEmail(payload: LeadEmailPayload): Promise<void> {
-  if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
-    console.warn('EmailJS not configured — skipping email notification');
-    return;
+function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function sendWithTimeout(
+  serviceId: string,
+  templateId: string,
+  params: Record<string, string>,
+  publicKey: string,
+): Promise<void> {
+  const send = emailjs.send(serviceId, templateId, params, publicKey);
+  const timeout = new Promise<never>((_, reject) =>
+    setTimeout(() => reject(new Error('Email send timed out')), SEND_TIMEOUT_MS),
+  );
+  await Promise.race([send, timeout]);
+}
+
+async function sendWithRetry(
+  serviceId: string,
+  templateId: string,
+  params: Record<string, string>,
+  publicKey: string,
+  context: string,
+): Promise<void> {
+  let lastError: unknown;
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      await sendWithTimeout(serviceId, templateId, params, publicKey);
+      return;
+    } catch (err) {
+      lastError = err;
+      if (attempt < MAX_RETRIES) {
+        const delay = RETRY_DELAY_MS * (attempt + 1);
+        await wait(delay);
+      }
+    }
   }
+  reportError(lastError, { component: 'sendLeadEmail', action: context });
+  throw lastError;
+}
+
+export async function sendLeadEmail(payload: LeadEmailPayload): Promise<void> {
+  if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) return;
 
   const ctx = payload.calculatorContext;
-
   const now = new Date();
 
   const templateParams: Record<string, string> = {
@@ -47,7 +91,6 @@ export async function sendLeadEmail(payload: LeadEmailPayload): Promise<void> {
     source: payload.source || 'request_contact_form',
     submittedAt: payload.submittedAt || now.toISOString(),
     time: now.toLocaleString(),
-    // Calculator context — pre-formatted for the template
     calcAnnualTons: ctx?.annualTons != null ? `${ctx.annualTons.toLocaleString()} t` : 'N/A',
     calcScrapRate: ctx?.scrapRatePct != null ? `${ctx.scrapRatePct.toFixed(1)}%` : 'N/A',
     calcCostPerTon: fmtUSD(ctx?.costPerTon),
@@ -56,13 +99,7 @@ export async function sendLeadEmail(payload: LeadEmailPayload): Promise<void> {
     hasCalculator: ctx ? 'yes' : '',
   };
 
-  const send = emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
-
-  const timeout = new Promise<never>((_, reject) =>
-    setTimeout(() => reject(new Error('Email send timed out')), SEND_TIMEOUT_MS),
-  );
-
-  await Promise.race([send, timeout]);
+  await sendWithRetry(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY, 'lead_email');
 }
 
 interface ConfirmationPayload {
@@ -73,10 +110,7 @@ interface ConfirmationPayload {
 }
 
 export async function sendConfirmationEmail(payload: ConfirmationPayload): Promise<void> {
-  if (!SERVICE_ID || !CONFIRM_TEMPLATE_ID || !PUBLIC_KEY) {
-    console.warn('EmailJS confirmation template not configured — skipping');
-    return;
-  }
+  if (!SERVICE_ID || !CONFIRM_TEMPLATE_ID || !PUBLIC_KEY) return;
 
   const templateParams: Record<string, string> = {
     email: payload.email,
@@ -85,11 +119,5 @@ export async function sendConfirmationEmail(payload: ConfirmationPayload): Promi
     ...payload.params,
   };
 
-  console.log('[sendConfirmationEmail] Sending with params:', JSON.stringify(templateParams));
-  const send = emailjs.send(SERVICE_ID, CONFIRM_TEMPLATE_ID, templateParams, PUBLIC_KEY);
-  const timeout = new Promise<never>((_, reject) =>
-    setTimeout(() => reject(new Error('Confirmation email timed out')), SEND_TIMEOUT_MS),
-  );
-
-  await Promise.race([send, timeout]);
+  await sendWithRetry(SERVICE_ID, CONFIRM_TEMPLATE_ID, templateParams, PUBLIC_KEY, 'confirmation_email');
 }

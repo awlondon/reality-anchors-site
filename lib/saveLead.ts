@@ -14,6 +14,11 @@ export interface LeadPayload {
 const SAVE_TIMEOUT_MS = 10_000;
 
 export async function saveLead(payload: LeadPayload): Promise<void> {
+  if (!db) {
+    console.warn('[saveLead] Firebase not configured — skipping persistence');
+    return;
+  }
+
   const write = addDoc(collection(db, 'leads'), {
     ...payload,
     source: 'web_form',

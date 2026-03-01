@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     locale: 'en_AU',
     images: [
       {
-        url: '/assets/brand/og-image.png',
+        url: '/assets/brand/reality-anchors-lockup-dark.png',
         width: 1200,
         height: 630,
         alt: 'Reality Anchors Limited — Operational Validation Platform',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/assets/brand/og-image.png'],
+    images: ['/assets/brand/reality-anchors-lockup-dark.png'],
   },
 };
 
@@ -42,8 +42,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="icon" href="/assets/brand/favicon-dark.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        {/* Security headers (meta-tag equivalents for static hosting) */}
+        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+        <meta httpEquiv="X-Frame-Options" content="DENY" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        {/* Prefetch hints for external APIs */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://api.emailjs.com" />
+        <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;700&display=swap"
           rel="stylesheet"

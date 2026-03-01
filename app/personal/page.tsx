@@ -66,8 +66,9 @@ export default function PersonalPage() {
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-6 grid md:grid-cols-2 gap-6">
+      <section className="relative overflow-hidden py-16">
+        <PhotoBackground src="/images/operator-work.jpg" opacity={0.06} gradient="from-bg/95 via-bg/85 to-bg/95" position="center 50%" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 grid md:grid-cols-2 gap-6">
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-4">Who it&apos;s for</h2>
             <ul className="flex flex-col gap-2.5">
@@ -139,8 +140,9 @@ export default function PersonalPage() {
         </div>
       </section>
 
-      <section className="py-8 pb-16">
-        <div className="max-w-4xl mx-auto px-6">
+      <section className="relative overflow-hidden py-8 pb-16">
+        <PhotoBackground src="/images/steel-closeup.jpg" opacity={0.05} gradient="from-bg/95 via-bg/90 to-bg/95" position="center" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-5">Feature surface</h2>
             <div className="overflow-x-auto">

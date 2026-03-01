@@ -2,6 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import PhotoBackground from '@/components/PhotoBackground';
 import { fadeUp } from '@/lib/motion';
 import { siteMetrics } from '@/lib/siteData';
 
@@ -75,8 +76,9 @@ export default function ValueBridge() {
   ];
 
   return (
-    <section className="bg-bg py-12">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="relative overflow-hidden bg-bg py-12">
+      <PhotoBackground src="/images/operator-work.jpg" opacity={0.06} gradient="from-bg/90 via-bg/85 to-bg/90" position="center 40%" />
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"

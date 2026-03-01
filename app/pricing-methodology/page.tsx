@@ -40,7 +40,9 @@ export default function PricingMethodologyPage() {
       </section>
 
       {/* Sections */}
-      <div className="max-w-4xl mx-auto px-6 py-14 flex flex-col gap-10">
+      <section className="relative overflow-hidden">
+        <PhotoBackground src="/images/methodology-measurement.jpg" opacity={0.04} gradient="from-bg/95 via-bg/90 to-bg/95" position="center 60%" />
+      <div className="relative z-10 max-w-4xl mx-auto px-6 py-14 flex flex-col gap-10">
 
         {/* Purpose */}
         <section className="border border-line bg-card rounded-2xl p-8">
@@ -219,6 +221,7 @@ AnnualReworkSavings =
           </Link>
         </div>
       </div>
+      </section>
 
       <Footer />
     </main>

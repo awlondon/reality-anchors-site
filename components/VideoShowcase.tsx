@@ -6,7 +6,7 @@ import { trackEvent } from '@/lib/analytics';
 import { fadeUp } from '@/lib/motion';
 
 const SCENE_DURATION = 3000;
-const SCENE_COUNT = 5;
+const SCENE_COUNT = 3;
 const LOOPS_BEFORE_SETTLE = 2; // cycle through all scenes twice, then settle
 
 /* ── palette ────────────────────────────────────────────────── */
@@ -335,207 +335,6 @@ function Scene3() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   SCENE 4 — THE SYSTEM
-   Wide workshop view: multiple bending/cutting stations all
-   connected to a central control dashboard. Status grid.
-   ═══════════════════════════════════════════════════════════════ */
-function Scene4() {
-  const stations = [
-    { x: 100, y: 190, label: 'SHEAR-01', ok: true },
-    { x: 260, y: 190, label: 'BEND-01', ok: true },
-    { x: 420, y: 190, label: 'BEND-02', ok: true },
-    { x: 580, y: 190, label: 'SHEAR-02', ok: true },
-    { x: 100, y: 300, label: 'WELD-01', ok: true },
-    { x: 260, y: 300, label: 'BEND-03', ok: false },
-    { x: 420, y: 300, label: 'QC-01', ok: true },
-    { x: 580, y: 300, label: 'PACK-01', ok: true },
-  ];
-
-  return (
-    <g>
-      {/* ── Factory ceiling / overhead structure ──────────────── */}
-      <rect x="0" y="0" width="800" height="80" fill={C.bgDeep} />
-      {/* Overhead beams */}
-      {[100, 250, 400, 550, 700].map(x => (
-        <rect key={x} x={x - 4} y="0" width="8" height="130" fill={C.steelDk} opacity="0.3" />
-      ))}
-      {/* Overhead lights (blue LED strips) */}
-      {[200, 400, 600].map(x => (
-        <g key={x}>
-          <rect x={x - 30} y="75" width="60" height="3" rx="1" fill={C.accent} opacity="0.4" />
-          <ellipse cx={x} cy="130" rx="80" ry="50" fill={C.accent} opacity="0.02" />
-        </g>
-      ))}
-
-      {/* ── Connection lines (data flow) ──────────────────────── */}
-      {stations.map((s, i) =>
-        stations.slice(i + 1).filter(t =>
-          Math.abs(t.x - s.x) <= 200 && Math.abs(t.y - s.y) <= 150
-        ).map(t => (
-          <line key={`${s.label}-${t.label}`} x1={s.x} y1={s.y} x2={t.x} y2={t.y}
-            stroke={C.line} strokeWidth="0.8" strokeDasharray="6 8" opacity="0.3">
-            <animate attributeName="stroke-dashoffset" from="0" to="-28" dur="3s" repeatCount="indefinite" />
-          </line>
-        ))
-      )}
-
-      {/* ── Station nodes ─────────────────────────────────────── */}
-      {stations.map((s, i) => (
-        <g key={s.label}>
-          {/* Machine silhouette */}
-          <rect x={s.x - 50} y={s.y - 30} width="100" height="60" rx="6"
-            fill={C.card} stroke={C.line} strokeWidth="0.8" />
-          {/* Status light */}
-          <circle cx={s.x + 38} cy={s.y - 18} r="4"
-            fill={s.ok ? C.green : C.amber} opacity={s.ok ? 0.8 : 0.9}>
-            {!s.ok && <animate attributeName="opacity" values="0.4;1;0.4" dur="1s" repeatCount="indefinite" />}
-          </circle>
-          {/* Station icon (simplified machine graphic) */}
-          <rect x={s.x - 20} y={s.y - 12} width="40" height="24" rx="3"
-            fill="none" stroke={s.ok ? C.accent : C.amber} strokeWidth="0.8" opacity="0.5" />
-          <circle cx={s.x} cy={s.y} r="3" fill={s.ok ? C.accent : C.amber} opacity="0.5" />
-          {/* Label */}
-          <text x={s.x} y={s.y + 44} textAnchor="middle" fill={C.muted} fontSize="8" fontFamily="monospace">
-            {s.label}
-          </text>
-          {/* Data pulse */}
-          <circle cx={s.x} cy={s.y - 30} r="2" fill={C.accent2} opacity="0">
-            <animate attributeName="opacity" values="0;0.8;0" dur={`${2 + i * 0.4}s`} repeatCount="indefinite" />
-            <animate attributeName="cy" values={`${s.y - 30};${s.y - 50};${s.y - 30}`}
-              dur={`${2 + i * 0.4}s`} repeatCount="indefinite" />
-          </circle>
-        </g>
-      ))}
-
-      {/* ── Central dashboard ─────────────────────────────────── */}
-      <rect x="680" y="100" width="110" height="130" rx="6" fill={C.bgDeep} stroke={C.accent} strokeWidth="1" opacity="0.95" />
-      <text x="735" y="118" textAnchor="middle" fill={C.accent2} fontSize="8" fontFamily="monospace">LIVE STATUS</text>
-      {/* Mini status grid */}
-      {stations.map((s, i) => {
-        const gx = 694 + (i % 4) * 22;
-        const gy = 130 + Math.floor(i / 4) * 22;
-        return (
-          <g key={`grid-${i}`}>
-            <rect x={gx} y={gy} width="16" height="16" rx="2" fill={s.ok ? C.green : C.amber} opacity={s.ok ? 0.2 : 0.3} />
-            <rect x={gx + 2} y={gy + 2} width="12" height="12" rx="1" fill={s.ok ? C.green : C.amber} opacity={s.ok ? 0.5 : 0.7}>
-              {!s.ok && <animate attributeName="opacity" values="0.3;0.8;0.3" dur="1s" repeatCount="indefinite" />}
-            </rect>
-          </g>
-        );
-      })}
-      {/* Summary */}
-      <text x="735" y="190" textAnchor="middle" fill={C.green} fontSize="14" fontFamily="monospace" fontWeight="bold">7/8</text>
-      <text x="735" y="205" textAnchor="middle" fill={C.muted} fontSize="7" fontFamily="monospace">STATIONS OK</text>
-      {/* Throughput */}
-      <text x="735" y="222" textAnchor="middle" fill={C.txt} fontSize="10" fontFamily="monospace">142 t/hr</text>
-
-      {/* ── Caption graphic ───────────────────────────────────── */}
-      <rect x="0" y="370" width="800" height="80" fill="url(#captionFade4)" />
-      <text x="400" y="410" textAnchor="middle" fill={C.txt} fontSize="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="600" letterSpacing="0.5">
-        From single cuts to entire production lines.
-      </text>
-      <line x1="230" y1="425" x2="570" y2="425" stroke={C.accent} strokeWidth="2" opacity="0.4" />
-
-      <defs>
-        <linearGradient id="captionFade4" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={C.bg} stopOpacity="0" />
-          <stop offset="40%" stopColor={C.bgDeep} stopOpacity="0.9" />
-          <stop offset="100%" stopColor={C.bgDeep} />
-        </linearGradient>
-      </defs>
-    </g>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   SCENE 5 — THE ANCHOR
-   Finished fabricated rebar shapes neatly arranged on transport
-   racks. Completion pulse. "Reality Anchors" wordmark.
-   ═══════════════════════════════════════════════════════════════ */
-function Scene5() {
-  // Finished rebar shapes
-  const shapes = [
-    // Row 1 — L-shapes (stirrups)
-    { d: 'M120,200 L120,150 L200,150', label: 'L-01' },
-    { d: 'M240,200 L240,150 L320,150', label: 'L-02' },
-    { d: 'M360,200 L360,150 L440,150', label: 'L-03' },
-    { d: 'M480,200 L480,150 L560,150', label: 'L-04' },
-    // Row 2 — U-shapes (ties)
-    { d: 'M120,290 L120,260 L220,260 L220,290', label: 'U-01' },
-    { d: 'M260,290 L260,260 L360,260 L360,290', label: 'U-02' },
-    { d: 'M400,290 L400,260 L500,260 L500,290', label: 'U-03' },
-    { d: 'M540,290 L540,260 L640,260 L640,290', label: 'U-04' },
-  ];
-
-  return (
-    <g>
-      {/* ── Transport rack ────────────────────────────────────── */}
-      {/* Horizontal rails */}
-      <rect x="80" y="210" width="600" height="4" rx="2" fill={C.steelDk} />
-      <rect x="80" y="300" width="600" height="4" rx="2" fill={C.steelDk} />
-      {/* Vertical supports */}
-      {[80, 340, 600, 680].map(x => (
-        <rect key={x} x={x} y="130" width="4" height="210" rx="2" fill={C.steelDk} opacity="0.5" />
-      ))}
-
-      {/* ── Finished shapes ───────────────────────────────────── */}
-      {shapes.map((s, i) => (
-        <g key={s.label}>
-          <path d={s.d} fill="none" stroke={C.accent} strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"
-            opacity={0.5 + i * 0.04}>
-            <animate attributeName="opacity" values={`${0.4 + i * 0.03};${0.7 + i * 0.03};${0.4 + i * 0.03}`}
-              dur={`${3 + i * 0.3}s`} repeatCount="indefinite" />
-          </path>
-          {/* Individual check */}
-          <circle cx={i < 4 ? 200 + (i * 120) + 10 : 220 + ((i - 4) * 140) + 10}
-            cy={i < 4 ? 140 : 250} r="6" fill={C.green} opacity="0.2" />
-          <text x={i < 4 ? 200 + (i * 120) + 10 : 220 + ((i - 4) * 140) + 10}
-            y={i < 4 ? 144 : 254} textAnchor="middle" fill={C.green} fontSize="8" fontFamily="monospace">&#10003;</text>
-        </g>
-      ))}
-
-      {/* ── Batch counter ─────────────────────────────────────── */}
-      <rect x="700" y="140" width="80" height="70" rx="6" fill={C.bgDeep} stroke={C.green} strokeWidth="1" opacity="0.9" />
-      <text x="740" y="160" textAnchor="middle" fill={C.muted} fontSize="8" fontFamily="monospace">BATCH</text>
-      <text x="740" y="185" textAnchor="middle" fill={C.green} fontSize="22" fontFamily="monospace" fontWeight="bold">8/8</text>
-      <text x="740" y="200" textAnchor="middle" fill={C.green} fontSize="8" fontFamily="monospace">COMPLETE</text>
-
-      {/* ── Completion pulse ───────────────────────────────────── */}
-      <circle cx="400" cy="230" r="80" fill="none" stroke={C.accent} strokeWidth="1" opacity="0">
-        <animate attributeName="r" values="60;140" dur="3s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.3;0" dur="3s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="400" cy="230" r="60" fill="none" stroke={C.accent2} strokeWidth="0.5" opacity="0">
-        <animate attributeName="r" values="40;120" dur="3s" begin="1s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.2;0" dur="3s" begin="1s" repeatCount="indefinite" />
-      </circle>
-
-      {/* ── Caption + wordmark graphic ────────────────────────── */}
-      <rect x="0" y="340" width="800" height="110" fill="url(#captionFade5)" />
-      {/* Wordmark */}
-      <text x="400" y="386" textAnchor="middle" fill={C.txt} fontSize="16" fontFamily="Inter, system-ui, sans-serif"
-        fontWeight="700" letterSpacing="4" opacity="0.85">
-        REALITY ANCHORS
-      </text>
-      <line x1="280" y1="396" x2="520" y2="396" stroke={C.accent} strokeWidth="2" opacity="0.5" />
-      {/* Tagline */}
-      <text x="400" y="420" textAnchor="middle" fill={C.txt} fontSize="20" fontFamily="Inter, system-ui, sans-serif"
-        fontWeight="600" letterSpacing="0.5">
-        Execution, verified.
-      </text>
-
-      <defs>
-        <linearGradient id="captionFade5" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={C.bg} stopOpacity="0" />
-          <stop offset="30%" stopColor={C.bgDeep} stopOpacity="0.85" />
-          <stop offset="100%" stopColor={C.bgDeep} />
-        </linearGradient>
-      </defs>
-    </g>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════
    SETTLED STATE — CONTINUOUS BENDING LOOP
    After the intro scenes play twice, the animation settles into
    this mesmerising bending loop: a rebar feeds in, a mandrel
@@ -764,14 +563,12 @@ function BendingLoop() {
 }
 
 /* ── scene registry ─────────────────────────────────────────── */
-const SCENE_COMPONENTS = [Scene1, Scene2, Scene3, Scene4, Scene5];
+const SCENE_COMPONENTS = [Scene1, Scene2, Scene3];
 
 const CAPTIONS = [
   'Every bar of steel carries a specification.',
   'AI vision confirms the cut before the blade moves.',
   'Computation guides every angle to specification.',
-  'From single cuts to entire production lines.',
-  'Execution, verified.',
 ];
 
 /* ═══════════════════════════════════════════════════════════════

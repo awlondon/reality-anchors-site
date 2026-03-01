@@ -61,7 +61,7 @@ export const testimonials: Testimonial[] = [
   {
     id: 'quality-manager-precast',
     quote:
-      'Three plants, three different ways of checking work \u2014 that was our reality before this. Now everyone validates the same way, and my QA guys aren\u2019t babysitting every pour. Scrap\u2019s down about 22%.',
+      'Three plants, three different ways of checking work \u2014 that was our reality before this. Now everyone validates the same way, and the QA team isn\u2019t babysitting every pour. Scrap\u2019s down about 22%.',
     attribution: 'Quality Manager',
     company: 'Precast concrete operation, 3 plants',
     backgroundSrc: '/images/quality-control.jpg',
@@ -138,7 +138,7 @@ export const testimonials: Testimonial[] = [
   {
     id: 'project-engineer-ar',
     quote:
-      'The AR overlay changed how my guys read drawings on site. Instead of squinting at a tablet and guessing, they\u2019re seeing the alignment check right on the piece. Fit-up errors dropped off a cliff.',
+      'The AR overlay changed how the crew reads drawings on site. Instead of squinting at a tablet and guessing, they\u2019re seeing the alignment check right on the piece. Fit-up errors dropped off a cliff.',
     attribution: 'Project Engineer',
     company: 'Structural erection contractor, 80 employees',
     backgroundSrc: '/images/structural-steel.jpg',

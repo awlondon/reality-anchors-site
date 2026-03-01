@@ -17,6 +17,11 @@ export interface CalculatorContext {
   estimatedEbitda: number;
   estimatedMaterialSavings: number;
   estimatedTonsSaved: number;
+  /** Full breakdown — set by both Quick Estimate and full Margin Impact calculator */
+  materialDollarsSaved?: number;
+  laborDollarsSaved?: number;
+  throughputContribution?: number;
+  oversightRiskSaved?: number;
 }
 
 export function setCalculatorContext(ctx: CalculatorContext): void {

@@ -10,17 +10,17 @@ const tiers = [
   {
     name: 'Personal',
     href: '/personal/',
-    price: '$5–$50/mo',
-    desc: 'Execution guidance for individual operators and small shops, designed for repeatable day-to-day work.',
-    tags: ['Execution guidance', 'Material visibility', 'Offline-first'],
+    price: '$19–$199/mo',
+    desc: 'Execution guidance for solo operators and small crews. Offline-first, 1–8 seats, with a clean upgrade path into commercial workflows.',
+    tags: ['Execution guidance', 'Offline-first', '1–8 seats'],
     cta: 'Explore Personal',
   },
   {
     name: 'Commercial',
     href: '/commercial/',
     price: '$2k–$25k/yr',
-    desc: 'Execution-layer infrastructure for crews and yards that amplifies the value of existing planning and ERP investments.',
-    tags: ['Bench execution', 'Multi-job efficiency', 'Audit logs'],
+    desc: 'Value-aligned execution infrastructure for fabrication yards. Reinforces upstream planning tools through verified bench-level outcomes.',
+    tags: ['Bench execution', 'Scrap reduction', 'Audit logs'],
     cta: 'Explore Commercial',
     highlight: true,
   },
@@ -28,8 +28,8 @@ const tiers = [
     name: 'Industrial',
     href: '/industrial/',
     price: 'Custom agreement',
-    desc: 'High-volume plants scaling execution standardization, telemetry quality, and enterprise integration leverage.',
-    tags: ['QA readiness', 'ERP integration', 'Traceability'],
+    desc: 'Enterprise execution standardization for high-volume plants with ERP integration, calibration governance, and compliance-grade traceability.',
+    tags: ['Throughput', 'ERP integration', 'Traceability'],
     cta: 'Explore Industrial',
   },
 ];
@@ -48,10 +48,10 @@ export default function Tiers() {
         >
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions</p>
           <h2 className="text-3xl md:text-4xl font-semibold text-txt max-w-lg leading-tight">
-            Choose your path
+            Scope that fits the operation
           </h2>
           <p className="mt-3 text-muted max-w-xl">
-            Different buyers optimize for different outcomes. Product surface and contract terms follow that reality.
+            From a single bench to an enterprise fleet. Pricing scales with the value delivered, not the number of features turned on.
           </p>
         </motion.div>
 

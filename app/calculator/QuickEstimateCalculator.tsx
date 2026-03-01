@@ -98,6 +98,7 @@ export default function QuickEstimateCalculator() {
         reworkReductionPct: FIXED.reworkReductionPct,
         throughputImprovementPct: FIXED.throughputImprovementPct,
         includeOversightRisk: FIXED.includeOversightRisk,
+        skipVolumeScale: true,
       });
     } catch {
       return null;
@@ -119,6 +120,10 @@ export default function QuickEstimateCalculator() {
       estimatedEbitda: totalEbitda,
       estimatedMaterialSavings: materialSavings,
       estimatedTonsSaved: tonsSaved,
+      materialDollarsSaved: results?.material.dollarsSaved ?? 0,
+      laborDollarsSaved: results?.labor.dollarsSaved ?? 0,
+      throughputContribution: results?.throughput.ebitdaContribution ?? 0,
+      oversightRiskSaved: results?.oversightRisk.dollarsSaved ?? 0,
     });
 
     if (debounceRef.current) clearTimeout(debounceRef.current);

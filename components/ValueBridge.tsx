@@ -61,7 +61,7 @@ export default function ValueBridge() {
       icon: <ValidateIcon />,
       tag: 'VALIDATE',
       title: 'In-Process Verification',
-      body: 'Each step is verified against live job context and facilities. Material & labour savings it propagates into scrap, delay, and rework.',
+      body: 'Each step is verified against live job context and facility parameters. Catches deviations before they propagate into scrap, delay, and rework.',
       metric: siteMetrics.valueBridge.optimizeMetric,
       metricSuffix: 'max scrap reduction',
     },

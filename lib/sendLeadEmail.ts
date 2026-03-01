@@ -94,7 +94,10 @@ export async function sendLeadEmail(payload: LeadEmailPayload): Promise<void> {
     calcAnnualTons: ctx?.annualTons != null ? `${ctx.annualTons.toLocaleString()} t` : 'N/A',
     calcScrapRate: ctx?.scrapRatePct != null ? `${ctx.scrapRatePct.toFixed(1)}%` : 'N/A',
     calcCostPerTon: fmtUSD(ctx?.costPerTon),
-    calcMaterialSavings: fmtUSD(ctx?.estimatedMaterialSavings),
+    calcMaterialSavings: fmtUSD(ctx?.materialDollarsSaved ?? ctx?.estimatedMaterialSavings),
+    calcLaborSavings: fmtUSD(ctx?.laborDollarsSaved),
+    calcThroughput: fmtUSD(ctx?.throughputContribution),
+    calcOversightRisk: fmtUSD(ctx?.oversightRiskSaved),
     calcEbitda: fmtUSD(ctx?.estimatedEbitda),
     hasCalculator: ctx ? 'yes' : '',
   };

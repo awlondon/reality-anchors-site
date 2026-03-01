@@ -581,7 +581,7 @@ export default function VideoShowcase() {
   const [activeScene, setActiveScene] = useState(0);
   const [settled, setSettled] = useState(false);
   const reduceMotion = useReducedMotion();
-  const isInView = useInView(containerRef, { amount: 0.3 });
+  const isInView = useInView(containerRef, { once: true, amount: 0.05 });
 
   // Advance to next scene, count loops, settle after LOOPS_BEFORE_SETTLE
   const advance = useCallback(() => {

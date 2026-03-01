@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
 };
 
-const testimonial = getTestimonialsForPage('board-strategy').find((t) => t.id === 'it-director-multisite')!;
+const testimonial = getTestimonialsForPage('board-strategy')[0]!;
 
 export default function BoardStrategyPage() {
   return (

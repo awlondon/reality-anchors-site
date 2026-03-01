@@ -1,5 +1,19 @@
 'use client';
 
+/**
+ * WebGL animated node-and-link field rendered via Three.js.
+ *
+ * Three.js adds ~140 KB gzipped to the bundle but is loaded only on the hero
+ * via `next/dynamic` with `ssr: false`, so it does not block first paint.
+ * The effect is central to the brand identity (data-network motif) and would
+ * be difficult to replicate with CSS or Canvas 2D at equivalent quality.
+ *
+ * If bundle size ever becomes a concern, options include:
+ *   1. Tree-shake Three.js via a custom minimal build (drops ~40 KB).
+ *   2. Replace with a static SVG pattern + CSS animation (loses parallax/3D).
+ *   3. Lazy-load Three.js only after LCP via `requestIdleCallback`.
+ */
+
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 

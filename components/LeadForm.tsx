@@ -269,6 +269,7 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
                       onChange={(e) => setData((d) => ({ ...d, message: e.target.value }))}
                       placeholder="Describe your workflow challenge, throughput, or goals…"
                       rows={4}
+                      maxLength={2000}
                       className="ra-input resize-none"
                     />
                   </label>

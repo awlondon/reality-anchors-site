@@ -1,4 +1,5 @@
 import Hero from '@/components/Hero';
+import VideoShowcase from '@/components/VideoShowcase';
 import ValueBridge from '@/components/ValueBridge';
 import Features from '@/components/Features';
 import Metrics from '@/components/Metrics';
@@ -27,6 +28,7 @@ export default async function Home() {
         }}
       />
       <Hero />
+      <VideoShowcase />
       <ValueBridge />
       <Features />
       <AdaptiveNarrative initialRegimes={regimes} />

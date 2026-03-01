@@ -9,7 +9,7 @@ import { getTestimonialsForPage } from '@/data/testimonials';
 
 export const metadata: Metadata = {
   title: 'Personal Plans — Execution Guidance for Solo Operators',
-  description: 'Practical execution layer for solo operators and small teams. $19-$199/month for 1-8 seats with offline-first operation.',
+  description: 'Practical execution layer for solo operators and small teams. $49-$349/month for 1-8 seats with offline-first operation.',
   openGraph: {
     title: 'Personal Plans | Reality Anchors',
     description: 'Execution guidance for solo operators and small teams — fewer errors, cleaner handoffs, path to scale.',
@@ -20,29 +20,29 @@ export const metadata: Metadata = {
 const personalRegimes = regimeCatalog.filter((regime) => ['Core', 'Pro'].includes(regime.tier)).slice(0, 3);
 
 const features = [
-  { cap: 'Manual job entry', inc: true, note: 'First-class for every plan.' },
-  { cap: 'Photo import + OCR assist', inc: true, note: 'Optional import with manual verification.' },
-  { cap: 'Cut + bend execution guidance', inc: true, note: 'Step sequence, counters, and hold points.' },
-  { cap: 'Offline-first operation', inc: true, note: 'Works on device; sync when connected.' },
-  { cap: 'Progressive upgrade path', inc: true, note: 'Move from personal to commercial workflows without rework.' },
+  { cap: 'Manual job entry', note: 'First-class for every plan.' },
+  { cap: 'Photo import + OCR assist', note: 'Optional import with manual verification.' },
+  { cap: 'Cut + bend execution guidance', note: 'Step sequence, counters, and hold points.' },
+  { cap: 'Offline-first operation', note: 'Works on device; sync when connected.' },
+  { cap: 'Progressive upgrade path', note: 'Transition to Commercial without rework or data migration.' },
 ];
 
 const pricingTiers = [
   {
     tier: 'Solo',
-    monthly: '$19',
+    monthly: '$49',
     includes: '1 operator seat, core execution workflows, personal job history',
     fit: 'Independent tradesperson or side business',
   },
   {
     tier: 'Studio',
-    monthly: '$79',
+    monthly: '$149',
     includes: 'Up to 3 seats, shared templates, QA checkpoints, exportable work logs',
     fit: 'Small shop standardizing repeatable work',
   },
   {
     tier: 'Crew',
-    monthly: '$199',
+    monthly: '$349',
     includes: 'Up to 8 seats, supervisor view, calibration packs, onboarding support',
     fit: 'Growing team preparing for commercial-grade operations',
   },
@@ -63,7 +63,7 @@ export default function PersonalPage() {
             A practical execution layer for solo operators and small teams that need fewer errors, cleaner handoffs, and a clear path into larger-scale deployments.
           </p>
           <div className="flex flex-wrap gap-2 mt-6">
-            {['$19–$199/month', 'Built for 1–8 seats', 'Scales into Commercial'].map((t) => (
+            {['$49–$349/month', 'Built for 1–8 seats', 'Scales into Commercial'].map((t) => (
               <span key={t} className="text-xs font-semibold px-3 py-1.5 rounded-full border border-line text-muted">{t}</span>
             ))}
           </div>
@@ -76,7 +76,7 @@ export default function PersonalPage() {
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-4">Who it&apos;s for</h2>
             <ul className="flex flex-col gap-2.5">
-              {['Independent operators', 'Two-to-eight person fabrication crews', 'Shops replacing whiteboards and ad-hoc notes', 'Teams that want to graduate into commercial operations'].map((i) => (
+              {['Independent operators', 'Small fabrication crews (2–8 people)', 'Shops replacing whiteboards and ad-hoc notes', 'Teams building toward commercial-grade operations'].map((i) => (
                 <li key={i} className="flex gap-3 text-sm text-muted">
                   <span className="text-accent mt-0.5">›</span>{i}
                 </li>
@@ -86,7 +86,7 @@ export default function PersonalPage() {
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-4">What it solves</h2>
             <ul className="flex flex-col gap-2.5">
-              {['Reduces rework from missed bends, mis-reads, and sequence drift', 'Creates repeatable operator behavior without heavy SOP overhead', 'Captures execution proof that can feed customer updates and QA reviews', 'Establishes workflow discipline before moving into multi-project environments'].map((i) => (
+              {['Cuts rework from missed bends, mis-reads, and sequence drift', 'Builds repeatable operator habits without heavy SOP overhead', 'Captures execution proof for customer updates and QA reviews', 'Establishes workflow discipline before scaling into multi-project work'].map((i) => (
                 <li key={i} className="flex gap-3 text-sm text-muted">
                   <span className="text-accent mt-0.5">›</span>{i}
                 </li>
@@ -156,19 +156,16 @@ export default function PersonalPage() {
         <PhotoBackground src="/images/steel-closeup.jpg" opacity={0.05} gradient="from-bg/95 via-bg/90 to-bg/95" position="center" />
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-5">Feature surface</h2>
+            <h2 className="text-lg font-semibold text-txt mb-5">Included in every plan</h2>
             <div className="overflow-x-auto">
               <table className="ra-table">
                 <thead>
-                  <tr><th>Capability</th><th>Included</th><th>Notes</th></tr>
+                  <tr><th>Capability</th><th>Details</th></tr>
                 </thead>
                 <tbody>
                   {features.map((f) => (
                     <tr key={f.cap}>
                       <td>{f.cap}</td>
-                      <td>
-                        <span className="text-green-400 font-semibold text-sm">{f.inc ? 'Yes' : '—'}</span>
-                      </td>
                       <td className="text-muted text-sm">{f.note}</td>
                     </tr>
                   ))}

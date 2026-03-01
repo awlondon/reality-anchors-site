@@ -26,7 +26,7 @@ export default function BoardStrategyPage() {
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Executive Brief · Fabrication Strategy</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">Completing the Digital Fabrication Stack</h1>
           <p className="text-xl text-muted max-w-3xl leading-relaxed">
-            Planning systems digitized intent. Execution remains the final under-digitized layer. Reality Anchors is execution infrastructure that validates physical work before irreversible actions occur.
+            Planning systems digitized intent. Execution remains the final under-digitized layer — Reality Anchors validates physical work before irreversible actions occur.
           </p>
           <div className="flex flex-wrap gap-3 mt-8">
             <Link href="/commercial/#contact" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
@@ -56,10 +56,10 @@ export default function BoardStrategyPage() {
           <h2 className="text-xl font-semibold text-txt mb-4">Why Execution Control Is Inevitable</h2>
           <ul className="flex flex-col gap-2.5 text-sm text-muted">
             {[
-              'Digitization in complex industries consistently moves from planning to execution control.',
-              'Material alteration is irreversible; prevention economics dominate correction economics.',
-              'Margin pressure and labor variability make execution variance financially intolerable.',
-              'Planning-only digital threads remain probabilistic without execution confirmation.',
+              'In complex industries, digitization consistently expands from planning into execution — fabrication is following this pattern.',
+              'Steel cuts and bends are irreversible. Preventing errors is structurally cheaper than correcting them.',
+              'Tightening margins and inconsistent labor make unchecked execution variance a direct financial risk.',
+              'Without execution confirmation, planning-only digital threads remain probabilistic — assumptions, not outcomes.',
             ].map((item) => (
               <li key={item} className="flex gap-3"><span className="text-accent">›</span>{item}</li>
             ))}
@@ -72,7 +72,7 @@ export default function BoardStrategyPage() {
             <div>
               <h3 className="text-sm font-semibold text-muted uppercase tracking-wide mb-3">Without execution validation</h3>
               <ul className="flex flex-col gap-2 text-sm text-muted">
-                {['Limited margin influence', 'Incomplete digital-thread narrative', 'Lower differentiation at the shop floor', 'Higher vulnerability to execution-layer entrants'].map((i) => (
+                {['Margin influence ends at the planning layer', 'Digital-thread narrative stops short of physical outcomes', 'No differentiation at the point of execution', 'Exposed to disruption from execution-layer entrants'].map((i) => (
                   <li key={i} className="flex gap-3"><span className="text-accent">›</span>{i}</li>
                 ))}
               </ul>
@@ -80,7 +80,7 @@ export default function BoardStrategyPage() {
             <div>
               <h3 className="text-sm font-semibold text-muted uppercase tracking-wide mb-3">With execution validation</h3>
               <ul className="flex flex-col gap-2 text-sm text-muted">
-                {['Verified outcomes feed planning refinement', 'Higher data fidelity across modules', 'Stronger retention via workflow embedding', 'Clear, board-level ROI narrative'].map((i) => (
+                {['Verified outcomes feed planning refinement', 'Measurably higher data fidelity across the stack', 'Deeper retention through daily workflow integration', 'Clean, defensible ROI narrative for the board'].map((i) => (
                   <li key={i} className="flex gap-3"><span className="text-accent">›</span>{i}</li>
                 ))}
               </ul>
@@ -121,7 +121,7 @@ export default function BoardStrategyPage() {
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">SaaS Pricing Capture Strategy (Value Extraction Range)</h2>
           <p className="text-sm text-muted mb-5">
-            Based on ~<span className="font-mono text-txt">$575k</span> annual customer EBITDA uplift, sustainable early capture is typically <span className="font-mono text-txt">8–15%</span> of created value to preserve adoption velocity and procurement acceptance.
+            Based on ~<span className="font-mono text-txt">$575k</span> annual customer EBITDA uplift, sustainable early capture is typically <span className="font-mono text-txt">8–15%</span> of created value — enough to maintain adoption momentum and procurement fit.
           </p>
           <div className="table-scroll-wrapper overflow-x-auto mb-5">
             <table className="ra-table">
@@ -142,7 +142,7 @@ export default function BoardStrategyPage() {
           <h2 className="text-xl font-semibold text-txt mb-4">5-Year Investor ARR Ramp (Base Case)</h2>
           <ArrRamp />
           <p className="text-sm text-muted mb-5">
-            Model assumptions: <span className="font-mono text-txt">$70k ACV</span> per facility, early churn moderation, and net revenue retention expansion as execution workflows embed into daily operations.
+            Model assumes <span className="font-mono text-txt">$70k ACV</span> per facility, early churn moderation, and expanding net revenue retention as execution workflows embed into daily operations.
           </p>
           <div className="table-scroll-wrapper overflow-x-auto mb-5">
             <table className="ra-table">
@@ -165,7 +165,7 @@ export default function BoardStrategyPage() {
           <h2 className="text-xl font-semibold text-txt mb-4">Sensitivity: Scrap Improvement vs EBITDA</h2>
           <div className="table-scroll-wrapper overflow-x-auto mb-4">
             <table className="ra-table">
-              <thead><tr><th>Absolute scrap reduction</th><th>Estimated EBITDA uplift</th></tr></thead>
+              <thead><tr><th>Absolute scrap reduction</th><th>Material savings (scrap only)</th></tr></thead>
               <tbody>
                 <tr><td className="font-mono">1.0 pt</td><td className="font-mono text-accent-2">~$212k</td></tr>
                 <tr><td className="font-mono">1.5 pts</td><td className="font-mono text-accent-2">~$319k</td></tr>

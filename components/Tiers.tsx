@@ -10,7 +10,7 @@ const tiers = [
   {
     name: 'Personal',
     href: '/personal/',
-    price: '$19–$199/mo',
+    price: '$49–$349/mo',
     badge: 'Basic',
     desc: 'Execution guidance for solo operators and small crews. Offline-first, 1–8 seats, with a clean upgrade path into commercial workflows.',
     tags: ['Execution guidance', 'Offline-first', '1–8 seats'],

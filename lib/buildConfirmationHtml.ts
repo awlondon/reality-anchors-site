@@ -51,10 +51,12 @@ export interface ConfirmationParams {
   materialSavings: string;
   laborSavings: string;
   throughputSavings: string;
+  oversightSavings: string;
   totalEbitda: string;
   materialPct: string;
   laborPct: string;
   throughputPct: string;
+  oversightPct: string;
 }
 
 export function buildConfirmationParams(
@@ -70,6 +72,7 @@ export function buildConfirmationParams(
   let materialSavings: number;
   let laborSavings: number;
   let throughputSavings: number;
+  let oversightSavings: number;
   let totalEbitda: number;
 
   if (calc?.materialDollarsSaved != null) {
@@ -77,12 +80,14 @@ export function buildConfirmationParams(
     materialSavings = calc.materialDollarsSaved;
     laborSavings = calc.laborDollarsSaved ?? 0;
     throughputSavings = calc.throughputContribution ?? 0;
+    oversightSavings = calc.oversightRiskSaved ?? 0;
     totalEbitda = calc.estimatedEbitda;
   } else if (calc) {
     // Legacy context without breakdown — use stored total, estimate split
     materialSavings = calc.estimatedMaterialSavings;
     laborSavings = 0;
     throughputSavings = 0;
+    oversightSavings = 0;
     totalEbitda = calc.estimatedEbitda;
   } else {
     // No calculator context at all — fall back to benchmark
@@ -90,10 +95,11 @@ export function buildConfirmationParams(
     materialSavings = result.material.dollarsSaved;
     laborSavings = result.labor.dollarsSaved;
     throughputSavings = result.throughput.ebitdaContribution;
+    oversightSavings = 0;
     totalEbitda = result.totals.annualEbitdaIncrease;
   }
 
-  const maxBar = Math.max(materialSavings, laborSavings, throughputSavings, 1);
+  const maxBar = Math.max(materialSavings, laborSavings, throughputSavings, oversightSavings, 1);
 
   return {
     firstName: name.split(' ')[0] || 'there',
@@ -107,9 +113,11 @@ export function buildConfirmationParams(
     materialSavings: formatUSD(materialSavings),
     laborSavings: formatUSD(laborSavings),
     throughputSavings: formatUSD(throughputSavings),
+    oversightSavings: formatUSD(oversightSavings),
     totalEbitda: formatUSD(totalEbitda),
     materialPct: `${maxBar > 0 ? Math.round((materialSavings / maxBar) * 100) : 0}`,
     laborPct: `${maxBar > 0 ? Math.round((laborSavings / maxBar) * 100) : 0}`,
     throughputPct: `${maxBar > 0 ? Math.round((throughputSavings / maxBar) * 100) : 0}`,
+    oversightPct: `${maxBar > 0 ? Math.round((oversightSavings / maxBar) * 100) : 0}`,
   };
 }

@@ -181,7 +181,7 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
               Request a scoped consultation
             </h2>
             <p className="text-muted leading-relaxed mb-8">
-              Complete the form and we'll return with a fit assessment, suggested rollout scope, and a timeline for value realization.
+              Complete the form and we&apos;ll return with a fit assessment, suggested rollout scope, and a timeline for value realization.
             </p>
             <ul className="flex flex-col gap-3">
               {[
@@ -224,7 +224,7 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
                     </svg>
                   </div>
                   <h3 className="text-xl font-semibold text-txt mb-2">Request received</h3>
-                  <p className="text-muted text-sm">We'll follow up with a fit assessment and suggested scope.</p>
+                  <p className="text-muted text-sm">We&apos;ll follow up with a fit assessment and suggested scope.</p>
                 </motion.div>
               ) : (
                 <motion.form

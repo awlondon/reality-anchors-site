@@ -88,6 +88,10 @@ export default function TestimonialBreak({
             <p className="text-xs text-muted">{company}</p>
           </div>
         </div>
+
+        <p className="mt-4 text-[10px] tracking-wide uppercase text-muted/40">
+          Simulated testimonial &mdash; based on expected outcomes, not a verified customer quote
+        </p>
       </motion.div>
     </section>
   );

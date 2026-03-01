@@ -64,19 +64,18 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
     const sessionId = getSessionId() ?? 'unknown';
 
     try {
-      // Primary: persist to Firebase
-      await saveLead({
-        name: data.name,
-        email: data.email,
-        company: data.company,
-        role: data.role,
-        message: data.message,
+      // Send email notification (primary — this is what notifies the team)
+      await sendLeadEmail({
+        ...data,
         sessionId,
         regimeId: attributedRegime,
+        source: 'request_contact_form',
+        submittedAt: new Date().toISOString(),
+        calculatorContext: getCalculatorContext(),
       });
       setSubmitted(true);
     } catch (err) {
-      console.error('Lead save failed:', err);
+      console.error('Email send failed:', err);
       setSubmitError('Something went wrong while submitting your request. Please try again.');
     } finally {
       setLoading(false);
@@ -84,14 +83,16 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
 
     // Best-effort side effects — wrapped so unhandled throws can't crash the component
     try {
-      sendLeadEmail({
-        ...data,
+      // Persist to Firebase (best-effort backup)
+      saveLead({
+        name: data.name,
+        email: data.email,
+        company: data.company,
+        role: data.role,
+        message: data.message,
         sessionId,
         regimeId: attributedRegime,
-        source: 'request_contact_form',
-        submittedAt: new Date().toISOString(),
-        calculatorContext: getCalculatorContext(),
-      }).catch(() => {});
+      }).catch((err) => console.warn('Firebase save failed (non-critical):', err));
 
       window.dispatchEvent(
         new CustomEvent('analytics', {

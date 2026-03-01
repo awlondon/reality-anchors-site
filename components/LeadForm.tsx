@@ -9,6 +9,7 @@ import { getSessionId } from '@/lib/session';
 import { upsertSalesAlert } from '@/lib/salesNotifications';
 import { saveLead } from '@/lib/saveLead';
 import { getCalculatorContext } from '@/lib/calculatorContext';
+import { sendLeadEmail } from '@/lib/sendLeadEmail';
 
 interface FormData {
   name: string;
@@ -83,17 +84,13 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
 
     // Best-effort side effects — wrapped so unhandled throws can't crash the component
     try {
-      const leadPayload = {
+      sendLeadEmail({
         ...data,
         sessionId,
         regimeId: attributedRegime,
         source: 'request_contact_form',
         submittedAt: new Date().toISOString(),
-      };
-      fetch('/api/lead/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(leadPayload),
+        calculatorContext: getCalculatorContext(),
       }).catch(() => {});
 
       window.dispatchEvent(
@@ -106,17 +103,6 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
           },
         })
       );
-
-      fetch('/api/sales/notify/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'form_submit',
-          sessionId,
-          formData: { email: data.email, company: data.company, role: data.role },
-          regimeId: attributedRegime ?? undefined,
-        }),
-      }).catch(() => {});
 
       const alert = {
         id: `${sessionId}_form_submit`,

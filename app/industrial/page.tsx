@@ -35,8 +35,9 @@ export default function IndustrialPage() {
         </div>
       </section>
 
-      <section className="py-14">
-        <div className="max-w-4xl mx-auto px-6 grid md:grid-cols-2 gap-6">
+      <section className="relative overflow-hidden py-14">
+        <PhotoBackground src="/images/cnc-precision.jpg" opacity={0.06} gradient="from-bg/95 via-bg/85 to-bg/95" position="center 40%" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 grid md:grid-cols-2 gap-6">
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-4">Industrial outcomes</h2>
             <ul className="flex flex-col gap-2.5">
@@ -100,8 +101,9 @@ export default function IndustrialPage() {
         </div>
       </section>
 
-      <section className="pb-14">
-        <div className="max-w-4xl mx-auto px-6">
+      <section className="relative overflow-hidden pb-14">
+        <PhotoBackground src="/images/structural-steel.jpg" opacity={0.05} gradient="from-bg/95 via-bg/90 to-bg/95" position="center 30%" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-3">Industrial program set</h2>
             <p className="text-muted text-sm mb-5">Machine calibration support, traceable execution, and compliance-ready controls for ERP-connected plants.</p>

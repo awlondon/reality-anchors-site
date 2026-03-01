@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import ExecutiveAnalyticsProvider from '@/components/ExecutiveAnalyticsProvider';
 import { computeConversionScore } from '@/lib/conversionModel';
 import { HOME_EXPERIMENT } from '@/lib/experiments/config';
@@ -30,17 +30,11 @@ export default function ExecutiveDashboard() {
   return (
     <ExecutiveAnalyticsProvider>
       {({ events, summary, sessions, reset }) => {
-        const filteredRegimes = useMemo(
-          () => summary.regimes.filter((r) => r.engagementScore >= minScore),
-          [summary.regimes, minScore]
-        );
+        const filteredRegimes = summary.regimes.filter((r: ExecRegimeStats) => r.engagementScore >= minScore);
 
-        const scoredSessions = useMemo(
-          () => sessions.map((s) => ({ ...s, ...computeConversionScore(s) })).sort((a, b) => b.scorePercent - a.scorePercent),
-          [sessions]
-        );
+        const scoredSessions = sessions.map((s: Parameters<typeof computeConversionScore>[0]) => ({ ...s, ...computeConversionScore(s) })).sort((a: { scorePercent: number }, b: { scorePercent: number }) => b.scorePercent - a.scorePercent);
 
-        const variantSummary = useMemo(() => summarizeByVariant(events, config.id), [events, config.id]);
+        const variantSummary = summarizeByVariant(events, config.id);
         const variantA = variantSummary.find((v) => v.variant === 'A');
         const variantB = variantSummary.find((v) => v.variant === 'B');
         const lift = variantA && variantB ? variantB.submitRate - variantA.submitRate : null;

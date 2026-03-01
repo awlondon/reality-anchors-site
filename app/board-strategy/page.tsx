@@ -34,7 +34,9 @@ export default function BoardStrategyPage() {
         </div>
       </section>
 
-      <div className="max-w-5xl mx-auto px-6 py-14 flex flex-col gap-8">
+      <div className="relative overflow-hidden">
+        <PhotoBackground src="/images/structural-steel.jpg" opacity={0.04} gradient="from-bg/95 via-bg/90 to-bg/95" position="center 50%" />
+      <div className="relative z-10 max-w-5xl mx-auto px-6 py-14 flex flex-col gap-8">
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">Executive Summary</h2>
           <p className="text-sm text-muted leading-relaxed mb-4">
@@ -168,6 +170,7 @@ export default function BoardStrategyPage() {
             The strategic question is not whether execution digitizes. It is who owns the execution layer that anchors the rest of the fabrication stack.
           </p>
         </section>
+      </div>
       </div>
 
       <Footer />

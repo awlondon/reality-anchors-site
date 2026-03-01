@@ -94,8 +94,10 @@ export default function RegimeSection({
     offset: ['start center', 'end center'],
   });
 
-  const subtitleOpacity = reduceMotion ? 1 : useTransform(scrollYProgress, [0, 0.4], [0, 1]);
-  const statsOpacity = reduceMotion ? 1 : useTransform(scrollYProgress, [0.3, 0.7], [0, 1]);
+  const subtitleOpacityTransform = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
+  const statsOpacityTransform = useTransform(scrollYProgress, [0.3, 0.7], [0, 1]);
+  const subtitleOpacity = reduceMotion ? 1 : subtitleOpacityTransform;
+  const statsOpacity = reduceMotion ? 1 : statsOpacityTransform;
 
   return (
     <motion.section

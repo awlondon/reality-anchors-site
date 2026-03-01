@@ -17,6 +17,47 @@ type Props = {
   layers: ParallaxLayer[];
 };
 
+function ParallaxLayer({
+  layer,
+  index,
+  scrollYProgress,
+  reduceMotion,
+  failed,
+  onError,
+}: {
+  layer: ParallaxLayer;
+  index: number;
+  scrollYProgress: ReturnType<typeof useScroll>['scrollYProgress'];
+  reduceMotion: boolean | null;
+  failed: boolean;
+  onError: () => void;
+}) {
+  const yTransform = useTransform(scrollYProgress, [0, 1], [-layer.depth, layer.depth]);
+  const y = reduceMotion ? 0 : yTransform;
+  const source = failed && layer.fallbackSrc ? layer.fallbackSrc : layer.src;
+
+  return (
+    <motion.div key={`${layer.src}-${index}`} style={{ y }} className="absolute inset-0">
+      <div
+        className="relative h-[130%] w-full"
+        style={{
+          opacity: layer.opacity ?? 1,
+          transform: `scale(${layer.scale ?? 1}) translateZ(0)`,
+        }}
+      >
+        <Image
+          src={source}
+          alt={layer.alt}
+          fill
+          priority={false}
+          className="object-cover"
+          onError={onError}
+        />
+      </div>
+    </motion.div>
+  );
+}
+
 export default function MultiLayerParallax({ layers }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [failedLayers, setFailedLayers] = useState<Record<number, boolean>>({});
@@ -28,35 +69,21 @@ export default function MultiLayerParallax({ layers }: Props) {
 
   return (
     <div ref={ref} className="absolute inset-0 overflow-hidden [perspective:1000px]">
-      {layers.map((layer, index) => {
-        const y = reduceMotion ? 0 : useTransform(scrollYProgress, [0, 1], [-layer.depth, layer.depth]);
-        const source = failedLayers[index] && layer.fallbackSrc ? layer.fallbackSrc : layer.src;
-
-        return (
-          <motion.div key={`${layer.src}-${index}`} style={{ y }} className="absolute inset-0">
-            <div
-              className="relative h-[130%] w-full"
-              style={{
-                opacity: layer.opacity ?? 1,
-                transform: `scale(${layer.scale ?? 1}) translateZ(0)`,
-              }}
-            >
-              <Image
-                src={source}
-                alt={layer.alt}
-                fill
-                priority={false}
-                className="object-cover"
-                onError={() => {
-                  if (layer.fallbackSrc && !failedLayers[index]) {
-                    setFailedLayers((prev) => ({ ...prev, [index]: true }));
-                  }
-                }}
-              />
-            </div>
-          </motion.div>
-        );
-      })}
+      {layers.map((layer, index) => (
+        <ParallaxLayer
+          key={`${layer.src}-${index}`}
+          layer={layer}
+          index={index}
+          scrollYProgress={scrollYProgress}
+          reduceMotion={reduceMotion}
+          failed={!!failedLayers[index]}
+          onError={() => {
+            if (layer.fallbackSrc && !failedLayers[index]) {
+              setFailedLayers((prev) => ({ ...prev, [index]: true }));
+            }
+          }}
+        />
+      ))}
     </div>
   );
 }

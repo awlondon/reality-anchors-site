@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import PhotoBackground from '@/components/PhotoBackground';
 import { stagger, fadeUp } from '@/lib/motion';
 import { trackEvent } from '@/lib/analytics';
 
@@ -35,8 +36,9 @@ const tiers = [
 
 export default function Tiers() {
   return (
-    <section className="py-24 bg-bg-2">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="relative overflow-hidden py-24 bg-bg-2">
+      <PhotoBackground src="/images/cnc-precision.jpg" opacity={0.06} gradient="from-bg-2/95 via-bg-2/85 to-bg-2/95" position="center 50%" />
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"

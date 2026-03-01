@@ -2,6 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
+import PhotoBackground from '@/components/PhotoBackground';
 import { fadeUp, stagger } from '@/lib/motion';
 import { siteMetrics } from '@/lib/siteData';
 
@@ -34,8 +35,9 @@ function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
 
 export default function Metrics() {
   return (
-    <section className="py-24 bg-bg border-y border-line">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="relative overflow-hidden py-24 bg-bg border-y border-line">
+      <PhotoBackground src="/images/structural-steel.jpg" opacity={0.07} gradient="from-bg/90 via-bg/80 to-bg/90" position="center 60%" />
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
         <motion.p
           initial="hidden"
           whileInView="visible"

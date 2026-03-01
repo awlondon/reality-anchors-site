@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fadeUp, stagger } from '@/lib/motion';
+import { trackEvent } from '@/lib/analytics';
 import { faqs, type FAQItem } from '@/data/faq';
 
 function AccordionItem({ item, isOpen, onToggle }: { item: FAQItem; isOpen: boolean; onToggle: () => void }) {
@@ -74,7 +75,11 @@ export default function FAQ() {
               <AccordionItem
                 item={faq}
                 isOpen={openIndex === i}
-                onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+                onToggle={() => {
+                  const willOpen = openIndex !== i;
+                  setOpenIndex(willOpen ? i : null);
+                  if (willOpen) trackEvent('faq_open', { question: faq.question });
+                }}
               />
             </motion.div>
           ))}

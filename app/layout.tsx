@@ -46,11 +46,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <meta httpEquiv="X-Frame-Options" content="DENY" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
+        {/* Google Search Console verification */}
+        {process.env.NEXT_PUBLIC_GSC_VERIFICATION && (
+          <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GSC_VERIFICATION} />
+        )}
         {/* Prefetch hints for external APIs */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://api.emailjs.com" />
         <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <link rel="preconnect" href="https://www.googletagmanager.com" />
+        )}
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;700&display=swap"
           rel="stylesheet"

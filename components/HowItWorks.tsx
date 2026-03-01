@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import PhotoBackground from '@/components/PhotoBackground';
+import { trackEvent } from '@/lib/analytics';
 import { stagger, fadeUp } from '@/lib/motion';
 
 const steps = [
@@ -121,6 +122,7 @@ export default function HowItWorks() {
           <Link
             href="/calculator/"
             className="inline-flex px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px"
+            onClick={() => trackEvent('how_it_works_cta')}
           >
             Try the Quick Estimate →
           </Link>

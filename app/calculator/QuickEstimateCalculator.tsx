@@ -340,12 +340,14 @@ export default function QuickEstimateCalculator() {
           <Link
             href="/margin-impact/"
             className="flex-1 text-center px-5 py-3 rounded-lg border border-line hover:border-accent/50 text-sm font-medium text-muted hover:text-txt transition-all"
+            onClick={() => trackEvent('calculator_upgrade_full_model', { estimatedEbitda: Math.round(totalEbitda) })}
           >
             Build full EBITDA model →
           </Link>
           <Link
             href="/commercial/#contact"
             className="flex-1 text-center px-5 py-3 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px hover:shadow-lg hover:shadow-accent/25"
+            onClick={() => trackEvent('calculator_request_consult', { estimatedEbitda: Math.round(totalEbitda) })}
           >
             Request a scoped consultation
           </Link>

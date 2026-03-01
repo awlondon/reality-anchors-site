@@ -8,10 +8,13 @@ import Tiers from '@/components/Tiers';
 import LeadForm from '@/components/LeadForm';
 import Footer from '@/components/Footer';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import TestimonialBreak from '@/components/TestimonialBreak';
 import { getRegimes } from '@/lib/getRegimes';
+import { getTestimonialsForPage } from '@/data/testimonials';
 
 export default async function Home() {
   const regimes = await getRegimes();
+  const testimonials = getTestimonialsForPage('home');
 
   return (
     <main id="main-content" className="snap-y">
@@ -29,11 +32,38 @@ export default async function Home() {
       />
       <Hero />
       <VideoShowcase />
+      {testimonials[0] && (
+        <TestimonialBreak
+          id={testimonials[0].id}
+          quote={testimonials[0].quote}
+          attribution={testimonials[0].attribution}
+          company={testimonials[0].company}
+          backgroundSrc={testimonials[0].backgroundSrc}
+        />
+      )}
       <ValueBridge />
       <Features />
       <AdaptiveNarrative initialRegimes={regimes} />
+      {testimonials[1] && (
+        <TestimonialBreak
+          id={testimonials[1].id}
+          quote={testimonials[1].quote}
+          attribution={testimonials[1].attribution}
+          company={testimonials[1].company}
+          backgroundSrc={testimonials[1].backgroundSrc}
+        />
+      )}
       <Metrics />
       <Tiers />
+      {testimonials[3] && (
+        <TestimonialBreak
+          id={testimonials[3].id}
+          quote={testimonials[3].quote}
+          attribution={testimonials[3].attribution}
+          company={testimonials[3].company}
+          backgroundSrc={testimonials[3].backgroundSrc}
+        />
+      )}
       <LeadForm />
       <Footer />
     </main>

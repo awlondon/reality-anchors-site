@@ -4,8 +4,7 @@ export function trackEvent(name: string, data?: EventData): void {
   if (typeof window === 'undefined') return;
 
   // Push to GTM dataLayer (primary — GTM routes to GA4, Meta, etc.)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const dl = (window as any).dataLayer;
+  const dl = (window as unknown as Record<string, unknown>).dataLayer;
   if (Array.isArray(dl)) {
     dl.push({ event: name, ...data });
   }

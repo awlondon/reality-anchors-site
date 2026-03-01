@@ -120,7 +120,30 @@ export default function PersonalPage() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-muted/60 mt-4">Need more than 8 seats, cross-project rollups, or formal compliance controls? Move to Commercial or Industrial packaging without changing your bench workflow foundation.</p>
+            <div className="mt-6 border border-line/50 rounded-xl bg-bg/50 px-5 py-4">
+              <h3 className="text-sm font-semibold text-txt mb-3">What the savings look like</h3>
+              <div className="grid md:grid-cols-3 gap-4 text-center">
+                <div>
+                  <p className="text-[11px] uppercase tracking-wide text-muted mb-1">Solo · 200 t/yr</p>
+                  <p className="font-mono text-accent-2 text-lg font-semibold">~$5k</p>
+                  <p className="text-[11px] text-muted">annual savings · 9× ROI</p>
+                </div>
+                <div>
+                  <p className="text-[11px] uppercase tracking-wide text-muted mb-1">Studio · 800 t/yr</p>
+                  <p className="font-mono text-accent-2 text-lg font-semibold">~$21k</p>
+                  <p className="text-[11px] text-muted">annual savings · 12× ROI</p>
+                </div>
+                <div>
+                  <p className="text-[11px] uppercase tracking-wide text-muted mb-1">Crew · 3,000 t/yr</p>
+                  <p className="font-mono text-accent-2 text-lg font-semibold">~$79k</p>
+                  <p className="text-[11px] text-muted">annual savings · 19× ROI</p>
+                </div>
+              </div>
+              <p className="text-[10px] text-muted/50 mt-3 text-center">Illustrative estimates based on $850/ton steel, 8% baseline scrap, 1.5pt improvement. Actual results vary by operation.</p>
+            </div>
+            <div className="mt-5 border-t border-line pt-4">
+              <p className="text-xs text-muted/70"><strong className="text-txt">Ready for more?</strong> Crew gets you started. When you need audit logs, multi-bench coordination, or formal compliance controls, <Link href="/commercial/" className="text-accent hover:text-blue-400 font-semibold">Commercial</Link> picks up where Crew leaves off — with your existing workflows intact.</p>
+            </div>
           </div>
         </div>
       </section>

@@ -174,13 +174,13 @@ AnnualReworkSavings =
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">4. Value-Aligned Subscription Structure</h2>
           <p className="text-muted text-sm mb-6">
-            Subscription tiers are set at 10–25% of modeled annual savings. This fraction keeps the upside strongly in the buyer&apos;s favor while maintaining commercial sustainability and full product support.
+            Commercial and Industrial subscriptions are typically set at 8–20% of modeled annual savings. Personal entry plans capture less by design, keeping adoption friction low and ROI high for smaller operations. Across all tiers, the upside stays strongly in the buyer&apos;s favor.
           </p>
           <div className="table-scroll-wrapper overflow-x-auto mb-6">
             <table className="ra-table">
               <thead><tr><th>Modeled annual value</th><th>Typical subscription</th><th>Notes</th></tr></thead>
               <tbody>
-                <tr><td className="font-mono text-accent-2">Up to $15k</td><td className="font-mono text-txt">$2k–$3k</td><td className="text-muted text-sm">Small bench, low volume</td></tr>
+                <tr><td className="font-mono text-accent-2">Up to $15k</td><td className="font-mono text-txt">$1.5k–$2.5k</td><td className="text-muted text-sm">Small bench, low volume</td></tr>
                 <tr><td className="font-mono text-accent-2">$15k–$50k</td><td className="font-mono text-txt">$6k–$9k</td><td className="text-muted text-sm">Typical small-to-mid shop</td></tr>
                 <tr><td className="font-mono text-accent-2">$50k–$150k</td><td className="font-mono text-txt">$15k–$25k</td><td className="text-muted text-sm">High utilisation benches</td></tr>
                 <tr><td className="font-mono text-accent-2">$150k+</td><td className="font-mono text-txt">Custom</td><td className="text-muted text-sm">Multi-bench / multi-facility</td></tr>

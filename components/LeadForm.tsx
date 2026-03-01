@@ -155,8 +155,19 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
   );
 
   return (
-    <section id={id} className="py-24 bg-bg border-t border-line">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id={id} className="relative overflow-hidden py-24 bg-bg border-t border-line">
+      {/* Background photograph — team collaboration */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/team-collaboration.jpg"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+        className="absolute inset-0 w-full h-full object-cover opacity-[0.08] mix-blend-luminosity pointer-events-none"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-bg/90 via-bg/70 to-bg/90 pointer-events-none" />
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-start">
           {/* Copy */}
           <motion.div

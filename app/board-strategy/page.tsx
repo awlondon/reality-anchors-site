@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
+import PhotoBackground from '@/components/PhotoBackground';
 
 export const metadata: Metadata = {
   title: 'Board-Level Strategic Narrative — Completing the Digital Fabrication Stack',
@@ -14,8 +15,9 @@ export const metadata: Metadata = {
 export default function BoardStrategyPage() {
   return (
     <main id="main-content" className="pt-20">
-      <section className="py-16 border-b border-line">
-        <div className="max-w-5xl mx-auto px-6">
+      <section className="relative overflow-hidden py-16 border-b border-line">
+        <PhotoBackground src="/images/boardroom-strategy.jpg" opacity={0.12} position="center 30%" />
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Executive Brief · Fabrication Strategy</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">Completing the Digital Fabrication Stack</h1>
           <p className="text-xl text-muted max-w-3xl leading-relaxed">

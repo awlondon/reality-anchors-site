@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import LeadForm from '@/components/LeadForm';
+import PhotoBackground from '@/components/PhotoBackground';
 import { regimeCatalog } from '@/lib/siteData';
 
 export const metadata: Metadata = {
@@ -18,8 +19,9 @@ const industrialRegimes = regimeCatalog.filter((regime) => ['machine-calibration
 export default function IndustrialPage() {
   return (
     <main id="main-content" className="pt-20">
-      <section className="py-16 border-b border-line">
-        <div className="max-w-4xl mx-auto px-6">
+      <section className="relative overflow-hidden py-16 border-b border-line">
+        <PhotoBackground src="/images/industrial-factory.jpg" opacity={0.18} position="center 40%" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions / Industrial</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">Industrial</h1>
           <p className="text-xl text-muted max-w-2xl leading-relaxed">

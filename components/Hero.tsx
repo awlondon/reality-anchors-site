@@ -62,6 +62,16 @@ export default function Hero() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-bg flex items-center">
+      {/* Background photograph — welding scene for industrial context */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/hero-welding.jpg"
+        alt=""
+        aria-hidden="true"
+        decoding="async"
+        className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity"
+      />
+
       {/* Three.js field */}
       <ErrorBoundary>
         <StructuredFieldBackground className="absolute inset-0 w-full h-full" intensity={0.65} />

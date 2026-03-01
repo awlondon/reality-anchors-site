@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import PhotoBackground from '@/components/PhotoBackground';
+import { ScrapBeforeAfter } from './Charts';
 
 export const metadata: Metadata = {
   title: 'Pricing Methodology — Transparent Value-Aligned Pricing',
@@ -158,6 +159,7 @@ export default function PricingMethodologyPage() {
               </tbody>
             </table>
           </div>
+          <ScrapBeforeAfter />
           <div className="codeblock text-xs">{`AnnualMaterialSavings =
   TonsPerMonth × 12 × SteelCostPerTon × ScrapDelta
 

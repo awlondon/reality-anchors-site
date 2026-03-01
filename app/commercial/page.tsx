@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import LeadForm from '@/components/LeadForm';
 import PhotoBackground from '@/components/PhotoBackground';
 import { regimeCatalog } from '@/lib/siteData';
+import { ScrapRanges } from './Charts';
 
 export const metadata: Metadata = {
   title: 'Commercial Solutions — Execution Intelligence for Fabrication Yards',
@@ -80,7 +81,8 @@ export default function CommercialPage() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-muted/70">Contracts reference a published baseline model version for clarity.</p>
+            <ScrapRanges />
+            <p className="text-xs text-muted/70 mt-4">Contracts reference a published baseline model version for clarity.</p>
           </div>
         </div>
       </section>

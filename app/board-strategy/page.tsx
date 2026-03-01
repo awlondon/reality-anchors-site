@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import PhotoBackground from '@/components/PhotoBackground';
+import { EbitdaWaterfall, ArrRamp, ScrapSensitivity } from './Charts';
 
 export const metadata: Metadata = {
   title: 'Board-Level Strategic Narrative — Completing the Digital Fabrication Stack',
@@ -99,7 +100,8 @@ export default function BoardStrategyPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-sm text-muted">
+          <EbitdaWaterfall />
+          <p className="text-sm text-muted mt-4">
             EBITDA moves from approximately <span className="font-mono text-txt">$3.2M</span> to <span className="font-mono text-txt">$3.775M</span> (8.0% → 9.4% margin), or ~17–18% EBITDA uplift.
           </p>
         </section>
@@ -126,6 +128,7 @@ export default function BoardStrategyPage() {
 
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">5-Year Investor ARR Ramp (Base Case)</h2>
+          <ArrRamp />
           <p className="text-sm text-muted mb-5">
             Model assumptions: <span className="font-mono text-txt">$70k ACV</span> per facility, early churn moderation, and net revenue retention expansion as execution workflows embed into daily operations.
           </p>
@@ -158,7 +161,8 @@ export default function BoardStrategyPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-muted/70">Illustrative ranges; final results depend on facility mix, throughput, workforce patterns, and baseline discipline.</p>
+          <ScrapSensitivity />
+          <p className="text-xs text-muted/70 mt-4">Illustrative ranges; final results depend on facility mix, throughput, workforce patterns, and baseline discipline.</p>
         </section>
 
         <section className="border border-line bg-card rounded-2xl p-8">

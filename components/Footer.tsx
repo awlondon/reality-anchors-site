@@ -22,6 +22,8 @@ export default function Footer() {
           <Link href="/pricing-methodology/" className="hover:text-txt transition-colors">Methodology</Link>
           <Link href="/board-strategy/" className="hover:text-txt transition-colors">Strategy</Link>
           <Link href="/commercial/#contact" className="hover:text-txt transition-colors">Contact</Link>
+          <Link href="/privacy/" className="hover:text-txt transition-colors">Privacy</Link>
+          <Link href="/terms/" className="hover:text-txt transition-colors">Terms</Link>
         </nav>
 
         <div className="text-xs text-muted/80">

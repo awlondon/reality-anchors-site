@@ -61,7 +61,7 @@ export default function PersonalPage() {
             '@type': 'Product',
             name: 'Reality Anchors Personal',
             description: 'Execution guidance for solo operators and small teams — fewer errors, cleaner handoffs, path to scale.',
-            url: 'https://ra.primarydesignco.com/personal/',
+            url: 'https://realityanchorsltd.com/personal/',
             brand: { '@type': 'Organization', name: 'Reality Anchors Limited' },
             offers: {
               '@type': 'AggregateOffer',

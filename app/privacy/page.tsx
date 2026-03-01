@@ -20,7 +20,7 @@ export default function PrivacyPage() {
           <Section title="1. Who we are">
             <p>
               Reality Anchors Limited (&quot;Reality Anchors&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) operates the website at{' '}
-              <a href="https://ra.primarydesignco.com">ra.primarydesignco.com</a> and provides operational validation
+              <a href="https://realityanchorsltd.com">realityanchorsltd.com</a> and provides operational validation
               software for fabrication and industrial operations.
             </p>
           </Section>

@@ -3,6 +3,7 @@ import type { CalculatorContext } from '@/lib/calculatorContext';
 
 const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? '';
 const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? '';
+const CONFIRM_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_CONFIRM_TEMPLATE_ID ?? '';
 const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? '';
 
 const SEND_TIMEOUT_MS = 10_000;
@@ -59,6 +60,34 @@ export async function sendLeadEmail(payload: LeadEmailPayload): Promise<void> {
 
   const timeout = new Promise<never>((_, reject) =>
     setTimeout(() => reject(new Error('Email send timed out')), SEND_TIMEOUT_MS),
+  );
+
+  await Promise.race([send, timeout]);
+}
+
+interface ConfirmationPayload {
+  email: string;
+  name: string;
+  company: string;
+  params: Record<string, string>;
+}
+
+export async function sendConfirmationEmail(payload: ConfirmationPayload): Promise<void> {
+  if (!SERVICE_ID || !CONFIRM_TEMPLATE_ID || !PUBLIC_KEY) {
+    console.warn('EmailJS confirmation template not configured — skipping');
+    return;
+  }
+
+  const templateParams: Record<string, string> = {
+    email: payload.email,
+    name: payload.name,
+    company: payload.company,
+    ...payload.params,
+  };
+
+  const send = emailjs.send(SERVICE_ID, CONFIRM_TEMPLATE_ID, templateParams, PUBLIC_KEY);
+  const timeout = new Promise<never>((_, reject) =>
+    setTimeout(() => reject(new Error('Confirmation email timed out')), SEND_TIMEOUT_MS),
   );
 
   await Promise.race([send, timeout]);

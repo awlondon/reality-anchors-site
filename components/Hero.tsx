@@ -157,7 +157,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-xs font-bold tracking-[0.2em] uppercase text-muted mb-4"
         >
-          Reality Anchors Limited
+          Execution Intelligence for Steel Fabrication
         </motion.p>
 
         <motion.h1
@@ -166,7 +166,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight text-txt max-w-4xl"
         >
-          The Execution Layer for Fabrication Systems
+          Every Cut Measured. Every Bend Verified. Every Ton Accounted For.
         </motion.h1>
 
         <motion.p
@@ -175,7 +175,7 @@ export default function Hero() {
           transition={{ duration: 0.55, delay: 0.32 }}
           className="mt-6 text-lg text-muted max-w-2xl leading-relaxed"
         >
-          Enterprise platforms plan the work. Reality Anchors ensures the work is executed correctly where specifications become irreversible physical actions.
+          AI-guided fabrication execution that reduces scrap, eliminates rework, and turns material waste into margin. Built for yards that run on specifications, not guesswork.
         </motion.p>
 
         <motion.div
@@ -189,14 +189,14 @@ export default function Hero() {
             className="px-7 py-4 rounded-lg bg-accent hover:bg-blue-500 text-white font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/25"
             onClick={() => trackEvent('hero_cta_primary')}
           >
-            Explore Strategic Integration
+            See What You Could Save
           </Link>
           <Link
             href="/board-strategy/"
             className="px-7 py-4 rounded-lg border border-white/25 hover:border-white/50 hover:bg-white/6 text-txt font-semibold transition-all hover:-translate-y-0.5"
             onClick={() => trackEvent('hero_cta_secondary')}
           >
-            Read Board-Level Strategic Narrative
+            Read the Strategic Case
           </Link>
         </motion.div>
 

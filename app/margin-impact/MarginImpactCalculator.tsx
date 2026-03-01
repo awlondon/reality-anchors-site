@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { computeMarginImpact } from '@/lib/marginModel';
+import { setCalculatorContext } from '@/lib/calculatorContext';
 import InputSection from './InputSection';
 import ResultPanel from './ResultPanel';
 import EnterpriseRollup from './EnterpriseRollup';
@@ -84,8 +85,17 @@ export default function MarginImpactCalculator() {
 
   function handleCalculate() {
     try {
-      setResults(computeMarginImpact(inputs));
+      const computed = computeMarginImpact(inputs);
+      setResults(computed);
       setError('');
+      setCalculatorContext({
+        annualTons: inputs.annualTonsProcessed,
+        scrapRatePct: inputs.currentScrapRatePct,
+        costPerTon: inputs.avgMaterialCostPerTon,
+        estimatedEbitda: computed.totals.annualEbitdaIncrease,
+        estimatedMaterialSavings: computed.material.dollarsSaved,
+        estimatedTonsSaved: computed.material.tonsSaved,
+      });
     } catch (e: any) {
       setError(e?.message || 'Unable to compute model.');
       setResults(null);

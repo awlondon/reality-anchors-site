@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { trackEvent } from '@/lib/analytics';
 import { fadeUp } from '@/lib/motion';
@@ -458,16 +458,13 @@ export default function VideoShowcase() {
   const [activeScene, setActiveScene] = useState(0);
   const isInView = useInView(containerRef, { once: true, amount: 0.05 });
 
-  // Advance to next scene — cycles forever
-  const advance = useCallback(() => {
-    setActiveScene(prev => (prev + 1) % SCENE_COUNT);
-  }, []);
-
-  // Cycle scenes indefinitely
+  // Cycle scenes — use setTimeout to account for transition time
   useEffect(() => {
-    const id = setInterval(advance, SCENE_DURATION);
-    return () => clearInterval(id);
-  }, [advance]);
+    const id = setTimeout(() => {
+      setActiveScene(prev => (prev + 1) % SCENE_COUNT);
+    }, SCENE_DURATION);
+    return () => clearTimeout(id);
+  }, [activeScene]);
 
   // Analytics
   useEffect(() => {

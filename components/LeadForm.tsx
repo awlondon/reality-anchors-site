@@ -9,7 +9,8 @@ import { getSessionId } from '@/lib/session';
 import { upsertSalesAlert } from '@/lib/salesNotifications';
 import { saveLead } from '@/lib/saveLead';
 import { getCalculatorContext } from '@/lib/calculatorContext';
-import { sendLeadEmail } from '@/lib/sendLeadEmail';
+import { sendLeadEmail, sendConfirmationEmail } from '@/lib/sendLeadEmail';
+import { buildConfirmationParams } from '@/lib/buildConfirmationHtml';
 
 interface FormData {
   name: string;
@@ -83,6 +84,16 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
 
     // Best-effort side effects — wrapped so unhandled throws can't crash the component
     try {
+      // Send confirmation email to submitter (best-effort)
+      const calcCtx = getCalculatorContext();
+      const confirmParams = buildConfirmationParams(calcCtx, data.name);
+      sendConfirmationEmail({
+        email: data.email,
+        name: data.name,
+        company: data.company,
+        params: { ...confirmParams },
+      }).catch((err) => console.warn('Confirmation email failed (non-critical):', err));
+
       // Persist to Firebase (best-effort backup)
       saveLead({
         name: data.name,

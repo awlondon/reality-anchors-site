@@ -1,6 +1,7 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { C, FONT, MONO } from './constants';
 
 type RangeDatum = {
@@ -27,13 +28,15 @@ const CHART_W = VB_W - LEFT - RIGHT;
 
 export default function RangeBar({ data, maxValue, ariaLabel, className, suffix = '%' }: Props) {
   const reduce = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-30px' });
   const VB_H = TOP + data.length * ROW_H + 8;
   const max = maxValue ?? Math.ceil(Math.max(...data.map(d => d.high)) * 1.3);
   const scale = (v: number) => (v / max) * CHART_W;
   const barH = 16;
 
   return (
-    <div className={className}>
+    <div ref={ref} className={className}>
       <svg viewBox={`0 0 ${VB_W} ${VB_H}`} className="w-full h-auto" role="img" aria-label={ariaLabel}>
         <title>{ariaLabel}</title>
 
@@ -67,8 +70,7 @@ export default function RangeBar({ data, maxValue, ariaLabel, className, suffix 
                   x={x1} y={cy - barH / 2} height={barH} rx={4}
                   fill={C.accent} opacity="0.3"
                   initial={{ width: 0 }}
-                  whileInView={{ width: rangeW }}
-                  viewport={{ once: true, margin: '-30px' }}
+                  animate={{ width: inView ? rangeW : 0 }}
                   transition={{ duration: 0.5, delay: i * 0.12, ease: 'easeOut' }}
                 />
               )}
@@ -93,8 +95,7 @@ export default function RangeBar({ data, maxValue, ariaLabel, className, suffix 
                   cx={baseX} cy={cy} r={5}
                   fill={C.accent2}
                   initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
+                  animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0 }}
                   transition={{ duration: 0.3, delay: i * 0.12 + 0.4 }}
                 />
               )}

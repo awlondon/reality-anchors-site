@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence, useReducedMotion, useInView } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { trackEvent } from '@/lib/analytics';
 import { fadeUp } from '@/lib/motion';
 
@@ -580,7 +580,6 @@ export default function VideoShowcase() {
   const loopCount = useRef(0);
   const [activeScene, setActiveScene] = useState(0);
   const [settled, setSettled] = useState(false);
-  const reduceMotion = useReducedMotion();
   const isInView = useInView(containerRef, { once: true, amount: 0.05 });
 
   // Advance to next scene, count loops, settle after LOOPS_BEFORE_SETTLE
@@ -597,12 +596,12 @@ export default function VideoShowcase() {
     });
   }, []);
 
-  // Cycle scenes (stops once settled)
+  // Cycle scenes unconditionally until settled
   useEffect(() => {
-    if (reduceMotion || !isInView || settled) return;
+    if (settled) return;
     const id = setInterval(advance, SCENE_DURATION);
     return () => clearInterval(id);
-  }, [reduceMotion, isInView, settled, advance]);
+  }, [settled, advance]);
 
   // Analytics
   useEffect(() => {
@@ -613,28 +612,6 @@ export default function VideoShowcase() {
   }, [isInView]);
 
   const ActiveScene = settled ? BendingLoop : SCENE_COMPONENTS[activeScene];
-
-  // Reduced motion — static
-  if (reduceMotion) {
-    return (
-      <section className="bg-bg">
-        <div className="max-w-7xl mx-auto px-0 sm:px-6 pb-8">
-          <div className="relative w-full aspect-video overflow-hidden sm:rounded-2xl border border-line/50 bg-bg-2">
-            <svg viewBox="0 0 800 450" className="w-full h-full" role="img"
-              aria-label="AI-guided rebar fabrication process overview">
-              <rect width="800" height="450" fill={C.bg} />
-              <Scene1 />
-            </svg>
-          </div>
-          <ul className="flex flex-col items-center gap-2 mt-5 px-6">
-            {CAPTIONS.map((c, i) => (
-              <li key={i} className="text-sm text-muted">{c}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section className="bg-bg">

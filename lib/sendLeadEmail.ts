@@ -85,6 +85,7 @@ export async function sendConfirmationEmail(payload: ConfirmationPayload): Promi
     ...payload.params,
   };
 
+  console.log('[sendConfirmationEmail] Sending with params:', JSON.stringify(templateParams));
   const send = emailjs.send(SERVICE_ID, CONFIRM_TEMPLATE_ID, templateParams, PUBLIC_KEY);
   const timeout = new Promise<never>((_, reject) =>
     setTimeout(() => reject(new Error('Confirmation email timed out')), SEND_TIMEOUT_MS),

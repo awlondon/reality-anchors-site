@@ -83,24 +83,31 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
     }
 
     // Best-effort side effects — wrapped so unhandled throws can't crash the component
+    // Capture form values for side effects (closure safety)
+    const formName = data.name;
+    const formEmail = data.email;
+    const formCompany = data.company;
+    const formRole = data.role;
+    const formMessage = data.message;
     try {
       // Send confirmation email to submitter (best-effort)
       const calcCtx = getCalculatorContext();
-      const confirmParams = buildConfirmationParams(calcCtx, data.name);
+      const confirmParams = buildConfirmationParams(calcCtx, formName);
+      console.log('[LeadForm] Confirmation params:', JSON.stringify(confirmParams));
       sendConfirmationEmail({
-        email: data.email,
-        name: data.name,
-        company: data.company,
+        email: formEmail,
+        name: formName,
+        company: formCompany,
         params: { ...confirmParams },
       }).catch((err) => console.warn('Confirmation email failed (non-critical):', err));
 
       // Persist to Firebase (best-effort backup)
       saveLead({
-        name: data.name,
-        email: data.email,
-        company: data.company,
-        role: data.role,
-        message: data.message,
+        name: formName,
+        email: formEmail,
+        company: formCompany,
+        role: formRole,
+        message: formMessage,
         sessionId,
         regimeId: attributedRegime,
       }).catch((err) => console.warn('Firebase save failed (non-critical):', err));
@@ -111,7 +118,7 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
             type: 'lead_form_submit',
             stage: 'lead_form_submit',
             regimeId: attributedRegime ?? undefined,
-            role: data.role,
+            role: formRole,
           },
         })
       );
@@ -125,10 +132,10 @@ export default function LeadForm({ id = 'contact' }: { id?: string }) {
       upsertSalesAlert(alert);
       window.dispatchEvent(new CustomEvent('analytics', { detail: { ...alert, type: 'sales_notification', notificationType: alert.type } }));
 
-      trackEvent('lead_submitted', { role: data.role, regimeId: attributedRegime ?? 'unknown' });
-    } catch {
+      trackEvent('lead_submitted', { role: formRole, regimeId: attributedRegime ?? 'unknown' });
+    } catch (sideEffectErr) {
       // Non-critical side effects — log but don't block form completion
-      console.warn('Post-submit side effects failed (non-critical)');
+      console.warn('Post-submit side effects failed (non-critical):', sideEffectErr);
     }
   };
 

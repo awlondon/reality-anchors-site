@@ -1,48 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useExperiment } from '@/components/ExperimentProvider';
 import { setLastRegime } from '@/lib/funnelContext';
-import { hashEvent } from '@/lib/hashEvent';
-import { getSessionId } from '@/lib/session';
-import { useTrafficAttribution } from '@/lib/useTrafficAttribution';
-
-async function sendEvent(
-  detail: Record<string, unknown>,
-  experimentId: string,
-  variant: string,
-  attribution: ReturnType<typeof useTrafficAttribution>
-) {
-  const sessionId = getSessionId();
-  const payload = {
-    ...detail,
-    experimentId,
-    variant,
-    sessionId,
-    ...attribution,
-    timestamp: Date.now(),
-    source: 'funnel_tracker',
-  };
-
-  const eventId = await hashEvent(payload);
-
-  // Best-effort: API route only works with a Node server,
-  // not on static export / GitHub Pages hosting
-  try {
-    await fetch('/api/analytics/ingest/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...payload, eventId }),
-    });
-  } catch {
-    // Silently ignore — expected on static hosting
-  }
-}
 
 export function useFunnelTracker() {
-  const { experimentId, variant } = useExperiment();
-  const attribution = useTrafficAttribution();
-
   useEffect(() => {
     const track = (detail: Record<string, unknown>) => {
       const stage = detail.stage;
@@ -51,10 +12,6 @@ export function useFunnelTracker() {
       if (stage === 'regime_enter' && typeof regimeId === 'string') {
         setLastRegime(regimeId);
       }
-
-      void sendEvent(detail, experimentId, variant, attribution).catch(() => {
-        // Silently ignore — expected on static hosting
-      });
     };
 
     track({ type: 'landing_view', stage: 'landing_view' });
@@ -69,5 +26,5 @@ export function useFunnelTracker() {
 
     window.addEventListener('analytics', handler as EventListener);
     return () => window.removeEventListener('analytics', handler as EventListener);
-  }, [attribution, experimentId, variant]);
+  }, []);
 }

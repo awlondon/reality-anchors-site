@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { formatPct, formatUSD } from '@/lib/marginModel';
 import AcronymHint from './AcronymHint';
+import EbitdaCompositionChart from '@/components/charts/EbitdaCompositionChart';
 
 type Results = any;
 
@@ -53,6 +54,17 @@ export default function ResultPanel({ results }: { results: Results }) {
           <ResultCard title="Oversight / Risk" value={formatUSD(results.oversightRisk.dollarsSaved)} />
         </div>
       </div>
+
+      <EbitdaCompositionChart
+        ariaLabel="EBITDA impact composition breakdown"
+        segments={[
+          { label: 'Material', value: results.material.dollarsSaved, color: '#2e7deb' },
+          { label: 'Labor', value: results.labor.dollarsSaved, color: '#6fb0ff' },
+          { label: 'Throughput', value: results.throughput.ebitdaContribution, color: '#38E18E' },
+          { label: 'Oversight', value: results.oversightRisk.dollarsSaved, color: '#f59e0b' },
+        ]}
+        total={results.totals.annualEbitdaIncrease}
+      />
 
       <div
         ref={annualEbitdaRef}

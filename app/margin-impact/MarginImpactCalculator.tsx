@@ -95,6 +95,10 @@ export default function MarginImpactCalculator() {
         estimatedEbitda: computed.totals.annualEbitdaIncrease,
         estimatedMaterialSavings: computed.material.dollarsSaved,
         estimatedTonsSaved: computed.material.tonsSaved,
+        materialDollarsSaved: computed.material.dollarsSaved,
+        laborDollarsSaved: computed.labor.dollarsSaved,
+        throughputContribution: computed.throughput.ebitdaContribution,
+        oversightRiskSaved: computed.oversightRisk.dollarsSaved,
       });
     } catch (e: any) {
       setError(e?.message || 'Unable to compute model.');

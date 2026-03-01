@@ -19,23 +19,25 @@ function clamp(v: number, min: number, max: number) {
   return Math.min(Math.max(v, min), max);
 }
 
-function compute(tons: number, scrapRate: number, costPerTon: number) {
-  const targetScrap = clamp(scrapRate - BENCHMARK.scrapReductionPts, 0, scrapRate);
-  const revenue = tons * costPerTon * BENCHMARK.revenueMultiplier;
+/** Fallback computation when no calculator context is stored (benchmark only). */
+function computeBenchmark() {
+  const targetScrap = clamp(BENCHMARK.scrapRate - BENCHMARK.scrapReductionPts, 0, BENCHMARK.scrapRate);
+  const revenue = BENCHMARK.tons * BENCHMARK.costPerTon * BENCHMARK.revenueMultiplier;
   const labor = revenue * BENCHMARK.laborFraction;
 
   return computeMarginImpact({
-    annualTonsProcessed: tons,
-    avgMaterialCostPerTon: costPerTon,
+    annualTonsProcessed: BENCHMARK.tons,
+    avgMaterialCostPerTon: BENCHMARK.costPerTon,
     annualFabricationRevenue: revenue,
     annualFabricationLaborCost: labor,
     incrementalContributionMarginPct: BENCHMARK.contributionMarginPct,
-    currentScrapRatePct: scrapRate,
+    currentScrapRatePct: BENCHMARK.scrapRate,
     targetScrapRatePct: targetScrap,
     preventableReworkLaborPct: BENCHMARK.preventableReworkLaborPct,
     reworkReductionPct: BENCHMARK.reworkReductionPct,
     throughputImprovementPct: BENCHMARK.throughputImprovementPct,
     includeOversightRisk: false,
+    skipVolumeScale: true,
   });
 }
 
@@ -63,12 +65,34 @@ export function buildConfirmationParams(
   const tons = calc?.annualTons ?? BENCHMARK.tons;
   const scrapRate = calc?.scrapRatePct ?? BENCHMARK.scrapRate;
   const costPerTon = calc?.costPerTon ?? BENCHMARK.costPerTon;
+  const tonsSaved = calc?.estimatedTonsSaved ?? 0;
 
-  const result = compute(tons, scrapRate, costPerTon);
+  let materialSavings: number;
+  let laborSavings: number;
+  let throughputSavings: number;
+  let totalEbitda: number;
 
-  const materialSavings = result.material.dollarsSaved;
-  const laborSavings = result.labor.dollarsSaved;
-  const throughputSavings = result.throughput.ebitdaContribution;
+  if (calc?.materialDollarsSaved != null) {
+    // Use the exact results the lead saw on screen — no re-computation.
+    materialSavings = calc.materialDollarsSaved;
+    laborSavings = calc.laborDollarsSaved ?? 0;
+    throughputSavings = calc.throughputContribution ?? 0;
+    totalEbitda = calc.estimatedEbitda;
+  } else if (calc) {
+    // Legacy context without breakdown — use stored total, estimate split
+    materialSavings = calc.estimatedMaterialSavings;
+    laborSavings = 0;
+    throughputSavings = 0;
+    totalEbitda = calc.estimatedEbitda;
+  } else {
+    // No calculator context at all — fall back to benchmark
+    const result = computeBenchmark();
+    materialSavings = result.material.dollarsSaved;
+    laborSavings = result.labor.dollarsSaved;
+    throughputSavings = result.throughput.ebitdaContribution;
+    totalEbitda = result.totals.annualEbitdaIncrease;
+  }
+
   const maxBar = Math.max(materialSavings, laborSavings, throughputSavings, 1);
 
   return {
@@ -79,11 +103,11 @@ export function buildConfirmationParams(
     annualTons: `${tons.toLocaleString()} tons`,
     scrapRate: `${scrapRate.toFixed(1)}%`,
     costPerTon: `${formatUSD(costPerTon)}/ton`,
-    tonsSaved: `${Math.round(result.material.tonsSaved).toLocaleString()} t`,
+    tonsSaved: `${Math.round(tonsSaved).toLocaleString()} t`,
     materialSavings: formatUSD(materialSavings),
     laborSavings: formatUSD(laborSavings),
     throughputSavings: formatUSD(throughputSavings),
-    totalEbitda: formatUSD(result.totals.annualEbitdaIncrease),
+    totalEbitda: formatUSD(totalEbitda),
     materialPct: `${maxBar > 0 ? Math.round((materialSavings / maxBar) * 100) : 0}`,
     laborPct: `${maxBar > 0 ? Math.round((laborSavings / maxBar) * 100) : 0}`,
     throughputPct: `${maxBar > 0 ? Math.round((throughputSavings / maxBar) * 100) : 0}`,

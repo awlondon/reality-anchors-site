@@ -1,6 +1,7 @@
 import Hero from '@/components/Hero';
 import VideoShowcase from '@/components/VideoShowcase';
 import ValueBridge from '@/components/ValueBridge';
+import HowItWorks from '@/components/HowItWorks';
 import Features from '@/components/Features';
 import Metrics from '@/components/Metrics';
 import AdaptiveNarrative from '@/components/AdaptiveNarrative';
@@ -9,6 +10,8 @@ import LeadForm from '@/components/LeadForm';
 import Footer from '@/components/Footer';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import TestimonialBreak from '@/components/TestimonialBreak';
+import FAQ from '@/components/FAQ';
+import { faqStructuredData } from '@/data/faq';
 import { getRegimes } from '@/lib/getRegimes';
 import { getTestimonialsForPage } from '@/data/testimonials';
 
@@ -30,6 +33,12 @@ export default async function Home() {
           }),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqStructuredData()),
+        }}
+      />
       <Hero />
       <VideoShowcase />
       {testimonials[0] && (
@@ -42,6 +51,7 @@ export default async function Home() {
         />
       )}
       <ValueBridge />
+      <HowItWorks />
       <Features />
       <AdaptiveNarrative initialRegimes={regimes} />
       {testimonials[1] && (
@@ -64,6 +74,7 @@ export default async function Home() {
           backgroundSrc={testimonials[3].backgroundSrc}
         />
       )}
+      <FAQ />
       <LeadForm />
       <Footer />
     </main>

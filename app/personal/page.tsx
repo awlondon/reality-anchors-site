@@ -53,6 +53,26 @@ const testimonial = getTestimonialsForPage('personal')[0]!;
 export default function PersonalPage() {
   return (
     <main id="main-content" className="pt-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: 'Reality Anchors Personal',
+            description: 'Execution guidance for solo operators and small teams — fewer errors, cleaner handoffs, path to scale.',
+            url: 'https://ra.primarydesignco.com/personal/',
+            brand: { '@type': 'Organization', name: 'Reality Anchors Limited' },
+            offers: {
+              '@type': 'AggregateOffer',
+              priceCurrency: 'AUD',
+              lowPrice: '49',
+              highPrice: '349',
+              offerCount: 3,
+            },
+          }),
+        }}
+      />
       {/* Page header */}
       <section className="relative overflow-hidden py-16 border-b border-line">
         <PhotoBackground src="/images/workshop-personal.jpg" opacity={0.15} position="center 60%" />
@@ -199,7 +219,11 @@ export default function PersonalPage() {
         </div>
       </section>
 
-      <LeadForm id="contact" />
+      <LeadForm
+        id="contact"
+        heading="Get started with Personal"
+        description="Tell us about your operation and we'll help you pick the right plan. No commitment required."
+      />
       <Footer />
     </main>
   );

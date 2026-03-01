@@ -24,6 +24,21 @@ const testimonial = getTestimonialsForPage('commercial').find((t) => t.id === 'p
 export default function CommercialPage() {
   return (
     <main id="main-content" className="pt-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Reality Anchors Commercial',
+            provider: { '@type': 'Organization', name: 'Reality Anchors Limited' },
+            description: 'Execution intelligence for fabrication yards — measurable scrap reduction, audit-ready workflows, and value-aligned pricing.',
+            url: 'https://ra.primarydesignco.com/commercial/',
+            areaServed: 'AU',
+            serviceType: 'Fabrication Execution Software',
+          }),
+        }}
+      />
       {/* Header */}
       <section className="relative overflow-hidden py-16 border-b border-line">
         <PhotoBackground src="/images/commercial-fabrication.jpg" opacity={0.18} position="center 30%" />
@@ -197,6 +212,39 @@ export default function CommercialPage() {
                   <Link href={regime.learnMoreHref} className="inline-block mt-3 text-xs font-semibold text-accent hover:text-blue-400">Learn more →</Link>
                 </article>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pilot program — middle-of-funnel confidence builder */}
+      <section className="pb-14">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="border border-accent/30 bg-gradient-to-b from-accent/5 to-card rounded-2xl p-7">
+            <h2 className="text-lg font-semibold text-txt mb-3">Pilot program</h2>
+            <p className="text-muted text-sm mb-5">
+              Not ready for a full deployment? Start with a structured pilot to validate fit and measure impact before committing to a broader rollout.
+            </p>
+            <div className="grid sm:grid-cols-3 gap-4 mb-5">
+              {[
+                { phase: 'Week 1–2', title: 'Onboarding', desc: 'Baseline metrics captured, workflows configured, operators trained.' },
+                { phase: 'Week 3–8', title: 'Validation', desc: '60-day window measuring scrap, rework, and throughput against baselines.' },
+                { phase: 'Week 9+', title: 'Decision', desc: 'Review measured outcomes. Scale, adjust, or walk away — no lock-in.' },
+              ].map((step) => (
+                <div key={step.phase} className="border border-line rounded-xl bg-bg/50 px-4 py-3">
+                  <p className="text-[10px] font-bold tracking-wide uppercase text-accent mb-1">{step.phase}</p>
+                  <p className="text-sm font-semibold text-txt mb-1">{step.title}</p>
+                  <p className="text-xs text-muted">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Link href="#contact" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
+                Start a pilot
+              </Link>
+              <Link href="/calculator/" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
+                Estimate impact first
+              </Link>
             </div>
           </div>
         </div>

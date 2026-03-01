@@ -3,19 +3,44 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { trackEvent } from '@/lib/analytics';
 
 const NAV_LINKS = [
   { href: '/personal/', label: 'Personal' },
   { href: '/commercial/', label: 'Commercial' },
   { href: '/industrial/', label: 'Industrial' },
+  { href: '/calculator/', label: 'Quick Estimate' },
   { href: '/margin-impact/', label: 'Margin Model' },
   { href: '/board-strategy/', label: 'Strategy' },
 ];
 
+/** Map pathname prefixes to contextual CTA labels and destinations. */
+const CTA_MAP: Record<string, { label: string; href: string }> = {
+  '/personal':        { label: 'Get Started', href: '/personal/#contact' },
+  '/commercial':      { label: 'Request Demo', href: '/commercial/#contact' },
+  '/industrial':      { label: 'Schedule Review', href: '/industrial/#contact' },
+  '/calculator':      { label: 'Build Full Model', href: '/margin-impact/' },
+  '/margin-impact':   { label: 'Request Assessment', href: '/commercial/#contact' },
+  '/board-strategy':  { label: 'Schedule Briefing', href: '/commercial/#contact' },
+  '/pricing-methodology': { label: 'Explore Plans', href: '/commercial/' },
+};
+const DEFAULT_CTA = { label: 'Request Demo', href: '/commercial/#contact' };
+
+function getCta(pathname: string) {
+  for (const [prefix, cta] of Object.entries(CTA_MAP)) {
+    if (pathname.startsWith(prefix)) return cta;
+  }
+  return DEFAULT_CTA;
+}
+
 export default function Navbar({ activePath = '' }: { activePath?: string }) {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const cta = getCta(pathname);
+  const currentActive = activePath || pathname;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -67,7 +92,7 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
               key={href}
               href={href}
               className={`text-sm font-medium transition-colors ${
-                activePath === href
+                currentActive === href
                   ? 'text-accent-2 border-b border-accent-2 pb-0.5'
                   : 'text-muted hover:text-txt'
               }`}
@@ -77,14 +102,14 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
           ))}
         </nav>
 
-        {/* Desktop CTA */}
+        {/* Desktop CTA — contextual per page */}
         <div className="hidden md:flex items-center gap-3">
           <Link
-            href="/commercial/#contact"
+            href={cta.href}
             className="px-4 py-2 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px"
-            onClick={() => trackEvent('navbar_cta_click')}
+            onClick={() => trackEvent('navbar_cta_click', { label: cta.label, page: pathname })}
           >
-            Request Demo
+            {cta.label}
           </Link>
         </div>
 
@@ -113,7 +138,7 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
               key={href}
               href={href}
               className={`text-sm font-medium py-1 ${
-                activePath === href ? 'text-accent-2' : 'text-muted hover:text-txt'
+                currentActive === href ? 'text-accent-2' : 'text-muted hover:text-txt'
               }`}
               onClick={() => setOpen(false)}
             >
@@ -121,11 +146,11 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
             </Link>
           ))}
           <Link
-            href="/commercial/#contact"
+            href={cta.href}
             className="px-4 py-2 rounded-lg bg-accent text-white text-sm font-semibold text-center"
-            onClick={() => { setOpen(false); trackEvent('navbar_cta_click_mobile'); }}
+            onClick={() => { setOpen(false); trackEvent('navbar_cta_click_mobile', { label: cta.label, page: pathname }); }}
           >
-            Request Demo
+            {cta.label}
           </Link>
         </nav>
       )}

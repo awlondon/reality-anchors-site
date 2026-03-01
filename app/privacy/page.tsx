@@ -58,8 +58,9 @@ export default function PrivacyPage() {
             <p>We use the following third-party services to operate the site:</p>
             <ul>
               <li>
-                <strong>Resend</strong> — email delivery for contact form notifications. Your submitted data is
-                transmitted to Resend solely to deliver the notification email.
+                <strong>EmailJS</strong> — email delivery for contact form notifications and confirmation
+                emails. Your submitted data is transmitted to EmailJS solely to deliver notification and
+                confirmation emails.
               </li>
               <li>
                 <strong>Firebase (Google)</strong> — real-time database used for anonymised session analytics and

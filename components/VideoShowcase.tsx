@@ -337,6 +337,79 @@ function Scene3() {
       <line x1="380" y1="250" x2="404" y2="250" stroke={C.accent2} strokeWidth="0.5" opacity="0.5" />
       <line x1="392" y1="238" x2="392" y2="262" stroke={C.accent2} strokeWidth="0.5" opacity="0.5" />
 
+      {/* ── AR light overlay — projected bend location markers ── */}
+      {/* Vertical laser lines projected onto the rebar showing precise bend points */}
+      {[
+        { x: 200, label: 'A', dist: '1,200' },
+        { x: 300, label: 'B', dist: '2,400' },
+        { x: 382, label: 'C', dist: '3,250', active: true },
+      ].map((m, i) => (
+        <g key={m.label}>
+          {/* Projected laser line */}
+          <line x1={m.x} y1={m.active ? 130 : 200} x2={m.x} y2={290}
+            stroke={m.active ? C.green : C.accent2}
+            strokeWidth={m.active ? 1.5 : 0.8}
+            strokeDasharray={m.active ? 'none' : '4 3'}
+            opacity="0">
+            <animate attributeName="opacity"
+              values={`0;0;${m.active ? 0.7 : 0.4}`}
+              dur="1.8s" begin={`${0.3 + i * 0.25}s`} fill="freeze" />
+          </line>
+          {/* Triangle pointer at rebar surface */}
+          <polygon
+            points={`${m.x - 4},${m.active ? 244 : 248} ${m.x + 4},${m.active ? 244 : 248} ${m.x},${m.active ? 250 : 252}`}
+            fill={m.active ? C.green : C.accent2}
+            opacity="0">
+            <animate attributeName="opacity"
+              values={`0;0;${m.active ? 0.8 : 0.5}`}
+              dur="1.8s" begin={`${0.3 + i * 0.25}s`} fill="freeze" />
+          </polygon>
+          {/* Point label chip */}
+          <rect x={m.x - 18} y={m.active ? 130 : 200} width="36" height="16" rx="3"
+            fill={C.bgDeep} stroke={m.active ? C.green : C.accent2}
+            strokeWidth="0.6" opacity="0">
+            <animate attributeName="opacity"
+              values={`0;0;${m.active ? 0.95 : 0.7}`}
+              dur="1.8s" begin={`${0.3 + i * 0.25}s`} fill="freeze" />
+          </rect>
+          <text x={m.x} y={m.active ? 142 : 212} textAnchor="middle"
+            fill={m.active ? C.green : C.accent2}
+            fontSize="8" fontFamily="monospace" opacity="0">
+            {m.label}: {m.dist}
+            <animate attributeName="opacity"
+              values={`0;0;${m.active ? 0.95 : 0.7}`}
+              dur="1.8s" begin={`${0.3 + i * 0.25}s`} fill="freeze" />
+          </text>
+        </g>
+      ))}
+
+      {/* AR scanning sweep — green line sweeps across the rebar */}
+      <rect x="60" y="248" width="6" height="22" rx="3" fill={C.green} opacity="0.5"
+        filter="url(#arSweepGlow3)">
+        <animate attributeName="x" values="60;400;60" dur="2.5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2.5s" repeatCount="indefinite" />
+      </rect>
+
+      {/* Bend zone highlight — pulsing ring at the active bend point */}
+      <circle cx="382" cy="259" r="20" fill="none" stroke={C.green} strokeWidth="1.5"
+        strokeDasharray="6 4" opacity="0.4">
+        <animate attributeName="r" values="18;26;18" dur="2s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.5;0.2;0.5" dur="2s" repeatCount="indefinite" />
+        <animateTransform attributeName="transform" type="rotate"
+          from="0 382 259" to="360 382 259" dur="6s" repeatCount="indefinite" />
+      </circle>
+      {/* Inner precision ring */}
+      <circle cx="382" cy="259" r="10" fill="none" stroke={C.green} strokeWidth="0.8" opacity="0.6">
+        <animate attributeName="opacity" values="0.4;0.8;0.4" dur="1.5s" repeatCount="indefinite" />
+      </circle>
+
+      {/* AR distance callout along rebar — shows measurement from feed end */}
+      <line x1="60" y1="290" x2="382" y2="290" stroke={C.green} strokeWidth="0.6" opacity="0.3" />
+      <polygon points="60,288 60,292 66,290" fill={C.green} opacity="0.3" />
+      <polygon points="382,288 382,292 376,290" fill={C.green} opacity="0.3" />
+      <rect x="185" y="293" width="70" height="14" rx="3" fill={C.bgDeep} stroke={C.green} strokeWidth="0.5" opacity="0.7" />
+      <text x="220" y="303" textAnchor="middle" fill={C.green} fontSize="8" fontFamily="monospace" opacity="0.8">3,250 mm</text>
+
       {/* ── Caption graphic ───────────────────────────────────── */}
       <rect x="0" y="370" width="800" height="80" fill="url(#captionFade3)" />
       <text x="400" y="410" textAnchor="middle" fill={C.txt} fontSize="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="600" letterSpacing="0.5">
@@ -359,6 +432,9 @@ function Scene3() {
           <stop offset="40%" stopColor={C.bgDeep} stopOpacity="0.9" />
           <stop offset="100%" stopColor={C.bgDeep} />
         </linearGradient>
+        <filter id="arSweepGlow3">
+          <feGaussianBlur stdDeviation="4" />
+        </filter>
       </defs>
     </g>
   );

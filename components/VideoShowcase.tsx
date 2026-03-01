@@ -7,7 +7,6 @@ import { fadeUp } from '@/lib/motion';
 
 const SCENE_DURATION = 3000;
 const SCENE_COUNT = 3;
-const LOOPS_BEFORE_SETTLE = 2; // cycle through all scenes twice, then settle
 
 /* ── palette ────────────────────────────────────────────────── */
 const C = {
@@ -365,238 +364,6 @@ function Scene3() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SETTLED STATE — CONTINUOUS BENDING LOOP
-   After the intro scenes play twice, the animation settles into
-   this mesmerising bending loop: a rebar feeds in, a mandrel
-   bends it to 90°, the finished piece slides out, and a new bar
-   feeds in. Pure SVG <animate> — no React state needed.
-   ═══════════════════════════════════════════════════════════════ */
-function BendingLoop() {
-  /* Total loop period = 6s
-     0.0–1.2s  — bar feeds in from left
-     1.2–3.2s  — bend happens (arm rotates, heat glow appears)
-     3.2–4.2s  — HUD confirms 90.0° PASS
-     4.2–5.4s  — finished piece slides out right
-     5.4–6.0s  — brief pause, then repeat                       */
-  const DUR = '6s';
-
-  return (
-    <g>
-      {/* ── Machine body ──────────────────────────────────────── */}
-      <rect x="260" y="220" width="280" height="130" rx="8" fill={C.card} stroke={C.line} strokeWidth="1" />
-      {/* Working surface */}
-      <rect x="240" y="220" width="320" height="8" rx="2" fill={C.steelDk} />
-      {/* Upper housing */}
-      <rect x="310" y="140" width="180" height="80" rx="6" fill={C.steelDk} stroke={C.lineLt} strokeWidth="0.8" />
-      {/* Machine label */}
-      <text x="400" y="170" textAnchor="middle" fill={C.muted} fontSize="10" fontFamily="monospace" opacity="0.5">
-        CNC-BEND-01
-      </text>
-      {/* Status light */}
-      <circle cx="480" cy="152" r="4" fill={C.green} opacity="0.7">
-        <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2s" repeatCount="indefinite" />
-      </circle>
-
-      {/* ── Central mandrel ───────────────────────────────────── */}
-      <circle cx="400" cy="270" r="20" fill={C.steelDk} stroke={C.lineLt} strokeWidth="2.5" />
-      <circle cx="400" cy="270" r="7" fill={C.line} />
-      {/* Mandrel cross */}
-      <line x1="393" y1="270" x2="407" y2="270" stroke={C.lineLt} strokeWidth="1" />
-      <line x1="400" y1="263" x2="400" y2="277" stroke={C.lineLt} strokeWidth="1" />
-
-      {/* ── Feed rollers ──────────────────────────────────────── */}
-      {[280, 520].map(x => (
-        <g key={x}>
-          <circle cx={x} cy="260" r="12" fill="none" stroke={C.lineLt} strokeWidth="1.5" />
-          <circle cx={x} cy="280" r="12" fill="none" stroke={C.lineLt} strokeWidth="1.5" />
-          {/* Roller rotation tick */}
-          <line x1={x - 5} y1="260" x2={x + 5} y2="260" stroke={C.muted} strokeWidth="1">
-            <animateTransform attributeName="transform" type="rotate"
-              from={`0 ${x} 260`} to={`360 ${x} 260`} dur="1.5s" repeatCount="indefinite" />
-          </line>
-          <line x1={x - 5} y1="280" x2={x + 5} y2="280" stroke={C.muted} strokeWidth="1">
-            <animateTransform attributeName="transform" type="rotate"
-              from={`360 ${x} 280`} to={`0 ${x} 280`} dur="1.5s" repeatCount="indefinite" />
-          </line>
-        </g>
-      ))}
-
-      {/* ── REBAR — incoming straight bar ─────────────────────── */}
-      {/* This bar slides in from far left to the mandrel */}
-      <g>
-        <animateTransform attributeName="transform" type="translate"
-          values="-400,0;60,0;60,0;60,0;60,0;-400,0"
-          keyTimes="0;0.2;0.53;0.7;0.9;1" dur={DUR} repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0;1;1;0;0;0"
-          keyTimes="0;0.15;0.2;0.35;0.9;1" dur={DUR} repeatCount="indefinite" />
-        <rect x="0" y="262" width="340" height="14" rx="7" fill="url(#bendBarGrad)" />
-        {rebarRidges(0, 262, 340, 14)}
-      </g>
-
-      {/* ── REBAR — the bent piece (animated from straight to 90°) ── */}
-      {/* Horizontal portion that stays at the mandrel */}
-      <g opacity="0">
-        <animate attributeName="opacity" values="0;0;1;1;1;0"
-          keyTimes="0;0.19;0.22;0.7;0.88;0.92" dur={DUR} repeatCount="indefinite" />
-        <rect x="60" y="262" width="332" height="14" rx="7" fill="url(#bendBarGrad)" />
-        {rebarRidges(60, 262, 332, 14)}
-      </g>
-      {/* Bend arc — appears during the bend */}
-      <path d="M392,270 Q400,270 400,250" fill="none" stroke={C.steel} strokeWidth="14"
-        strokeLinecap="round" opacity="0">
-        <animate attributeName="opacity" values="0;0;0;1;1;1;0"
-          keyTimes="0;0.2;0.25;0.4;0.7;0.88;0.92" dur={DUR} repeatCount="indefinite" />
-      </path>
-      {/* Vertical portion after bend */}
-      <rect x="393" y="100" width="14" height="150" rx="7" fill="url(#bendBarGrad)" opacity="0">
-        <animate attributeName="opacity" values="0;0;0;1;1;1;0"
-          keyTimes="0;0.2;0.35;0.53;0.7;0.88;0.92" dur={DUR} repeatCount="indefinite" />
-      </rect>
-
-      {/* ── Finished piece slides out (whole L-shape moves right) ── */}
-      <g opacity="0">
-        <animate attributeName="opacity" values="0;0;1;1;0"
-          keyTimes="0;0.69;0.72;0.88;0.92" dur={DUR} repeatCount="indefinite" />
-        <animateTransform attributeName="transform" type="translate"
-          values="0,0;0,0;0,0;350,0;350,0"
-          keyTimes="0;0.69;0.72;0.9;1" dur={DUR} repeatCount="indefinite" />
-        <rect x="60" y="262" width="332" height="14" rx="7" fill={C.accent} opacity="0.5" />
-        {rebarRidges(60, 262, 332, 14, 16, 0.15)}
-        <path d="M392,270 Q400,270 400,250" fill="none" stroke={C.accent} strokeWidth="14" strokeLinecap="round" opacity="0.5" />
-        <rect x="393" y="100" width="14" height="150" rx="7" fill={C.accent} opacity="0.5" />
-      </g>
-
-      {/* ── Bending arm — rotates 0° to 90° during bend ─────── */}
-      <g>
-        <animateTransform attributeName="transform" type="rotate"
-          values="0,400,270;0,400,270;0,400,270;-90,400,270;-90,400,270;-90,400,270;0,400,270"
-          keyTimes="0;0.2;0.25;0.5;0.53;0.88;0.92" dur={DUR} repeatCount="indefinite" />
-        <line x1="400" y1="270" x2="400" y2="220" stroke={C.lineLt} strokeWidth="5" strokeLinecap="round" />
-        <circle cx="400" cy="220" r="8" fill={C.steelDk} stroke={C.lineLt} strokeWidth="1.5" />
-      </g>
-
-      {/* ── Heat glow at bend point ───────────────────────────── */}
-      <circle cx="395" cy="260" r="0" fill="url(#bendHeatGlow)" opacity="0">
-        <animate attributeName="r" values="0;0;0;35;30;0;0"
-          keyTimes="0;0.2;0.25;0.45;0.55;0.65;1" dur={DUR} repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0;0;0;0.7;0.5;0;0"
-          keyTimes="0;0.2;0.25;0.4;0.55;0.65;1" dur={DUR} repeatCount="indefinite" />
-      </circle>
-
-      {/* ── Sparks during bend ─────────────────────────────────── */}
-      {Array.from({ length: 14 }, (_, i) => {
-        const angle = ((i * 25) - 60) * Math.PI / 180;
-        const r1 = 12 + (i % 3) * 6;
-        const r2 = r1 + 12 + (i % 4) * 8;
-        const x1 = 395 + Math.cos(angle) * r1;
-        const y1 = 260 + Math.sin(angle) * r1 * 0.6;
-        const x2 = 395 + Math.cos(angle) * r2;
-        const y2 = 260 + Math.sin(angle) * r2 * 0.6;
-        return (
-          <line key={i} x1={x1} y1={y1} x2={x2} y2={y2}
-            stroke={i % 2 === 0 ? C.amberLt : C.amber}
-            strokeWidth={1 + (i % 2) * 0.5} strokeLinecap="round" opacity="0">
-            <animate attributeName="opacity" values="0;0;0;0.8;0;0"
-              keyTimes={`0;0.28;${0.3 + i * 0.01};${0.35 + i * 0.01};${0.5 + i * 0.008};1`}
-              dur={DUR} repeatCount="indefinite" />
-          </line>
-        );
-      })}
-
-      {/* ── Angular measurement HUD ───────────────────────────── */}
-      {/* Reference lines */}
-      <line x1="400" y1="270" x2="330" y2="270" stroke={C.accent2} strokeWidth="0.8" strokeDasharray="3 3" opacity="0.3" />
-      <line x1="400" y1="270" x2="400" y2="200" stroke={C.accent2} strokeWidth="0.8" strokeDasharray="3 3" opacity="0.3" />
-      {/* Angle arc (draws during bend) */}
-      <path d="M350,270 A50,50 0 0,0 400,220" fill="none" stroke={C.accent2} strokeWidth="1.5" opacity="0">
-        <animate attributeName="opacity" values="0;0;0;0.6;0.6;0"
-          keyTimes="0;0.2;0.3;0.5;0.7;0.92" dur={DUR} repeatCount="indefinite" />
-        <animate attributeName="stroke-dasharray" values="0 200;0 200;0 200;200 0;200 0;200 0"
-          keyTimes="0;0.2;0.3;0.53;0.7;1" dur={DUR} repeatCount="indefinite" />
-      </path>
-      {/* Crosshair */}
-      <circle cx="395" cy="260" r="35" fill="none" stroke={C.accent2} strokeWidth="0.5" opacity="0">
-        <animate attributeName="opacity" values="0;0;0;0.3;0.3;0"
-          keyTimes="0;0.2;0.3;0.5;0.7;0.92" dur={DUR} repeatCount="indefinite" />
-      </circle>
-
-      {/* ── Readout panel ─────────────────────────────────────── */}
-      <rect x="570" y="130" width="200" height="100" rx="8" fill={C.bgDeep} stroke={C.accent} strokeWidth="1" opacity="0.95" />
-      <text x="590" y="152" fill={C.muted} fontSize="9" fontFamily="monospace">BEND ANGLE</text>
-      {/* Angle value — counts up during bend */}
-      <text x="590" y="188" fill={C.txt} fontSize="30" fontFamily="monospace" fontWeight="bold" opacity="0.4">
-        0.0&#176;
-      </text>
-      {/* Overlay that shows final value after bend completes */}
-      <g opacity="0">
-        <animate attributeName="opacity" values="0;0;0;1;1;1;0"
-          keyTimes="0;0.2;0.48;0.53;0.7;0.88;0.92" dur={DUR} repeatCount="indefinite" />
-        <text x="590" y="188" fill={C.txt} fontSize="30" fontFamily="monospace" fontWeight="bold">90.0&#176;</text>
-        {/* PASS badge */}
-        <rect x="708" y="140" width="50" height="22" rx="11" fill={C.green} opacity="0.15" />
-        <text x="733" y="155" textAnchor="middle" fill={C.green} fontSize="10" fontFamily="monospace" fontWeight="bold">PASS</text>
-      </g>
-      {/* Counting angle - animates text position to simulate counting */}
-      <g opacity="0">
-        <animate attributeName="opacity" values="0;0;1;0;0"
-          keyTimes="0;0.25;0.35;0.53;1" dur={DUR} repeatCount="indefinite" />
-        <text x="590" y="188" fill={C.accent2} fontSize="30" fontFamily="monospace" fontWeight="bold">
-          45.0&#176;
-        </text>
-      </g>
-      {/* Progress bar */}
-      <rect x="590" y="200" width="160" height="4" rx="2" fill={C.line} />
-      <rect x="590" y="200" width="0" height="4" rx="2" fill={C.green} opacity="0.8">
-        <animate attributeName="width" values="0;0;0;160;160;160;0"
-          keyTimes="0;0.2;0.25;0.53;0.7;0.88;0.92" dur={DUR} repeatCount="indefinite" />
-      </rect>
-      {/* Tolerance label */}
-      <text x="590" y="222" fill={C.muted} fontSize="8" fontFamily="monospace" opacity="0">
-        TOL &#177;0.5&#176; &#8226; RADIUS 4d
-        <animate attributeName="opacity" values="0;0;0;0.7;0.7;0"
-          keyTimes="0;0.2;0.48;0.55;0.7;0.92" dur={DUR} repeatCount="indefinite" />
-      </text>
-
-      {/* ── Counter — pieces completed ─────────────────────────── */}
-      <rect x="570" y="250" width="200" height="50" rx="6" fill={C.bgDeep} stroke={C.line} strokeWidth="0.8" opacity="0.8" />
-      <text x="590" y="270" fill={C.muted} fontSize="8" fontFamily="monospace">PIECES TODAY</text>
-      <text x="590" y="292" fill={C.accent2} fontSize="16" fontFamily="monospace" fontWeight="bold">247</text>
-      <text x="640" y="292" fill={C.muted} fontSize="10" fontFamily="monospace">/ 320</text>
-      {/* Mini progress */}
-      <rect x="700" y="275" width="56" height="6" rx="3" fill={C.line} />
-      <rect x="700" y="275" width="43" height="6" rx="3" fill={C.accent} opacity="0.7" />
-
-      {/* ── Caption graphic — lower third ─────────────────────── */}
-      <rect x="0" y="370" width="800" height="80" fill="url(#captionFadeBend)" />
-      <text x="400" y="410" textAnchor="middle" fill={C.txt} fontSize="20"
-        fontFamily="Inter, system-ui, sans-serif" fontWeight="600" letterSpacing="0.5">
-        Precision bending. Every bar. Every time.
-      </text>
-      <line x1="240" y1="425" x2="560" y2="425" stroke={C.accent} strokeWidth="2" opacity="0.4" />
-
-      {/* ── Defs ──────────────────────────────────────────────── */}
-      <defs>
-        <linearGradient id="bendBarGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={C.steel} />
-          <stop offset="50%" stopColor={C.steelDk} />
-          <stop offset="100%" stopColor="#1a3050" />
-        </linearGradient>
-        <radialGradient id="bendHeatGlow">
-          <stop offset="0%" stopColor={C.amber} stopOpacity="0.7" />
-          <stop offset="50%" stopColor={C.amber} stopOpacity="0.15" />
-          <stop offset="100%" stopColor={C.amber} stopOpacity="0" />
-        </radialGradient>
-        <linearGradient id="captionFadeBend" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={C.bg} stopOpacity="0" />
-          <stop offset="40%" stopColor={C.bgDeep} stopOpacity="0.9" />
-          <stop offset="100%" stopColor={C.bgDeep} />
-        </linearGradient>
-      </defs>
-    </g>
-  );
-}
-
 /* ── scene registry ─────────────────────────────────────────── */
 const SCENE_COMPONENTS = [Scene1, Scene2, Scene3];
 
@@ -612,32 +379,19 @@ const CAPTIONS = [
 export default function VideoShowcase() {
   const containerRef = useRef<HTMLDivElement>(null);
   const hasFiredView = useRef(false);
-  const loopCount = useRef(0);
   const [activeScene, setActiveScene] = useState(0);
-  const [settled, setSettled] = useState(false);
   const isInView = useInView(containerRef, { once: true, amount: 0.05 });
 
-  // Advance to next scene, count loops, settle after LOOPS_BEFORE_SETTLE
+  // Advance to next scene — cycles forever
   const advance = useCallback(() => {
-    setActiveScene(prev => {
-      const next = (prev + 1) % SCENE_COUNT;
-      if (next === 0) {
-        loopCount.current += 1;
-        if (loopCount.current >= LOOPS_BEFORE_SETTLE) {
-          setSettled(true);
-          return prev; // stay on current scene — settled flag overrides key
-        }
-      }
-      return next;
-    });
+    setActiveScene(prev => (prev + 1) % SCENE_COUNT);
   }, []);
 
-  // Cycle scenes unconditionally until settled
+  // Cycle scenes indefinitely
   useEffect(() => {
-    if (settled) return;
     const id = setInterval(advance, SCENE_DURATION);
     return () => clearInterval(id);
-  }, [settled, advance]);
+  }, [advance]);
 
   // Analytics
   useEffect(() => {
@@ -647,7 +401,7 @@ export default function VideoShowcase() {
     }
   }, [isInView]);
 
-  const ActiveScene = settled ? BendingLoop : SCENE_COMPONENTS[activeScene];
+  const ActiveScene = SCENE_COMPONENTS[activeScene];
 
   return (
     <section className="bg-bg">
@@ -675,7 +429,7 @@ export default function VideoShowcase() {
               {/* Active scene */}
               <AnimatePresence mode="wait">
                 <motion.g
-                  key={settled ? 'bending-loop' : activeScene}
+                  key={activeScene}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -687,16 +441,12 @@ export default function VideoShowcase() {
             </svg>
           </div>
 
-          {/* Scene indicator dots — fade out once settled */}
-          <div className={`flex items-center justify-center gap-2 mt-4 transition-opacity duration-700 ${
-            settled ? 'opacity-0 pointer-events-none' : 'opacity-100'
-          }`}>
+          {/* Scene indicator dots */}
+          <div className="flex items-center justify-center gap-2 mt-4">
             {CAPTIONS.map((c, i) => (
               <button
                 key={i}
-                onClick={() => {
-                  if (!settled) setActiveScene(i);
-                }}
+                onClick={() => setActiveScene(i)}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   i === activeScene
                     ? 'bg-accent w-8'

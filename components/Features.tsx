@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import PhotoBackground from '@/components/PhotoBackground';
 import { stagger, fadeUp } from '@/lib/motion';
 import { regimeCatalog } from '@/lib/siteData';
 
@@ -72,8 +73,9 @@ const displayOverrides: Record<string, {
 
 export default function Features() {
   return (
-    <section className="py-24 bg-bg-2 border-y border-line/70">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="relative overflow-hidden py-24 bg-bg-2 border-y border-line/70">
+      <PhotoBackground src="/images/sparks-metal.jpg" opacity={0.08} gradient="from-bg-2/90 via-bg-2/80 to-bg-2/95" position="center 40%" />
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"

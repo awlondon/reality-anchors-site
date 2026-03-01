@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
+import PhotoBackground from '@/components/PhotoBackground';
 
 export const metadata: Metadata = {
   title: 'Pricing Methodology — Transparent Value-Aligned Pricing',
@@ -15,8 +16,9 @@ export default function PricingMethodologyPage() {
   return (
     <main id="main-content" className="pt-20">
       {/* Header */}
-      <section className="py-16 border-b border-line">
-        <div className="max-w-4xl mx-auto px-6">
+      <section className="relative overflow-hidden py-16 border-b border-line">
+        <PhotoBackground src="/images/methodology-measurement.jpg" opacity={0.15} position="center 50%" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6">
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">
             Document RA-WP-001 · Version 1.0 · January 2026
           </p>

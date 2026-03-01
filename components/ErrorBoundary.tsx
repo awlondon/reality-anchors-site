@@ -5,6 +5,8 @@ import { Component, type ReactNode } from 'react';
 interface Props {
   children: ReactNode;
   fallback?: ReactNode;
+  /** Optional label for error logging (e.g. "executive-dashboard") */
+  section?: string;
 }
 
 interface State {
@@ -22,7 +24,8 @@ export default class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error) {
-    console.error('[ErrorBoundary]', error);
+    const label = this.props.section ? `[ErrorBoundary:${this.props.section}]` : '[ErrorBoundary]';
+    console.error(label, error);
   }
 
   render() {

@@ -1,0 +1,36 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#090F1A"/>
+      <stop offset="1" stop-color="#24314A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <rect x="58" y="58" width="1084" height="584" rx="24" fill="#0D1828" stroke="#4A8FFF" stroke-opacity="0.35"/>
+
+  <rect x="130" y="145" width="420" height="410" rx="18" fill="#14253A" stroke="#6AA6FF" stroke-opacity="0.4"/>
+  <text x="160" y="193" fill="#D6E6FF" font-size="24" font-family="Arial" font-weight="700">Model A</text>
+  <rect x="160" y="220" width="360" height="50" rx="10" fill="#243D59"/>
+  <text x="184" y="252" fill="#BDD7FF" font-size="18" font-family="Arial">Schema: valid</text>
+  <rect x="160" y="286" width="360" height="50" rx="10" fill="#243D59"/>
+  <text x="184" y="318" fill="#BDD7FF" font-size="18" font-family="Arial">Confidence: 0.97</text>
+  <rect x="160" y="352" width="360" height="50" rx="10" fill="#243D59"/>
+  <text x="184" y="384" fill="#BDD7FF" font-size="18" font-family="Arial">Drift score: 0.04</text>
+
+  <rect x="650" y="145" width="420" height="410" rx="18" fill="#14253A" stroke="#6AA6FF" stroke-opacity="0.4"/>
+  <text x="680" y="193" fill="#D6E6FF" font-size="24" font-family="Arial" font-weight="700">Model B</text>
+  <rect x="680" y="220" width="360" height="50" rx="10" fill="#243D59"/>
+  <text x="704" y="252" fill="#BDD7FF" font-size="18" font-family="Arial">Schema: valid</text>
+  <rect x="680" y="286" width="360" height="50" rx="10" fill="#243D59"/>
+  <text x="704" y="318" fill="#BDD7FF" font-size="18" font-family="Arial">Confidence: 0.96</text>
+  <rect x="680" y="352" width="360" height="50" rx="10" fill="#243D59"/>
+  <text x="704" y="384" fill="#BDD7FF" font-size="18" font-family="Arial">Drift score: 0.05</text>
+
+  <rect x="460" y="455" width="280" height="92" rx="14" fill="#1C3450" stroke="#82B5FF" stroke-opacity="0.4"/>
+  <text x="497" y="492" fill="#DCEBFF" font-size="20" font-family="Arial" font-weight="700">Quorum 96.8%</text>
+  <text x="502" y="522" fill="#AFCBFF" font-size="16" font-family="Arial">Rollback &lt;300ms</text>
+
+  <circle cx="600" cy="285" r="32" fill="#1A8E67"/>
+  <path d="M586 286L597 298L617 274" stroke="#E9FFF7" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M552 285H648" stroke="#72C3FF" stroke-width="4" stroke-dasharray="8 8"/>
+</svg>

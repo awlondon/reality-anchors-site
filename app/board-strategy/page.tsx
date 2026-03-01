@@ -3,14 +3,17 @@ import Link from 'next/link';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Board-Level Strategic Narrative',
-  description:
-    'Executive narrative on why execution-layer validation is inevitable fabrication infrastructure, including EBITDA uplift, SaaS capture strategy, and 5-year ARR ramp framing.',
+  title: 'Board-Level Strategic Narrative — Completing the Digital Fabrication Stack',
+  description: 'Executive narrative on why execution-layer validation is inevitable fabrication infrastructure, including EBITDA uplift, SaaS capture strategy, and 5-year ARR ramp framing.',
+  openGraph: {
+    title: 'Board-Level Strategic Narrative | Reality Anchors',
+    description: 'Executive narrative on execution-layer validation as inevitable fabrication infrastructure.',
+  },
 };
 
 export default function BoardStrategyPage() {
   return (
-    <main className="pt-20">
+    <main id="main-content" className="pt-20">
       <section className="py-16 border-b border-line">
         <div className="max-w-5xl mx-auto px-6">
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Executive Brief · Fabrication Strategy</p>
@@ -22,7 +25,7 @@ export default function BoardStrategyPage() {
             <Link href="/commercial/#contact" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
               Discuss strategic integration
             </Link>
-            <Link href="/calculator/" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
+            <Link href="/margin-impact/" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
               Review value inputs
             </Link>
           </div>
@@ -81,7 +84,7 @@ export default function BoardStrategyPage() {
           <p className="text-sm text-muted mb-5">
             Illustrative assumptions: $40M revenue, 8% EBITDA margin, 25,000 tons annual throughput, $850/ton steel cost, 8% baseline scrap.
           </p>
-          <div className="overflow-x-auto mb-6">
+          <div className="table-scroll-wrapper overflow-x-auto mb-6">
             <table className="ra-table">
               <thead><tr><th>Driver</th><th>Illustrative impact</th><th>Annual EBITDA effect</th></tr></thead>
               <tbody>
@@ -102,7 +105,7 @@ export default function BoardStrategyPage() {
           <p className="text-sm text-muted mb-5">
             Based on ~<span className="font-mono text-txt">$575k</span> annual customer EBITDA uplift, sustainable early capture is typically <span className="font-mono text-txt">8–15%</span> of created value to preserve adoption velocity and procurement acceptance.
           </p>
-          <div className="overflow-x-auto mb-5">
+          <div className="table-scroll-wrapper overflow-x-auto mb-5">
             <table className="ra-table">
               <thead><tr><th>Scenario</th><th>Annual price</th><th>Capture of value</th><th>Customer ROI multiple</th></tr></thead>
               <tbody>
@@ -122,7 +125,7 @@ export default function BoardStrategyPage() {
           <p className="text-sm text-muted mb-5">
             Model assumptions: <span className="font-mono text-txt">$70k ACV</span> per facility, early churn moderation, and net revenue retention expansion as execution workflows embed into daily operations.
           </p>
-          <div className="overflow-x-auto mb-5">
+          <div className="table-scroll-wrapper overflow-x-auto mb-5">
             <table className="ra-table">
               <thead><tr><th>Year</th><th>Facilities</th><th>ARR</th><th>Ramp note</th></tr></thead>
               <tbody>
@@ -141,7 +144,7 @@ export default function BoardStrategyPage() {
 
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">Sensitivity: Scrap Improvement vs EBITDA</h2>
-          <div className="overflow-x-auto mb-4">
+          <div className="table-scroll-wrapper overflow-x-auto mb-4">
             <table className="ra-table">
               <thead><tr><th>Absolute scrap reduction</th><th>Estimated EBITDA uplift</th></tr></thead>
               <tbody>

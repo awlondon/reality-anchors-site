@@ -5,15 +5,19 @@ import LeadForm from '@/components/LeadForm';
 import { regimeCatalog } from '@/lib/siteData';
 
 export const metadata: Metadata = {
-  title: 'Commercial',
-  description: 'Execution intelligence for crews and fabrication yards that increases the measurable value of existing digital fabrication systems.',
+  title: 'Commercial Solutions — Execution Intelligence for Fabrication Yards',
+  description: 'Execution-layer infrastructure for crews and yards. Value-amplification pricing aligned to measurable scrap reduction and margin improvement.',
+  openGraph: {
+    title: 'Commercial Solutions | Reality Anchors',
+    description: 'Execution intelligence for fabrication yards — measurable scrap reduction, audit-ready workflows, and value-aligned pricing.',
+  },
 };
 
 const commercialRegimes = regimeCatalog.filter((regime) => ['structural-fabrication', 'multi-project-optimization', 'machine-calibration'].includes(regime.id));
 
 export default function CommercialPage() {
   return (
-    <main className="pt-20">
+    <main id="main-content" className="pt-20">
       {/* Header */}
       <section className="py-16 border-b border-line">
         <div className="max-w-4xl mx-auto px-6">
@@ -23,7 +27,7 @@ export default function CommercialPage() {
             Execution intelligence for crews and fabrication yards. Designed to reinforce upstream planning tools through verified downstream execution outcomes.
           </p>
           <div className="flex flex-wrap gap-3 mt-8">
-            <Link href="/calculator/" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
+            <Link href="/margin-impact/" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
               Estimate savings
             </Link>
             <Link href="#contact" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
@@ -148,7 +152,7 @@ export default function CommercialPage() {
             <p className="text-xs text-muted/70 mb-5">Final pricing depends on bench count, instrumentation scope, calibration governance requirements, and multi-project optimization complexity.</p>
 
             <div className="flex flex-wrap gap-3">
-              <Link href="/calculator/" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
+              <Link href="/margin-impact/" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
                 Estimate savings
               </Link>
               <Link href="#contact" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">

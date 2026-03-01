@@ -1,0 +1,40 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A1320"/>
+      <stop offset="1" stop-color="#283A4A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <rect x="58" y="58" width="1084" height="584" rx="24" fill="#0E1A2B" stroke="#36B6A8" stroke-opacity="0.35"/>
+
+  <rect x="120" y="130" width="580" height="420" rx="16" fill="#13263A" stroke="#4FCFC1" stroke-opacity="0.45"/>
+  <text x="150" y="175" fill="#B6EDE7" font-size="22" font-family="Arial" font-weight="700">Master Cut Plan</text>
+  <rect x="150" y="205" width="220" height="40" rx="8" fill="#1D374D"/>
+  <text x="165" y="231" fill="#8BE0D6" font-size="18" font-family="Arial">Project A</text>
+  <rect x="150" y="260" width="380" height="26" rx="6" fill="#3DAFA2" fill-opacity="0.75"/>
+  <rect x="150" y="295" width="145" height="26" rx="6" fill="#2F86F8" fill-opacity="0.75"/>
+  <rect x="304" y="295" width="175" height="26" rx="6" fill="#B57AFF" fill-opacity="0.75"/>
+  <rect x="488" y="295" width="82" height="26" rx="6" fill="#F3B455" fill-opacity="0.85"/>
+
+  <rect x="150" y="340" width="220" height="40" rx="8" fill="#1D374D"/>
+  <text x="165" y="366" fill="#8BE0D6" font-size="18" font-family="Arial">Project B</text>
+  <rect x="150" y="395" width="205" height="26" rx="6" fill="#B57AFF" fill-opacity="0.8"/>
+  <rect x="364" y="395" width="125" height="26" rx="6" fill="#3DAFA2" fill-opacity="0.75"/>
+  <rect x="498" y="395" width="92" height="26" rx="6" fill="#2F86F8" fill-opacity="0.75"/>
+
+  <rect x="760" y="130" width="320" height="215" rx="16" fill="#122436" stroke="#52D7C9" stroke-opacity="0.4"/>
+  <text x="790" y="175" fill="#BDEFEA" font-size="20" font-family="Arial" font-weight="700">Future Stock</text>
+  <rect x="790" y="205" width="225" height="34" rx="8" fill="#21556D"/>
+  <text x="804" y="228" fill="#D0FFF9" font-size="16" font-family="Arial">A-11 | 2.4m | tagged</text>
+  <rect x="790" y="250" width="245" height="34" rx="8" fill="#21556D"/>
+  <text x="804" y="273" fill="#D0FFF9" font-size="16" font-family="Arial">B-07 | 1.2m | reusable</text>
+
+  <rect x="760" y="370" width="320" height="180" rx="16" fill="#122436" stroke="#52D7C9" stroke-opacity="0.4"/>
+  <text x="790" y="415" fill="#BDEFEA" font-size="20" font-family="Arial" font-weight="700">Inventory Lift</text>
+  <text x="790" y="455" fill="#58D9CC" font-size="40" font-family="Arial" font-weight="700">+23%</text>
+  <text x="790" y="490" fill="#9FD7D2" font-size="18" font-family="Arial">cross-job reuse</text>
+
+  <path d="M585 330C680 330 705 238 790 238" stroke="#67E3D6" stroke-width="3" stroke-dasharray="8 8"/>
+  <path d="M585 406C680 406 700 442 790 442" stroke="#67E3D6" stroke-width="3" stroke-dasharray="8 8"/>
+</svg>

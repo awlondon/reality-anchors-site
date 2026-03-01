@@ -1,16 +1,15 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
-import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import ErrorBoundary from '@/components/ErrorBoundary';
 import { trackEvent } from '@/lib/analytics';
 import { siteMetrics } from '@/lib/siteData';
 
-// Three.js is large (~600 kB). Dynamic import splits it into its own chunk so it
-// doesn't block the initial page parse. The canvas renders client-side only.
 const StructuredFieldBackground = dynamic(
   () => import('@/components/StructuredFieldBackground'),
-  { ssr: false },
+  { ssr: false }
 );
 
 export default function Hero() {
@@ -64,7 +63,9 @@ export default function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-bg flex items-center">
       {/* Three.js field */}
-      <StructuredFieldBackground className="absolute inset-0 w-full h-full" intensity={0.65} />
+      <ErrorBoundary>
+        <StructuredFieldBackground className="absolute inset-0 w-full h-full" intensity={0.65} />
+      </ErrorBoundary>
 
       {/* Symbol-vector level-1 HLSF ring */}
       <motion.div

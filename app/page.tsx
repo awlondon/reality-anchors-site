@@ -13,28 +13,26 @@ export default async function Home() {
   const regimes = await getRegimes();
 
   return (
-    <main className="snap-y">
-      <ErrorBoundary section="hero">
-        <Hero />
-      </ErrorBoundary>
-      <ErrorBoundary section="value-bridge">
-        <ValueBridge />
-      </ErrorBoundary>
-      <ErrorBoundary section="features">
-        <Features />
-      </ErrorBoundary>
-      <ErrorBoundary section="narrative">
-        <AdaptiveNarrative initialRegimes={regimes} />
-      </ErrorBoundary>
-      <ErrorBoundary section="metrics">
-        <Metrics />
-      </ErrorBoundary>
-      <ErrorBoundary section="tiers">
-        <Tiers />
-      </ErrorBoundary>
-      <ErrorBoundary section="lead-form">
-        <LeadForm />
-      </ErrorBoundary>
+    <main id="main-content" className="snap-y">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Reality Anchors Limited',
+            url: 'https://ra.primarydesignco.com',
+            description: 'AI-assisted operational validation for fabrication, field, and operations teams.',
+          }),
+        }}
+      />
+      <Hero />
+      <ValueBridge />
+      <Features />
+      <AdaptiveNarrative initialRegimes={regimes} />
+      <Metrics />
+      <Tiers />
+      <LeadForm />
       <Footer />
     </main>
   );

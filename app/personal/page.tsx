@@ -5,8 +5,12 @@ import LeadForm from '@/components/LeadForm';
 import { regimeCatalog } from '@/lib/siteData';
 
 export const metadata: Metadata = {
-  title: 'Personal',
-  description: 'Curated programs for individuals and small shops, designed for dependable day-to-day execution.',
+  title: 'Personal Plans — Execution Guidance for Solo Operators',
+  description: 'Practical execution layer for solo operators and small teams. $19-$199/month for 1-8 seats with offline-first operation.',
+  openGraph: {
+    title: 'Personal Plans | Reality Anchors',
+    description: 'Execution guidance for solo operators and small teams — fewer errors, cleaner handoffs, path to scale.',
+  },
 };
 
 
@@ -43,7 +47,7 @@ const pricingTiers = [
 
 export default function PersonalPage() {
   return (
-    <main className="pt-20">
+    <main id="main-content" className="pt-20">
       {/* Page header */}
       <section className="py-16 border-b border-line">
         <div className="max-w-4xl mx-auto px-6">

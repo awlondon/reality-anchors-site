@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: '/commercial/', label: 'Commercial' },
   { href: '/industrial/', label: 'Industrial' },
   { href: '/margin-impact/', label: 'Margin Model' },
+  { href: '/board-strategy/', label: 'Strategy' },
 ];
 
 export default function Navbar({ activePath = '' }: { activePath?: string }) {
@@ -21,6 +22,19 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [open]);
 
   return (
     <header

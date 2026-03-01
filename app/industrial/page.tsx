@@ -5,15 +5,19 @@ import LeadForm from '@/components/LeadForm';
 import { regimeCatalog } from '@/lib/siteData';
 
 export const metadata: Metadata = {
-  title: 'Industrial',
-  description: 'High-volume environments with traceability, calibration governance, and integration readiness.',
+  title: 'Industrial Solutions — Enterprise Execution Validation at Scale',
+  description: 'High-volume execution standardization with ERP integration, compliance-grade traceability, and enterprise commercial structure.',
+  openGraph: {
+    title: 'Industrial Solutions | Reality Anchors',
+    description: 'Enterprise execution validation — ERP integration, compliance traceability, and high-volume operational controls.',
+  },
 };
 
 const industrialRegimes = regimeCatalog.filter((regime) => ['machine-calibration', 'ai-governance', 'ar-execution'].includes(regime.id));
 
 export default function IndustrialPage() {
   return (
-    <main className="pt-20">
+    <main id="main-content" className="pt-20">
       <section className="py-16 border-b border-line">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions / Industrial</p>

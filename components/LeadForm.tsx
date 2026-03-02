@@ -38,14 +38,7 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
-    window.dispatchEvent(
-      new CustomEvent('analytics', {
-        detail: {
-          type: 'lead_form_view',
-          stage: 'lead_form_view',
-        },
-      })
-    );
+    trackEvent('lead_form_view');
   }, []);
 
   const validate = () => {
@@ -118,16 +111,11 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
         regimeId: attributedRegime,
       }).catch((err) => console.warn('Firebase save failed (non-critical):', err));
 
-      window.dispatchEvent(
-        new CustomEvent('analytics', {
-          detail: {
-            type: 'lead_form_submit',
-            stage: 'lead_form_submit',
-            regimeId: attributedRegime ?? undefined,
-            role: formRole,
-          },
-        })
-      );
+      trackEvent('lead_form_submit', {
+        role: formRole,
+        regimeId: attributedRegime ?? 'unknown',
+        company: formCompany,
+      });
 
       const alert = {
         id: `${sessionId}_form_submit`,
@@ -136,9 +124,7 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
         createdAt: Date.now(),
       };
       upsertSalesAlert(alert);
-      window.dispatchEvent(new CustomEvent('analytics', { detail: { ...alert, type: 'sales_notification', notificationType: alert.type } }));
-
-      trackEvent('lead_submitted', { role: formRole, regimeId: attributedRegime ?? 'unknown' });
+      trackEvent('sales_notification', { notificationType: alert.type });
     } catch (sideEffectErr) {
       // Non-critical side effects — log but don't block form completion
       console.warn('Post-submit side effects failed (non-critical):', sideEffectErr);

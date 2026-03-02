@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { computeMarginImpact } from '@/lib/marginModel';
 import { setCalculatorContext } from '@/lib/calculatorContext';
+import { trackEvent } from '@/lib/analytics';
 import InputSection from './InputSection';
 import ResultPanel from './ResultPanel';
 import EnterpriseRollup from './EnterpriseRollup';
@@ -99,6 +100,12 @@ export default function MarginImpactCalculator() {
         laborDollarsSaved: computed.labor.dollarsSaved,
         throughputContribution: computed.throughput.ebitdaContribution,
         oversightRiskSaved: computed.oversightRisk.dollarsSaved,
+      });
+      trackEvent('margin_impact_calculated', {
+        annual_tons: inputs.annualTonsProcessed,
+        scrap_rate_pct: inputs.currentScrapRatePct,
+        cost_per_ton: inputs.avgMaterialCostPerTon,
+        estimated_ebitda_increase: computed.totals.annualEbitdaIncrease,
       });
     } catch (e: any) {
       setError(e?.message || 'Unable to compute model.');

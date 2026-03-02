@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: 'Reality Anchors Limited',
     type: 'website',
-    locale: 'en_AU',
+    locale: 'en_US',
     images: [
       {
         url: '/assets/brand/reality-anchors-lockup-dark.png',

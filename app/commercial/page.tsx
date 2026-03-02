@@ -35,7 +35,7 @@ export default function CommercialPage() {
             provider: { '@type': 'Organization', name: 'Reality Anchors Limited' },
             description: 'Execution intelligence for fabrication yards — measurable scrap reduction, audit-ready workflows, and value-aligned pricing.',
             url: 'https://realityanchorsltd.com/commercial/',
-            areaServed: 'AU',
+            areaServed: 'US',
             serviceType: 'Fabrication Execution Software',
           }),
         }}

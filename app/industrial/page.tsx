@@ -34,7 +34,7 @@ export default function IndustrialPage() {
             provider: { '@type': 'Organization', name: 'Reality Anchors Limited' },
             description: 'Enterprise execution validation — ERP integration, compliance traceability, and high-volume operational controls.',
             url: 'https://realityanchorsltd.com/industrial/',
-            areaServed: 'AU',
+            areaServed: 'US',
             serviceType: 'Industrial Execution Validation Software',
           }),
         }}

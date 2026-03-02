@@ -66,7 +66,7 @@ export default function PersonalPage() {
             brand: { '@type': 'Organization', name: 'Reality Anchors Limited' },
             offers: {
               '@type': 'AggregateOffer',
-              priceCurrency: 'AUD',
+              priceCurrency: 'USD',
               lowPrice: '49',
               highPrice: '349',
               offerCount: 3,

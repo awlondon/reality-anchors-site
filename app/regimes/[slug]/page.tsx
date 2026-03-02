@@ -52,7 +52,7 @@ export default function RegimeDetailPage({ params }: Props) {
             url: `https://realityanchorsltd.com/regimes/${params.slug}/`,
             provider: { '@type': 'Organization', name: 'Reality Anchors Limited' },
             serviceType: 'Fabrication Execution Validation',
-            areaServed: 'AU',
+            areaServed: 'US',
           }),
         }}
       />

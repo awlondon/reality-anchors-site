@@ -70,7 +70,7 @@ export default function TermsPage() {
             <p>
               To the fullest extent permitted by law, Reality Anchors Limited shall not be liable for any indirect,
               incidental, consequential, or punitive damages arising from your use of the Site. Our total liability
-              for any claim arising from Site use shall not exceed AUD $100.
+              for any claim arising from Site use shall not exceed USD $100.
             </p>
           </Section>
 

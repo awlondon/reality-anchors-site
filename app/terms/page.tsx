@@ -2,7 +2,12 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
+  description: 'Terms of Service for the Reality Anchors Limited website. Covers site usage, intellectual property, liability, and governing law.',
   alternates: { canonical: '/terms/' },
+  openGraph: {
+    title: 'Terms of Service | Reality Anchors',
+    description: 'Terms of Service for the Reality Anchors Limited website.',
+  },
 };
 
 const EFFECTIVE_DATE = '1 March 2026';

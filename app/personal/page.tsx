@@ -10,6 +10,7 @@ import { getTestimonialsForPage } from '@/data/testimonials';
 export const metadata: Metadata = {
   title: 'Personal Plans — Execution Guidance for Solo Operators',
   description: 'Practical execution layer for solo operators and small teams. $49-$349/month for 1-8 seats with offline-first operation.',
+  alternates: { canonical: '/personal/' },
   openGraph: {
     title: 'Personal Plans | Reality Anchors',
     description: 'Execution guidance for solo operators and small teams — fewer errors, cleaner handoffs, path to scale.',

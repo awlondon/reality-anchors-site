@@ -1,32 +1,45 @@
 import type { Metadata } from 'next';
+import { Inter, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import ProgressBar from '@/components/ProgressBar';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
 import ExperimentProvider from '@/components/ExperimentProvider';
+import CookieConsentBanner from '@/components/CookieConsentBanner';
 import { HOME_EXPERIMENT } from '@/lib/experiments/config';
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+  variable: '--font-mono',
+});
 
 export const metadata: Metadata = {
   title: {
-    default: 'Reality Anchors Limited | Operational Validation Platform',
+    default: 'Reality Anchors LLC | Operational Validation Platform',
     template: '%s | Reality Anchors',
   },
   description:
     'Reality Anchors delivers AI-assisted operational validation for fabrication, field, and operations teams — measurable scrap reduction, traceable workflows, and field-ready deployment.',
   metadataBase: new URL('https://realityanchorsltd.com'),
-  alternates: {
-    canonical: '/',
-  },
   openGraph: {
-    siteName: 'Reality Anchors Limited',
+    siteName: 'Reality Anchors LLC',
     type: 'website',
-    locale: 'en_AU',
+    locale: 'en_US',
     images: [
       {
         url: '/assets/brand/reality-anchors-lockup-dark.png',
         width: 1200,
         height: 630,
-        alt: 'Reality Anchors Limited — Operational Validation Platform',
+        alt: 'Reality Anchors LLC — Operational Validation Platform',
       },
     ],
   },
@@ -38,10 +51,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable}`}>
       <head>
         <link rel="icon" href="/assets/brand/favicon-dark.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#2e7deb" />
         {/* Security headers (meta-tag equivalents for static hosting) */}
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <meta httpEquiv="X-Frame-Options" content="DENY" />
@@ -51,20 +66,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GSC_VERIFICATION} />
         )}
         {/* Prefetch hints for external APIs */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://api.emailjs.com" />
         <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
-        {/* Google tag (gtag.js) — GA4 */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-FMPQLVL6E6" />
+        {/* Consent Mode v2 — must precede GTM/GA4 scripts */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FMPQLVL6E6');`,
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});`,
+          }}
+        />
+        {/* Google tag (gtag.js) — GA4 */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YEXZTYB87J" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `gtag('js',new Date());gtag('config','G-YEXZTYB87J');`,
           }}
         />
         {/* Google Tag Manager */}
@@ -100,6 +115,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <Navbar />
           {children}
         </ExperimentProvider>
+        <CookieConsentBanner />
       </body>
     </html>
   );

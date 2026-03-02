@@ -15,8 +15,8 @@ const config: Config = {
         'accent-2': '#6fb0ff',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['IBM Plex Mono', 'Consolas', 'monospace'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'Consolas', 'monospace'],
       },
     },
   },

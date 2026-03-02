@@ -7,6 +7,7 @@ import { ScrapBeforeAfter } from './Charts';
 export const metadata: Metadata = {
   title: 'Pricing Methodology — Transparent Value-Aligned Pricing',
   description: 'Published baseline models, conservative improvement deltas, and value-aligned subscription structure. No percentage-of-savings contracts.',
+  alternates: { canonical: '/pricing-methodology/' },
   openGraph: {
     title: 'Pricing Methodology | Reality Anchors',
     description: 'Transparent pricing methodology with published baseline models and conservative improvement deltas.',

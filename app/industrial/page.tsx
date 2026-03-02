@@ -10,6 +10,7 @@ import { getTestimonialsForPage } from '@/data/testimonials';
 export const metadata: Metadata = {
   title: 'Industrial Solutions — Enterprise Execution Validation at Scale',
   description: 'High-volume execution standardization with ERP integration, compliance-grade traceability, and enterprise commercial structure.',
+  alternates: { canonical: '/industrial/' },
   openGraph: {
     title: 'Industrial Solutions | Reality Anchors',
     description: 'Enterprise execution validation — ERP integration, compliance traceability, and high-volume operational controls.',
@@ -30,10 +31,10 @@ export default function IndustrialPage() {
             '@context': 'https://schema.org',
             '@type': 'Service',
             name: 'Reality Anchors Industrial',
-            provider: { '@type': 'Organization', name: 'Reality Anchors Limited' },
+            provider: { '@type': 'Organization', name: 'Reality Anchors LLC' },
             description: 'Enterprise execution validation — ERP integration, compliance traceability, and high-volume operational controls.',
             url: 'https://realityanchorsltd.com/industrial/',
-            areaServed: 'AU',
+            areaServed: 'US',
             serviceType: 'Industrial Execution Validation Software',
           }),
         }}

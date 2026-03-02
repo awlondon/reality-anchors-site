@@ -24,6 +24,11 @@ export function generateMetadata({ params }: Props): Metadata {
   return {
     title: `${regime.title} Program`,
     description: regime.description,
+    alternates: { canonical: `/regimes/${params.slug}/` },
+    openGraph: {
+      title: `${regime.title} Program | Reality Anchors`,
+      description: regime.description,
+    },
   };
 }
 
@@ -36,6 +41,21 @@ export default function RegimeDetailPage({ params }: Props) {
 
   return (
     <main className="pt-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: `${regime.title} Program`,
+            description: regime.description,
+            url: `https://realityanchorsltd.com/regimes/${params.slug}/`,
+            provider: { '@type': 'Organization', name: 'Reality Anchors LLC' },
+            serviceType: 'Fabrication Execution Validation',
+            areaServed: 'US',
+          }),
+        }}
+      />
       <section className="py-14 border-b border-line">
         <div className="max-w-5xl mx-auto px-6">
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Programs / {regime.tier}</p>

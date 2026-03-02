@@ -7,6 +7,7 @@ import QuickEstimateCalculator from './QuickEstimateCalculator';
 export const metadata: Metadata = {
   title: 'Quick Estimate — Scrap Recovery Calculator',
   description: 'Three sliders, instant results. Model your facility\'s annual scrap recovery and EBITDA impact in under 60 seconds.',
+  alternates: { canonical: '/calculator/' },
   openGraph: {
     title: 'Quick Estimate Calculator | Reality Anchors',
     description: 'Estimate your fabrication scrap savings in under 60 seconds with three simple inputs.',
@@ -16,6 +17,22 @@ export const metadata: Metadata = {
 export default function CalculatorPage() {
   return (
     <main id="main-content" className="pt-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebApplication',
+            name: 'Quick Estimate Calculator',
+            description: 'Estimate fabrication scrap savings and EBITDA impact in under 60 seconds with three simple inputs.',
+            url: 'https://realityanchorsltd.com/calculator/',
+            applicationCategory: 'BusinessApplication',
+            operatingSystem: 'Any',
+            offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+            provider: { '@type': 'Organization', name: 'Reality Anchors LLC' },
+          }),
+        }}
+      />
       {/* Header */}
       <section className="relative overflow-hidden py-16 border-b border-line">
         <PhotoBackground src="/images/cnc-precision.jpg" opacity={0.12} position="center 50%" />

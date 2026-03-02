@@ -11,6 +11,7 @@ import { ScrapRanges } from './Charts';
 export const metadata: Metadata = {
   title: 'Commercial Solutions — Execution Intelligence for Fabrication Yards',
   description: 'Execution-layer infrastructure for crews and yards. Value-amplification pricing aligned to measurable scrap reduction and margin improvement.',
+  alternates: { canonical: '/commercial/' },
   openGraph: {
     title: 'Commercial Solutions | Reality Anchors',
     description: 'Execution intelligence for fabrication yards — measurable scrap reduction, audit-ready workflows, and value-aligned pricing.',
@@ -31,10 +32,10 @@ export default function CommercialPage() {
             '@context': 'https://schema.org',
             '@type': 'Service',
             name: 'Reality Anchors Commercial',
-            provider: { '@type': 'Organization', name: 'Reality Anchors Limited' },
+            provider: { '@type': 'Organization', name: 'Reality Anchors LLC' },
             description: 'Execution intelligence for fabrication yards — measurable scrap reduction, audit-ready workflows, and value-aligned pricing.',
             url: 'https://realityanchorsltd.com/commercial/',
-            areaServed: 'AU',
+            areaServed: 'US',
             serviceType: 'Fabrication Execution Software',
           }),
         }}

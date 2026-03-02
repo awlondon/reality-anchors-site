@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import VideoShowcase from '@/components/VideoShowcase';
 import ValueBridge from '@/components/ValueBridge';
@@ -15,6 +16,10 @@ import { faqStructuredData } from '@/data/faq';
 import { getRegimes } from '@/lib/getRegimes';
 import { getTestimonialsForPage } from '@/data/testimonials';
 
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
+
 export default async function Home() {
   const regimes = await getRegimes();
   const testimonials = getTestimonialsForPage('home');
@@ -27,7 +32,7 @@ export default async function Home() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Organization',
-            name: 'Reality Anchors Limited',
+            name: 'Reality Anchors LLC',
             url: 'https://realityanchorsltd.com',
             description: 'AI-assisted operational validation for fabrication, field, and operations teams.',
           }),

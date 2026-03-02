@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { computeMarginImpact, type MarginImpactResults } from '@/lib/marginModel';
 import { setCalculatorContext } from '@/lib/calculatorContext';
+import { trackEvent } from '@/lib/analytics';
 import InputSection from './InputSection';
 import ResultPanel from './ResultPanel';
 import EnterpriseRollup from './EnterpriseRollup';

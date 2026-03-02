@@ -172,7 +172,7 @@ export default function QuickEstimateCalculator() {
         <div style={{ fontFamily: 'system-ui, sans-serif', color: '#0f172a' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem', paddingBottom: '1rem', borderBottom: '2px solid #e2e8f0' }}>
             <div>
-              <div style={{ fontWeight: 700, fontSize: '1.1rem' }}>Reality Anchors LLC</div>
+              <div style={{ fontWeight: 700, fontSize: '1.1rem' }}>Reality Anchors</div>
               <div style={{ color: '#64748b', fontSize: '0.8rem' }}>Scrap Recovery Estimate</div>
             </div>
             <div style={{ textAlign: 'right', fontSize: '0.75rem', color: '#94a3b8' }}>

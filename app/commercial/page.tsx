@@ -32,7 +32,7 @@ export default function CommercialPage() {
             '@context': 'https://schema.org',
             '@type': 'Service',
             name: 'Reality Anchors Commercial',
-            provider: { '@type': 'Organization', name: 'Reality Anchors LLC' },
+            provider: { '@type': 'Organization', name: 'Reality Anchors' },
             description: 'Execution intelligence for fabrication yards — measurable scrap reduction, audit-ready workflows, and value-aligned pricing.',
             url: 'https://realityanchorsltd.com/commercial/',
             areaServed: 'US',

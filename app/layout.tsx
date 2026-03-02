@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import ProgressBar from '@/components/ProgressBar';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
 import ExperimentProvider from '@/components/ExperimentProvider';
+import CookieConsentBanner from '@/components/CookieConsentBanner';
 import { HOME_EXPERIMENT } from '@/lib/experiments/config';
 
 const inter = Inter({
@@ -66,11 +67,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://api.emailjs.com" />
         <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
+        {/* Consent Mode v2 — must precede GTM/GA4 scripts */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});`,
+          }}
+        />
         {/* Google tag (gtag.js) — GA4 */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-YEXZTYB87J" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-YEXZTYB87J');`,
+            __html: `gtag('js',new Date());gtag('config','G-YEXZTYB87J');`,
           }}
         />
         {/* Google Tag Manager */}
@@ -106,6 +113,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <Navbar />
           {children}
         </ExperimentProvider>
+        <CookieConsentBanner />
       </body>
     </html>
   );

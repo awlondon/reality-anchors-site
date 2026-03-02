@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/privacy/' },
   openGraph: {
     title: 'Privacy Policy | Reality Anchors',
-    description: 'How Reality Anchors LLC collects, uses, and protects your information.',
+    description: 'How Reality Anchors collects, uses, and protects your information.',
   },
 };
 

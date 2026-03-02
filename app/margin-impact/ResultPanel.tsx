@@ -1,11 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { formatPct, formatUSD } from '@/lib/marginModel';
+import { formatPct, formatUSD, type MarginImpactResults } from '@/lib/marginModel';
 import AcronymHint from './AcronymHint';
 import EbitdaCompositionChart from '@/components/charts/EbitdaCompositionChart';
-
-type Results = any;
 
 function ResultCard({ title, value }: { title: string; value: string }) {
   return (
@@ -16,7 +14,7 @@ function ResultCard({ title, value }: { title: string; value: string }) {
   );
 }
 
-export default function ResultPanel({ results }: { results: Results }) {
+export default function ResultPanel({ results }: { results: MarginImpactResults }) {
   const annualEbitdaRef = useRef<HTMLDivElement | null>(null);
   const [isAnnualEbitdaVisible, setIsAnnualEbitdaVisible] = useState(false);
 

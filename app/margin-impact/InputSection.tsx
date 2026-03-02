@@ -20,12 +20,12 @@ type Inputs = {
 function NumInput({ label, value, onChange }: { label: string; value: number; onChange: (v: number) => void }) {
   return (
     <label className="block">
-      <span className="block text-sm text-neutral-600 mb-2">{label}</span>
+      <span className="block text-sm text-muted mb-2">{label}</span>
       <input
         type="number"
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm"
+        className="ra-input"
       />
     </label>
   );
@@ -36,8 +36,8 @@ export default function InputSection({ inputs, setInputs }: { inputs: Inputs; se
 
   return (
     <div className="space-y-10">
-      <section className="bg-white rounded-xl shadow-sm border border-neutral-200 p-6">
-        <h2 className="text-lg font-medium mb-6">Facility Profile</h2>
+      <section className="bg-card rounded-xl border border-line p-6">
+        <h2 className="text-lg font-medium text-txt mb-6">Facility Profile</h2>
         <div className="grid md:grid-cols-2 gap-6">
           <NumInput label="Annual Tons Processed" value={inputs.annualTonsProcessed} onChange={(v) => setField('annualTonsProcessed', v)} />
           <NumInput label="Avg Material Cost per Ton ($)" value={inputs.avgMaterialCostPerTon} onChange={(v) => setField('avgMaterialCostPerTon', v)} />
@@ -47,11 +47,11 @@ export default function InputSection({ inputs, setInputs }: { inputs: Inputs; se
         </div>
       </section>
 
-      <section className="bg-white rounded-xl shadow-sm border border-neutral-200 p-6">
-        <h2 className="text-lg font-medium mb-6">Impact Assumptions</h2>
+      <section className="bg-card rounded-xl border border-line p-6">
+        <h2 className="text-lg font-medium text-txt mb-6">Impact Assumptions</h2>
         <div className="space-y-8">
           <div>
-            <h3 className="text-sm font-semibold text-neutral-700 mb-3">Material Efficiency</h3>
+            <h3 className="text-sm font-semibold text-txt mb-3">Material Efficiency</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <NumInput label="Current Scrap Rate (%)" value={inputs.currentScrapRatePct} onChange={(v) => setField('currentScrapRatePct', v)} />
               <NumInput label="Target Scrap Rate (%)" value={inputs.targetScrapRatePct} onChange={(v) => setField('targetScrapRatePct', v)} />
@@ -59,7 +59,7 @@ export default function InputSection({ inputs, setInputs }: { inputs: Inputs; se
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-neutral-700 mb-3">Labor Rework</h3>
+            <h3 className="text-sm font-semibold text-txt mb-3">Labor Rework</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <NumInput label="Preventable Rework (% of labor)" value={inputs.preventableReworkLaborPct} onChange={(v) => setField('preventableReworkLaborPct', v)} />
               <NumInput label="Rework Reduction (%)" value={inputs.reworkReductionPct} onChange={(v) => setField('reworkReductionPct', v)} />
@@ -67,19 +67,19 @@ export default function InputSection({ inputs, setInputs }: { inputs: Inputs; se
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-neutral-700 mb-3">Throughput Capacity</h3>
+            <h3 className="text-sm font-semibold text-txt mb-3">Throughput Capacity</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <NumInput label="Throughput Improvement (%)" value={inputs.throughputImprovementPct} onChange={(v) => setField('throughputImprovementPct', v)} />
             </div>
           </div>
 
-          <details className="border border-neutral-200 rounded-lg p-4" open={inputs.includeOversightRisk}>
-            <summary className="cursor-pointer text-sm font-semibold text-neutral-700">Include Oversight & Risk Model</summary>
+          <details className="border border-line rounded-lg p-4" open={inputs.includeOversightRisk}>
+            <summary className="cursor-pointer text-sm font-semibold text-txt">Include Oversight & Risk Model</summary>
             <div className="mt-4 grid md:grid-cols-2 gap-6">
               <NumInput label="Annual QA / Inspection Cost ($)" value={inputs.annualQALaborCost} onChange={(v) => setField('annualQALaborCost', v)} />
               <NumInput label="Annual Major Error Cost ($)" value={inputs.annualMajorErrorCost} onChange={(v) => setField('annualMajorErrorCost', v)} />
               <NumInput label="Error Reduction (%)" value={inputs.errorReductionPct} onChange={(v) => setField('errorReductionPct', v)} />
-              <label className="flex items-end gap-2 text-sm text-neutral-700">
+              <label className="flex items-end gap-2 text-sm text-muted">
                 <input type="checkbox" checked={inputs.includeOversightRisk} onChange={(e) => setField('includeOversightRisk', e.target.checked)} />
                 Enable oversight/risk contribution
               </label>

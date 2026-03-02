@@ -68,6 +68,7 @@ export default function Hero() {
         src="/images/hero-welding.jpg"
         alt=""
         aria-hidden="true"
+        loading="lazy"
         decoding="async"
         className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity"
       />

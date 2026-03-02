@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/terms/' },
   openGraph: {
     title: 'Terms of Service | Reality Anchors',
-    description: 'Terms of Service for the Reality Anchors LLC website.',
+    description: 'Terms governing use of the Reality Anchors website and services.',
   },
 };
 

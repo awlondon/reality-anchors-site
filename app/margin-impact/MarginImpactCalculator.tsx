@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { computeMarginImpact } from '@/lib/marginModel';
+import { computeMarginImpact, type MarginImpactResults } from '@/lib/marginModel';
 import { setCalculatorContext } from '@/lib/calculatorContext';
 import InputSection from './InputSection';
 import ResultPanel from './ResultPanel';
@@ -29,7 +29,7 @@ const REVEAL_DURATION_MS = 2500;
 
 export default function MarginImpactCalculator() {
   const [inputs, setInputs] = useState(defaultInputs);
-  const [results, setResults] = useState<any>(null);
+  const [results, setResults] = useState<MarginImpactResults | null>(null);
   const [showAnnualImpact, setShowAnnualImpact] = useState(false);
   const [error, setError] = useState('');
   const resultsRef = useRef<HTMLDivElement | null>(null);
@@ -100,23 +100,23 @@ export default function MarginImpactCalculator() {
         throughputContribution: computed.throughput.ebitdaContribution,
         oversightRiskSaved: computed.oversightRisk.dollarsSaved,
       });
-    } catch (e: any) {
-      setError(e?.message || 'Unable to compute model.');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Unable to compute model.');
       setResults(null);
     }
   }
 
   return (
     <div className="space-y-12">
-      <section className="bg-white rounded-xl border border-neutral-200 p-6">
+      <section className="bg-card rounded-xl border border-line p-6">
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div>
-            <h2 className="text-lg font-medium">Execution errors quietly erode margin.</h2>
-            <p className="mt-2 text-sm text-neutral-600">This model estimates <AcronymHint acronym="EBITDA" caption="Earnings Before Interest, Taxes, Depreciation, and Amortization" /> impact from material efficiency, labor efficiency, throughput capacity, and oversight risk reduction.</p>
+            <h2 className="text-lg font-medium text-txt">Execution errors quietly erode margin.</h2>
+            <p className="mt-2 text-sm text-muted">This model estimates <AcronymHint acronym="EBITDA" caption="Earnings Before Interest, Taxes, Depreciation, and Amortization" /> impact from material efficiency, labor efficiency, throughput capacity, and oversight risk reduction.</p>
           </div>
-          <div className="rounded-lg border border-neutral-200 p-4 text-sm min-w-56">
-            <div className="text-neutral-500">Signal</div>
-            <div className="font-semibold mt-1">A 1% scrap shift can materially impact EBITDA.</div>
+          <div className="rounded-lg border border-line p-4 text-sm min-w-56">
+            <div className="text-muted">Signal</div>
+            <div className="font-semibold text-txt mt-1">A 1% scrap shift can materially impact EBITDA.</div>
           </div>
         </div>
       </section>
@@ -124,12 +124,12 @@ export default function MarginImpactCalculator() {
       <InputSection inputs={inputs} setInputs={setInputs} />
 
       <div className="flex justify-center">
-        <button onClick={handleCalculate} className="bg-black text-white px-6 py-3 rounded-md text-sm font-medium hover:bg-neutral-800 transition">
+        <button onClick={handleCalculate} className="bg-accent hover:bg-blue-500 text-white px-6 py-3 rounded-md text-sm font-medium transition">
           Calculate Margin Impact
         </button>
       </div>
 
-      {error && <p className="text-sm text-red-600 text-center">{error}</p>}
+      {error && <p className="text-sm text-red-400 text-center">{error}</p>}
 
       {results && (
         <div ref={resultsRef} className="space-y-12">

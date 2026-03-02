@@ -3,6 +3,10 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   alternates: { canonical: '/privacy/' },
+  openGraph: {
+    title: 'Privacy Policy | Reality Anchors',
+    description: 'How Reality Anchors collects, uses, and protects your information.',
+  },
 };
 
 const EFFECTIVE_DATE = '1 March 2026';

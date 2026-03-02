@@ -82,7 +82,7 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
       });
       setSubmitted(true);
     } catch (err) {
-      console.error('Email send failed:', err);
+      if (process.env.NODE_ENV === 'development') console.error('Email send failed:', err);
       setSubmitError('Something went wrong while submitting your request. Please try again.');
     } finally {
       setLoading(false);
@@ -99,13 +99,13 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
       // Send confirmation email to submitter (best-effort)
       const calcCtx = getCalculatorContext();
       const confirmParams = buildConfirmationParams(calcCtx, formName);
-      console.log('[LeadForm] Confirmation params:', JSON.stringify(confirmParams));
+      if (process.env.NODE_ENV === 'development') console.log('[LeadForm] Confirmation params:', JSON.stringify(confirmParams));
       sendConfirmationEmail({
         email: formEmail,
         name: formName,
         company: formCompany,
         params: { ...confirmParams },
-      }).catch((err) => console.warn('Confirmation email failed (non-critical):', err));
+      }).catch((err) => { if (process.env.NODE_ENV === 'development') console.warn('Confirmation email failed (non-critical):', err); });
 
       // Persist to Firebase (best-effort backup)
       saveLead({
@@ -116,7 +116,7 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
         message: formMessage,
         sessionId,
         regimeId: attributedRegime,
-      }).catch((err) => console.warn('Firebase save failed (non-critical):', err));
+      }).catch((err) => { if (process.env.NODE_ENV === 'development') console.warn('Firebase save failed (non-critical):', err); });
 
       window.dispatchEvent(
         new CustomEvent('analytics', {
@@ -141,7 +141,7 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
       trackEvent('lead_submitted', { role: formRole, regimeId: attributedRegime ?? 'unknown' });
     } catch (sideEffectErr) {
       // Non-critical side effects — log but don't block form completion
-      console.warn('Post-submit side effects failed (non-critical):', sideEffectErr);
+      if (process.env.NODE_ENV === 'development') console.warn('Post-submit side effects failed (non-critical):', sideEffectErr);
     }
   };
 

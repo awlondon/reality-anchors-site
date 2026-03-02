@@ -3,7 +3,7 @@
 import { useState, useEffect, type ReactNode } from 'react';
 
 const ACCESS_KEY = 'ra_exec_access';
-const VALID_CODE = 'ra2026'; // Simple gate — not a security boundary
+const VALID_CODE = process.env.NEXT_PUBLIC_EXEC_ACCESS_CODE ?? 'ra2026'; // env-configurable gate — not a security boundary
 
 export default function AccessGate({ children }: { children: ReactNode }) {
   const [authorized, setAuthorized] = useState(false);

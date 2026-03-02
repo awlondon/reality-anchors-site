@@ -3,18 +3,45 @@
  * Keep this as a pure function layer so UI can be swapped without touching math.
  */
 
-function clamp(num, min, max) {
+function clamp(num: number, min: number, max: number): number {
   return Math.min(Math.max(num, min), max);
 }
 
-function pctToFrac(pct) {
+function pctToFrac(pct: number): number {
   return pct / 100;
 }
 
 const REFERENCE_ANNUAL_TONS = 25000;
 
-function validateInputs(i) {
-  const required = [
+export interface MarginImpactInputs {
+  annualTonsProcessed: number;
+  avgMaterialCostPerTon: number;
+  annualFabricationRevenue: number;
+  annualFabricationLaborCost: number;
+  incrementalContributionMarginPct: number;
+  currentScrapRatePct: number;
+  targetScrapRatePct: number;
+  preventableReworkLaborPct: number;
+  reworkReductionPct: number;
+  throughputImprovementPct: number;
+  includeOversightRisk: boolean;
+  annualQALaborCost?: number;
+  annualMajorErrorCost?: number;
+  errorReductionPct?: number;
+  skipVolumeScale?: boolean;
+}
+
+export interface MarginImpactResults {
+  material: { tonsSaved: number; dollarsSaved: number };
+  labor: { dollarsSaved: number };
+  throughput: { incrementalRevenue: number; ebitdaContribution: number };
+  oversightRisk: { dollarsSaved: number };
+  totals: { annualEbitdaIncrease: number; ebitdaMarginImprovementPct: number };
+  pricing: { lowFrictionAnnual: number; baseAnnual: number; aggressiveAnnual: number };
+}
+
+function validateInputs(i: MarginImpactInputs): void {
+  const required: (keyof MarginImpactInputs)[] = [
     'annualTonsProcessed',
     'avgMaterialCostPerTon',
     'annualFabricationRevenue',
@@ -40,15 +67,15 @@ function validateInputs(i) {
   if (i.annualFabricationLaborCost < 0) throw new Error('annualFabricationLaborCost must be >= 0');
 
   if (i.includeOversightRisk) {
-    const opt = ['annualQALaborCost', 'annualMajorErrorCost', 'errorReductionPct'];
+    const opt: (keyof MarginImpactInputs)[] = ['annualQALaborCost', 'annualMajorErrorCost', 'errorReductionPct'];
     for (const k of opt) {
       if (typeof i[k] !== 'number') throw new Error(`Missing oversight/risk input: ${k}`);
-      if (i[k] < 0) throw new Error(`${k} must be >= 0`);
+      if ((i[k] as number) < 0) throw new Error(`${k} must be >= 0`);
     }
   }
 }
 
-export function computeMarginImpact(inputs) {
+export function computeMarginImpact(inputs: MarginImpactInputs): MarginImpactResults {
   validateInputs(inputs);
 
   const currentScrap = clamp(inputs.currentScrapRatePct, 0, 100);
@@ -81,9 +108,9 @@ export function computeMarginImpact(inputs) {
 
   let oversightRiskDollarsSaved = 0;
   if (inputs.includeOversightRisk) {
-    const errRed = clamp(inputs.errorReductionPct, 0, 100);
-    const qaSaved = (inputs.annualQALaborCost * volumeScale) * pctToFrac(errRed);
-    const majorErrSaved = (inputs.annualMajorErrorCost * volumeScale) * pctToFrac(errRed);
+    const errRed = clamp(inputs.errorReductionPct ?? 0, 0, 100);
+    const qaSaved = ((inputs.annualQALaborCost ?? 0) * volumeScale) * pctToFrac(errRed);
+    const majorErrSaved = ((inputs.annualMajorErrorCost ?? 0) * volumeScale) * pctToFrac(errRed);
     oversightRiskDollarsSaved = qaSaved + majorErrSaved;
   }
 
@@ -107,7 +134,7 @@ export function computeMarginImpact(inputs) {
   };
 }
 
-export function formatUSD(value, { maximumFractionDigits = 0 } = {}) {
+export function formatUSD(value: number, { maximumFractionDigits = 0 } = {}): string {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -115,10 +142,10 @@ export function formatUSD(value, { maximumFractionDigits = 0 } = {}) {
   }).format(Number.isFinite(value) ? value : 0);
 }
 
-export function formatNumber(value, { maximumFractionDigits = 2 } = {}) {
+export function formatNumber(value: number, { maximumFractionDigits = 2 } = {}): string {
   return new Intl.NumberFormat('en-US', { maximumFractionDigits }).format(Number.isFinite(value) ? value : 0);
 }
 
-export function formatPct(value, { maximumFractionDigits = 1 } = {}) {
+export function formatPct(value: number, { maximumFractionDigits = 1 } = {}): string {
   return `${formatNumber(value, { maximumFractionDigits })}%`;
 }

@@ -55,6 +55,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="icon" href="/assets/brand/favicon-dark.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#2e7deb" />
         {/* Security headers (meta-tag equivalents for static hosting) */}
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <meta httpEquiv="X-Frame-Options" content="DENY" />

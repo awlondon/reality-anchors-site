@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import MarginImpactCalculator from './MarginImpactCalculator';
 
 export const metadata: Metadata = {
@@ -39,6 +40,28 @@ export default function MarginImpactPage() {
         </header>
 
         <MarginImpactCalculator />
+
+        {/* CTA */}
+        <div className="mt-14 bg-white rounded-xl border border-neutral-200 p-8 text-center">
+          <h2 className="text-lg font-semibold text-neutral-900 mb-2">Ready to validate these numbers?</h2>
+          <p className="text-neutral-600 text-sm mb-6 max-w-md mx-auto">
+            Share your model with our team for a scoped assessment against your actual shop data — no commitment required.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/commercial/#contact"
+              className="px-6 py-3 rounded-lg bg-black hover:bg-neutral-800 text-white text-sm font-semibold transition-all hover:-translate-y-px hover:shadow-lg"
+            >
+              Request a scoped assessment
+            </Link>
+            <Link
+              href="/calculator/"
+              className="px-6 py-3 rounded-lg border border-neutral-200 hover:border-neutral-400 text-neutral-700 text-sm font-medium transition-all"
+            >
+              ← Back to Quick Estimate
+            </Link>
+          </div>
+        </div>
       </div>
     </main>
   );

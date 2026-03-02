@@ -24,6 +24,11 @@ export function generateMetadata({ params }: Props): Metadata {
   return {
     title: `${regime.title} Program`,
     description: regime.description,
+    alternates: { canonical: `/regimes/${params.slug}/` },
+    openGraph: {
+      title: `${regime.title} Program | Reality Anchors`,
+      description: regime.description,
+    },
   };
 }
 

@@ -4,6 +4,7 @@ import MarginImpactCalculator from './MarginImpactCalculator';
 export const metadata: Metadata = {
   title: 'Margin Impact Calculator — Quantify EBITDA Uplift',
   description: 'Interactive tool to model the EBITDA impact of structured execution validation across material, labor, throughput, and oversight costs.',
+  alternates: { canonical: '/margin-impact/' },
   openGraph: {
     title: 'Margin Impact Calculator | Reality Anchors',
     description: 'Quantify the EBITDA impact of execution validation for your fabrication operation.',

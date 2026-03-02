@@ -10,6 +10,7 @@ import { getTestimonialsForPage } from '@/data/testimonials';
 export const metadata: Metadata = {
   title: 'Industrial Solutions — Enterprise Execution Validation at Scale',
   description: 'High-volume execution standardization with ERP integration, compliance-grade traceability, and enterprise commercial structure.',
+  alternates: { canonical: '/industrial/' },
   openGraph: {
     title: 'Industrial Solutions | Reality Anchors',
     description: 'Enterprise execution validation — ERP integration, compliance traceability, and high-volume operational controls.',

@@ -7,6 +7,7 @@ import QuickEstimateCalculator from './QuickEstimateCalculator';
 export const metadata: Metadata = {
   title: 'Quick Estimate — Scrap Recovery Calculator',
   description: 'Three sliders, instant results. Model your facility\'s annual scrap recovery and EBITDA impact in under 60 seconds.',
+  alternates: { canonical: '/calculator/' },
   openGraph: {
     title: 'Quick Estimate Calculator | Reality Anchors',
     description: 'Estimate your fabrication scrap savings in under 60 seconds with three simple inputs.',

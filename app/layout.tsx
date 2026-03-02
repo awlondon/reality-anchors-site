@@ -14,9 +14,6 @@ export const metadata: Metadata = {
   description:
     'Reality Anchors delivers AI-assisted operational validation for fabrication, field, and operations teams — measurable scrap reduction, traceable workflows, and field-ready deployment.',
   metadataBase: new URL('https://realityanchorsltd.com'),
-  alternates: {
-    canonical: '/',
-  },
   openGraph: {
     siteName: 'Reality Anchors Limited',
     type: 'website',
@@ -61,10 +58,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
         {/* Google tag (gtag.js) — GA4 */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-FMPQLVL6E6" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YEXZTYB87J" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FMPQLVL6E6');`,
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-YEXZTYB87J');`,
           }}
         />
         {/* Google Tag Manager */}

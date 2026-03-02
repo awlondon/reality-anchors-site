@@ -178,16 +178,16 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
           >
             <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-4">Get in Touch</p>
             <h2 className="text-3xl md:text-4xl font-semibold text-txt mb-5 leading-tight">
-              {heading || 'Request a scoped consultation'}
+              {heading || 'See if it fits your operation'}
             </h2>
             <p className="text-muted leading-relaxed mb-8">
-              {description || 'Complete the form and we\'ll return with a fit assessment, suggested rollout scope, and a timeline for value realization.'}
+              {description || 'Complete the form and we\'ll return with a fit assessment, suggested rollout scope, and an estimate of what you could save.'}
             </p>
             <ul className="flex flex-col gap-3">
               {[
-                'Role-specific solution mapping for operations, engineering, and procurement.',
-                'Estimated savings ranges by segment and material throughput.',
-                'Optional technical deep-dive with architecture and governance review.',
+                'Tailored walkthrough for your role — operations, engineering, or procurement.',
+                'Savings estimate based on your material throughput and scrap profile.',
+                'Optional technical deep-dive covering architecture, integration, and governance.',
               ].map((item) => (
                 <li key={item} className="flex gap-3 text-sm text-muted">
                   <svg className="w-4 h-4 text-accent shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">

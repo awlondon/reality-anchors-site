@@ -413,7 +413,7 @@ function Scene3() {
       {/* ── Caption graphic ───────────────────────────────────── */}
       <rect x="0" y="370" width="800" height="80" fill="url(#captionFade3)" />
       <text x="400" y="410" textAnchor="middle" fill={C.txt} fontSize="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="600" letterSpacing="0.5">
-        Computation guides every angle to specification.
+        Every bend is verified against the spec in real time.
       </text>
       <line x1="230" y1="425" x2="570" y2="425" stroke={C.accent} strokeWidth="2" opacity="0.4" />
 
@@ -446,7 +446,7 @@ const SCENE_COMPONENTS = [Scene1, Scene2, Scene3];
 const CAPTIONS = [
   'Every bar of steel carries a specification.',
   'AI vision confirms the cut before the blade moves.',
-  'Computation guides every angle to specification.',
+  'Every bend is verified against the spec in real time.',
 ];
 
 /* ═══════════════════════════════════════════════════════════════

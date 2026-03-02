@@ -50,7 +50,7 @@ export default function RegimeDetailPage({ params }: Props) {
             name: `${regime.title} Program`,
             description: regime.description,
             url: `https://realityanchorsltd.com/regimes/${params.slug}/`,
-            provider: { '@type': 'Organization', name: 'Reality Anchors Limited' },
+            provider: { '@type': 'Organization', name: 'Reality Anchors LLC' },
             serviceType: 'Fabrication Execution Validation',
             areaServed: 'US',
           }),

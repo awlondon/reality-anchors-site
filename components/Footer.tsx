@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="flex items-center gap-3">
           <Image src="/assets/brand/svg/logo-ra-speed-square-dark.svg" alt="Reality Anchors" width={36} height={36} className="h-9 w-auto" />
           <div>
-            <div className="text-sm font-semibold text-txt">Reality Anchors Limited</div>
+            <div className="text-sm font-semibold text-txt">Reality Anchors LLC</div>
             <div className="text-xs text-muted">Measured. Anchored. Deterministic.</div>
           </div>
         </div>
@@ -27,7 +27,7 @@ export default function Footer() {
         </nav>
 
         <div className="text-xs text-muted/80">
-          © {new Date().getFullYear()} Reality Anchors Limited
+          © {new Date().getFullYear()} Reality Anchors LLC
         </div>
       </div>
     </footer>

@@ -26,7 +26,7 @@ export default function MarginImpactPage() {
             applicationCategory: 'BusinessApplication',
             operatingSystem: 'Any',
             offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-            provider: { '@type': 'Organization', name: 'Reality Anchors Limited' },
+            provider: { '@type': 'Organization', name: 'Reality Anchors LLC' },
           }),
         }}
       />

@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: 'How Reality Anchors Limited collects, uses, and protects your information when you use our website and services.',
+  description: 'How Reality Anchors LLC collects, uses, and protects your information when you use our website and services.',
   alternates: { canonical: '/privacy/' },
   openGraph: {
     title: 'Privacy Policy | Reality Anchors',
-    description: 'How Reality Anchors Limited collects, uses, and protects your information.',
+    description: 'How Reality Anchors LLC collects, uses, and protects your information.',
   },
 };
 
@@ -24,7 +24,7 @@ export default function PrivacyPage() {
         <div className="prose-legal">
           <Section title="1. Who we are">
             <p>
-              Reality Anchors Limited (&quot;Reality Anchors&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) operates the website at{' '}
+              Reality Anchors LLC (&quot;Reality Anchors&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) operates the website at{' '}
               <a href="https://realityanchorsltd.com">realityanchorsltd.com</a> and provides operational validation
               software for fabrication and industrial operations.
             </p>

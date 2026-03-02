@@ -63,7 +63,7 @@ export default function PersonalPage() {
             name: 'Reality Anchors Personal',
             description: 'Execution guidance for solo operators and small teams — fewer errors, cleaner handoffs, path to scale.',
             url: 'https://realityanchorsltd.com/personal/',
-            brand: { '@type': 'Organization', name: 'Reality Anchors Limited' },
+            brand: { '@type': 'Organization', name: 'Reality Anchors LLC' },
             offers: {
               '@type': 'AggregateOffer',
               priceCurrency: 'USD',

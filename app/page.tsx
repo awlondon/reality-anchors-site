@@ -32,7 +32,7 @@ export default async function Home() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Organization',
-            name: 'Reality Anchors Limited',
+            name: 'Reality Anchors LLC',
             url: 'https://realityanchorsltd.com',
             description: 'AI-assisted operational validation for fabrication, field, and operations teams.',
           }),

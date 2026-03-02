@@ -146,7 +146,7 @@ export default function QuickEstimateCalculator() {
     window.print();
   }, [totalEbitda]);
 
-  const today = new Date().toLocaleDateString('en-AU', {
+  const today = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

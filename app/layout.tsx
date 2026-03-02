@@ -24,14 +24,14 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Reality Anchors LLC | Operational Validation Platform',
+    default: 'Reality Anchors | Operational Validation Platform',
     template: '%s | Reality Anchors',
   },
   description:
     'Reality Anchors delivers AI-assisted operational validation for fabrication, field, and operations teams — measurable scrap reduction, traceable workflows, and field-ready deployment.',
   metadataBase: new URL('https://realityanchorsltd.com'),
   openGraph: {
-    siteName: 'Reality Anchors LLC',
+    siteName: 'Reality Anchors',
     type: 'website',
     locale: 'en_US',
     images: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         url: '/assets/brand/reality-anchors-lockup-dark.png',
         width: 1200,
         height: 630,
-        alt: 'Reality Anchors LLC — Operational Validation Platform',
+        alt: 'Reality Anchors — Operational Validation Platform',
       },
     ],
   },

@@ -34,7 +34,7 @@ export default async function Home() {
             '@type': 'Organization',
             name: 'Reality Anchors',
             url: 'https://realityanchorsltd.com',
-            description: 'AI-assisted operational validation for fabrication, field, and operations teams.',
+            description: 'AI-guided validation for steel fabrication teams. Reduce scrap, eliminate rework, and build traceable execution records.',
           }),
         }}
       />

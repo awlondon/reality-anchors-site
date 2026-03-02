@@ -53,7 +53,7 @@ export default function ValueBridge() {
       icon: <GuideIcon />,
       tag: 'GUIDE',
       title: 'Action-Ready Guidance',
-      body: 'Translate planning outputs into clear, execution-ready workstation actions. Validated execution reduces interpretation drift — while preserving upstream system continuity.',
+      body: 'Turn cut lists and schedules into clear, step-by-step workstation actions. Operators know exactly what to do next — no second-guessing drawings or manual look-ups.',
       metric: siteMetrics.valueBridge.governMetric,
       metricSuffix: 'fabrication errors',
     },
@@ -61,7 +61,7 @@ export default function ValueBridge() {
       icon: <ValidateIcon />,
       tag: 'VALIDATE',
       title: 'In-Process Verification',
-      body: 'Each step is verified against live job context and facility parameters. Catches deviations before they propagate into scrap, delay, and rework.',
+      body: 'Each step is checked against the live job and machine profile. Deviations are caught before they turn into scrap, delay, or rework.',
       metric: siteMetrics.valueBridge.optimizeMetric,
       metricSuffix: 'max scrap reduction',
     },
@@ -69,7 +69,7 @@ export default function ValueBridge() {
       icon: <RecordIcon />,
       tag: 'RECORD',
       title: 'Operational Traceability',
-      body: 'Every decision logged & reproducible. Upstream platforms gain cleaner material, timing, and performance feedback over time.',
+      body: 'Every decision logged and reproducible. Your ERP, detailing, and QA systems get cleaner data on material use, timing, and performance.',
       metric: siteMetrics.valueBridge.traceMetric,
       metricSuffix: 'execution accuracy',
     },
@@ -87,7 +87,7 @@ export default function ValueBridge() {
           className="flex flex-col items-center gap-5"
         >
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent">
-            Execution Infrastructure Value
+            How It Adds Up
           </p>
 
           <div

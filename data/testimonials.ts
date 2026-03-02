@@ -12,7 +12,7 @@ export const testimonials: Testimonial[] = [
   {
     id: 'ops-manager-yard',
     quote:
-      'Honestly, the biggest thing was catching bad cuts before they left the shop. We were eating 34% less rework by the end of Q1 \u2014 and that number kept dropping.',
+      'Rework dropped 34% in the first quarter and scrap fell from 6.1% to 4.3%. The biggest shift was catching bad cuts before they left the bench — not after they hit the field.',
     attribution: 'Operations Manager',
     company: '200-person fabrication yard',
     backgroundSrc: '/images/operator-work.jpg',
@@ -21,7 +21,7 @@ export const testimonials: Testimonial[] = [
   {
     id: 'engineering-lead-steel',
     quote:
-      'My detailers were spending half their day chasing down RFIs. Now the checks happen at the bench, so they can actually focus on production drawings instead of cleaning up mistakes after the fact.',
+      'RFI volume dropped 41% in two months. Now checks happen at the bench so my detailers focus on production drawings instead of cleaning up mistakes after the fact.',
     attribution: 'Engineering Lead',
     company: 'Structural steel shop, 45 employees',
     backgroundSrc: '/images/sparks-metal.jpg',
@@ -30,7 +30,7 @@ export const testimonials: Testimonial[] = [
   {
     id: 'safety-coordinator-home',
     quote:
-      'We used to find out about a tolerance issue when the piece didn\u2019t fit on site. Now the operator knows before the torch even lights. It\u2019s a completely different way of working.',
+      'Field rejections went from about twelve a month to two. The operator catches the tolerance issue before the torch even lights — completely different way of working.',
     attribution: 'Safety Coordinator',
     company: 'Mid-Atlantic steel erector, 120 field crew',
     backgroundSrc: '/images/team-collaboration.jpg',
@@ -39,7 +39,7 @@ export const testimonials: Testimonial[] = [
   {
     id: 'it-director-multisite',
     quote:
-      'I braced for a six-month integration headache. Turned out we had three sites live in under a month with zero on-prem infrastructure. When I showed the numbers to the CFO, the ROI conversation was already over.',
+      'Three sites live in under four weeks, zero on-prem infrastructure, and a 7.2x ROI in the first year. When I showed the CFO, the conversation was already over.',
     attribution: 'IT Director',
     company: 'Multi-site fabricator, 600+ employees',
     backgroundSrc: '/images/commercial-fabrication.jpg',

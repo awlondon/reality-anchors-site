@@ -83,12 +83,12 @@ export default function Features() {
           variants={fadeUp}
           className="mb-14"
         >
-          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Strategic Role in the Fabrication Stack</p>
+          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">What It Covers</p>
           <h2 className="text-3xl md:text-4xl font-semibold text-txt max-w-3xl leading-tight">
-            Closed-loop execution intelligence for fabrication operations
+            From bench execution to fleet-wide oversight
           </h2>
           <p className="mt-4 text-muted max-w-2xl">
-            We complement detailing and ERP systems by converting planning intent into verified execution outcomes and feedback-ready telemetry.
+            Reality Anchors works alongside your detailing and ERP systems — turning plans into verified outcomes on the shop floor.
           </p>
         </motion.div>
 

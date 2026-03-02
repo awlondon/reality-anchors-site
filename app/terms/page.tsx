@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
-  description: 'Terms of Service for the Reality Anchors Limited website. Covers site usage, intellectual property, liability, and governing law.',
+  description: 'Terms of Service for the Reality Anchors LLC website. Covers site usage, intellectual property, liability, and governing law.',
   alternates: { canonical: '/terms/' },
   openGraph: {
     title: 'Terms of Service | Reality Anchors',
-    description: 'Terms of Service for the Reality Anchors Limited website.',
+    description: 'Terms of Service for the Reality Anchors LLC website.',
   },
 };
 
@@ -43,7 +43,7 @@ export default function TermsPage() {
           <Section title="3. Intellectual property">
             <p>
               All content on this Site — including text, graphics, product descriptions, data models, and software —
-              is the property of Reality Anchors Limited or its licensors and is protected by applicable intellectual
+              is the property of Reality Anchors LLC or its licensors and is protected by applicable intellectual
               property laws. Nothing on this Site grants you any licence to use our intellectual property without
               express written permission.
             </p>
@@ -68,9 +68,9 @@ export default function TermsPage() {
 
           <Section title="6. Limitation of liability">
             <p>
-              To the fullest extent permitted by law, Reality Anchors Limited shall not be liable for any indirect,
+              To the fullest extent permitted by law, Reality Anchors LLC shall not be liable for any indirect,
               incidental, consequential, or punitive damages arising from your use of the Site. Our total liability
-              for any claim arising from Site use shall not exceed AUD $100.
+              for any claim arising from Site use shall not exceed USD $100.
             </p>
           </Section>
 
@@ -83,8 +83,9 @@ export default function TermsPage() {
 
           <Section title="8. Governing law">
             <p>
-              These Terms are governed by the laws of New South Wales, Australia. Any disputes arising under these
-              Terms shall be subject to the exclusive jurisdiction of the courts of New South Wales.
+              These Terms are governed by the laws of the State of California, United States. Any disputes arising
+              under these Terms shall be subject to the exclusive jurisdiction of the state and federal courts
+              located in California.
             </p>
           </Section>
 

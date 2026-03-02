@@ -81,7 +81,7 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
             priority
           />
           <span className="hidden sm:block text-xs font-semibold tracking-widest uppercase text-txt/80 leading-tight">
-            Reality Anchors Ltd.
+            Reality Anchors LLC
           </span>
         </Link>
 

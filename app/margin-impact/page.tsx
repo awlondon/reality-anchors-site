@@ -25,8 +25,8 @@ export default function MarginImpactPage() {
             url: 'https://realityanchorsltd.com/margin-impact/',
             applicationCategory: 'BusinessApplication',
             operatingSystem: 'Any',
-            offers: { '@type': 'Offer', price: '0', priceCurrency: 'AUD' },
-            provider: { '@type': 'Organization', name: 'Reality Anchors Limited' },
+            offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+            provider: { '@type': 'Organization', name: 'Reality Anchors LLC' },
           }),
         }}
       />

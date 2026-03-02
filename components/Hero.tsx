@@ -175,7 +175,7 @@ export default function Hero() {
           transition={{ duration: 0.55, delay: 0.32 }}
           className="mt-6 text-lg text-muted max-w-2xl leading-relaxed"
         >
-          AI-guided fabrication execution that reduces scrap, eliminates rework, and turns material waste into margin. Built for yards that run on specifications, not guesswork.
+          AI-guided validation that reduces scrap, eliminates rework, and turns material waste into margin. Built for fabrication yards that run on specifications, not guesswork.
         </motion.p>
 
         <motion.div

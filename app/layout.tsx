@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: '%s | Reality Anchors',
   },
   description:
-    'Reality Anchors delivers AI-assisted operational validation for fabrication, field, and operations teams — measurable scrap reduction, traceable workflows, and field-ready deployment.',
+    'AI-guided validation for steel fabrication teams. Reduce scrap, eliminate rework, and build traceable execution records — from a single bench to an enterprise fleet.',
   metadataBase: new URL('https://realityanchorsltd.com'),
   alternates: {
     canonical: '/',

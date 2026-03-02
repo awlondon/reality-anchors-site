@@ -1,10 +1,25 @@
 import type { Metadata } from 'next';
+import { Inter, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import ProgressBar from '@/components/ProgressBar';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
 import ExperimentProvider from '@/components/ExperimentProvider';
 import { HOME_EXPERIMENT } from '@/lib/experiments/config';
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+  variable: '--font-mono',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -35,7 +50,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable}`}>
       <head>
         <link rel="icon" href="/assets/brand/favicon-dark.png" />
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
@@ -48,15 +63,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GSC_VERIFICATION} />
         )}
         {/* Prefetch hints for external APIs */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://api.emailjs.com" />
         <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
         {/* Google tag (gtag.js) — GA4 */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-YEXZTYB87J" />
         <script

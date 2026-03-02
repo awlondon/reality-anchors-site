@@ -72,6 +72,25 @@ export default function PrivacyPage() {
                 sales alerting. No personally identifiable information is stored in Firebase without your explicit
                 submission.
               </li>
+              <li>
+                <strong>Google Analytics 4 (GA4)</strong> — web analytics service provided by Google LLC. GA4
+                collects anonymised usage data (pages visited, session duration, traffic source, device type) to
+                help us understand how visitors interact with our site. GA4 may set cookies such as{' '}
+                <code>_ga</code> and <code>_gid</code> on your device, subject to your consent.
+              </li>
+              <li>
+                <strong>Google Tag Manager (GTM)</strong> — tag management service provided by Google LLC. GTM
+                coordinates the loading and firing of analytics and advertising tags on our site. GTM itself does
+                not collect personal data, but it manages the deployment of services that do (such as GA4 and
+                Google Ads).
+              </li>
+              <li>
+                <strong>Google Ads</strong> — we use Google Ads conversion tracking to measure the effectiveness
+                of our advertising campaigns. When you arrive at our site after clicking a Google ad, a conversion
+                tag records that visit. This may set cookies such as <code>_gcl_aw</code> and{' '}
+                <code>_gcl_au</code> on your device, subject to your consent. No personally identifiable
+                information is shared with Google for advertising purposes.
+              </li>
             </ul>
             <p>
               Each service operates under its own privacy policy. We encourage you to review them if you have concerns
@@ -94,11 +113,33 @@ export default function PrivacyPage() {
             </p>
           </Section>
 
-          <Section title="7. Cookies">
+          <Section title="7. Cookies and similar technologies">
             <p>
-              This site uses a single session cookie (<code>exp_home_narrative_v1</code>) to preserve A/B test
-              variant assignment across page loads. It contains no personally identifiable information and expires
-              with your session. We do not use advertising or cross-site tracking cookies.
+              This site uses cookies and similar technologies for the following purposes, subject to your consent
+              choices:
+            </p>
+            <ul>
+              <li>
+                <strong>Essential cookies:</strong> <code>exp_home_narrative_v1</code> — preserves A/B test
+                variant assignment across page loads. Contains no personally identifiable information and expires
+                with your session. This cookie is always active as it is necessary for site functionality.
+              </li>
+              <li>
+                <strong>Analytics cookies (requires consent):</strong> <code>_ga</code>, <code>_gid</code> — set
+                by Google Analytics 4 to distinguish unique users and throttle request rate. These cookies expire
+                after up to 2 years (<code>_ga</code>) or 24 hours (<code>_gid</code>).
+              </li>
+              <li>
+                <strong>Advertising cookies (requires consent):</strong> <code>_gcl_aw</code>,{' '}
+                <code>_gcl_au</code>, <code>_gac_*</code> — set by Google Ads to attribute conversions to ad
+                clicks. These cookies expire after 90 days.
+              </li>
+            </ul>
+            <p>
+              When you first visit our site, analytics and advertising cookies are blocked by default. A consent
+              banner allows you to accept or reject these cookies. Your choice is stored in your browser&apos;s
+              local storage and respected on subsequent visits. You can change your preference at any time by
+              clearing your browser&apos;s local storage for this site.
             </p>
           </Section>
 

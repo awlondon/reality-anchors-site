@@ -69,15 +69,15 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-5 flex items-center justify-between h-14 sm:h-16">
+      <div className="max-w-6xl mx-auto px-5 flex items-center justify-between h-16">
         {/* Logo + wordmark */}
-        <Link href="/" className="flex items-center gap-2 sm:gap-3 shrink-0" aria-label="Reality Anchors home">
+        <Link href="/" className="flex items-center gap-3 shrink-0" aria-label="Reality Anchors home">
           <Image
             src="/assets/brand/svg/logo-ra-speed-square-dark.svg"
             alt="Reality Anchors"
             width={48}
             height={48}
-            className="h-9 sm:h-12 w-auto"
+            className="h-12 w-auto"
             priority
           />
           <span className="hidden sm:block text-xs font-semibold tracking-widest uppercase text-txt/80 leading-tight">
@@ -132,12 +132,12 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
 
       {/* Mobile menu */}
       {open && (
-        <nav id="mobile-nav" className="md:hidden px-4 sm:px-5 pb-5 pt-2 flex flex-col gap-1 border-t border-line max-h-[80vh] overflow-y-auto" aria-label="Mobile navigation">
+        <nav id="mobile-nav" className="md:hidden px-5 pb-4 flex flex-col gap-4 border-t border-line max-h-[80vh] overflow-y-auto" aria-label="Mobile navigation">
           {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className={`text-sm font-medium py-2.5 px-1 border-b border-line/40 ${
+              className={`text-sm font-medium py-1 ${
                 currentActive === href ? 'text-accent-2' : 'text-muted hover:text-txt'
               }`}
               onClick={() => setOpen(false)}
@@ -147,7 +147,7 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
           ))}
           <Link
             href={cta.href}
-            className="mt-3 px-4 py-3 rounded-lg bg-accent text-white text-sm font-semibold text-center"
+            className="px-4 py-2 rounded-lg bg-accent text-white text-sm font-semibold text-center"
             onClick={() => { setOpen(false); trackEvent('navbar_cta_click_mobile', { label: cta.label, page: pathname }); }}
           >
             {cta.label}

@@ -61,7 +61,7 @@ export default function Hero() {
   );
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-bg flex items-end sm:items-center">
+    <section className="relative min-h-screen w-full overflow-hidden bg-bg flex items-center">
       {/* Background photograph — welding scene for industrial context */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -151,12 +151,12 @@ export default function Hero() {
       <div className="absolute inset-0 z-[2] bg-gradient-to-b from-bg/70 via-bg/55 to-bg/85 pointer-events-none" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-6 pt-20 pb-20 sm:pt-24 sm:pb-10">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-24">
         <motion.p
           initial={reduce ? {} : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase text-muted mb-3 sm:mb-4"
+          className="text-xs font-bold tracking-[0.2em] uppercase text-muted mb-4"
         >
           Execution Intelligence for Steel Fabrication
         </motion.p>
@@ -165,7 +165,7 @@ export default function Hero() {
           initial={reduce ? {} : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-[1.7rem] leading-[1.2] sm:text-4xl md:text-6xl lg:text-7xl font-semibold sm:leading-tight tracking-tight text-txt max-w-4xl"
+          className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight text-txt max-w-4xl"
         >
           Every Cut Measured. Every Bend Verified. Every Ton Accounted For.
         </motion.h1>
@@ -174,7 +174,7 @@ export default function Hero() {
           initial={reduce ? {} : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.32 }}
-          className="mt-4 sm:mt-6 text-sm sm:text-lg text-muted max-w-2xl leading-relaxed"
+          className="mt-6 text-lg text-muted max-w-2xl leading-relaxed"
         >
           AI-guided fabrication execution that reduces scrap, eliminates rework, and turns material waste into margin. Built for yards that run on specifications, not guesswork.
         </motion.p>
@@ -183,18 +183,18 @@ export default function Hero() {
           initial={reduce ? {} : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.44 }}
-          className="mt-6 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4"
+          className="mt-10 flex flex-wrap gap-4"
         >
           <Link
             href="/commercial/#contact"
-            className="px-7 py-3 sm:py-4 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm sm:text-base font-semibold text-center transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/25"
+            className="px-7 py-4 rounded-lg bg-accent hover:bg-blue-500 text-white font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/25"
             onClick={() => trackEvent('hero_cta_primary')}
           >
             See What You Could Save
           </Link>
           <Link
             href="/board-strategy/"
-            className="px-7 py-3 sm:py-4 rounded-lg border border-white/25 hover:border-white/50 hover:bg-white/6 text-txt text-sm sm:text-base font-semibold text-center transition-all hover:-translate-y-0.5"
+            className="px-7 py-4 rounded-lg border border-white/25 hover:border-white/50 hover:bg-white/6 text-txt font-semibold transition-all hover:-translate-y-0.5"
             onClick={() => trackEvent('hero_cta_secondary')}
           >
             Read the Strategic Case
@@ -206,15 +206,15 @@ export default function Hero() {
           initial={reduce ? {} : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-8 sm:mt-14 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 max-w-3xl"
+          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl"
         >
           {siteMetrics.hero.map(({ value, label }) => (
             <div
               key={label}
-              className="border border-line/70 bg-card/50 backdrop-blur-sm rounded-xl px-3 py-2 sm:px-4 sm:py-3"
+              className="border border-line/70 bg-card/50 backdrop-blur-sm rounded-xl px-4 py-3"
             >
-              <div className="text-base sm:text-xl font-bold text-accent-2 font-mono">{value}</div>
-              <div className="text-[10px] sm:text-xs text-muted mt-0.5 sm:mt-1">{label}</div>
+              <div className="text-xl font-bold text-accent-2 font-mono">{value}</div>
+              <div className="text-xs text-muted mt-1">{label}</div>
             </div>
           ))}
         </motion.div>
@@ -222,7 +222,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-1"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.6 }}

@@ -8,15 +8,16 @@ import { getRegimeById, regimeCatalog } from '@/lib/siteData';
 import { getTestimonialsForPage } from '@/data/testimonials';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
   return regimeCatalog.map((regime) => ({ slug: regime.id }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const regime = getRegimeById(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const regime = getRegimeById(slug);
   if (!regime) {
     return { title: 'Program not found' };
   }
@@ -24,7 +25,7 @@ export function generateMetadata({ params }: Props): Metadata {
   return {
     title: `${regime.title} Program`,
     description: regime.description,
-    alternates: { canonical: `/regimes/${params.slug}/` },
+    alternates: { canonical: `/regimes/${slug}/` },
     openGraph: {
       title: `${regime.title} Program | Reality Anchors`,
       description: regime.description,
@@ -32,12 +33,13 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function RegimeDetailPage({ params }: Props) {
-  const regime = getRegimeById(params.slug);
+export default async function RegimeDetailPage({ params }: Props) {
+  const { slug } = await params;
+  const regime = getRegimeById(slug);
 
   if (!regime) notFound();
 
-  const testimonial = getTestimonialsForPage(`regime:${params.slug}`)[0];
+  const testimonial = getTestimonialsForPage(`regime:${slug}`)[0];
 
   return (
     <main className="pt-20">
@@ -49,7 +51,7 @@ export default function RegimeDetailPage({ params }: Props) {
             '@type': 'Service',
             name: `${regime.title} Program`,
             description: regime.description,
-            url: `https://realityanchorsltd.com/regimes/${params.slug}/`,
+            url: `https://realityanchorsltd.com/regimes/${slug}/`,
             provider: { '@type': 'Organization', name: 'Reality Anchors' },
             serviceType: 'Fabrication Execution Validation',
             areaServed: 'US',

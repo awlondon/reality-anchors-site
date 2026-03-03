@@ -15,7 +15,24 @@
  */
 
 import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
+import {
+  WebGLRenderer,
+  Scene,
+  PerspectiveCamera,
+  Group,
+  GridHelper,
+  BufferGeometry,
+  BufferAttribute,
+  PointsMaterial,
+  Points,
+  LineBasicMaterial,
+  LineSegments,
+  Clock,
+  AdditiveBlending,
+  MathUtils,
+} from 'three';
+import type { Material } from 'three';
+import { WEBGL_NODE_COUNT, WEBGL_MAX_LINKS } from '@/lib/constants';
 
 interface Props {
   className?: string;
@@ -38,7 +55,7 @@ export default function StructuredFieldBackground({
       window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
     const motion = reduceMotion ? 0.0 : intensity;
 
-    const renderer = new THREE.WebGLRenderer({
+    const renderer = new WebGLRenderer({
       antialias: true,
       alpha: true,
       powerPreference: 'high-performance',
@@ -47,8 +64,8 @@ export default function StructuredFieldBackground({
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, dprCap));
     host.appendChild(renderer.domElement);
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 200);
+    const scene = new Scene();
+    const camera = new PerspectiveCamera(55, 1, 0.1, 200);
     camera.position.set(0, 0, 24);
 
     const resize = () => {
@@ -60,16 +77,16 @@ export default function StructuredFieldBackground({
     resize();
 
     // Grid planes
-    const gridGroup = new THREE.Group();
+    const gridGroup = new Group();
     scene.add(gridGroup);
 
     const makeGrid = (size: number, divisions: number, z: number, opacity: number) => {
-      const grid = new THREE.GridHelper(size, divisions, 0x1e3a5a, 0x0f2236);
+      const grid = new GridHelper(size, divisions, 0x1e3a5a, 0x0f2236);
       const mats = Array.isArray(grid.material) ? grid.material : [grid.material];
-      mats.forEach((m: THREE.Material) => {
-        (m as THREE.LineBasicMaterial).transparent = true;
-        (m as THREE.LineBasicMaterial).opacity = opacity;
-        (m as THREE.LineBasicMaterial).depthWrite = false;
+      mats.forEach((m: Material) => {
+        (m as LineBasicMaterial).transparent = true;
+        (m as LineBasicMaterial).opacity = opacity;
+        (m as LineBasicMaterial).depthWrite = false;
       });
       grid.position.set(0, 0, z);
       grid.rotation.x = Math.PI / 2;
@@ -81,7 +98,7 @@ export default function StructuredFieldBackground({
     gridGroup.add(makeGrid(40, 40, -3, 0.28));
 
     // Nodes
-    const nodeCount = 520;
+    const nodeCount = WEBGL_NODE_COUNT;
     const nodePositions = new Float32Array(nodeCount * 3);
     const nodeSeeds = new Float32Array(nodeCount);
     const nodeVel = new Float32Array(nodeCount * 3);
@@ -98,32 +115,32 @@ export default function StructuredFieldBackground({
       nodeSeeds[i] = Math.random() * 1000;
     }
 
-    const nodeGeo = new THREE.BufferGeometry();
-    nodeGeo.setAttribute('position', new THREE.BufferAttribute(nodePositions, 3));
-    const nodeMat = new THREE.PointsMaterial({
+    const nodeGeo = new BufferGeometry();
+    nodeGeo.setAttribute('position', new BufferAttribute(nodePositions, 3));
+    const nodeMat = new PointsMaterial({
       color: 0x5090d0,
       size: 0.05,
       transparent: true,
       opacity: 0.65,
-      blending: THREE.AdditiveBlending,
+      blending: AdditiveBlending,
       depthWrite: false,
     });
-    const nodes = new THREE.Points(nodeGeo, nodeMat);
+    const nodes = new Points(nodeGeo, nodeMat);
     scene.add(nodes);
 
     // Links
-    const maxLinks = 700;
+    const maxLinks = WEBGL_MAX_LINKS;
     const linkPos = new Float32Array(maxLinks * 2 * 3);
-    const linkGeo = new THREE.BufferGeometry();
-    linkGeo.setAttribute('position', new THREE.BufferAttribute(linkPos, 3));
-    const linkMat = new THREE.LineBasicMaterial({
+    const linkGeo = new BufferGeometry();
+    linkGeo.setAttribute('position', new BufferAttribute(linkPos, 3));
+    const linkMat = new LineBasicMaterial({
       color: 0x2255a0,
       transparent: true,
       opacity: 0.16,
-      blending: THREE.AdditiveBlending,
+      blending: AdditiveBlending,
       depthWrite: false,
     });
-    const links = new THREE.LineSegments(linkGeo, linkMat);
+    const links = new LineSegments(linkGeo, linkMat);
     scene.add(links);
 
     const updateLinks = () => {
@@ -152,7 +169,7 @@ export default function StructuredFieldBackground({
         linkPos[base] = linkPos[base + 1] = linkPos[base + 2] = 1e9;
         linkPos[base + 3] = linkPos[base + 4] = linkPos[base + 5] = 1e9;
       }
-      (linkGeo.attributes.position as THREE.BufferAttribute).needsUpdate = true;
+      (linkGeo.attributes.position as BufferAttribute).needsUpdate = true;
     };
 
     // Mouse parallax
@@ -168,7 +185,7 @@ export default function StructuredFieldBackground({
     const onVis = () => { running = document.visibilityState === 'visible'; };
     document.addEventListener('visibilitychange', onVis);
 
-    const clock = new THREE.Clock();
+    const clock = new Clock();
     let raf = 0;
     let linkAccum = 0;
 
@@ -178,8 +195,8 @@ export default function StructuredFieldBackground({
       const t = clock.getElapsedTime();
       const dt = Math.min(0.033, clock.getDelta());
 
-      camera.position.x = THREE.MathUtils.lerp(camera.position.x, mouseX * 1.0, 0.04);
-      camera.position.y = THREE.MathUtils.lerp(camera.position.y, -mouseY * 0.7, 0.04);
+      camera.position.x = MathUtils.lerp(camera.position.x, mouseX * 1.0, 0.04);
+      camera.position.y = MathUtils.lerp(camera.position.y, -mouseY * 0.7, 0.04);
       camera.lookAt(0, 0, 0);
 
       gridGroup.rotation.z = Math.sin(t * 0.05) * 0.05 * motion;
@@ -201,7 +218,7 @@ export default function StructuredFieldBackground({
         if (nodePositions[ix + 2] > bounds.z) nodePositions[ix + 2] = -bounds.z;
         if (nodePositions[ix + 2] < -bounds.z) nodePositions[ix + 2] = bounds.z;
       }
-      (nodeGeo.attributes.position as THREE.BufferAttribute).needsUpdate = true;
+      (nodeGeo.attributes.position as BufferAttribute).needsUpdate = true;
 
       linkAccum += dt;
       if (linkAccum > 0.12) { linkAccum = 0; updateLinks(); }

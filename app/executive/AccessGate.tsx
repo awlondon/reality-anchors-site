@@ -44,6 +44,7 @@ export default function AccessGate({ children }: { children: ReactNode }) {
             value={code}
             onChange={(e) => { setCode(e.target.value); setError(false); }}
             placeholder="Access code"
+            aria-label="Executive dashboard access code"
             className={`ra-input text-center ${error ? 'border-red-500/60' : ''}`}
             autoFocus
             autoComplete="off"

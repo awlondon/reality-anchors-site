@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /executive/
-
-Sitemap: https://realityanchorsltd.com/sitemap.xml

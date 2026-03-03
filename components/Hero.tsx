@@ -9,7 +9,12 @@ import { siteMetrics } from '@/lib/siteData';
 
 const StructuredFieldBackground = dynamic(
   () => import('@/components/StructuredFieldBackground'),
-  { ssr: false }
+  {
+    ssr: false,
+    loading: () => (
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-accent/5 via-transparent to-transparent animate-pulse" />
+    ),
+  }
 );
 
 export default function Hero() {

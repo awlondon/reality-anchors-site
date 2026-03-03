@@ -11,7 +11,7 @@ function pctToFrac(pct: number): number {
   return pct / 100;
 }
 
-const REFERENCE_ANNUAL_TONS = 25000;
+import { REFERENCE_ANNUAL_TONS, PRICING_MULTIPLIERS } from '@/lib/constants';
 
 export interface MarginImpactInputs {
   annualTonsProcessed: number;
@@ -120,9 +120,9 @@ export function computeMarginImpact(inputs: MarginImpactInputs): MarginImpactRes
   const ebitdaMarginImprovementPct =
     scaledAnnualRevenue > 0 ? (annualEbitdaIncrease / scaledAnnualRevenue) * 100 : 0;
 
-  const lowFrictionAnnual = annualEbitdaIncrease * 0.08;
-  const baseAnnual = annualEbitdaIncrease * 0.12;
-  const aggressiveAnnual = annualEbitdaIncrease * 0.15;
+  const lowFrictionAnnual = annualEbitdaIncrease * PRICING_MULTIPLIERS.lowFriction;
+  const baseAnnual = annualEbitdaIncrease * PRICING_MULTIPLIERS.base;
+  const aggressiveAnnual = annualEbitdaIncrease * PRICING_MULTIPLIERS.aggressive;
 
   return {
     material: { tonsSaved, dollarsSaved: materialDollarsSaved },

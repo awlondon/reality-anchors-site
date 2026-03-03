@@ -22,7 +22,7 @@ const steps = [
   {
     number: '02',
     title: 'Guide',
-    description: 'Operators follow step-by-step execution sequences with hold points, counters, and machine-specific parameters.',
+    description: 'Operators follow step-by-step instructions with hold points, counters, and machine-specific parameters.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />

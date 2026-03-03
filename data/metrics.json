@@ -1,15 +1,15 @@
 {
   "hero": [
-    { "value": "1.8 pts", "label": "Median scrap delta" },
-    { "value": "4.2s", "label": "Plan generation" },
+    { "value": "1.8 pts", "label": "Scrap reduction" },
+    { "value": "4.2s", "label": "Cut-plan generation" },
     { "value": "0.7%", "label": "Fabrication error rate" },
     { "value": "97.4%", "label": "Offline uptime" }
   ],
   "measuredOutcomes": [
-    { "value": 8, "suffix": "%", "label": "Average scrap reduction", "sub": "across structural fabrication cohorts" },
-    { "value": 4, "suffix": "s", "label": "Median plan generation", "sub": "from schedule ingest to cut plan" },
-    { "value": 99, "suffix": "%", "label": "Execution reliability", "sub": "actions completed without preventable rework" },
-    { "value": 14, "suffix": " days", "label": "Calibration convergence", "sub": "to stable machine-specific profiles" }
+    { "value": 8, "suffix": "%", "label": "Average scrap reduction", "sub": "across deployed fabrication sites" },
+    { "value": 4, "suffix": "s", "label": "Cut-plan generation", "sub": "from job schedule to ready-to-cut plan" },
+    { "value": 99, "suffix": "%", "label": "Execution reliability", "sub": "of steps completed without preventable rework" },
+    { "value": 14, "suffix": " days", "label": "Calibration lock-in", "sub": "to stable, drift-free machine profiles" }
   ],
   "valueBridge": {
     "governMetric": "< 0.7%",

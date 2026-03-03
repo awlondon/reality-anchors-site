@@ -14,11 +14,11 @@ export const faqs: FAQItem[] = [
   },
   {
     question: 'How does it integrate with our existing ERP or detailing software?',
-    answer: 'Reality Anchors sits downstream of planning and detailing systems. It imports cut lists from existing schedules and exports verified execution records. Integration is non-invasive — we complement your existing stack rather than replacing any part of it.',
+    answer: 'Reality Anchors works alongside your planning and detailing systems. It imports cut lists from existing schedules and exports verified execution records. Nothing to rip out — we plug into what you already run.',
   },
   {
     question: 'What happens to our data?',
-    answer: 'All execution data stays within your control. We use immutable event logs for traceability and export-ready formats for audits. No data is shared with third parties. See our privacy policy for full details.',
+    answer: 'All data stays within your control. Every action is logged in tamper-proof event records you can export for audits at any time. Nothing is shared with third parties. See our privacy policy for full details.',
   },
   {
     question: 'Is there a contract lock-in?',
@@ -26,7 +26,7 @@ export const faqs: FAQItem[] = [
   },
   {
     question: 'How are savings measured?',
-    answer: 'We use published industry baseline scrap rates (not self-reported numbers) and apply conservative improvement deltas. All savings metrics — scrap, rework, throughput — are measured through the platform\'s own logged data, not estimates.',
+    answer: 'We use published industry scrap rates as baselines — not self-reported numbers — and apply conservative reduction targets. All savings metrics (scrap, rework, throughput) are measured through the platform\'s own logged data, not estimates.',
   },
 ];
 

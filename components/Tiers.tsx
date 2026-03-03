@@ -12,7 +12,7 @@ const tiers = [
     href: '/personal/',
     price: '$49–$349/mo',
     badge: 'Basic',
-    desc: 'Execution guidance for solo operators and small crews. Offline-first, 1–8 seats, with a clean upgrade path into commercial workflows.',
+    desc: 'Step-by-step guidance for solo operators and small crews. Works offline, supports 1–8 seats, and upgrades cleanly into commercial plans.',
     tags: ['Execution guidance', 'Offline-first', '1–8 seats'],
     cta: 'Explore Personal',
   },

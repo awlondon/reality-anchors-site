@@ -158,7 +158,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-xs font-bold tracking-[0.2em] uppercase text-muted mb-4"
         >
-          Execution Intelligence for Steel Fabrication
+          AI for Steel Fabrication
         </motion.p>
 
         <motion.h1

@@ -12,7 +12,6 @@ interface ErrorContext {
   [key: string]: unknown;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let sentryModule: any = null;
 let sentryInitAttempted = false;
 

@@ -6,6 +6,7 @@ import ProgressBar from '@/components/ProgressBar';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
 import ExperimentProvider from '@/components/ExperimentProvider';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
+import WebVitals from '@/components/WebVitals';
 import { HOME_EXPERIMENT } from '@/lib/experiments/config';
 
 const inter = Inter({
@@ -77,16 +78,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         {/* Google tag (gtag.js) — GA4 */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YEXZTYB87J" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `gtag('js',new Date());gtag('config','G-YEXZTYB87J');`,
-          }}
-        />
+        {process.env.NEXT_PUBLIC_GA4_ID && (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA4_ID}');`,
+              }}
+            />
+          </>
+        )}
         {/* Google Tag Manager */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        {process.env.NEXT_PUBLIC_GTM_ID && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -98,14 +104,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </head>
       <body className="overflow-x-hidden">
         {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-58VTVGC4"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          />
-        </noscript>
+        {process.env.NEXT_PUBLIC_GTM_ID && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
+        )}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold"

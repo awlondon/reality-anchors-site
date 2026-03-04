@@ -1,3 +1,5 @@
+import { CONVERSION_WEIGHTS, CONVERSION_NORMS, INTENT_THRESHOLDS } from '@/lib/constants';
+
 export type SessionAggregate = {
   sessionId: string;
   maxScrollDepth: number;
@@ -16,19 +18,20 @@ function sigmoid(x: number) {
 }
 
 export function classifyIntent(probability: number): IntentState {
-  if (probability > 0.7) return 'high';
-  if (probability > 0.4) return 'emerging';
+  if (probability > INTENT_THRESHOLDS.high) return 'high';
+  if (probability > INTENT_THRESHOLDS.emerging) return 'emerging';
   return 'low';
 }
 
 export function computeConversionScore(session: SessionAggregate) {
-  const dwellNorm = Math.min(session.totalDwellMs / 8000, 1);
-  const depthNorm = Math.min(session.maxScrollDepth / 100, 1);
-  const regimeNorm = Math.min(session.regimeCount / 3, 1);
-  const ctaNorm = Math.min(session.totalCtaClicks / 2, 1);
-  const kpiNorm = Math.min(session.kpiReveals / 5, 1);
+  const dwellNorm = Math.min(session.totalDwellMs / CONVERSION_NORMS.dwellMs, 1);
+  const depthNorm = Math.min(session.maxScrollDepth / CONVERSION_NORMS.scrollDepth, 1);
+  const regimeNorm = Math.min(session.regimeCount / CONVERSION_NORMS.regimeCount, 1);
+  const ctaNorm = Math.min(session.totalCtaClicks / CONVERSION_NORMS.ctaClicks, 1);
+  const kpiNorm = Math.min(session.kpiReveals / CONVERSION_NORMS.kpiReveals, 1);
 
-  const z = 2.4 * dwellNorm + 1.8 * depthNorm + 1.2 * regimeNorm + 2.6 * ctaNorm + 1.0 * kpiNorm - 2.5;
+  const w = CONVERSION_WEIGHTS;
+  const z = w.dwell * dwellNorm + w.depth * depthNorm + w.regime * regimeNorm + w.cta * ctaNorm + w.kpi * kpiNorm + w.bias;
   const probability = sigmoid(z);
 
   return {

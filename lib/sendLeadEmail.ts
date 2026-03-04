@@ -1,15 +1,12 @@
 import emailjs from '@emailjs/browser';
 import type { CalculatorContext } from '@/lib/calculatorContext';
-import { reportError } from '@/lib/errorReporting';
+import { reportError, reportWarning } from '@/lib/errorReporting';
+import { EMAIL_SEND_TIMEOUT_MS, EMAIL_MAX_RETRIES, EMAIL_RETRY_DELAY_MS } from '@/lib/constants';
 
 const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? '';
 const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? '';
 const CONFIRM_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_CONFIRM_TEMPLATE_ID ?? '';
 const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? '';
-
-const SEND_TIMEOUT_MS = 10_000;
-const MAX_RETRIES = 2;
-const RETRY_DELAY_MS = 1_500;
 
 if (typeof window !== 'undefined' && (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY)) {
   console.warn('[EmailJS] Missing env vars — email notifications will be skipped');
@@ -45,7 +42,7 @@ async function sendWithTimeout(
 ): Promise<void> {
   const send = emailjs.send(serviceId, templateId, params, publicKey);
   const timeout = new Promise<never>((_, reject) =>
-    setTimeout(() => reject(new Error('Email send timed out')), SEND_TIMEOUT_MS),
+    setTimeout(() => reject(new Error('Email send timed out')), EMAIL_SEND_TIMEOUT_MS),
   );
   await Promise.race([send, timeout]);
 }
@@ -58,19 +55,24 @@ async function sendWithRetry(
   context: string,
 ): Promise<void> {
   let lastError: unknown;
-  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+  for (let attempt = 0; attempt <= EMAIL_MAX_RETRIES; attempt++) {
     try {
       await sendWithTimeout(serviceId, templateId, params, publicKey);
       return;
     } catch (err) {
       lastError = err;
-      if (attempt < MAX_RETRIES) {
-        const delay = RETRY_DELAY_MS * (attempt + 1);
+      reportWarning(`EmailJS attempt ${attempt + 1}/${EMAIL_MAX_RETRIES + 1} failed`, {
+        component: 'sendLeadEmail',
+        action: context,
+        attempt,
+      });
+      if (attempt < EMAIL_MAX_RETRIES) {
+        const delay = EMAIL_RETRY_DELAY_MS * (attempt + 1);
         await wait(delay);
       }
     }
   }
-  reportError(lastError, { component: 'sendLeadEmail', action: context });
+  reportError(lastError, { component: 'sendLeadEmail', action: context, totalAttempts: EMAIL_MAX_RETRIES + 1 });
   throw lastError;
 }
 

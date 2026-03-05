@@ -74,20 +74,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Consent Mode v2 — must precede GTM/GA4 scripts */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});`,
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'granted','ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted'});`,
           }}
         />
-        {/* Google tag (gtag.js) — GA4 */}
-        {process.env.NEXT_PUBLIC_GA4_ID && (
-          <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`} />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA4_ID}');`,
-              }}
-            />
-          </>
-        )}
+        {/* Google tag (gtag.js) — GA4 + Google Ads */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YEXZTYB87J" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `gtag('js',new Date());gtag('config','G-YEXZTYB87J');gtag('config','AW-948622339');`,
+          }}
+        />
         {/* Google Tag Manager */}
         {process.env.NEXT_PUBLIC_GTM_ID && (
           <script

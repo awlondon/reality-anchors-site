@@ -163,7 +163,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-xs font-bold tracking-[0.2em] uppercase text-muted mb-4"
         >
-          AI for Steel Fabrication
+          Fabrication Execution Software
         </motion.p>
 
         <motion.h1
@@ -172,7 +172,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight text-txt max-w-4xl"
         >
-          Every Cut Measured. Every Bend Verified. Every Ton Accounted For.
+          Fewer Miscuts. Less Scrap. Every Bar Tracked.
         </motion.h1>
 
         <motion.p
@@ -181,7 +181,7 @@ export default function Hero() {
           transition={{ duration: 0.55, delay: 0.32 }}
           className="mt-6 text-lg text-muted max-w-2xl leading-relaxed"
         >
-          AI-guided validation that reduces scrap, eliminates rework, and turns material waste into margin. Built for fabrication yards that run on specifications, not guesswork.
+          Tablet software that reads your cut lists, applies stretch allowances and bend rules, and generates step-by-step cutter and bender instructions. Runs alongside your existing machines&nbsp;&mdash; no hardware changes, works offline.
         </motion.p>
 
         <motion.div
@@ -195,7 +195,7 @@ export default function Hero() {
             className="px-7 py-4 rounded-lg bg-accent hover:bg-blue-500 text-white font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/25"
             onClick={() => trackEvent('hero_cta_primary')}
           >
-            See What You Could Save
+            Get a Scrap Estimate for Your Shop
           </Link>
           <Link
             href="/board-strategy/"
@@ -205,6 +205,18 @@ export default function Hero() {
             Read the Strategic Case
           </Link>
         </motion.div>
+
+        <motion.p
+          initial={reduce ? {} : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.54 }}
+          className="mt-6 text-xs text-muted/80 flex items-center gap-2"
+        >
+          <svg className="w-3.5 h-3.5 text-accent/70 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+          </svg>
+          Operators confirm every step. No changes to existing machines. Works offline.
+        </motion.p>
 
         {/* KPIs */}
         <motion.div

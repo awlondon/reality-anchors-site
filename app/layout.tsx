@@ -100,8 +100,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             }}
           />
         )}
-        {/* ElevenLabs Conversational AI Widget */}
-        <script async src="https://unpkg.com/@elevenlabs/convai-widget-embed"></script>
       </head>
       <body className="overflow-x-hidden">
         {/* Google Tag Manager (noscript) */}
@@ -128,8 +126,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           {children}
         </ExperimentProvider>
         <CookieConsentBanner />
-        {/* @ts-expect-error -- elevenlabs-convai is a web component */}
-        <elevenlabs-convai agent-id="agent_9301kjv5tm96e8b9ehysgwmk43h0"></elevenlabs-convai>
       </body>
     </html>
   );

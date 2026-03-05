@@ -1,13 +1,16 @@
 import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import VideoShowcase from '@/components/VideoShowcase';
+import FieldProof from '@/components/FieldProof';
 import ValueBridge from '@/components/ValueBridge';
 import HowItWorks from '@/components/HowItWorks';
 import Features from '@/components/Features';
 import Metrics from '@/components/Metrics';
+import InlineCapture from '@/components/InlineCapture';
 import AdaptiveNarrative from '@/components/AdaptiveNarrative';
 import Tiers from '@/components/Tiers';
 import LeadForm from '@/components/LeadForm';
+import StickyCTA from '@/components/StickyCTA';
 import Footer from '@/components/Footer';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import TestimonialBreak from '@/components/TestimonialBreak';
@@ -55,6 +58,7 @@ export default async function Home() {
           backgroundSrc={testimonials[0].backgroundSrc}
         />
       )}
+      <FieldProof />
       <ValueBridge />
       <HowItWorks />
       <Features />
@@ -69,6 +73,7 @@ export default async function Home() {
         />
       )}
       <Metrics />
+      <InlineCapture />
       <Tiers />
       {testimonials[3] && (
         <TestimonialBreak
@@ -81,6 +86,7 @@ export default async function Home() {
       )}
       <FAQ />
       <LeadForm />
+      <StickyCTA />
       <Footer />
     </main>
   );

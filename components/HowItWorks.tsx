@@ -117,7 +117,7 @@ export default function HowItWorks() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="mt-10 text-center"
+          className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
           <Link
             href="/calculator/"
@@ -125,6 +125,13 @@ export default function HowItWorks() {
             onClick={() => trackEvent('how_it_works_cta')}
           >
             Try the Quick Estimate →
+          </Link>
+          <Link
+            href="/commercial/#contact"
+            className="inline-flex px-5 py-2.5 rounded-lg border border-white/25 hover:border-white/50 hover:bg-white/6 text-txt text-sm font-semibold transition-all hover:-translate-y-px"
+            onClick={() => trackEvent('how_it_works_cta_contact', { cta: 'shop_waste_estimate' })}
+          >
+            Get a Shop Waste Estimate
           </Link>
         </motion.div>
       </div>

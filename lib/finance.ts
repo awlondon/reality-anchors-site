@@ -1,10 +1,11 @@
+import { IRR_SOLVER } from '@/lib/constants';
+
 export function calculateNPV(rate: number, cashFlows: number[]) {
   return cashFlows.reduce((npv, cf, i) => npv + cf / Math.pow(1 + rate, i), 0);
 }
 
 export function calculateIRR(cashFlows: number[], guess = 0.1) {
-  const maxIterations = 1000;
-  const tolerance = 1e-7;
+  const { maxIterations, tolerance, gridSearchStart, gridSearchEnd, gridSearchStep, gridSearchTolerance, minRate } = IRR_SOLVER;
   let rate = guess;
 
   for (let i = 0; i < maxIterations; i++) {
@@ -19,15 +20,15 @@ export function calculateIRR(cashFlows: number[], guess = 0.1) {
     if (Math.abs(derivative) < tolerance) break;
 
     const newRate = rate - npv / derivative;
-    if (!Number.isFinite(newRate) || newRate <= -0.9999) break;
+    if (!Number.isFinite(newRate) || newRate <= minRate) break;
 
     if (Math.abs(newRate - rate) < tolerance) return newRate;
     rate = newRate;
   }
 
-  for (let candidate = -0.9; candidate <= 1.5; candidate += 0.01) {
+  for (let candidate = gridSearchStart; candidate <= gridSearchEnd; candidate += gridSearchStep) {
     const npv = calculateNPV(candidate, cashFlows);
-    if (Math.abs(npv) < 1e-3) return candidate;
+    if (Math.abs(npv) < gridSearchTolerance) return candidate;
   }
 
   return null;

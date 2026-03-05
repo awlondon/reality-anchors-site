@@ -1,3 +1,18 @@
 node_modules/
 .next/
 out/
+docs/
+.env
+.env.local
+.env.*.local
+
+# Test artifacts
+test-results/
+playwright-report/
+blob-report/
+
+# Bundle analysis
+.next/analyze/
+
+# Optimized images (generated)
+public/images/optimized/

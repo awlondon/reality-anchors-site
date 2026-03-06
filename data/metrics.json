@@ -5,6 +5,26 @@
     { "value": "0.7%", "label": "Fabrication error rate" },
     { "value": "97.4%", "label": "Offline uptime" }
   ],
+  "heroVariants": {
+    "A": [
+      { "value": "99%", "label": "Execution reliability" },
+      { "value": "< 5s", "label": "Validation response" },
+      { "value": "8%", "label": "Avg scrap reduction" },
+      { "value": "97.4%", "label": "Offline uptime" }
+    ],
+    "B": [
+      { "value": "Up to 8%", "label": "Scrap reduction" },
+      { "value": "4.2s", "label": "Cut-plan generation" },
+      { "value": "0.7%", "label": "Fabrication error rate" },
+      { "value": "97.4%", "label": "Offline uptime" }
+    ],
+    "C": [
+      { "value": "99%", "label": "Data accuracy" },
+      { "value": "8%", "label": "Avg scrap reduction" },
+      { "value": "41%", "label": "RFI reduction" },
+      { "value": "7.2x", "label": "First-year ROI" }
+    ]
+  },
   "measuredOutcomes": [
     { "value": 8, "suffix": "%", "label": "Average scrap reduction", "sub": "across deployed fabrication sites" },
     { "value": 4, "suffix": "s", "label": "Cut-plan generation", "sub": "from job schedule to ready-to-cut plan" },

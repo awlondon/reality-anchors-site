@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: '%s | Reality Anchors',
   },
   description:
-    'AI-guided validation for steel fabrication teams. Reduce scrap, eliminate rework, and build traceable execution records — from a single bench to an enterprise fleet.',
+    'AI-guided execution validation for industrial fabrication teams. Reduce scrap, eliminate rework, and build traceable execution records — from a single bench to an enterprise fleet.',
   metadataBase: new URL('https://realityanchorsltd.com'),
   openGraph: {
     siteName: 'Reality Anchors',

@@ -40,7 +40,8 @@
       "report"
     ],
     "roi": "Average monthly material impact observed: 6\u201310 tons recovered per 200-ton shop.",
-    "animationPreset": "fadeUp"
+    "animationPreset": "fadeUp",
+    "workcellIds": ["rebar-cut-bend"]
   },
   {
     "id": "multi-project-optimization",
@@ -83,7 +84,8 @@
       "report"
     ],
     "roi": "Observed planning compression: 4\u201312 hours per week with lower material over-ordering.",
-    "animationPreset": "slideIn"
+    "animationPreset": "slideIn",
+    "workcellIds": ["rebar-cut-bend"]
   },
   {
     "id": "machine-calibration",
@@ -126,7 +128,8 @@
       "report"
     ],
     "roi": "Lower drift volatility and fewer corrective reruns during high-throughput shifts.",
-    "animationPreset": "minimal"
+    "animationPreset": "minimal",
+    "workcellIds": ["rebar-cut-bend", "plate-press-brake"]
   },
   {
     "id": "fleet-grip",
@@ -169,7 +172,8 @@
       "report"
     ],
     "roi": "Improves incident prevention and insurance telemetry quality for mixed terrain operations.",
-    "animationPreset": "scaleIn"
+    "animationPreset": "scaleIn",
+    "workcellIds": []
   },
   {
     "id": "ar-execution",
@@ -211,7 +215,8 @@
       "confirm",
       "report"
     ],
-    "roi": "Accelerates onboarding and reduces tolerance misses on complex assemblies."
+    "roi": "Accelerates onboarding and reduces tolerance misses on complex assemblies.",
+    "workcellIds": []
   },
   {
     "id": "ai-governance",
@@ -253,6 +258,7 @@
       "confirm",
       "report"
     ],
-    "roi": "Compliance-grade decision governance for regulated and audit-heavy buyers."
+    "roi": "Compliance-grade decision governance for regulated and audit-heavy buyers.",
+    "workcellIds": []
   }
 ]

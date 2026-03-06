@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
-import VideoShowcase from '@/components/VideoShowcase';
+import VideoShowcasePlatform from '@/components/VideoShowcasePlatform';
 import FieldProof from '@/components/FieldProof';
 import ValueBridge from '@/components/ValueBridge';
 import HowItWorks from '@/components/HowItWorks';
@@ -37,7 +37,7 @@ export default async function Home() {
             '@type': 'Organization',
             name: 'Reality Anchors',
             url: 'https://realityanchorsltd.com',
-            description: 'AI-guided validation for steel fabrication teams. Reduce scrap, eliminate rework, and build traceable execution records.',
+            description: 'AI-guided execution validation for industrial fabrication teams. Reduce scrap, eliminate rework, and build traceable execution records across every workcell.',
           }),
         }}
       />
@@ -48,7 +48,7 @@ export default async function Home() {
         }}
       />
       <Hero />
-      <VideoShowcase />
+      <VideoShowcasePlatform />
       {testimonials[0] && (
         <TestimonialBreak
           id={testimonials[0].id}

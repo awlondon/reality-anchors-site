@@ -16,7 +16,7 @@ export const testimonials: Testimonial[] = [
     attribution: 'Operations Manager',
     company: '200-person fabrication yard',
     backgroundSrc: '/images/operator-work.jpg',
-    pages: ['home'],
+    pages: ['home', 'industries:rebar-cut-bend'],
   },
   {
     id: 'engineering-lead-steel',
@@ -65,7 +65,7 @@ export const testimonials: Testimonial[] = [
     attribution: 'Quality Manager',
     company: 'Precast concrete operation, 3 plants',
     backgroundSrc: '/images/quality-control.jpg',
-    pages: ['industrial'],
+    pages: ['industrial', 'industries'],
   },
 
   // ── Personal ──
@@ -98,7 +98,7 @@ export const testimonials: Testimonial[] = [
     attribution: 'Lead Fabricator',
     company: 'Structural steel contractor, 60 employees',
     backgroundSrc: '/images/sparks-metal.jpg',
-    pages: ['regime:structural-fabrication'],
+    pages: ['regime:structural-fabrication', 'industries:rebar-cut-bend'],
   },
 
   // ── Regime: Multi-Project Optimization ──

@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { trackEvent } from '@/lib/analytics';
 
 const NAV_LINKS = [
+  { href: '/industries/', label: 'Industries' },
   { href: '/personal/', label: 'Personal' },
   { href: '/commercial/', label: 'Commercial' },
   { href: '/industrial/', label: 'Industrial' },
@@ -17,6 +18,10 @@ const NAV_LINKS = [
 
 /** Map pathname prefixes to contextual CTA labels and destinations. */
 const CTA_MAP: Record<string, { label: string; href: string }> = {
+  '/industries/rebar': { label: 'Estimate Savings', href: '/calculator/' },
+  '/industries':      { label: 'Explore Rebar', href: '/industries/rebar-cut-bend/' },
+  '/platform':        { label: 'See Industries', href: '/industries/' },
+  '/diligence':       { label: 'Request Package', href: '/diligence/#download' },
   '/personal':        { label: 'Get Started', href: '/personal/#contact' },
   '/commercial':      { label: 'Request Demo', href: '/commercial/#contact' },
   '/industrial':      { label: 'Schedule Review', href: '/industrial/#contact' },

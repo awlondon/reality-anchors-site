@@ -4,9 +4,10 @@ import Footer from '@/components/Footer';
 import LeadForm from '@/components/LeadForm';
 import PhotoBackground from '@/components/PhotoBackground';
 import IntegrationDiagram from '@/components/IntegrationDiagram';
-import TestimonialBreak from '@/components/TestimonialBreak';
+// TODO: Re-enable with real testimonials
+// import TestimonialBreak from '@/components/TestimonialBreak';
 import { regimeCatalog } from '@/lib/siteData';
-import { getTestimonialsForPage } from '@/data/testimonials';
+// import { getTestimonialsForPage } from '@/data/testimonials';
 import { CTA } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 
 const industrialRegimes = regimeCatalog.filter((regime) => ['machine-calibration', 'ai-governance', 'ar-execution'].includes(regime.id));
 
-const testimonial = getTestimonialsForPage('industrial').find((t) => t.id === 'quality-manager-precast')!;
+// const testimonial = getTestimonialsForPage('industrial').find((t) => t.id === 'quality-manager-precast')!;
 
 export default function IndustrialPage() {
   return (
@@ -120,13 +121,7 @@ export default function IndustrialPage() {
         </div>
       </section>
 
-      <TestimonialBreak
-        id={testimonial.id}
-        quote={testimonial.quote}
-        attribution={testimonial.attribution}
-        company={testimonial.company}
-        backgroundSrc={testimonial.backgroundSrc}
-      />
+      {/* TODO: Re-enable with real testimonials */}
 
       {/* Scale metrics and economics */}
       <section className="py-14">

@@ -4,9 +4,10 @@ import Footer from '@/components/Footer';
 import LeadForm from '@/components/LeadForm';
 import PhotoBackground from '@/components/PhotoBackground';
 import IntegrationDiagram from '@/components/IntegrationDiagram';
-import TestimonialBreak from '@/components/TestimonialBreak';
+// TODO: Re-enable with real testimonials
+// import TestimonialBreak from '@/components/TestimonialBreak';
 import { regimeCatalog } from '@/lib/siteData';
-import { getTestimonialsForPage } from '@/data/testimonials';
+// import { getTestimonialsForPage } from '@/data/testimonials';
 import { CTA } from '@/lib/constants';
 import CaseStudies from '@/components/CaseStudies';
 import { ScrapRanges } from './Charts';
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 
 const commercialRegimes = regimeCatalog.filter((regime) => ['structural-fabrication', 'multi-project-optimization', 'machine-calibration'].includes(regime.id));
 
-const testimonial = getTestimonialsForPage('commercial').find((t) => t.id === 'procurement-lead-supply')!;
+// const testimonial = getTestimonialsForPage('commercial').find((t) => t.id === 'procurement-lead-supply')!;
 
 export default function CommercialPage() {
   return (
@@ -168,13 +169,7 @@ export default function CommercialPage() {
         </div>
       </section>
 
-      <TestimonialBreak
-        id={testimonial.id}
-        quote={testimonial.quote}
-        attribution={testimonial.attribution}
-        company={testimonial.company}
-        backgroundSrc={testimonial.backgroundSrc}
-      />
+      {/* TODO: Re-enable with real testimonials */}
 
       {/* Programs */}
       <section className="relative overflow-hidden py-14">

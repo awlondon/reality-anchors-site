@@ -6,7 +6,7 @@ export interface FAQItem {
 export const faqs: FAQItem[] = [
   {
     question: 'How long does deployment take?',
-    answer: 'Personal plans are self-service and operational within hours. Commercial deployments typically begin with a 2-week onboarding phase followed by a 60-day validation window. Industrial engagements include a scoping assessment before deployment timelines are set.',
+    answer: 'Personal plans are self-service and designed to be operational within hours. Commercial deployments are planned around a 2-week onboarding phase followed by a 60-day validation window. Industrial engagements include a scoping assessment before deployment timelines are set.',
   },
   {
     question: 'What hardware or infrastructure is required?',
@@ -22,11 +22,11 @@ export const faqs: FAQItem[] = [
   },
   {
     question: 'Is there a contract lock-in?',
-    answer: 'Personal plans are month-to-month. Commercial and Industrial agreements include a 60-day validation window to confirm fit and ROI before any long-term commitment. If the modeled value does not materialise, you can walk away.',
+    answer: 'Personal plans are month-to-month. Commercial and Industrial agreements include a 60-day validation window to confirm fit before any long-term commitment. If the platform does not deliver value, you can walk away.',
   },
   {
     question: 'How are savings measured?',
-    answer: 'We use published industry scrap rates as baselines — not self-reported numbers — and apply conservative reduction targets. All savings metrics (scrap, rework, throughput) are measured through the platform\'s own logged data, not estimates.',
+    answer: 'We use industry-typical scrap rates as baselines — not self-reported numbers — and apply conservative reduction targets. Savings metrics (scrap, rework, throughput) are tracked through the platform\'s own logged data during the validation window.',
   },
 ];
 

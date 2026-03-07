@@ -14,10 +14,10 @@ export default function CaseStudies() {
           viewport={{ once: true }}
           variants={fadeUp}
         >
-          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Results</p>
-          <h2 className="text-2xl font-semibold text-txt mb-2">Before &amp; after</h2>
+          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Illustrative Scenarios</p>
+          <h2 className="text-2xl font-semibold text-txt mb-2">Modeled deployment outcomes</h2>
           <p className="text-sm text-muted mb-8 max-w-xl">
-            Representative outcomes from early deployments. Names withheld per NDA; facility profiles available on request.
+            Representative scenarios illustrating how the platform is designed to perform across different fabrication environments. Based on modeled assumptions, not specific customer data.
           </p>
         </motion.div>
 
@@ -42,8 +42,8 @@ export default function CaseStudies() {
                   <thead>
                     <tr className="border-b border-line/50">
                       <th className="text-left font-medium text-muted pb-1.5 pr-3">Metric</th>
-                      <th className="text-right font-medium text-muted pb-1.5 px-2">Before</th>
-                      <th className="text-right font-medium text-muted pb-1.5 pl-2">After</th>
+                      <th className="text-right font-medium text-muted pb-1.5 px-2">Typical</th>
+                      <th className="text-right font-medium text-muted pb-1.5 pl-2">Target</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -59,7 +59,7 @@ export default function CaseStudies() {
               </div>
 
               <div className="mt-3 pt-3 border-t border-line/50 flex items-baseline gap-2">
-                <span className="text-[10px] text-muted uppercase tracking-wide">Payback</span>
+                <span className="text-[10px] text-muted uppercase tracking-wide">Modeled ROI</span>
                 <span className="font-mono text-sm font-bold text-accent-2">{cs.payback}</span>
               </div>
             </motion.article>

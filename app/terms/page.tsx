@@ -61,8 +61,8 @@ export default function TermsPage() {
             <p>
               The Site and its content are provided &quot;as is&quot; without warranty of any kind, express or
               implied, including warranties of merchantability, fitness for a particular purpose, or
-              non-infringement. Metrics and outcome figures presented on the Site are indicative and based on observed
-              customer data; individual results will vary.
+              non-infringement. Metrics and outcome figures presented on the Site are illustrative and based on
+              modeled assumptions; they are not guarantees and individual results will vary.
             </p>
           </Section>
 

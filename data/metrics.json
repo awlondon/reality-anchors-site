@@ -1,39 +1,39 @@
 {
   "hero": [
-    { "value": "Up to 8%", "label": "Scrap reduction" },
+    { "value": "Up to 8%", "label": "Scrap reduction target" },
     { "value": "4.2s", "label": "Cut-plan generation" },
-    { "value": "0.7%", "label": "Fabrication error rate" },
+    { "value": "0.7%", "label": "Error rate target" },
     { "value": "97.4%", "label": "Offline uptime" }
   ],
   "heroVariants": {
     "A": [
-      { "value": "99%", "label": "Execution reliability" },
+      { "value": "99%", "label": "Execution reliability target" },
       { "value": "< 5s", "label": "Validation response" },
-      { "value": "8%", "label": "Avg scrap reduction" },
+      { "value": "Up to 8%", "label": "Scrap reduction target" },
       { "value": "97.4%", "label": "Offline uptime" }
     ],
     "B": [
-      { "value": "Up to 8%", "label": "Scrap reduction" },
+      { "value": "Up to 8%", "label": "Scrap reduction target" },
       { "value": "4.2s", "label": "Cut-plan generation" },
-      { "value": "0.7%", "label": "Fabrication error rate" },
+      { "value": "0.7%", "label": "Error rate target" },
       { "value": "97.4%", "label": "Offline uptime" }
     ],
     "C": [
-      { "value": "99%", "label": "Data accuracy" },
-      { "value": "8%", "label": "Avg scrap reduction" },
-      { "value": "41%", "label": "RFI reduction" },
-      { "value": "7.2x", "label": "First-year ROI" }
+      { "value": "99%", "label": "Data accuracy target" },
+      { "value": "Up to 8%", "label": "Scrap reduction target" },
+      { "value": "Up to 40%", "label": "RFI reduction target" },
+      { "value": "Up to 7x", "label": "Modeled first-year ROI" }
     ]
   },
-  "measuredOutcomes": [
-    { "value": 8, "suffix": "%", "label": "Average scrap reduction", "sub": "across deployed fabrication sites", "context": "Median across deployed sites, 200\u20135,000 t/yr throughput" },
-    { "value": 4, "suffix": "s", "label": "Cut-plan generation", "sub": "from job schedule to ready-to-cut plan", "context": "P95 latency, standard cut list of 40\u2013120 bar marks" },
-    { "value": 99, "suffix": "%", "label": "Execution reliability", "sub": "of steps completed without preventable rework", "context": "Steps completed correctly on first attempt, last 90 days" },
-    { "value": 14, "suffix": " days", "label": "Calibration lock-in", "sub": "to stable, drift-free machine profiles", "context": "Median time to converge on stable machine profiles" }
+  "designTargets": [
+    { "value": 8, "suffix": "%", "label": "Scrap reduction target", "sub": "modeled for typical fabrication sites" },
+    { "value": 4, "suffix": "s", "label": "Cut-plan generation", "sub": "from job schedule to ready-to-cut plan" },
+    { "value": 99, "suffix": "%", "label": "Execution reliability target", "sub": "of steps completed without preventable rework" },
+    { "value": 14, "suffix": " days", "label": "Calibration lock-in target", "sub": "to stable, drift-free machine profiles" }
   ],
   "valueBridge": {
     "governMetric": "< 0.7%",
-    "optimizeMetric": "8%",
+    "optimizeMetric": "Up to 8%",
     "traceMetric": "99%"
   }
 }

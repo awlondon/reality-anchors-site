@@ -3,7 +3,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import PhotoBackground from '@/components/PhotoBackground';
-import ContextBadge from '@/components/ContextBadge';
 import { fadeUp, stagger } from '@/lib/motion';
 import { siteMetrics } from '@/lib/siteData';
 
@@ -53,7 +52,7 @@ export default function Metrics() {
           variants={fadeUp}
           className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-12 text-center"
         >
-          Measured Outcomes
+          Design Targets
         </motion.p>
 
         <motion.div
@@ -63,16 +62,10 @@ export default function Metrics() {
           variants={stagger}
           className="grid grid-cols-2 md:grid-cols-4 gap-8"
         >
-          {siteMetrics.measuredOutcomes.map(({ value, suffix, label, sub, context }) => (
+          {siteMetrics.designTargets.map(({ value, suffix, label, sub }) => (
             <motion.div key={label} variants={fadeUp} className="text-center">
               <div className="text-4xl md:text-5xl font-bold text-txt font-mono mb-2">
-                {context ? (
-                  <ContextBadge context={context}>
-                    <Counter target={value} suffix={suffix} />
-                  </ContextBadge>
-                ) : (
-                  <Counter target={value} suffix={suffix} />
-                )}
+                <Counter target={value} suffix={suffix} />
               </div>
               <div className="text-sm font-semibold text-txt mb-1">{label}</div>
               <div className="text-xs text-muted">{sub}</div>

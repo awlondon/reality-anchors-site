@@ -19,7 +19,7 @@ const ABSTRACT_SECTIONS = [
   {
     title: 'Deployment model',
     content:
-      'Cloud-native SaaS with zero on-prem infrastructure. Per-facility onboarding with a 60-day validation window. Baseline metrics are modeled from published industry scrap rates — not self-reported. Subscription is value-aligned: 8\u201320% of modeled annual savings.',
+      'Cloud-native SaaS with zero on-prem infrastructure. Per-facility onboarding with a 60-day validation window. Baseline metrics are modeled from industry-typical scrap rates — not self-reported. Subscription is value-aligned: 8\u201320% of modeled annual savings.',
   },
   {
     title: 'Unit economics',

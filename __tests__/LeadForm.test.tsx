@@ -42,24 +42,23 @@ describe('LeadForm', () => {
     vi.clearAllMocks();
   });
 
-  it('renders the form with all required fields', () => {
+  it('renders step 1 with email field and continue button', () => {
     const { container } = render(<LeadForm />);
 
-    expect(container.querySelector('input[placeholder="Jane Smith"]')).toBeInTheDocument();
     expect(container.querySelector('input[placeholder="jane@company.com"]')).toBeInTheDocument();
-    expect(container.querySelector('input[placeholder="Acme Fabrication"]')).toBeInTheDocument();
-    expect(screen.getByText('Role')).toBeInTheDocument();
     expect(container.querySelector('button[type="submit"]')).toBeInTheDocument();
+    expect(screen.getByText('Continue')).toBeInTheDocument();
+    // Step 2 fields should not be visible yet
+    expect(container.querySelector('input[placeholder="Jane Smith"]')).not.toBeInTheDocument();
   });
 
-  it('shows validation errors when submitting empty form', async () => {
+  it('shows email validation error when submitting empty form', async () => {
     const { container } = render(<LeadForm />);
 
     const submitButton = container.querySelector('button[type="submit"]') as HTMLButtonElement;
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(screen.getAllByText('Required')).toHaveLength(3);
       expect(screen.getByText('Valid work email required')).toBeInTheDocument();
     });
   });
@@ -78,18 +77,42 @@ describe('LeadForm', () => {
     });
   });
 
+  it('advances to step 2 after valid email', async () => {
+    const { container } = render(<LeadForm />);
+
+    const emailInput = container.querySelector('input[type="email"]') as HTMLInputElement;
+    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+
+    const submitButton = container.querySelector('button[type="submit"]') as HTMLButtonElement;
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(container.querySelector('input[placeholder="Jane Smith"]')).toBeInTheDocument();
+      expect(container.querySelector('input[placeholder="Acme Fabrication"]')).toBeInTheDocument();
+      expect(screen.getByText('Request Contact')).toBeInTheDocument();
+    });
+  });
+
   it('submits successfully with valid data', async () => {
     const { sendLeadEmail } = await import('@/lib/sendLeadEmail');
 
     const { container } = render(<LeadForm />);
 
-    const nameInput = container.querySelector('input[placeholder="Jane Smith"]') as HTMLInputElement;
+    // Step 1: enter email and continue
     const emailInput = container.querySelector('input[type="email"]') as HTMLInputElement;
+    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+    fireEvent.click(container.querySelector('button[type="submit"]') as HTMLButtonElement);
+
+    // Step 2: fill details and submit
+    await waitFor(() => {
+      expect(container.querySelector('input[placeholder="Jane Smith"]')).toBeInTheDocument();
+    });
+
+    const nameInput = container.querySelector('input[placeholder="Jane Smith"]') as HTMLInputElement;
     const companyInput = container.querySelector('input[placeholder="Acme Fabrication"]') as HTMLInputElement;
     const roleSelect = container.querySelector('select') as HTMLSelectElement;
 
     fireEvent.change(nameInput, { target: { value: 'Test User' } });
-    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
     fireEvent.change(companyInput, { target: { value: 'Test Corp' } });
     fireEvent.change(roleSelect, { target: { value: 'Operations' } });
 

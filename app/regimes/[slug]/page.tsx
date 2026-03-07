@@ -124,7 +124,7 @@ export default async function RegimeDetailPage({ params }: Props) {
       <section className="pb-16">
         <div className="max-w-5xl mx-auto px-6">
           <article className="border border-line bg-card rounded-2xl p-6">
-            <h2 className="text-lg font-semibold text-txt mb-4">Metrics & ROI</h2>
+            <h2 className="text-lg font-semibold text-txt mb-4">Design Targets & Value Framing</h2>
             <div className="grid md:grid-cols-3 gap-4 mb-4">
               {regime.metrics.map((metric) => (
                 <div key={metric.label} className="border border-line rounded-xl px-4 py-3 bg-bg/60">

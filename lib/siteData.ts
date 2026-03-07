@@ -37,7 +37,7 @@ export interface Regime {
 export const siteMetrics = metrics as {
   hero: HeroMetric[];
   heroVariants: Record<string, HeroMetric[]>;
-  measuredOutcomes: MetricItem[];
+  designTargets: MetricItem[];
   valueBridge: {
     governMetric: string;
     optimizeMetric: string;

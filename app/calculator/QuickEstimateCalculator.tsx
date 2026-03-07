@@ -6,7 +6,7 @@ import { computeMarginImpact, formatUSD, formatNumber } from '@/lib/marginModel'
 import { setCalculatorContext } from '@/lib/calculatorContext';
 import { trackEvent } from '@/lib/analytics';
 
-// Conservative fixed assumptions matching observed median deployment outcomes.
+// Conservative fixed assumptions for illustrative estimates.
 // Users who want to tune these can use the full model at /margin-impact/.
 const FIXED = {
   scrapReductionPts: 1.5,
@@ -189,7 +189,7 @@ export default function QuickEstimateCalculator() {
                   ['Annual tonnage', `${formatNumber(tons, { maximumFractionDigits: 0 })} t`],
                   ['Current scrap rate', `${scrapRate.toFixed(1)}%`],
                   ['Material cost per ton', formatUSD(costPerTon, { maximumFractionDigits: 0 })],
-                  ['Assumed scrap reduction', '1.5 pts (observed median)'],
+                  ['Assumed scrap reduction', '1.5 pts (conservative model)'],
                 ] as [string, string][]).map(([k, v]) => (
                   <tr key={k} style={{ borderBottom: '1px solid #f1f5f9' }}>
                     <td style={{ padding: '0.4rem 0', color: '#64748b' }}>{k}</td>
@@ -241,7 +241,7 @@ export default function QuickEstimateCalculator() {
           </div>
 
           <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid #e2e8f0' }}>
-            Results are estimates based on observed customer data. Individual outcomes depend on shop configuration, material mix, and operator conditions. Not a guarantee of performance.
+            Results are illustrative estimates based on modeled assumptions. Individual outcomes depend on shop configuration, material mix, and operator conditions. Not a guarantee of performance.
           </div>
         </div>
       </div>
@@ -281,7 +281,7 @@ export default function QuickEstimateCalculator() {
             format={(v) => formatUSD(v, { maximumFractionDigits: 0 })}
           />
           <p className="text-xs text-muted/70 border-t border-line pt-4">
-            Assumes a 1.5-point scrap reduction — the observed median across deployments. Labor,
+            Assumes a 1.5-point scrap reduction based on conservative modeling. Labor,
             throughput, and oversight inputs are set to conservative defaults.
           </p>
         </div>
@@ -354,7 +354,7 @@ export default function QuickEstimateCalculator() {
         </div>
 
         <p className="text-xs text-muted/60 text-center leading-relaxed">
-          Results are estimates based on observed customer data. Individual outcomes depend on shop
+          Results are illustrative estimates based on modeled assumptions. Individual outcomes depend on shop
           configuration, material mix, and operator conditions. Not a guarantee of performance.
         </p>
       </div>

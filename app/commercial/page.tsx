@@ -93,7 +93,7 @@ export default function CommercialPage() {
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-3">Economics</h2>
             <p className="text-muted text-sm mb-4">
-              We use published industry scrap ranges — not self-reported numbers — to model conservative savings. Your subscription is set at 8–20% of modeled annual savings, keeping upside firmly in your favor.
+              We do not price against self-reported scrap rates. Instead, we use industry-typical ranges by segment and apply conservative deltas. This prevents pricing inflation and keeps contracts stable over time.
             </p>
             <div className="overflow-x-auto mb-4">
               <table className="ra-table">
@@ -106,7 +106,7 @@ export default function CommercialPage() {
               </table>
             </div>
             <ScrapRanges />
-            <p className="text-xs text-muted/70 mt-4">No performance audits. No revenue-share disputes. Contracts reference a published baseline model version.</p>
+            <p className="text-xs text-muted/70 mt-4">Contracts reference a baseline model version for clarity.</p>
           </div>
         </div>
       </section>
@@ -125,7 +125,7 @@ export default function CommercialPage() {
               {[
                 { phase: 'Week 1–2', title: 'Onboarding', desc: 'Baseline metrics captured, workflows configured, operators trained.' },
                 { phase: 'Week 3–8', title: 'Validation', desc: '60-day window measuring scrap, rework, and throughput against baselines.' },
-                { phase: 'Week 9+', title: 'Decision', desc: 'Review measured outcomes. Scale, adjust, or walk away — no lock-in.' },
+                { phase: 'Week 9+', title: 'Decision', desc: 'Review results against baselines. Scale, adjust, or walk away — no lock-in.' },
               ].map((step) => (
                 <div key={step.phase} className="border border-line rounded-xl bg-bg/50 px-4 py-3">
                   <p className="text-[10px] font-bold tracking-wide uppercase text-accent mb-1">{step.phase}</p>

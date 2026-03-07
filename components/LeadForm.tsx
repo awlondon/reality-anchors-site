@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { trackEvent } from '@/lib/analytics';
 import { fadeUp } from '@/lib/motion';
@@ -36,18 +36,25 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [step, setStep] = useState<1 | 2>(1);
+  const successRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     trackEvent('lead_form_view');
   }, []);
 
-  const validate = () => {
+  useEffect(() => {
+    if (submitted) successRef.current?.focus();
+  }, [submitted]);
+
+  const validateEmail = () => {
     const e: Partial<FormData> = {};
-    if (!data.name.trim()) e.name = 'Required';
     if (!data.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) e.email = 'Valid work email required';
-    if (!data.company.trim()) e.company = 'Required';
-    if (!data.role) e.role = 'Required';
     return e;
+  };
+
+  const validate = () => {
+    return validateEmail();
   };
 
   const handleSubmit = async (evt: React.FormEvent) => {
@@ -210,13 +217,15 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
             <AnimatePresence mode="wait">
               {submitted ? (
                 <motion.div
+                  ref={successRef}
                   key="success"
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-center py-8"
+                  className="text-center py-8 outline-none"
                   role="status"
                   aria-live="polite"
                   aria-atomic="true"
+                  tabIndex={-1}
                 >
                   <div className="w-12 h-12 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center mx-auto mb-4" aria-hidden="true">
                     <svg className="w-6 h-6 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
@@ -229,42 +238,57 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
               ) : (
                 <motion.form
                   key="form"
-                  onSubmit={handleSubmit}
+                  onSubmit={step === 1 ? (e) => {
+                    e.preventDefault();
+                    const emailErrors = validateEmail();
+                    if (Object.keys(emailErrors).length) { setErrors(emailErrors); return; }
+                    setErrors({});
+                    setStep(2);
+                    trackEvent('lead_form_email_step');
+                  } : handleSubmit}
                   className="flex flex-col gap-4"
                   noValidate
                 >
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {field('name', 'Full name', 'text', 'Jane Smith')}
-                    {field('email', 'Work email', 'email', 'jane@company.com')}
-                  </div>
-                  {field('company', 'Company', 'text', 'Acme Fabrication')}
+                  {/* Step 1: email only */}
+                  {field('email', 'Work email', 'email', 'jane@company.com')}
 
-                  <label className="flex flex-col gap-1.5">
-                    <span className="text-xs font-semibold text-muted uppercase tracking-wide">Role</span>
-                    <select
-                      value={data.role}
-                      onChange={(e) => setData((d) => ({ ...d, role: e.target.value }))}
-                      className={`ra-input ${errors.role ? 'border-red-500/60' : ''}`}
-                      aria-invalid={!!errors.role}
-                      aria-describedby={errors.role ? 'role-error' : undefined}
+                  {/* Step 2: details (shown after email entered) */}
+                  {step === 2 && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      className="flex flex-col gap-4 overflow-hidden"
                     >
-                      <option value="">Select…</option>
-                      {ROLES.map((r) => <option key={r} value={r}>{r}</option>)}
-                    </select>
-                    {errors.role && <span id="role-error" className="text-xs text-red-400">{errors.role}</span>}
-                  </label>
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        {field('name', 'Full name (optional)', 'text', 'Jane Smith')}
+                        {field('company', 'Company (optional)', 'text', 'Acme Fabrication')}
+                      </div>
 
-                  <label className="flex flex-col gap-1.5">
-                    <span className="text-xs font-semibold text-muted uppercase tracking-wide">Message (optional)</span>
-                    <textarea
-                      value={data.message}
-                      onChange={(e) => setData((d) => ({ ...d, message: e.target.value }))}
-                      placeholder="Describe your workflow challenge, throughput, or goals…"
-                      rows={4}
-                      maxLength={2000}
-                      className="ra-input resize-none"
-                    />
-                  </label>
+                      <label className="flex flex-col gap-1.5">
+                        <span className="text-xs font-semibold text-muted uppercase tracking-wide">Role (optional)</span>
+                        <select
+                          value={data.role}
+                          onChange={(e) => setData((d) => ({ ...d, role: e.target.value }))}
+                          className="ra-input"
+                        >
+                          <option value="">Select…</option>
+                          {ROLES.map((r) => <option key={r} value={r}>{r}</option>)}
+                        </select>
+                      </label>
+
+                      <label className="flex flex-col gap-1.5">
+                        <span className="text-xs font-semibold text-muted uppercase tracking-wide">Message (optional)</span>
+                        <textarea
+                          value={data.message}
+                          onChange={(e) => setData((d) => ({ ...d, message: e.target.value }))}
+                          placeholder="Describe your workflow challenge, throughput, or goals…"
+                          rows={3}
+                          maxLength={2000}
+                          className="ra-input resize-none"
+                        />
+                      </label>
+                    </motion.div>
+                  )}
 
                   {/* Honeypot field — hidden from humans, traps bots */}
                   <input
@@ -277,17 +301,17 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
                   />
 
                   {submitError && (
-                    <p className="text-sm text-amber-300" role="status">{submitError}</p>
+                    <p className="text-sm text-amber-300" role="alert">{submitError}</p>
                   )}
 
                   <button
                     type="submit"
                     disabled={loading}
                     aria-busy={loading}
-                    aria-label={loading ? 'Sending your request…' : 'Submit contact request'}
+                    aria-label={step === 1 ? 'Continue with email' : loading ? 'Sending your request…' : 'Submit contact request'}
                     className="w-full py-3.5 rounded-lg bg-accent hover:bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold transition-all hover:-translate-y-px mt-1"
                   >
-                    {loading ? 'Sending…' : 'Request Contact'}
+                    {step === 1 ? 'Continue' : loading ? 'Sending…' : 'Request Contact'}
                   </button>
                 </motion.form>
               )}

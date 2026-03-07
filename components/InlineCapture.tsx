@@ -103,7 +103,7 @@ export default function InlineCapture() {
                 disabled={loading}
                 className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-semibold transition-all hover:-translate-y-px whitespace-nowrap"
               >
-                {loading ? 'Sending\u2026' : 'Send Me the Estimate'}
+                {loading ? 'Sending\u2026' : 'Get ROI Estimate'}
               </button>
             </form>
             {error && <p className="mt-2 text-xs text-red-400">{error}</p>}

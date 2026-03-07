@@ -26,10 +26,10 @@
     ]
   },
   "measuredOutcomes": [
-    { "value": 8, "suffix": "%", "label": "Average scrap reduction", "sub": "across deployed fabrication sites" },
-    { "value": 4, "suffix": "s", "label": "Cut-plan generation", "sub": "from job schedule to ready-to-cut plan" },
-    { "value": 99, "suffix": "%", "label": "Execution reliability", "sub": "of steps completed without preventable rework" },
-    { "value": 14, "suffix": " days", "label": "Calibration lock-in", "sub": "to stable, drift-free machine profiles" }
+    { "value": 8, "suffix": "%", "label": "Average scrap reduction", "sub": "across deployed fabrication sites", "context": "Median across deployed sites, 200\u20135,000 t/yr throughput" },
+    { "value": 4, "suffix": "s", "label": "Cut-plan generation", "sub": "from job schedule to ready-to-cut plan", "context": "P95 latency, standard cut list of 40\u2013120 bar marks" },
+    { "value": 99, "suffix": "%", "label": "Execution reliability", "sub": "of steps completed without preventable rework", "context": "Steps completed correctly on first attempt, last 90 days" },
+    { "value": 14, "suffix": " days", "label": "Calibration lock-in", "sub": "to stable, drift-free machine profiles", "context": "Median time to converge on stable machine profiles" }
   ],
   "valueBridge": {
     "governMetric": "< 0.7%",

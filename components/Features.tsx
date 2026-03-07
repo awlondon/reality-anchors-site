@@ -6,6 +6,8 @@ import PhotoBackground from '@/components/PhotoBackground';
 import { stagger, fadeUp } from '@/lib/motion';
 import { regimeCatalog } from '@/lib/siteData';
 
+const CORE_TIERS = new Set(['Core', 'Pro']);
+
 const displayOverrides: Record<string, {
   stat: string;
   statTwo: string;
@@ -71,6 +73,75 @@ const displayOverrides: Record<string, {
   },
 };
 
+const coreRegimes = regimeCatalog.filter((r) => CORE_TIERS.has(r.tier));
+const advancedRegimes = regimeCatalog.filter((r) => !CORE_TIERS.has(r.tier));
+
+function RegimeCard({ regime, compact = false }: { regime: typeof regimeCatalog[number]; compact?: boolean }) {
+  const display = displayOverrides[regime.id];
+  if (!display) return null;
+
+  if (compact) {
+    return (
+      <motion.article
+        key={regime.id}
+        variants={fadeUp}
+        className="relative overflow-hidden rounded-xl border border-line/50 bg-card/80"
+      >
+        <div className="p-5 flex flex-col">
+          <h3 className="text-base font-semibold text-txt/80 mb-2">{regime.title}</h3>
+          <p className="text-muted text-xs leading-relaxed mb-3">{regime.description}</p>
+          <div className="flex flex-wrap gap-2 mb-3">
+            <span className={`rounded-md border px-2 py-1 text-[11px] font-semibold ${display.accent} opacity-70`}>{display.stat}</span>
+          </div>
+          <Link
+            href={display.href}
+            className="text-xs font-semibold text-muted hover:text-accent-2 transition-colors"
+          >
+            {display.cta} →
+          </Link>
+        </div>
+      </motion.article>
+    );
+  }
+
+  return (
+    <motion.article
+      key={regime.id}
+      variants={fadeUp}
+      className={`relative overflow-hidden rounded-2xl border border-line/70 bg-gradient-to-br ${display.bg}`}
+    >
+      <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.25),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(46,125,235,0.2),transparent_35%)]" />
+      <div className="absolute inset-y-0 right-0 w-28 sm:w-44 md:w-48 opacity-70 pointer-events-none">
+        <picture>
+          <source media="(max-width: 767px)" srcSet={display.imageMobile} />
+          <img
+            src={regime.image}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-contain object-right p-3"
+          />
+        </picture>
+      </div>
+      <div className="relative p-7 md:p-8 min-h-[280px] flex flex-col">
+        <h3 className="text-xl font-semibold text-white mb-3">{regime.title}</h3>
+        <p className="text-slate-200/90 text-sm leading-relaxed max-w-[80%] sm:max-w-[70%] md:max-w-[72%]">{regime.description}</p>
+        <div className="mt-6 grid sm:grid-cols-2 gap-3">
+          <div className={`rounded-lg border px-3 py-2 text-xs font-semibold ${display.accent}`}>{display.stat}</div>
+          <div className={`rounded-lg border px-3 py-2 text-xs font-semibold ${display.accent}`}>{display.statTwo}</div>
+        </div>
+        <Link
+          href={display.href}
+          className="mt-auto pt-7 text-sm font-semibold text-white hover:text-accent-2 transition-colors"
+        >
+          {display.cta} →
+        </Link>
+      </div>
+    </motion.article>
+  );
+}
+
 export default function Features() {
   return (
     <section className="relative overflow-hidden py-24 bg-bg-2 border-y border-line/70">
@@ -83,15 +154,16 @@ export default function Features() {
           variants={fadeUp}
           className="mb-14"
         >
-          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">What It Covers</p>
+          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Core Capabilities</p>
           <h2 className="text-3xl md:text-4xl font-semibold text-txt max-w-3xl leading-tight">
-            From bench execution to fleet-wide oversight
+            Fabrication execution, validated at every step
           </h2>
           <p className="mt-4 text-muted max-w-2xl">
             Reality Anchors works alongside your detailing and ERP systems — turning plans into verified outcomes on the shop floor.
           </p>
         </motion.div>
 
+        {/* Core regimes — full-size cards */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -99,47 +171,30 @@ export default function Features() {
           variants={stagger}
           className="grid lg:grid-cols-2 gap-6"
         >
-          {regimeCatalog.map((regime) => {
-            const display = displayOverrides[regime.id];
-            if (!display) return null;
-            return (
-              <motion.article
-                key={regime.id}
-                variants={fadeUp}
-                className={`relative overflow-hidden rounded-2xl border border-line/70 bg-gradient-to-br ${display.bg}`}
-              >
-                <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.25),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(46,125,235,0.2),transparent_35%)]" />
-                <div className="absolute inset-y-0 right-0 w-28 sm:w-44 md:w-48 opacity-70 pointer-events-none">
-                  <picture>
-                    <source media="(max-width: 767px)" srcSet={display.imageMobile} />
-                    <img
-                      src={regime.image}
-                      alt=""
-                      aria-hidden
-                      loading="lazy"
-                      decoding="async"
-                      className="h-full w-full object-contain object-right p-3"
-                    />
-                  </picture>
-                </div>
-                <div className="relative p-7 md:p-8 min-h-[280px] flex flex-col">
-                  <h3 className="text-xl font-semibold text-white mb-3">{regime.title}</h3>
-                  <p className="text-slate-200/90 text-sm leading-relaxed max-w-[80%] sm:max-w-[70%] md:max-w-[72%]">{regime.description}</p>
-                  <div className="mt-6 grid sm:grid-cols-2 gap-3">
-                    <div className={`rounded-lg border px-3 py-2 text-xs font-semibold ${display.accent}`}>{display.stat}</div>
-                    <div className={`rounded-lg border px-3 py-2 text-xs font-semibold ${display.accent}`}>{display.statTwo}</div>
-                  </div>
-                  <Link
-                    href={display.href}
-                    className="mt-auto pt-7 text-sm font-semibold text-white hover:text-accent-2 transition-colors"
-                  >
-                    {display.cta} →
-                  </Link>
-                </div>
-              </motion.article>
-            );
-          })}
+          {coreRegimes.map((regime) => (
+            <RegimeCard key={regime.id} regime={regime} />
+          ))}
         </motion.div>
+
+        {/* Advanced capabilities — compact cards */}
+        {advancedRegimes.length > 0 && (
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={stagger}
+            className="mt-14"
+          >
+            <motion.p variants={fadeUp} className="text-xs font-bold tracking-[0.18em] uppercase text-muted mb-6">
+              Advanced Capabilities
+            </motion.p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {advancedRegimes.map((regime) => (
+                <RegimeCard key={regime.id} regime={regime} compact />
+              ))}
+            </div>
+          </motion.div>
+        )}
       </div>
     </section>
   );

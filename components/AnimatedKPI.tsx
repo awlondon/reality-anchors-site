@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type Props = {
   value: number;
@@ -25,8 +25,10 @@ export default function AnimatedKPI({
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
   const reduceMotion = useReducedMotion();
+  const [hydrated, setHydrated] = useState(false);
 
-  const motionValue = useMotionValue(0);
+  // Initialize to real value so static HTML shows correct numbers
+  const motionValue = useMotionValue(value);
   const spring = useSpring(motionValue, {
     damping: 15,
     stiffness: 120,
@@ -35,6 +37,13 @@ export default function AnimatedKPI({
   const formattedValue = useTransform(spring, (latest) => `${prefix}${latest.toFixed(decimals)}${suffix}`);
 
   useEffect(() => {
+    motionValue.jump(0);
+    setHydrated(true);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!hydrated) return;
+
     if (reduceMotion) {
       motionValue.set(value);
       return;
@@ -43,7 +52,7 @@ export default function AnimatedKPI({
     if (isInView) {
       motionValue.set(value);
     }
-  }, [isInView, motionValue, reduceMotion, value]);
+  }, [hydrated, isInView, motionValue, reduceMotion, value]);
 
   useEffect(() => {
     if (!isInView) return;

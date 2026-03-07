@@ -9,6 +9,7 @@ import { trackEvent } from '@/lib/analytics';
 import { siteMetrics } from '@/lib/siteData';
 import { useExperiment } from '@/components/ExperimentProvider';
 import { HOME_EXPERIMENT } from '@/lib/experiments/config';
+import { CTA } from '@/lib/constants';
 
 const StructuredFieldBackground = dynamic(
   () => import('@/components/StructuredFieldBackground'),
@@ -27,9 +28,9 @@ const EYEBROW: Record<string, string> = {
 };
 
 const CTA_CONFIG: Record<string, { primary: { label: string; href: string }; secondary: { label: string; href: string } }> = {
-  A: { primary: { label: 'Explore Industries', href: '/industries/' }, secondary: { label: 'Read the Strategic Case', href: '/board-strategy/' } },
-  B: { primary: { label: 'Get a Scrap Estimate for Your Shop', href: '/commercial/#contact' }, secondary: { label: 'Read the Strategic Case', href: '/board-strategy/' } },
-  C: { primary: { label: 'Request Technical Review', href: '/platform/' }, secondary: { label: 'Explore Industries', href: '/industries/' } },
+  A: { primary: CTA.primary, secondary: CTA.secondary },
+  B: { primary: CTA.primary, secondary: CTA.secondary },
+  C: { primary: CTA.primary, secondary: CTA.secondary },
 };
 
 export default function Hero() {
@@ -38,7 +39,7 @@ export default function Hero() {
 
   const override = HOME_EXPERIMENT.narrative.heroOverride?.[variant];
   const headline = override?.headline ?? 'Fewer Miscuts. Less Scrap. Every Bar Tracked.';
-  const subhead = override?.subhead ?? 'Tablet software that reads your cut lists, applies stretch allowances and bend rules, and generates step-by-step cutter and bender instructions. Runs alongside your existing machines\u00a0\u2014 no hardware changes, works offline.';
+  const subhead = override?.subhead ?? 'Reads your cut lists, applies stretch and bend rules, and generates step-by-step instructions. No hardware changes, works offline.';
   const eyebrow = EYEBROW[variant] ?? EYEBROW.B;
   const ctas = CTA_CONFIG[variant] ?? CTA_CONFIG.B;
   const heroKPIs = siteMetrics.heroVariants?.[variant] ?? siteMetrics.hero;
@@ -100,7 +101,7 @@ export default function Hero() {
         src="/images/hero-welding.jpg"
         alt=""
         aria-hidden="true"
-        loading="lazy"
+        loading="eager"
         decoding="async"
         className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity"
       />

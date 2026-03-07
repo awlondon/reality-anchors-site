@@ -3,16 +3,24 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import PhotoBackground from '@/components/PhotoBackground';
+import ContextBadge from '@/components/ContextBadge';
 import { fadeUp, stagger } from '@/lib/motion';
 import { siteMetrics } from '@/lib/siteData';
 
 function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
-  const [count, setCount] = useState(0);
+  // Initialize to target so static HTML contains real values (not 0)
+  const [count, setCount] = useState(target);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    if (!inView) return;
+    setHydrated(true);
+    setCount(0);
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated || !inView) return;
     const duration = 1000;
     const steps = Math.min(target, 60);
     const stepTime = duration / steps;
@@ -27,7 +35,7 @@ function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
       }
     }, stepTime);
     return () => clearInterval(timer);
-  }, [inView, target]);
+  }, [hydrated, inView, target]);
 
   return <span ref={ref}>{count}{suffix}</span>;
 }
@@ -55,10 +63,16 @@ export default function Metrics() {
           variants={stagger}
           className="grid grid-cols-2 md:grid-cols-4 gap-8"
         >
-          {siteMetrics.measuredOutcomes.map(({ value, suffix, label, sub }) => (
+          {siteMetrics.measuredOutcomes.map(({ value, suffix, label, sub, context }) => (
             <motion.div key={label} variants={fadeUp} className="text-center">
               <div className="text-4xl md:text-5xl font-bold text-txt font-mono mb-2">
-                <Counter target={value} suffix={suffix} />
+                {context ? (
+                  <ContextBadge context={context}>
+                    <Counter target={value} suffix={suffix} />
+                  </ContextBadge>
+                ) : (
+                  <Counter target={value} suffix={suffix} />
+                )}
               </div>
               <div className="text-sm font-semibold text-txt mb-1">{label}</div>
               <div className="text-xs text-muted">{sub}</div>

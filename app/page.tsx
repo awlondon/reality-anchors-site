@@ -9,17 +9,18 @@ import Tiers from '@/components/Tiers';
 import LeadForm from '@/components/LeadForm';
 import StickyCTA from '@/components/StickyCTA';
 import Footer from '@/components/Footer';
-import TestimonialBreak from '@/components/TestimonialBreak';
+// TODO: Re-enable with real testimonials
+// import TestimonialBreak from '@/components/TestimonialBreak';
 import FAQ from '@/components/FAQ';
 import { faqStructuredData } from '@/data/faq';
-import { getTestimonialsForPage } from '@/data/testimonials';
+// import { getTestimonialsForPage } from '@/data/testimonials';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
 };
 
 export default async function Home() {
-  const testimonials = getTestimonialsForPage('home');
+  // const testimonials = getTestimonialsForPage('home');
 
   return (
     <main id="main-content" className="snap-y">
@@ -44,27 +45,11 @@ export default async function Home() {
       <Hero />
       <ProofStrip />
       <VideoShowcasePlatform />
-      {testimonials[0] && (
-        <TestimonialBreak
-          id={testimonials[0].id}
-          quote={testimonials[0].quote}
-          attribution={testimonials[0].attribution}
-          company={testimonials[0].company}
-          backgroundSrc={testimonials[0].backgroundSrc}
-        />
-      )}
+      {/* TODO: Re-enable with real testimonials */}
       <HowItWorks />
       <Features />
       <Metrics />
-      {testimonials[1] && (
-        <TestimonialBreak
-          id={testimonials[1].id}
-          quote={testimonials[1].quote}
-          attribution={testimonials[1].attribution}
-          company={testimonials[1].company}
-          backgroundSrc={testimonials[1].backgroundSrc}
-        />
-      )}
+      {/* TODO: Re-enable with real testimonials */}
       <Tiers />
       <FAQ />
       <LeadForm />

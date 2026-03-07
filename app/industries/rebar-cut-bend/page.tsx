@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import VideoShowcase from '@/components/VideoShowcase';
-import TestimonialBreak from '@/components/TestimonialBreak';
+// TODO: Re-enable with real testimonials
+// import TestimonialBreak from '@/components/TestimonialBreak';
 import LeadForm from '@/components/LeadForm';
 import Footer from '@/components/Footer';
-import { getTestimonialsForPage } from '@/data/testimonials';
+// import { getTestimonialsForPage } from '@/data/testimonials';
 import { getWorkcellBySlug } from '@/data/workcells';
 import { getRegimesByWorkcell } from '@/lib/siteData';
 
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 export default function RebarCutBendPage() {
-  const testimonials = getTestimonialsForPage('industries:rebar-cut-bend');
+  // const testimonials = getTestimonialsForPage('industries:rebar-cut-bend');
 
   return (
     <main id="main-content">
@@ -103,16 +104,7 @@ export default function RebarCutBendPage() {
       {/* ── Visual showcase (rebar-specific SVG scenes) ────────── */}
       <VideoShowcase />
 
-      {/* ── Testimonial #1 ────────────────────────────────────── */}
-      {testimonials[0] && (
-        <TestimonialBreak
-          id={testimonials[0].id}
-          quote={testimonials[0].quote}
-          attribution={testimonials[0].attribution}
-          company={testimonials[0].company}
-          backgroundSrc={testimonials[0].backgroundSrc}
-        />
-      )}
+      {/* TODO: Re-enable with real testimonials */}
 
       {/* ── Workflow ──────────────────────────────────────────── */}
       <section className="bg-bg py-20">
@@ -246,16 +238,7 @@ export default function RebarCutBendPage() {
         </div>
       </section>
 
-      {/* ── Testimonial #2 ────────────────────────────────────── */}
-      {testimonials[1] && (
-        <TestimonialBreak
-          id={testimonials[1].id}
-          quote={testimonials[1].quote}
-          attribution={testimonials[1].attribution}
-          company={testimonials[1].company}
-          backgroundSrc={testimonials[1].backgroundSrc}
-        />
-      )}
+      {/* TODO: Re-enable with real testimonials */}
 
       <LeadForm
         heading="See if rebar cut & bend fits your operation"

@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { workcells, type WorkcellStatus } from '@/data/workcells';
-import { getTestimonialsForPage } from '@/data/testimonials';
-import TestimonialBreak from '@/components/TestimonialBreak';
+// TODO: Re-enable with real testimonials
+// import { getTestimonialsForPage } from '@/data/testimonials';
+// import TestimonialBreak from '@/components/TestimonialBreak';
 import LeadForm from '@/components/LeadForm';
 import Footer from '@/components/Footer';
 
@@ -26,7 +27,7 @@ const STATUS_STYLE: Record<WorkcellStatus, string> = {
 };
 
 export default function IndustriesPage() {
-  const testimonials = getTestimonialsForPage('industries');
+  // const testimonials = getTestimonialsForPage('industries');
 
   return (
     <main id="main-content">
@@ -182,16 +183,7 @@ export default function IndustriesPage() {
         </div>
       </section>
 
-      {/* ── Testimonial ───────────────────────────────────────── */}
-      {testimonials[0] && (
-        <TestimonialBreak
-          id={testimonials[0].id}
-          quote={testimonials[0].quote}
-          attribution={testimonials[0].attribution}
-          company={testimonials[0].company}
-          backgroundSrc={testimonials[0].backgroundSrc}
-        />
-      )}
+      {/* TODO: Re-enable with real testimonials */}
 
       {/* ── CTA ───────────────────────────────────────────────── */}
       <section className="bg-bg py-16">

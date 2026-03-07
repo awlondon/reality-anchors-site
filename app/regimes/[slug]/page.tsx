@@ -3,9 +3,10 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
-import TestimonialBreak from '@/components/TestimonialBreak';
+// TODO: Re-enable with real testimonials
+// import TestimonialBreak from '@/components/TestimonialBreak';
 import { getRegimeById, regimeCatalog } from '@/lib/siteData';
-import { getTestimonialsForPage } from '@/data/testimonials';
+// import { getTestimonialsForPage } from '@/data/testimonials';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -39,7 +40,7 @@ export default async function RegimeDetailPage({ params }: Props) {
 
   if (!regime) notFound();
 
-  const testimonial = getTestimonialsForPage(`regime:${slug}`)[0];
+  // const testimonial = getTestimonialsForPage(`regime:${slug}`)[0];
 
   return (
     <main className="pt-20">
@@ -111,15 +112,7 @@ export default async function RegimeDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {testimonial && (
-        <TestimonialBreak
-          id={testimonial.id}
-          quote={testimonial.quote}
-          attribution={testimonial.attribution}
-          company={testimonial.company}
-          backgroundSrc={testimonial.backgroundSrc}
-        />
-      )}
+      {/* TODO: Re-enable with real testimonials */}
 
       <section className="pb-16">
         <div className="max-w-5xl mx-auto px-6">

@@ -3,9 +3,10 @@ import Link from 'next/link';
 import Footer from '@/components/Footer';
 import LeadForm from '@/components/LeadForm';
 import PhotoBackground from '@/components/PhotoBackground';
-import TestimonialBreak from '@/components/TestimonialBreak';
+// TODO: Re-enable with real testimonials
+// import TestimonialBreak from '@/components/TestimonialBreak';
 import { regimeCatalog } from '@/lib/siteData';
-import { getTestimonialsForPage } from '@/data/testimonials';
+// import { getTestimonialsForPage } from '@/data/testimonials';
 
 export const metadata: Metadata = {
   title: 'Personal Plans — Execution Guidance for Solo Operators',
@@ -49,7 +50,7 @@ const pricingTiers = [
   },
 ];
 
-const testimonial = getTestimonialsForPage('personal')[0]!;
+// const testimonial = getTestimonialsForPage('personal')[0]!;
 
 export default function PersonalPage() {
   return (
@@ -169,13 +170,7 @@ export default function PersonalPage() {
         </div>
       </section>
 
-      <TestimonialBreak
-        id={testimonial.id}
-        quote={testimonial.quote}
-        attribution={testimonial.attribution}
-        company={testimonial.company}
-        backgroundSrc={testimonial.backgroundSrc}
-      />
+      {/* TODO: Re-enable with real testimonials */}
 
       <section className="pb-16">
         <div className="max-w-4xl mx-auto px-6">

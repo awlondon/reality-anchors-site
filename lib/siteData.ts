@@ -6,6 +6,7 @@ export interface MetricItem {
   suffix: string;
   label: string;
   sub: string;
+  context?: string;
 }
 
 export interface HeroMetric {

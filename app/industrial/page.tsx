@@ -3,17 +3,19 @@ import Link from 'next/link';
 import Footer from '@/components/Footer';
 import LeadForm from '@/components/LeadForm';
 import PhotoBackground from '@/components/PhotoBackground';
+import IntegrationDiagram from '@/components/IntegrationDiagram';
 import TestimonialBreak from '@/components/TestimonialBreak';
 import { regimeCatalog } from '@/lib/siteData';
 import { getTestimonialsForPage } from '@/data/testimonials';
+import { CTA } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Industrial Solutions — Enterprise Execution Validation at Scale',
-  description: 'High-volume execution standardization with ERP integration, compliance-grade traceability, and enterprise commercial structure.',
+  title: 'Industrial Solutions — Execution Validation at Scale',
+  description: 'Enterprise execution validation with ERP integration, compliance-grade traceability, and multi-facility deployment. Pricing aligned to measurable plant savings.',
   alternates: { canonical: '/industrial/' },
   openGraph: {
     title: 'Industrial Solutions | Reality Anchors',
-    description: 'Enterprise execution validation — ERP integration, compliance traceability, and high-volume operational controls.',
+    description: 'Enterprise execution validation — ERP integration, compliance traceability, and multi-facility deployment.',
   },
 };
 
@@ -32,72 +34,83 @@ export default function IndustrialPage() {
             '@type': 'Service',
             name: 'Reality Anchors Industrial',
             provider: { '@type': 'Organization', name: 'Reality Anchors' },
-            description: 'Enterprise execution validation — ERP integration, compliance traceability, and high-volume operational controls.',
+            description: 'Enterprise execution validation — ERP integration, compliance traceability, and multi-facility deployment.',
             url: 'https://realityanchorsltd.com/industrial/',
             areaServed: 'US',
             serviceType: 'Industrial Execution Validation Software',
           }),
         }}
       />
+
+      {/* Hero with integration diagram */}
       <section className="relative overflow-hidden py-16 border-b border-line">
         <PhotoBackground src="/images/industrial-factory.jpg" opacity={0.18} position="center 40%" />
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions / Industrial</p>
-          <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">Industrial</h1>
-          <p className="text-xl text-muted max-w-2xl leading-relaxed">
-            High-volume environments need an execution layer that increases planning-system fidelity, traceability, and margin control at scale.
+          <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">
+            Execution validation for high-volume plants
+          </h1>
+          <p className="text-lg text-muted max-w-2xl leading-relaxed mb-8">
+            An execution layer between your ERP and the shop floor. Every step validated, every action logged, every export audit-ready.
           </p>
-          <div className="flex flex-wrap gap-2 mt-6">
-            {['Throughput', 'Traceability', 'Calibration', 'Integration'].map((t) => (
-              <span key={t} className="text-xs font-semibold px-3 py-1.5 rounded-full border border-line text-muted">{t}</span>
-            ))}
+          <IntegrationDiagram />
+          <div className="flex flex-wrap gap-3 mt-8">
+            <Link href="#contact" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
+              {CTA.secondary.label}
+            </Link>
+            <Link href={CTA.primary.href} className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
+              {CTA.primary.label}
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden py-14">
-        <PhotoBackground src="/images/cnc-precision.jpg" opacity={0.06} gradient="from-bg/95 via-bg/85 to-bg/95" position="center 40%" />
-        <div className="relative z-10 max-w-4xl mx-auto px-6 grid md:grid-cols-2 gap-6">
-          <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-4">Industrial outcomes</h2>
-            <ul className="flex flex-col gap-2.5">
-              {['Run-level scrap accounting and reuse inventory', 'Operator and station traceability', 'Versioned machine calibration profiles', 'QA exports suitable for internal audits', 'Standardized execution across shifts'].map((i) => (
-                <li key={i} className="flex gap-3 text-sm text-muted"><span className="text-accent">›</span>{i}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-4">Integration model</h2>
-            <ul className="flex flex-col gap-2.5 mb-4">
-              {['Imports from digital schedules (when available)', 'Structured exports for ERP / QA systems', 'Role-based access and immutable event logs', 'Device fleet management constraints'].map((i) => (
-                <li key={i} className="flex gap-3 text-sm text-muted"><span className="text-accent">›</span>{i}</li>
-              ))}
-            </ul>
-            <p className="text-xs text-muted/70">Designed to complement ERP and QA systems with reliable execution records from the workstation.</p>
+      {/* Deployment architecture */}
+      <section className="py-14">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-2xl font-semibold text-txt mb-6">How it fits your stack</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="border border-line bg-card rounded-2xl p-7">
+              <h3 className="text-sm font-semibold text-txt mb-4">Inputs from your systems</h3>
+              <ul className="flex flex-col gap-2.5">
+                {['Digital schedules from ERP / detailing', 'Machine calibration profiles (versioned)', 'Role-based access and permissions', 'Device fleet management constraints'].map((i) => (
+                  <li key={i} className="flex gap-3 text-sm text-muted"><span className="text-accent">›</span>{i}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="border border-line bg-card rounded-2xl p-7">
+              <h3 className="text-sm font-semibold text-txt mb-4">Outputs to your systems</h3>
+              <ul className="flex flex-col gap-2.5">
+                {['Per-run reports (scrap, time, exceptions)', 'Per-job trace logs (who / what / when)', 'Calibration drift summaries', 'Structured exports for ERP and QA'].map((i) => (
+                  <li key={i} className="flex gap-3 text-sm text-muted"><span className="text-accent">›</span>{i}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Compliance artifacts */}
       <section className="pb-14">
         <div className="max-w-4xl mx-auto px-6">
           <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-3">Strategic fit for detailing and ERP leaders</h2>
-            <p className="text-muted text-sm mb-6">
-              Reality Anchors complements ERP and detailing platforms by validating physical execution and returning clean feedback data that improves planning accuracy over time.
+            <h2 className="text-lg font-semibold text-txt mb-3">Compliance documentation the system produces</h2>
+            <p className="text-muted text-sm mb-5">
+              Reality Anchors generates audit-ready records at every level — from individual operator actions to multi-plant aggregates.
             </p>
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-sm font-semibold text-muted uppercase tracking-wide mb-3">Operational controls</h3>
                 <ul className="flex flex-col gap-2">
-                  {['Machine profiles (versioned)', 'Programs (released only after QA)', 'Step validation checkpoints', 'Immutable event streams (optional)'].map((i) => (
+                  {['Versioned machine profiles', 'QA-released programs only', 'Step validation checkpoints', 'Immutable event streams'].map((i) => (
                     <li key={i} className="flex gap-3 text-sm text-muted"><span className="text-accent">›</span>{i}</li>
                   ))}
                 </ul>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-muted uppercase tracking-wide mb-3">Operational exports</h3>
+                <h3 className="text-sm font-semibold text-muted uppercase tracking-wide mb-3">Audit exports</h3>
                 <ul className="flex flex-col gap-2">
-                  {['Per-run reports (scrap, time, exceptions)', 'Per-job trace logs (who/what/when)', 'Exception registry (drift, overrides)', 'Calibration drift summaries'].map((i) => (
+                  {['Run-level scrap accounting', 'Operator and station traceability', 'Exception registry (drift, overrides)', 'Standardized reports across shifts'].map((i) => (
                     <li key={i} className="flex gap-3 text-sm text-muted"><span className="text-accent">›</span>{i}</li>
                   ))}
                 </ul>
@@ -115,16 +128,15 @@ export default function IndustrialPage() {
         backgroundSrc={testimonial.backgroundSrc}
       />
 
-      <section className="pb-14">
+      {/* Scale metrics and economics */}
+      <section className="py-14">
         <div className="max-w-4xl mx-auto px-6">
           <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-3">Commercial structure for industrial deployments</h2>
+            <h2 className="text-lg font-semibold text-txt mb-3">Representative economics</h2>
             <p className="text-muted text-sm mb-4">
-              Enterprise agreements are structured around facility count, governance requirements, integration scope, and compliance documentation needs. Subscription is aligned to 8–15% of modeled annual value, keeping ROI firmly in your favor.
+              Subscription set at 8–15% of modeled annual savings. ROI stays firmly in your favor.
             </p>
-
             <div className="border border-line/50 rounded-xl bg-bg/50 px-5 py-4 mb-5">
-              <h3 className="text-sm font-semibold text-txt mb-3">Representative value framing</h3>
               <p className="text-xs text-muted mb-3">Mid-size plant: 25,000 t/yr · $850/ton steel · 8% baseline scrap</p>
               <div className="overflow-x-auto mb-3">
                 <table className="ra-table">
@@ -133,31 +145,31 @@ export default function IndustrialPage() {
                     <tr><td>Scrap reduction (1.5 pts)</td><td className="font-mono text-accent-2">~$319k</td></tr>
                     <tr><td>Labor rework reduction</td><td className="font-mono text-accent-2">~$96k</td></tr>
                     <tr><td>Throughput / capacity</td><td className="font-mono text-accent-2">~$160k</td></tr>
-                    <tr><td className="font-semibold text-txt">Total EBITDA uplift</td><td className="font-mono text-txt font-semibold">~$575k</td></tr>
+                    <tr><td className="font-semibold text-txt">Total annual uplift</td><td className="font-mono text-txt font-semibold">~$575k</td></tr>
                   </tbody>
                 </table>
               </div>
-              <p className="text-[10px] text-muted/50">Illustrative estimates; final scope depends on facility profile. Oversight/risk savings modeled separately during assessment.</p>
+              <p className="text-[10px] text-muted/50">Illustrative; final scope depends on facility profile.</p>
             </div>
-
             <div className="flex flex-wrap gap-3">
               <Link href="/margin-impact/" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
                 Model your facility
               </Link>
               <Link href="#contact" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
-                Schedule a technical review
+                {CTA.secondary.label}
               </Link>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Programs */}
       <section className="relative overflow-hidden pb-14">
         <PhotoBackground src="/images/structural-steel.jpg" opacity={0.05} gradient="from-bg/95 via-bg/90 to-bg/95" position="center 30%" />
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-3">Industrial program set</h2>
-            <p className="text-muted text-sm mb-5">Machine calibration support, traceable execution, and compliance-ready controls for ERP-connected plants.</p>
+            <p className="text-muted text-sm mb-5">Machine calibration, traceable execution, and compliance-ready controls for ERP-connected plants.</p>
             <div className="grid md:grid-cols-3 gap-4">
               {industrialRegimes.map((regime) => (
                 <article key={regime.id} className="rounded-xl border border-line/80 bg-bg/60 p-4">

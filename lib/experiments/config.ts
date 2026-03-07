@@ -1,7 +1,7 @@
 import type { ExperimentConfig } from '@/lib/experiments/types';
 
 export const HOME_EXPERIMENT: ExperimentConfig = {
-  id: 'home_narrative_v1',
+  id: 'home_narrative_v2',
   isEnabled: true,
   traffic: { A: 0.34, B: 0.33, C: 0.33 },
   narrative: {
@@ -23,29 +23,29 @@ export const HOME_EXPERIMENT: ExperimentConfig = {
         'ai-governance',
       ],
       C: [
-        'ai-governance',
         'structural-fabrication',
-        'machine-calibration',
         'multi-project-optimization',
+        'machine-calibration',
+        'ai-governance',
         'ar-execution',
         'fleet-grip',
       ],
     },
     heroOverride: {
       A: {
-        headline: 'Execution validation for industrial fabrication.',
+        headline: 'For fabrication teams, we reduce scrap and rework by up to 8%\u00a0\u2014 without changing your hardware.',
         subhead:
-          'AI-guided verification that reduces scrap, eliminates rework, and builds traceable execution records across every workcell.',
+          'Tablet software that validates every cut, bend, and assembly step against your job data. Works offline, runs alongside existing machines.',
       },
       B: {
         headline: 'Fewer Miscuts. Less Scrap. Every Bar Tracked.',
         subhead:
-          'Tablet software that reads your cut lists, applies stretch allowances and bend rules, and generates step-by-step cutter and bender instructions. Runs alongside your existing machines\u00a0\u2014 no hardware changes, works offline.',
+          'Reads your cut lists, applies stretch and bend rules, and generates step-by-step instructions. No hardware changes, works offline.',
       },
       C: {
-        headline: 'Verified execution data your planning tools can trust.',
+        headline: 'For operations leaders, we close the plan-to-execution gap by up to 8%\u00a0\u2014 no new hardware.',
         subhead:
-          'Bridge the gap between upstream planning and downstream execution. Every step guided, validated, and recorded.',
+          'Every fabrication step guided, validated, and recorded. Your ERP and QA systems get cleaner downstream data.',
       },
     },
   },

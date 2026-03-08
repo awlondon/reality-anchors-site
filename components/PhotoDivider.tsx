@@ -113,11 +113,11 @@ export default function PhotoDivider({
   return (
     <section ref={ref} id={id} className="relative overflow-hidden py-20 md:py-28">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-12 items-center gap-y-8">
-          {/* ── Image panel (7 cols) ── */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+          {/* ── Image panel ── */}
           <motion.div
             style={{ y: imageY, opacity }}
-            className={`md:col-span-7 ${isLeft ? '' : 'md:col-start-6'} md:row-start-1 relative z-0`}
+            className={`relative ${isLeft ? 'lg:order-1' : 'lg:order-2'}`}
           >
             <div className="relative">
               {/* Accent border stroke (slightly larger clipped div) */}
@@ -129,7 +129,7 @@ export default function PhotoDivider({
 
               {/* Clipped image */}
               <div
-                className="relative aspect-[4/3] md:aspect-[3/2] overflow-hidden"
+                className="relative aspect-[4/3] overflow-hidden"
                 style={{ clipPath }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -151,22 +151,21 @@ export default function PhotoDivider({
             </div>
           </motion.div>
 
-          {/* ── Text panel (6 cols, overlaps image by 1) ── */}
+          {/* ── Text panel ── */}
           <motion.div
             style={{ y: textY, opacity }}
-            className={`md:col-span-6 ${isLeft ? 'md:col-start-7' : 'md:col-start-1'} md:row-start-1 relative z-10`}
+            className={`${isLeft ? 'lg:order-2' : 'lg:order-1'}`}
           >
-            <div className="bg-bg/80 backdrop-blur-sm border border-line/50 rounded-2xl p-8 md:p-10">
-              <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">
-                {eyebrow}
-              </p>
-              <h2 className="text-2xl md:text-3xl font-semibold text-txt leading-tight mb-4">
-                {heading}
-              </h2>
-              <p className="text-sm md:text-base text-muted leading-relaxed">
-                {body}
-              </p>
-            </div>
+            <div className="w-10 h-0.5 bg-accent mb-6" aria-hidden="true" />
+            <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">
+              {eyebrow}
+            </p>
+            <h2 className="text-2xl md:text-3xl font-semibold text-txt leading-tight mb-4">
+              {heading}
+            </h2>
+            <p className="text-base text-muted leading-relaxed">
+              {body}
+            </p>
           </motion.div>
         </div>
       </div>

@@ -9,6 +9,8 @@ import IntegrationDiagram from '@/components/IntegrationDiagram';
 import { regimeCatalog } from '@/lib/siteData';
 // import { getTestimonialsForPage } from '@/data/testimonials';
 import { CTA } from '@/lib/constants';
+import PhotoDivider from '@/components/PhotoDivider';
+import { getDividersForPage } from '@/data/photoDividers';
 
 export const metadata: Metadata = {
   title: 'Industrial Solutions — Execution Validation at Scale',
@@ -23,6 +25,8 @@ export const metadata: Metadata = {
 const industrialRegimes = regimeCatalog.filter((regime) => ['machine-calibration', 'ai-governance', 'ar-execution'].includes(regime.id));
 
 // const testimonial = getTestimonialsForPage('industrial').find((t) => t.id === 'quality-manager-precast')!;
+
+const dividers = getDividersForPage('industrial');
 
 export default function IndustrialPage() {
   return (
@@ -121,7 +125,7 @@ export default function IndustrialPage() {
         </div>
       </section>
 
-      {/* TODO: Re-enable with real testimonials */}
+      {dividers[0] && <PhotoDivider {...dividers[0]} />}
 
       {/* Scale metrics and economics */}
       <section className="py-14">
@@ -177,6 +181,8 @@ export default function IndustrialPage() {
           </div>
         </div>
       </section>
+
+      {dividers[1] && <PhotoDivider {...dividers[1]} />}
 
       <LeadForm
         id="contact"

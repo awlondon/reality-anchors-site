@@ -3,11 +3,13 @@ import Link from 'next/link';
 import VideoShowcase from '@/components/VideoShowcase';
 // TODO: Re-enable with real testimonials
 // import TestimonialBreak from '@/components/TestimonialBreak';
+import PhotoDivider from '@/components/PhotoDivider';
 import LeadForm from '@/components/LeadForm';
 import Footer from '@/components/Footer';
 // import { getTestimonialsForPage } from '@/data/testimonials';
 import { getWorkcellBySlug } from '@/data/workcells';
 import { getRegimesByWorkcell } from '@/lib/siteData';
+import { getDividersForPage } from '@/data/photoDividers';
 
 const workcell = getWorkcellBySlug('rebar-cut-bend')!;
 const regimes = getRegimesByWorkcell('rebar-cut-bend');
@@ -23,6 +25,8 @@ export const metadata: Metadata = {
       'AI-guided rebar fabrication execution — every cut measured, every bend verified, every ton accounted for.',
   },
 };
+
+const dividers = getDividersForPage('rebar');
 
 export default function RebarCutBendPage() {
   // const testimonials = getTestimonialsForPage('industries:rebar-cut-bend');
@@ -104,7 +108,7 @@ export default function RebarCutBendPage() {
       {/* ── Visual showcase (rebar-specific SVG scenes) ────────── */}
       <VideoShowcase />
 
-      {/* TODO: Re-enable with real testimonials */}
+      {dividers[0] && <PhotoDivider {...dividers[0]} />}
 
       {/* ── Workflow ──────────────────────────────────────────── */}
       <section className="bg-bg py-20">
@@ -238,7 +242,7 @@ export default function RebarCutBendPage() {
         </div>
       </section>
 
-      {/* TODO: Re-enable with real testimonials */}
+      {dividers[1] && <PhotoDivider {...dividers[1]} />}
 
       <LeadForm
         heading="See if rebar cut & bend fits your operation"

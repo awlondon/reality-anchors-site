@@ -105,21 +105,8 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
           ))}
         </nav>
 
-        {/* Desktop search + CTA */}
+        {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <button
-            onClick={() => {
-              window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }));
-            }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-line hover:border-muted/40 text-muted hover:text-txt text-xs transition-all"
-            aria-label="Search (Cmd+K)"
-          >
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <span className="hidden lg:inline">Search</span>
-            <kbd className="hidden lg:inline font-mono text-muted/40 ml-1">&#8984;K</kbd>
-          </button>
           <Link
             href={cta.href}
             className="px-4 py-2 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px"

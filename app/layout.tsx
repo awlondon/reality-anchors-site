@@ -6,7 +6,6 @@ import ProgressBar from '@/components/ProgressBar';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
 import ExperimentProvider from '@/components/ExperimentProvider';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
-import SearchDialog from '@/components/SearchDialog';
 import WebVitals from '@/components/WebVitals';
 import { HOME_EXPERIMENT } from '@/lib/experiments/config';
 
@@ -126,7 +125,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <Navbar />
           {children}
         </ExperimentProvider>
-        <SearchDialog />
         <CookieConsentBanner />
       </body>
     </html>

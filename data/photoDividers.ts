@@ -22,7 +22,7 @@ const allDividers: PageDividers[] = [
       {
         id: 'home-team',
         imageSrc: '/images/people/fabrication-team-planning.jpg',
-        imageAlt: 'Two construction workers in hard hats coordinating with clipboard and radio',
+        imageAlt: 'Two construction workers in hard hats reviewing plans together on site',
         eyebrow: 'Built by Operators, for Operators',
         heading: 'Your crew already knows the work. We make it trackable.',
         body: 'Reality Anchors was designed alongside fabrication teams — not imposed on them. Every workflow starts from how operators actually move through a job.',

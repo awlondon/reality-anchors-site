@@ -99,11 +99,8 @@ export default function PhotoDivider({
   // Differential parallax — image lags, text overtakes
   const rawImageY = useTransform(scrollYProgress, [0, 1], [40, -40]);
   const rawTextY = useTransform(scrollYProgress, [0, 1], [60, -20]);
-  const rawOpacity = useTransform(scrollYProgress, [0.08, 0.3, 0.85], [0, 1, 0.85]);
-
   const imageY = reduceMotion ? 0 : rawImageY;
   const textY = reduceMotion ? 0 : rawTextY;
-  const opacity = reduceMotion ? 1 : rawOpacity;
 
   const isLeft = imagePosition === 'left';
   const clipPath = FRAME_CLIPS[frameVariant][isLeft ? 'left' : 'right'];
@@ -116,7 +113,7 @@ export default function PhotoDivider({
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
           {/* ── Image panel ── */}
           <motion.div
-            style={{ y: imageY, opacity }}
+            style={{ y: imageY }}
             className={`relative ${isLeft ? 'lg:order-1' : 'lg:order-2'}`}
           >
             <div className="relative">
@@ -153,7 +150,7 @@ export default function PhotoDivider({
 
           {/* ── Text panel ── */}
           <motion.div
-            style={{ y: textY, opacity }}
+            style={{ y: textY }}
             className={`${isLeft ? 'lg:order-2' : 'lg:order-1'}`}
           >
             <div className="w-10 h-0.5 bg-accent mb-6" aria-hidden="true" />

@@ -6,6 +6,7 @@ import ProgressBar from '@/components/ProgressBar';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
 import ExperimentProvider from '@/components/ExperimentProvider';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
+import SearchDialog from '@/components/SearchDialog';
 import WebVitals from '@/components/WebVitals';
 import { HOME_EXPERIMENT } from '@/lib/experiments/config';
 
@@ -78,12 +79,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
         {/* Google tag (gtag.js) — GA4 + Google Ads */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YEXZTYB87J" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `gtag('js',new Date());gtag('config','G-YEXZTYB87J');gtag('config','AW-948622339');`,
-          }}
-        />
+        {process.env.NEXT_PUBLIC_GA4_ID && (
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`} />
+        )}
+        {process.env.NEXT_PUBLIC_GA4_ID && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA4_ID}');${process.env.NEXT_PUBLIC_GADS_ID ? `gtag('config','${process.env.NEXT_PUBLIC_GADS_ID}');` : ''}`,
+            }}
+          />
+        )}
         {/* Google Tag Manager */}
         {process.env.NEXT_PUBLIC_GTM_ID && (
           <script
@@ -92,7 +97,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-58VTVGC4');`,
+})(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');`,
             }}
           />
         )}
@@ -121,6 +126,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <Navbar />
           {children}
         </ExperimentProvider>
+        <SearchDialog />
         <CookieConsentBanner />
       </body>
     </html>

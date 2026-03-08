@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { fadeUp } from '@/lib/motion';
 
 const proofPoints = [
-  { value: 'Up to 8%', label: 'Scrap reduction target' },
-  { value: '4.2s', label: 'Cut-plan generation' },
-  { value: '< 0.7%', label: 'Error rate target' },
-  { value: '97.4%', label: 'Offline uptime' },
+  { value: '3', label: 'Workcells supported' },
+  { value: '100%', label: 'Offline-capable' },
+  { value: '0', label: 'Hardware changes' },
+  { value: '60 days', label: 'Validation window' },
 ];
 
 export default function ProofStrip() {

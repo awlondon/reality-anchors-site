@@ -22,6 +22,7 @@ const columns = [
     links: [
       { href: '/board-strategy/', label: 'Strategy' },
       { href: '/pricing-methodology/', label: 'Methodology' },
+      { href: '/blog/', label: 'Blog' },
       { href: '/commercial/#contact', label: 'Contact' },
     ],
   },

@@ -10,6 +10,8 @@ import { regimeCatalog } from '@/lib/siteData';
 // import { getTestimonialsForPage } from '@/data/testimonials';
 import { CTA } from '@/lib/constants';
 import CaseStudies from '@/components/CaseStudies';
+import PhotoDivider from '@/components/PhotoDivider';
+import { getDividersForPage } from '@/data/photoDividers';
 import { ScrapRanges } from './Charts';
 
 export const metadata: Metadata = {
@@ -25,6 +27,8 @@ export const metadata: Metadata = {
 const commercialRegimes = regimeCatalog.filter((regime) => ['structural-fabrication', 'multi-project-optimization', 'machine-calibration'].includes(regime.id));
 
 // const testimonial = getTestimonialsForPage('commercial').find((t) => t.id === 'procurement-lead-supply')!;
+
+const dividers = getDividersForPage('commercial');
 
 export default function CommercialPage() {
   return (
@@ -113,6 +117,8 @@ export default function CommercialPage() {
       </section>
 
       <CaseStudies />
+
+      {dividers[0] && <PhotoDivider {...dividers[0]} />}
 
       {/* Rollout — pilot program moved up for early confidence */}
       <section className="pb-14">

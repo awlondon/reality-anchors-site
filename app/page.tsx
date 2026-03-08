@@ -11,8 +11,10 @@ import StickyCTA from '@/components/StickyCTA';
 import Footer from '@/components/Footer';
 // TODO: Re-enable with real testimonials
 // import TestimonialBreak from '@/components/TestimonialBreak';
+import PhotoDivider from '@/components/PhotoDivider';
 import FAQ from '@/components/FAQ';
 import { faqStructuredData } from '@/data/faq';
+import { getDividersForPage } from '@/data/photoDividers';
 // import { getTestimonialsForPage } from '@/data/testimonials';
 
 export const metadata: Metadata = {
@@ -21,6 +23,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   // const testimonials = getTestimonialsForPage('home');
+  const dividers = getDividersForPage('home');
 
   return (
     <main id="main-content" className="snap-y">
@@ -45,11 +48,11 @@ export default async function Home() {
       <Hero />
       <ProofStrip />
       <VideoShowcasePlatform />
-      {/* TODO: Re-enable with real testimonials */}
+      {dividers[0] && <PhotoDivider {...dividers[0]} />}
       <HowItWorks />
       <Features />
       <Metrics />
-      {/* TODO: Re-enable with real testimonials */}
+      {dividers[1] && <PhotoDivider {...dividers[1]} />}
       <Tiers />
       <FAQ />
       <LeadForm />

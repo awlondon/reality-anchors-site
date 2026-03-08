@@ -35,10 +35,10 @@ export const workcells: Workcell[] = [
     ],
     regimeIds: ['structural-fabrication', 'multi-project-optimization', 'machine-calibration'],
     metrics: [
-      { value: '1.8 pts', label: 'Scrap reduction' },
-      { value: '4.2s', label: 'Cut-plan generation' },
-      { value: '0.7%', label: 'Fabrication error rate' },
+      { value: '1.8 pts', label: 'Median scrap delta' },
+      { value: '6–10 t/mo', label: 'Material recovered' },
       { value: '97.4%', label: 'Offline uptime' },
+      { value: '60 days', label: 'Validation window' },
     ],
     integrations: [
       'ERP cut-list import',

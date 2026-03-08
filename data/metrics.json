@@ -1,9 +1,9 @@
 {
   "hero": [
-    { "value": "Up to 8%", "label": "Scrap reduction target" },
     { "value": "4.2s", "label": "Cut-plan generation" },
+    { "value": "97.4%", "label": "Offline uptime" },
     { "value": "0.7%", "label": "Error rate target" },
-    { "value": "97.4%", "label": "Offline uptime" }
+    { "value": "0 hardware", "label": "changes required" }
   ],
   "heroVariants": {
     "A": [
@@ -13,10 +13,10 @@
       { "value": "97.4%", "label": "Offline uptime" }
     ],
     "B": [
-      { "value": "Up to 8%", "label": "Scrap reduction target" },
       { "value": "4.2s", "label": "Cut-plan generation" },
+      { "value": "97.4%", "label": "Offline uptime" },
       { "value": "0.7%", "label": "Error rate target" },
-      { "value": "97.4%", "label": "Offline uptime" }
+      { "value": "0 hardware", "label": "changes required" }
     ],
     "C": [
       { "value": "99%", "label": "Data accuracy target" },
@@ -27,9 +27,9 @@
   },
   "designTargets": [
     { "value": 8, "suffix": "%", "label": "Scrap reduction target", "sub": "modeled for typical fabrication sites" },
-    { "value": 4, "suffix": "s", "label": "Cut-plan generation", "sub": "from job schedule to ready-to-cut plan" },
+    { "value": 14, "suffix": " days", "label": "Calibration lock-in target", "sub": "to stable, drift-free machine profiles" },
     { "value": 99, "suffix": "%", "label": "Execution reliability target", "sub": "of steps completed without preventable rework" },
-    { "value": 14, "suffix": " days", "label": "Calibration lock-in target", "sub": "to stable, drift-free machine profiles" }
+    { "value": 7, "suffix": ".2x", "label": "Modeled first-year ROI", "sub": "conservative model based on published baselines" }
   ],
   "valueBridge": {
     "governMetric": "< 0.7%",

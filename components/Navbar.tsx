@@ -105,7 +105,7 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
           ))}
         </nav>
 
-        {/* Desktop CTA — contextual per page */}
+        {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
           <Link
             href={cta.href}

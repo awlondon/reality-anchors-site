@@ -11,6 +11,7 @@ import { saveLead } from '@/lib/saveLead';
 import { getCalculatorContext } from '@/lib/calculatorContext';
 import { sendLeadEmail, sendConfirmationEmail } from '@/lib/sendLeadEmail';
 import { buildConfirmationParams } from '@/lib/buildConfirmationHtml';
+import { markFormLoaded, runSpamChecks, recordSubmission } from '@/lib/spamGuard';
 
 interface FormData {
   name: string;
@@ -38,6 +39,7 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [step, setStep] = useState<1 | 2>(1);
   const successRef = useRef<HTMLDivElement>(null);
+  const formLoadedAt = useRef(markFormLoaded());
 
   useEffect(() => {
     trackEvent('lead_form_view');
@@ -64,6 +66,11 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
     if (honeypot?.value) return; // Bot detected, silently ignore
     const e = validate();
     if (Object.keys(e).length) { setErrors(e); return; }
+
+    // Spam guard — disposable email, timing, rate limit
+    const spam = runSpamChecks(data.email, formLoadedAt.current);
+    if (spam.blocked) { setSubmitError(spam.reason); return; }
+
     setErrors({});
     setSubmitError(null);
     setLoading(true);
@@ -81,6 +88,7 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
         calculatorContext: getCalculatorContext(),
       });
       setSubmitted(true);
+      recordSubmission();
     } catch (err) {
       if (process.env.NODE_ENV === 'development') console.error('Email send failed:', err);
       setSubmitError('Something went wrong while submitting your request. Please try again.');

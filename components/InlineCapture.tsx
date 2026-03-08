@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { fadeUp } from '@/lib/motion';
 import { trackEvent } from '@/lib/analytics';
@@ -8,12 +8,14 @@ import { sendLeadEmail } from '@/lib/sendLeadEmail';
 import { getCalculatorContext } from '@/lib/calculatorContext';
 import { getSessionId } from '@/lib/session';
 import { getLastRegime } from '@/lib/funnelContext';
+import { markFormLoaded, runSpamChecks, recordSubmission } from '@/lib/spamGuard';
 
 export default function InlineCapture() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const formLoadedAt = useRef(markFormLoaded());
 
   useEffect(() => {
     trackEvent('inline_capture_view');
@@ -29,6 +31,11 @@ export default function InlineCapture() {
       setError('Valid work email required');
       return;
     }
+
+    // Spam guard — disposable email, timing, rate limit
+    const spam = runSpamChecks(email, formLoadedAt.current);
+    if (spam.blocked) { setError(spam.reason); return; }
+
     setError(null);
     setLoading(true);
     try {
@@ -45,6 +52,7 @@ export default function InlineCapture() {
         calculatorContext: getCalculatorContext(),
       });
       setSubmitted(true);
+      recordSubmission();
       trackEvent('inline_capture_submit');
     } catch {
       setError('Something went wrong. Please try again.');

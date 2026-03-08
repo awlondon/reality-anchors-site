@@ -69,7 +69,7 @@ function ResultRow({ label, value, highlight = false }: { label: string; value: 
   return (
     <div className={`flex items-center justify-between py-3 border-b border-line last:border-0 ${highlight ? 'py-4' : ''}`}>
       <span className={`text-sm ${highlight ? 'font-semibold text-txt' : 'text-muted'}`}>{label}</span>
-      <span className={`font-mono tabular-nums ${highlight ? 'text-xl font-bold text-white' : 'text-sm text-white/90'}`}>
+      <span className={`font-mono tabular-nums ${highlight ? 'text-xl font-bold text-accent-2' : 'text-sm text-txt'}`}>
         {value}
       </span>
     </div>
@@ -328,7 +328,7 @@ export default function QuickEstimateCalculator() {
             ].map(({ label, value }) => (
               <div key={label} className="border border-line rounded-lg px-3 py-2.5">
                 <div className="text-[10px] text-muted uppercase tracking-wide mb-1">{label}</div>
-                <div className="font-mono text-sm text-white/90">{formatUSD(value)} / yr</div>
+                <div className="font-mono text-sm text-txt">{formatUSD(value)} / yr</div>
               </div>
             ))}
           </div>

@@ -37,6 +37,7 @@ vi.mock('@/lib/spamGuard', () => ({
   markFormLoaded: vi.fn().mockReturnValue(0),
   runSpamChecks: vi.fn().mockReturnValue({ blocked: false, reason: null }),
   recordSubmission: vi.fn(),
+  isDisposableEmail: vi.fn().mockReturnValue(false),
 }));
 
 describe('LeadForm', () => {
@@ -147,31 +148,21 @@ describe('LeadForm', () => {
     expect(honeypot.getAttribute('aria-hidden')).toBe('true');
   });
 
-  it('blocks submission when spam guard detects disposable email', async () => {
-    const { runSpamChecks } = await import('@/lib/spamGuard');
-    (runSpamChecks as ReturnType<typeof vi.fn>).mockReturnValueOnce({
-      blocked: true,
-      reason: 'Please use a work email address — temporary addresses are not accepted.',
-    });
+  it('blocks at step 1 when disposable email is detected', async () => {
+    const { isDisposableEmail } = await import('@/lib/spamGuard');
+    (isDisposableEmail as ReturnType<typeof vi.fn>).mockReturnValueOnce(true);
 
-    const { sendLeadEmail } = await import('@/lib/sendLeadEmail');
     const { container } = render(<LeadForm />);
 
-    // Step 1: enter email and continue
+    // Step 1: enter disposable email and try to continue
     const emailInput = container.querySelector('input[type="email"]') as HTMLInputElement;
     fireEvent.change(emailInput, { target: { value: 'bot@armyspy.com' } });
     fireEvent.click(container.querySelector('button[type="submit"]') as HTMLButtonElement);
 
-    // Step 2: submit
-    await waitFor(() => {
-      expect(container.querySelector('input[placeholder="Jane Smith"]')).toBeInTheDocument();
-    });
-    const form = container.querySelector('form') as HTMLFormElement;
-    fireEvent.submit(form);
-
+    // Should show error and NOT advance to step 2
     await waitFor(() => {
       expect(screen.getByText(/temporary addresses are not accepted/)).toBeInTheDocument();
     });
-    expect(sendLeadEmail).not.toHaveBeenCalled();
+    expect(container.querySelector('input[placeholder="Jane Smith"]')).not.toBeInTheDocument();
   });
 });

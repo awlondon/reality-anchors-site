@@ -251,7 +251,12 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
                     e.preventDefault();
                     const emailErrors = validateEmail();
                     if (Object.keys(emailErrors).length) { setErrors(emailErrors); return; }
+                    if (isDisposableEmail(data.email)) {
+                      setSubmitError('Please use a work email address — temporary addresses are not accepted.');
+                      return;
+                    }
                     setErrors({});
+                    setSubmitError(null);
                     setStep(2);
                     trackEvent('lead_form_email_step');
                   } : handleSubmit}

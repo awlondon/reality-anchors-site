@@ -159,8 +159,10 @@ export default function QuickEstimateCalculator() {
         Hides interactive UI and shows the print-only branded artifact.
       */}
       <style>{`
+        [data-print] { display: none; }
         @media print {
           body * { visibility: hidden !important; }
+          [data-print] { display: block !important; }
           [data-print], [data-print] * { visibility: visible !important; }
           [data-print] { position: fixed; inset: 0; padding: 2.5cm; background: white; }
           [data-no-print] { display: none !important; }

@@ -29,6 +29,7 @@ describe('spamGuard', () => {
       expect(isDisposableEmail('user@company.org')).toBe(false);
       expect(isDisposableEmail('ops@factory.io')).toBe(false);
       expect(isDisposableEmail('test@gmail.com')).toBe(false);
+      expect(isDisposableEmail('alex@outlook.com')).toBe(false);
     });
 
     it('is case-insensitive on domain', () => {
@@ -39,6 +40,31 @@ describe('spamGuard', () => {
     it('returns false for invalid email', () => {
       expect(isDisposableEmail('no-at-sign')).toBe(false);
       expect(isDisposableEmail('')).toBe(false);
+    });
+
+    it('catches suspicious domain name patterns', () => {
+      expect(isDisposableEmail('x@tempmail-xyz.com')).toBe(true);
+      expect(isDisposableEmail('x@trashmail-new.net')).toBe(true);
+      expect(isDisposableEmail('x@fakeinbox123.org')).toBe(true);
+      expect(isDisposableEmail('x@spambox42.com')).toBe(true);
+      expect(isDisposableEmail('x@burnermail.io')).toBe(true);
+      expect(isDisposableEmail('x@disposable-service.com')).toBe(true);
+    });
+
+    it('catches bot-generated usernames (CV alternation + digits)', () => {
+      // These are the exact patterns seen in the spam submissions
+      expect(isDisposableEmail('xiweco6478@unknown-domain.com')).toBe(true);
+      expect(isDisposableEmail('rohiwo6197@unknown-domain.com')).toBe(true);
+      expect(isDisposableEmail('tafiku3812@unknown-domain.com')).toBe(true);
+      expect(isDisposableEmail('bovale9271@unknown-domain.com')).toBe(true);
+    });
+
+    it('does not flag legitimate usernames', () => {
+      expect(isDisposableEmail('john.smith@company.com')).toBe(false);
+      expect(isDisposableEmail('sue.bauman@outlook.com')).toBe(false);
+      expect(isDisposableEmail('jdoe@acme.org')).toBe(false);
+      expect(isDisposableEmail('alex2024@company.com')).toBe(false);
+      expect(isDisposableEmail('bruce@goldenjoy.com')).toBe(false);
     });
   });
 

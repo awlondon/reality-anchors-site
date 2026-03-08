@@ -13,7 +13,11 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "analyze": "ANALYZE=true next build",
-    "optimize-images": "node scripts/optimize-images.mjs"
+    "format": "prettier --write 'app/**/*.{ts,tsx}' 'components/**/*.{ts,tsx}' 'lib/**/*.ts' 'data/**/*.ts'",
+    "format:check": "prettier --check 'app/**/*.{ts,tsx}' 'components/**/*.{ts,tsx}' 'lib/**/*.ts' 'data/**/*.ts'",
+    "test:coverage": "vitest run --coverage",
+    "optimize-images": "node scripts/optimize-images.mjs",
+    "prebuild": "node scripts/optimize-images.mjs || true"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -36,11 +40,13 @@
     "@types/react-dom": "^19.2.3",
     "@types/three": "^0.166.0",
     "@vitejs/plugin-react": "^5.1.4",
+    "@vitest/coverage-v8": "^4.0.18",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.5.12",
     "jsdom": "^25.0.1",
     "postcss": "^8.4.39",
+    "prettier": "^3.8.1",
     "tailwindcss": "^3.4.6",
     "typescript": "^5.5.3",
     "vitest": "^4.0.18"

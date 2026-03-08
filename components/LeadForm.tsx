@@ -11,7 +11,7 @@ import { saveLead } from '@/lib/saveLead';
 import { getCalculatorContext } from '@/lib/calculatorContext';
 import { sendLeadEmail, sendConfirmationEmail } from '@/lib/sendLeadEmail';
 import { buildConfirmationParams } from '@/lib/buildConfirmationHtml';
-import { markFormLoaded, runSpamChecks, recordSubmission } from '@/lib/spamGuard';
+import { markFormLoaded, runSpamChecks, recordSubmission, isDisposableEmail } from '@/lib/spamGuard';
 
 interface FormData {
   name: string;
@@ -124,6 +124,7 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
         message: formMessage,
         sessionId,
         regimeId: attributedRegime,
+        spam: isDisposableEmail(formEmail),
       }).catch((err) => { if (process.env.NODE_ENV === 'development') console.warn('Firebase save failed (non-critical):', err); });
 
       trackEvent('lead_form_submit', {

@@ -67,6 +67,8 @@ export interface Plan {
   description: string;
   pricePerSeat: number;
   interval: 'month' | 'year';
+  includedActions: number;
+  overagePerAction: number;
   features: string[];
   recommended?: boolean;
 }
@@ -82,6 +84,18 @@ export interface Contract {
   signedBy?: string;
   documentUrl?: string;
   terms?: string;
+}
+
+/** Note from orgs/{orgId}/notes/* */
+export interface Note {
+  id: string;
+  text: string;
+  authorUid: string;
+  authorEmail: string;
+  authorName?: string;
+  context: string; // page/section where note was created: 'dashboard', 'seats', 'subscription', etc.
+  createdAt: Date;
+  pinned?: boolean;
 }
 
 /** Org health doc from admin_analytics/org_health_* */

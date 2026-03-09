@@ -3,6 +3,10 @@ import { getAvailablePlans, createStripeCheckoutSession } from '../lib/callable'
 import { Button, Card, PageHeader, Spinner, Badge } from '../components/ui';
 import type { Plan } from '../types';
 
+function formatNumber(n: number): string {
+  return n.toLocaleString();
+}
+
 export default function Onboarding() {
   const [plans, setPlans] = useState<Plan[]>([]);
   const [loading, setLoading] = useState(true);
@@ -38,20 +42,23 @@ export default function Onboarding() {
     }
   };
 
+  const selected = plans.find((p) => p.id === selectedPlan);
+  const monthlyTotal = selected ? selected.pricePerSeat * seatCount : 0;
+
   if (loading) {
     return <div className="flex justify-center h-64 items-center"><Spinner size="lg" /></div>;
   }
 
   return (
-    <div className="min-h-screen p-8 max-w-4xl mx-auto">
+    <div className="min-h-screen p-8 max-w-5xl mx-auto">
       <PageHeader
-        title="Choose Your Plan"
-        description="Select a plan and number of benches to get started"
+        title="Production System Licensing"
+        description="Select your tier and number of benches to get started"
       />
 
       {error && <p className="text-danger text-sm mb-4">{error}</p>}
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+      <div className="grid md:grid-cols-3 gap-4 mb-8">
         {plans.map((plan) => (
           <button
             key={plan.id}
@@ -68,11 +75,22 @@ export default function Onboarding() {
               {plan.recommended && <Badge color="blue">Recommended</Badge>}
             </div>
             <p className="text-muted text-sm mb-4">{plan.description}</p>
+
             <p className="text-2xl font-semibold text-txt">
-              ${plan.pricePerSeat}
-              <span className="text-sm text-muted font-normal"> / seat / {plan.interval}</span>
+              ${formatNumber(plan.pricePerSeat)}
+              <span className="text-sm text-muted font-normal"> / bench / mo</span>
             </p>
-            <ul className="mt-4 space-y-1">
+
+            <div className="mt-3 space-y-1 text-sm">
+              <p className="text-accent-2">
+                {formatNumber(plan.includedActions)} actions included
+              </p>
+              <p className="text-muted">
+                ${plan.overagePerAction}/action overage
+              </p>
+            </div>
+
+            <ul className="mt-4 space-y-1 border-t border-line pt-3">
               {plan.features.map((f, i) => (
                 <li key={i} className="text-sm text-muted flex items-start gap-2">
                   <span className="text-success mt-0.5">+</span>
@@ -84,23 +102,43 @@ export default function Onboarding() {
         ))}
       </div>
 
-      {selectedPlan && (
-        <Card className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <label className="text-sm text-muted" htmlFor="seatCount">Number of benches:</label>
-            <input
-              id="seatCount"
-              type="number"
-              min="1"
-              max="100"
-              value={seatCount}
-              onChange={(e) => setSeatCount(Math.max(1, parseInt(e.target.value, 10) || 1))}
-              className="w-20"
-            />
+      {selectedPlan && selected && (
+        <Card>
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div className="flex items-center gap-6">
+              <div>
+                <label className="text-sm text-muted block mb-1" htmlFor="seatCount">
+                  Number of benches
+                </label>
+                <input
+                  id="seatCount"
+                  type="number"
+                  min="1"
+                  max="100"
+                  value={seatCount}
+                  onChange={(e) => setSeatCount(Math.max(1, parseInt(e.target.value, 10) || 1))}
+                  className="w-20 bg-bg-2 border border-line rounded-lg px-3 py-2 text-txt text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+                />
+              </div>
+              <div>
+                <p className="text-sm text-muted">Monthly total</p>
+                <p className="text-xl font-semibold text-txt">
+                  ${formatNumber(monthlyTotal)}
+                  <span className="text-sm text-muted font-normal">/mo</span>
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-muted">Included actions</p>
+                <p className="text-xl font-semibold text-txt">
+                  {formatNumber(selected.includedActions * seatCount)}
+                  <span className="text-sm text-muted font-normal">/mo</span>
+                </p>
+              </div>
+            </div>
+            <Button onClick={handleCheckout} loading={checkoutLoading}>
+              Continue to Checkout
+            </Button>
           </div>
-          <Button onClick={handleCheckout} loading={checkoutLoading}>
-            Continue to Checkout
-          </Button>
         </Card>
       )}
     </div>

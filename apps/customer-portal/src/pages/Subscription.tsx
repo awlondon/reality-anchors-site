@@ -1,4 +1,5 @@
 import { useSubscriptions } from '../lib/hooks';
+import NotesPanel from '../components/NotesPanel';
 import {
   Card,
   PageHeader,
@@ -60,6 +61,8 @@ export default function Subscription() {
           ))}
         </div>
       )}
+
+      <NotesPanel context="subscription" title="Subscription Notes" />
     </>
   );
 }

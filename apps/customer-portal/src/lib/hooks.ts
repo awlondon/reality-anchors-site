@@ -8,6 +8,8 @@ import {
   onSnapshot,
   doc,
   getDoc,
+  addDoc,
+  serverTimestamp,
   where,
   type DocumentData,
   type QueryConstraint,
@@ -21,6 +23,7 @@ import type {
   Contract,
   KpiSnapshot,
   OrgHealth,
+  Note,
 } from '../types';
 
 /* ─── Generic Firestore hooks ─── */
@@ -213,4 +216,41 @@ export function useOrgSubscriptions(orgId: string | undefined) {
 export function useOrgContracts(orgId: string | undefined) {
   const path = orgId ? `orgs/${orgId}/contracts` : null;
   return useCollection<Contract>(path, [orderBy('createdAt', 'desc')]);
+}
+
+/* ─── Notes ─── */
+
+/** Notes for current org, optionally filtered by context (page) */
+export function useNotes(context?: string) {
+  const { orgId } = useAuth();
+  const path = orgId ? `orgs/${orgId}/notes` : null;
+  const constraints: QueryConstraint[] = [orderBy('createdAt', 'desc'), limit(50)];
+  if (context) {
+    constraints.unshift(where('context', '==', context));
+  }
+  return useCollection<Note>(path, constraints);
+}
+
+/** Add a note to the current org */
+export function useAddNote() {
+  const { user, orgId } = useAuth();
+
+  return async (text: string, context: string) => {
+    if (!orgId || !user) throw new Error('Not authenticated');
+    await addDoc(collection(db, `orgs/${orgId}/notes`), {
+      text,
+      authorUid: user.uid,
+      authorEmail: user.email ?? '',
+      authorName: user.displayName ?? user.email ?? '',
+      context,
+      createdAt: serverTimestamp(),
+      pinned: false,
+    });
+  };
+}
+
+/** Notes for a specific org (admin view) */
+export function useOrgNotes(orgId: string | undefined) {
+  const path = orgId ? `orgs/${orgId}/notes` : null;
+  return useCollection<Note>(path, [orderBy('createdAt', 'desc'), limit(50)]);
 }

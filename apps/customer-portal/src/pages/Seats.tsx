@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSeats, useSubscriptions } from '../lib/hooks';
+import NotesPanel from '../components/NotesPanel';
 import { assignSeat, releaseSeat, updateSeatCount } from '../lib/callable';
 import {
   Card,
@@ -165,6 +166,8 @@ export default function Seats() {
           ))}
         </div>
       )}
+
+      <NotesPanel context="seats" title="Seat Notes" />
     </>
   );
 }

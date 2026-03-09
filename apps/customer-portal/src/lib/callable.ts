@@ -40,7 +40,7 @@ export const updateSeatCount = callable<
 // Onboarding
 export const getAvailablePlans = callable<
   Record<string, never>,
-  { plans: Array<{ id: string; name: string; description: string; pricePerSeat: number; interval: string; features: string[]; recommended?: boolean }> }
+  { plans: Array<{ id: string; name: string; description: string; pricePerSeat: number; interval: string; includedActions: number; overagePerAction: number; features: string[]; recommended?: boolean }> }
 >('getAvailablePlans');
 
 // Contracts

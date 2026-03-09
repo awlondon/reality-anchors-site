@@ -1,12 +1,7 @@
 {
   "projects": {
-    "default": "reality-anchors"
+    "default": "reality-anchors-ltd"
   },
-  "targets": {
-    "reality-anchors": {
-      "hosting": {
-        "portal": ["reality-anchors-portal"]
-      }
-    }
-  }
+  "targets": {},
+  "etags": {}
 }

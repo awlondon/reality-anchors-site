@@ -67,6 +67,8 @@ export interface Plan {
   description: string;
   pricePerSeat: number;
   interval: 'month' | 'year';
+  includedActions: number;
+  overagePerAction: number;
   features: string[];
   recommended?: boolean;
 }

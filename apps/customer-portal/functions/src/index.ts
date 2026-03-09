@@ -1,40 +1,66 @@
+/**
+ * Customer Portal Cloud Functions
+ *
+ * Data model aligned with the Flutter fabrication app's Cloud Functions
+ * so both apps read/write the same Firestore structure.
+ *
+ * Key alignment points:
+ * - Stripe customer stored at orgs/{orgId}/billing/customer
+ * - Seats use seatId, assignedUid, workbenchId fields
+ * - Contracts use "signed" status with signatoryName
+ * - Plans read from Firestore app_config/plans with hardcoded fallback
+ * - Webhook events are idempotent via stripe_events/{eventId}
+ * - Org provisioning creates orgs/{orgId}/members/{uid} membership
+ */
+
 import * as admin from "firebase-admin";
 import { onCall, HttpsError } from "firebase-functions/v2/https";
 import { onRequest } from "firebase-functions/v2/https";
 import Stripe from "stripe";
 import { STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, PORTAL_URL } from "./config";
-import { PLANS } from "./plans";
+import { getAllPlans, resolvePlan } from "./plans";
+import {
+  orgBillingCustomerDocPath,
+  orgSubscriptionDocPath,
+  orgSubscriptionsCollectionPath,
+  orgSeatsCollectionPath,
+  orgSeatDocPath,
+  orgContractDocPath,
+} from "./commercialPaths";
+import { claimStripeEventIdempotency } from "./stripeWebhookIdempotency";
 
 admin.initializeApp();
 const db = admin.firestore();
 
 function getStripe(): Stripe {
-  return new Stripe(STRIPE_SECRET_KEY.value(), { apiVersion: "2025-02-24.acacia" });
+  return new Stripe(STRIPE_SECRET_KEY, { apiVersion: "2025-02-24.acacia" });
 }
 
 /* ─────────────────────────────────────────────
  * getAvailablePlans
- * Returns the pricing tiers (no auth required)
+ * Returns the pricing tiers from Firestore (or fallback)
  * ───────────────────────────────────────────── */
 export const getAvailablePlans = onCall(async () => {
+  const plans = await getAllPlans();
   return {
-    plans: PLANS.map((p) => ({
-      id: p.id,
+    plans: plans.map((p) => ({
+      id: p.planId,
       name: p.name,
       description: p.description,
       pricePerSeat: p.pricePerSeat,
-      interval: p.interval,
+      interval: "month" as const,
       includedActions: p.includedActions,
       overagePerAction: p.overagePerAction,
       features: p.features,
-      recommended: p.recommended ?? false,
+      recommended: p.recommended,
     })),
   };
 });
 
 /* ─────────────────────────────────────────────
  * createStripeCheckoutSession
- * Creates a Stripe Checkout for new subscription
+ * Creates a Stripe Checkout for new subscription.
+ * Stores customer at orgs/{orgId}/billing/customer (aligned with Flutter app).
  * ───────────────────────────────────────────── */
 export const createStripeCheckoutSession = onCall(async (request) => {
   const uid = request.auth?.uid;
@@ -45,31 +71,36 @@ export const createStripeCheckoutSession = onCall(async (request) => {
     licensedBenches: number;
   };
 
-  const plan = PLANS.find((p) => p.id === planId);
+  const plan = await resolvePlan(planId);
   if (!plan) throw new HttpsError("not-found", `Plan "${planId}" not found`);
   if (!licensedBenches || licensedBenches < 1)
     throw new HttpsError("invalid-argument", "licensedBenches must be >= 1");
 
-  // Get or create Stripe customer
   const userDoc = await db.doc(`users/${uid}`).get();
   const userData = userDoc.data();
-  let customerId = userData?.stripeCustomerId as string | undefined;
+  const email = userData?.email ?? request.auth?.token.email ?? "";
 
-  const stripe = getStripe();
-
-  if (!customerId) {
-    const customer = await stripe.customers.create({
-      email: userData?.email ?? request.auth?.token.email ?? "",
-      metadata: { firebaseUid: uid },
+  // Resolve or create org
+  let orgId = await resolveOrgId(uid);
+  if (!orgId) {
+    // Create org shell — will be fully provisioned by webhook
+    const orgRef = db.collection("orgs").doc();
+    orgId = orgRef.id;
+    await orgRef.set({
+      name: userData?.displayName
+        ? `${userData.displayName}'s Organization`
+        : "New Organization",
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
-    customerId = customer.id;
-    await db.doc(`users/${uid}`).set(
-      { stripeCustomerId: customerId },
-      { merge: true }
-    );
+    await db.doc(`users/${uid}`).set({ orgId }, { merge: true });
   }
 
-  // Use Stripe Price ID if configured, otherwise create ad-hoc price
+  // Get or create Stripe customer at orgs/{orgId}/billing/customer
+  const stripe = getStripe();
+  const customerId = await getOrCreateStripeCustomer(stripe, orgId, email);
+
+  // Build line items
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
   if (plan.stripePriceId) {
@@ -78,7 +109,6 @@ export const createStripeCheckoutSession = onCall(async (request) => {
       quantity: licensedBenches,
     });
   } else {
-    // Ad-hoc pricing — create price on the fly
     lineItems.push({
       price_data: {
         currency: "usd",
@@ -86,33 +116,31 @@ export const createStripeCheckoutSession = onCall(async (request) => {
           name: `${plan.name} — Production System License`,
           description: `${plan.includedActions.toLocaleString()} fabrication actions/bench/mo included`,
         },
-        unit_amount: plan.pricePerSeat * 100, // cents
+        unit_amount: plan.pricePerSeat * 100,
         recurring: { interval: "month" },
       },
       quantity: licensedBenches,
     });
   }
 
-  const portalUrl = PORTAL_URL.value();
-
   const session = await stripe.checkout.sessions.create({
     customer: customerId,
     mode: "subscription",
     line_items: lineItems,
-    success_url: `${portalUrl}/onboarding/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${portalUrl}/onboarding`,
+    success_url: `${PORTAL_URL}/onboarding/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${PORTAL_URL}/onboarding`,
     metadata: {
-      firebaseUid: uid,
-      planId: plan.id,
-      planName: plan.name,
-      licensedBenches: String(licensedBenches),
+      orgId,
+      uid,
     },
     subscription_data: {
       metadata: {
-        firebaseUid: uid,
-        planId: plan.id,
+        orgId,
+        uid,
+        planId: plan.planId,
         planName: plan.name,
         licensedBenches: String(licensedBenches),
+        planVersion: "v2",
       },
     },
   });
@@ -122,23 +150,26 @@ export const createStripeCheckoutSession = onCall(async (request) => {
 
 /* ─────────────────────────────────────────────
  * createCustomerPortalSession
- * Opens the Stripe Customer Portal for billing mgmt
+ * Opens the Stripe Customer Portal for billing mgmt.
+ * Reads customer from orgs/{orgId}/billing/customer.
  * ───────────────────────────────────────────── */
 export const createCustomerPortalSession = onCall(async (request) => {
   const uid = request.auth?.uid;
   if (!uid) throw new HttpsError("unauthenticated", "Must be signed in");
 
-  const userDoc = await db.doc(`users/${uid}`).get();
-  const customerId = userDoc.data()?.stripeCustomerId as string | undefined;
+  const orgId = await resolveOrgId(uid);
+  if (!orgId)
+    throw new HttpsError("failed-precondition", "No organization found");
+
+  const billingDoc = await db.doc(orgBillingCustomerDocPath(orgId)).get();
+  const customerId = billingDoc.data()?.stripeCustomerId as string | undefined;
   if (!customerId)
     throw new HttpsError("failed-precondition", "No Stripe customer found");
 
   const stripe = getStripe();
-  const portalUrl = PORTAL_URL.value();
-
   const session = await stripe.billingPortal.sessions.create({
     customer: customerId,
-    return_url: `${portalUrl}/billing`,
+    return_url: `${PORTAL_URL}/billing`,
   });
 
   return { url: session.url };
@@ -146,8 +177,8 @@ export const createCustomerPortalSession = onCall(async (request) => {
 
 /* ─────────────────────────────────────────────
  * Stripe Webhook
- * Handles checkout.session.completed, subscription
- * updates, and invoice events
+ * Handles checkout/subscription/invoice events with idempotency.
+ * Data model aligned with Flutter app's handleStripeWebhook.
  * ───────────────────────────────────────────── */
 export const stripeWebhook = onRequest(
   { cors: false },
@@ -165,7 +196,7 @@ export const stripeWebhook = onRequest(
       event = stripe.webhooks.constructEvent(
         req.rawBody,
         sig,
-        STRIPE_WEBHOOK_SECRET.value()
+        STRIPE_WEBHOOK_SECRET
       );
     } catch (err) {
       console.error("Webhook signature verification failed:", err);
@@ -173,27 +204,88 @@ export const stripeWebhook = onRequest(
       return;
     }
 
+    // Idempotency guard — skip already-processed events
+    const claimed = await claimStripeEventIdempotency(db, event);
+    if (!claimed) {
+      res.status(200).json({ received: true, deduplicated: true });
+      return;
+    }
+
     try {
       switch (event.type) {
-        case "checkout.session.completed":
-          await handleCheckoutCompleted(
-            event.data.object as Stripe.Checkout.Session
-          );
-          break;
+        case "checkout.session.completed": {
+          const session = event.data.object as Stripe.Checkout.Session;
+          if (session.mode === "subscription" && session.subscription) {
+            const subId =
+              typeof session.subscription === "string"
+                ? session.subscription
+                : session.subscription.id;
+            await syncSubscription(stripe, subId);
 
+            // Provision org if metadata is present
+            const subObj = await stripe.subscriptions.retrieve(subId);
+            const meta = subObj.metadata || {};
+            if (meta.orgId && meta.uid) {
+              await provisionOrganization({
+                orgId: meta.orgId,
+                uid: meta.uid,
+                email: session.customer_email || "",
+                planId: meta.planId,
+                planName: meta.planName,
+                licensedBenches: parseInt(meta.licensedBenches || "1", 10),
+              });
+            }
+          }
+          break;
+        }
+
+        case "customer.subscription.created":
         case "customer.subscription.updated":
-        case "customer.subscription.deleted":
-          await handleSubscriptionUpdate(
-            event.data.object as Stripe.Subscription
-          );
+        case "customer.subscription.deleted": {
+          const sub = event.data.object as Stripe.Subscription;
+          await syncSubscription(stripe, sub.id);
           break;
+        }
 
-        case "invoice.payment_failed":
-          await handlePaymentFailed(event.data.object as Stripe.Invoice);
+        case "invoice.payment_failed": {
+          const invoice = event.data.object as Stripe.Invoice;
+          const subId =
+            typeof invoice.subscription === "string"
+              ? invoice.subscription
+              : invoice.subscription?.id;
+          if (subId) {
+            await syncSubscription(stripe, subId);
+          }
+          // Update admin health for visibility
+          const customerId =
+            typeof invoice.customer === "string"
+              ? invoice.customer
+              : invoice.customer?.id ?? "";
+          if (customerId) {
+            const orgId = await findOrgByStripeCustomer(customerId);
+            if (orgId) {
+              await db.doc(`admin_analytics/org_health_${orgId}`).set(
+                { paymentStatus: "past_due" },
+                { merge: true }
+              );
+            }
+          }
           break;
+        }
+
+        case "invoice.paid": {
+          const invoice = event.data.object as Stripe.Invoice;
+          const subId =
+            typeof invoice.subscription === "string"
+              ? invoice.subscription
+              : invoice.subscription?.id;
+          if (subId) {
+            await syncSubscription(stripe, subId);
+          }
+          break;
+        }
 
         default:
-          // Unhandled event type
           break;
       }
     } catch (err) {
@@ -206,124 +298,10 @@ export const stripeWebhook = onRequest(
   }
 );
 
-/* ─── Webhook handlers ─── */
-
-async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
-  const uid = session.metadata?.firebaseUid;
-  if (!uid) return;
-
-  const planId = session.metadata?.planId ?? "unknown";
-  const planName = session.metadata?.planName ?? "Unknown Plan";
-  const licensedBenches = parseInt(
-    session.metadata?.licensedBenches ?? "1",
-    10
-  );
-
-  // Resolve or create org
-  const userDoc = await db.doc(`users/${uid}`).get();
-  const userData = userDoc.data();
-  let orgId = userData?.orgId as string | undefined;
-
-  if (!orgId) {
-    // Create new org
-    const orgRef = await db.collection("orgs").add({
-      name: userData?.displayName
-        ? `${userData.displayName}'s Organization`
-        : "New Organization",
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      ownerUid: uid,
-    });
-    orgId = orgRef.id;
-
-    // Link user to org
-    await db.doc(`users/${uid}`).set({ orgId }, { merge: true });
-  }
-
-  // Create subscription doc
-  const stripeSubId = session.subscription as string;
-  await db.doc(`orgs/${orgId}/subscriptions/${stripeSubId}`).set({
-    status: "active",
-    planId,
-    planName,
-    licensedBenches,
-    currentPeriodStart: admin.firestore.Timestamp.now(),
-    currentPeriodEnd: admin.firestore.Timestamp.fromDate(
-      new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
-    ),
-    cancelAtPeriodEnd: false,
-    stripeSubscriptionId: stripeSubId,
-    stripeCustomerId: session.customer as string,
-    createdAt: admin.firestore.FieldValue.serverTimestamp(),
-  });
-
-  // Provision seats
-  const batch = db.batch();
-  for (let i = 0; i < licensedBenches; i++) {
-    const seatRef = db.collection(`orgs/${orgId}/seats`).doc();
-    batch.set(seatRef, {
-      benchName: `Bench ${String.fromCharCode(65 + i)}`, // A, B, C...
-      status: "available",
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-    });
-  }
-  await batch.commit();
-}
-
-async function handleSubscriptionUpdate(sub: Stripe.Subscription) {
-  const uid = sub.metadata?.firebaseUid;
-  if (!uid) return;
-
-  const userDoc = await db.doc(`users/${uid}`).get();
-  const orgId = userDoc.data()?.orgId as string | undefined;
-  if (!orgId) return;
-
-  const subRef = db.doc(`orgs/${orgId}/subscriptions/${sub.id}`);
-
-  if (sub.status === "canceled") {
-    await subRef.update({
-      status: "canceled",
-      cancelAtPeriodEnd: false,
-    });
-    return;
-  }
-
-  await subRef.update({
-    status: sub.status === "past_due" ? "past_due" : sub.status,
-    cancelAtPeriodEnd: sub.cancel_at_period_end,
-    currentPeriodStart: admin.firestore.Timestamp.fromMillis(
-      sub.current_period_start * 1000
-    ),
-    currentPeriodEnd: admin.firestore.Timestamp.fromMillis(
-      sub.current_period_end * 1000
-    ),
-  });
-}
-
-async function handlePaymentFailed(invoice: Stripe.Invoice) {
-  const customerId = invoice.customer as string;
-
-  // Find user by Stripe customer ID
-  const usersSnap = await db
-    .collection("users")
-    .where("stripeCustomerId", "==", customerId)
-    .limit(1)
-    .get();
-
-  if (usersSnap.empty) return;
-  const userDoc = usersSnap.docs[0];
-  const orgId = userDoc.data().orgId as string | undefined;
-  if (!orgId) return;
-
-  // Update org health for admin visibility
-  await db.doc(`admin_analytics/org_health_${orgId}`).set(
-    { paymentStatus: "past_due" },
-    { merge: true }
-  );
-}
-
 /* ─────────────────────────────────────────────
  * assignSeat
- * Assigns an available seat to an operator email
+ * Assigns a seat to an operator. Uses the Flutter app's
+ * schema (seatId, assignedUid, workbenchId).
  * ───────────────────────────────────────────── */
 export const assignSeat = onCall(async (request) => {
   const uid = request.auth?.uid;
@@ -337,8 +315,32 @@ export const assignSeat = onCall(async (request) => {
   if (!seatId || !email)
     throw new HttpsError("invalid-argument", "seatId and email required");
 
-  const orgId = await getOrgId(uid);
-  const seatRef = db.doc(`orgs/${orgId}/seats/${seatId}`);
+  const orgId = await resolveOrgId(uid);
+  if (!orgId) throw new HttpsError("not-found", "No organization found");
+
+  // Check licensed seat count
+  const subsSnap = await db
+    .collection(orgSubscriptionsCollectionPath(orgId))
+    .where("status", "in", ["active", "past_due"])
+    .limit(1)
+    .get();
+
+  const licensedBenches =
+    (subsSnap.docs[0]?.data()?.licensedBenches as number) || 0;
+
+  const activeSeats = await db
+    .collection(orgSeatsCollectionPath(orgId))
+    .where("status", "==", "active")
+    .get();
+
+  if (activeSeats.size >= licensedBenches) {
+    throw new HttpsError(
+      "failed-precondition",
+      `All ${licensedBenches} licensed seats are in use`
+    );
+  }
+
+  const seatRef = db.doc(orgSeatDocPath(orgId, seatId));
   const seatDoc = await seatRef.get();
 
   if (!seatDoc.exists)
@@ -346,11 +348,21 @@ export const assignSeat = onCall(async (request) => {
   if (seatDoc.data()?.status !== "available")
     throw new HttpsError("failed-precondition", "Seat is not available");
 
+  // Look up the assignee's uid by email (if they exist in Firebase Auth)
+  let assignedUid: string | null = null;
+  try {
+    const userRecord = await admin.auth().getUserByEmail(email);
+    assignedUid = userRecord.uid;
+  } catch {
+    // User may not exist yet — store email for now
+  }
+
   await seatRef.update({
-    assignedTo: email,
+    assignedUid,
     assignedEmail: email,
+    workbenchId: null,
     status: "active",
-    lastActive: admin.firestore.FieldValue.serverTimestamp(),
+    assignedAt: admin.firestore.FieldValue.serverTimestamp(),
   });
 
   return { success: true };
@@ -358,7 +370,8 @@ export const assignSeat = onCall(async (request) => {
 
 /* ─────────────────────────────────────────────
  * releaseSeat
- * Releases an active seat back to available
+ * Releases an active seat back to available.
+ * Uses null (not FieldValue.delete) to match Flutter app pattern.
  * ───────────────────────────────────────────── */
 export const releaseSeat = onCall(async (request) => {
   const uid = request.auth?.uid;
@@ -367,8 +380,10 @@ export const releaseSeat = onCall(async (request) => {
   const { seatId } = request.data as { seatId: string };
   if (!seatId) throw new HttpsError("invalid-argument", "seatId required");
 
-  const orgId = await getOrgId(uid);
-  const seatRef = db.doc(`orgs/${orgId}/seats/${seatId}`);
+  const orgId = await resolveOrgId(uid);
+  if (!orgId) throw new HttpsError("not-found", "No organization found");
+
+  const seatRef = db.doc(orgSeatDocPath(orgId, seatId));
   const seatDoc = await seatRef.get();
 
   if (!seatDoc.exists) throw new HttpsError("not-found", "Seat not found");
@@ -376,9 +391,12 @@ export const releaseSeat = onCall(async (request) => {
     throw new HttpsError("failed-precondition", "Seat is not active");
 
   await seatRef.update({
-    assignedTo: admin.firestore.FieldValue.delete(),
-    assignedEmail: admin.firestore.FieldValue.delete(),
+    assignedUid: null,
+    assignedEmail: null,
+    workbenchId: null,
     status: "available",
+    assignedAt: null,
+    releasedAt: admin.firestore.FieldValue.serverTimestamp(),
   });
 
   return { success: true };
@@ -386,8 +404,8 @@ export const releaseSeat = onCall(async (request) => {
 
 /* ─────────────────────────────────────────────
  * updateSeatCount
- * Adds or removes seats. May redirect to Stripe
- * if additional payment is needed.
+ * Updates Stripe subscription quantity with prorations.
+ * Provisions new seat docs on increase.
  * ───────────────────────────────────────────── */
 export const updateSeatCount = onCall(async (request) => {
   const uid = request.auth?.uid;
@@ -397,20 +415,17 @@ export const updateSeatCount = onCall(async (request) => {
   if (!newCount || newCount < 1)
     throw new HttpsError("invalid-argument", "newCount must be >= 1");
 
-  const orgId = await getOrgId(uid);
+  const orgId = await resolveOrgId(uid);
+  if (!orgId) throw new HttpsError("not-found", "No organization found");
 
-  // Find active subscription
   const subsSnap = await db
-    .collection(`orgs/${orgId}/subscriptions`)
+    .collection(orgSubscriptionsCollectionPath(orgId))
     .where("status", "in", ["active", "trialing"])
     .limit(1)
     .get();
 
   if (subsSnap.empty)
-    throw new HttpsError(
-      "failed-precondition",
-      "No active subscription found"
-    );
+    throw new HttpsError("failed-precondition", "No active subscription found");
 
   const subDoc = subsSnap.docs[0];
   const subData = subDoc.data();
@@ -418,41 +433,38 @@ export const updateSeatCount = onCall(async (request) => {
 
   if (newCount === currentCount) return { success: true };
 
-  const stripeSubId = subData.stripeSubscriptionId as string | undefined;
+  // The subscription doc ID is the Stripe subscription ID
+  const stripeSubId = subDoc.id;
 
-  if (stripeSubId) {
-    // Update Stripe subscription quantity
-    const stripe = getStripe();
-    const sub = await stripe.subscriptions.retrieve(stripeSubId);
-    const itemId = sub.items.data[0]?.id;
+  const stripe = getStripe();
+  const sub = await stripe.subscriptions.retrieve(stripeSubId);
+  const itemId = sub.items.data[0]?.id;
 
-    if (itemId) {
-      await stripe.subscriptions.update(stripeSubId, {
-        items: [{ id: itemId, quantity: newCount }],
-        proration_behavior: "create_prorations",
-      });
-    }
+  if (itemId) {
+    await stripe.subscriptions.update(stripeSubId, {
+      items: [{ id: itemId, quantity: newCount }],
+      metadata: {
+        ...sub.metadata,
+        licensedBenches: String(newCount),
+      },
+      proration_behavior: "create_prorations",
+    });
   }
 
-  // Update Firestore
-  await subDoc.ref.update({ licensedBenches: newCount });
-
-  // Provision new seats if adding
+  // Provision new seat docs if adding seats
   if (newCount > currentCount) {
-    const seatsSnap = await db
-      .collection(`orgs/${orgId}/seats`)
-      .get();
-    const existingCount = seatsSnap.size;
-
     const batch = db.batch();
     for (let i = 0; i < newCount - currentCount; i++) {
-      const seatRef = db.collection(`orgs/${orgId}/seats`).doc();
+      const seatRef = db.collection(orgSeatsCollectionPath(orgId)).doc();
       batch.set(seatRef, {
-        benchName: `Bench ${String.fromCharCode(
-          65 + existingCount + i
-        )}`,
+        seatId: seatRef.id,
+        orgId,
+        assignedUid: null,
+        assignedEmail: null,
+        workbenchId: null,
         status: "available",
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        assignedAt: null,
       });
     }
     await batch.commit();
@@ -463,7 +475,8 @@ export const updateSeatCount = onCall(async (request) => {
 
 /* ─────────────────────────────────────────────
  * signContract
- * Records a contract signature
+ * Records a contract signature. Uses "signed" status
+ * and signatoryName field (aligned with Flutter app).
  * ───────────────────────────────────────────── */
 export const signContract = onCall(async (request) => {
   const uid = request.auth?.uid;
@@ -473,48 +486,229 @@ export const signContract = onCall(async (request) => {
   if (!contractId)
     throw new HttpsError("invalid-argument", "contractId required");
 
-  const orgId = await getOrgId(uid);
-  const contractRef = db.doc(`orgs/${orgId}/contracts/${contractId}`);
+  const orgId = await resolveOrgId(uid);
+  if (!orgId) throw new HttpsError("not-found", "No organization found");
+
+  const contractRef = db.doc(orgContractDocPath(orgId, contractId));
   const contractDoc = await contractRef.get();
 
   if (!contractDoc.exists)
     throw new HttpsError("not-found", "Contract not found");
 
   const status = contractDoc.data()?.status;
-  if (status !== "pending" && status !== "draft")
+  if (status !== "pending" && status !== "draft" && status !== "sent")
     throw new HttpsError(
       "failed-precondition",
       `Contract is ${status}, cannot sign`
     );
 
-  // Get user info for signature record
   const userDoc = await db.doc(`users/${uid}`).get();
   const userData = userDoc.data();
+  const signatoryName =
+    userData?.displayName ?? userData?.email ?? uid;
 
   await contractRef.update({
-    status: "active",
+    status: "signed",
+    signatoryName,
     signedAt: admin.firestore.FieldValue.serverTimestamp(),
-    signedBy:
-      userData?.displayName ?? userData?.email ?? uid,
+    signedByUid: uid,
+    updatedAt: admin.firestore.FieldValue.serverTimestamp(),
   });
 
   return { success: true };
 });
 
-/* ─── Helpers ─── */
+/* ─── Webhook helpers ─── */
 
-async function getOrgId(uid: string): Promise<string> {
+/**
+ * Syncs a Stripe subscription to Firestore.
+ * Aligned with the Flutter app's syncSubscription.
+ */
+async function syncSubscription(
+  stripe: Stripe,
+  subscriptionId: string
+): Promise<void> {
+  const sub = await stripe.subscriptions.retrieve(subscriptionId);
+  const metadata = sub.metadata || {};
+  const orgId = metadata.orgId;
+  if (!orgId) {
+    console.error("syncSubscription: missing orgId in subscription metadata");
+    return;
+  }
+
+  const contractId = metadata.contractId || null;
+  const licensedBenches = parseInt(metadata.licensedBenches || "1", 10);
+  const planId = metadata.planId || null;
+  const planName = metadata.planName || null;
+  const priceId = sub.items.data[0]?.price.id || null;
+
+  await db.doc(orgSubscriptionDocPath(orgId, sub.id)).set({
+    orgId,
+    contractId,
+    planId,
+    planName,
+    stripeCustomerId: sub.customer as string,
+    status: sub.status,
+    currentPeriodStart: admin.firestore.Timestamp.fromMillis(
+      sub.current_period_start * 1000
+    ),
+    currentPeriodEnd: admin.firestore.Timestamp.fromMillis(
+      sub.current_period_end * 1000
+    ),
+    cancelAtPeriodEnd: sub.cancel_at_period_end,
+    priceId,
+    licensedBenches,
+    updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+  });
+}
+
+/**
+ * Provisions a new organization after Stripe checkout.
+ * Aligned with the Flutter app's provisionOrganization.
+ */
+async function provisionOrganization(params: {
+  orgId: string;
+  uid: string;
+  email: string;
+  planId?: string;
+  planName?: string;
+  licensedBenches: number;
+}): Promise<void> {
+  const { orgId, uid, email, planId, planName, licensedBenches } = params;
+
+  const orgRef = db.collection("orgs").doc(orgId);
+  const orgSnap = await orgRef.get();
+
+  let enabledModules: string[] = [];
+  let supportTier = "standard";
+
+  if (planId) {
+    const plan = await resolvePlan(planId);
+    if (plan) {
+      enabledModules = plan.enabledModules;
+      supportTier = plan.supportTier;
+    }
+  }
+
+  const batch = db.batch();
+
+  if (!orgSnap.exists) {
+    batch.set(orgRef, {
+      name: planName
+        ? `Organization (${planName})`
+        : "New Organization",
+      licensedBenches,
+      enabledModules,
+      supportTier,
+      planId: planId || null,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+  } else {
+    batch.update(orgRef, {
+      licensedBenches,
+      enabledModules,
+      supportTier,
+      planId: planId || null,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+  }
+
+  // Add the purchasing user as org owner
+  const memberRef = orgRef.collection("members").doc(uid);
+  batch.set(
+    memberRef,
+    {
+      role: "owner",
+      active: true,
+      email,
+      joinedAt: admin.firestore.FieldValue.serverTimestamp(),
+    },
+    { merge: true }
+  );
+
+  // Create initial seat assignments
+  for (let i = 0; i < licensedBenches; i++) {
+    const seatRef = db.collection(orgSeatsCollectionPath(orgId)).doc();
+    batch.set(seatRef, {
+      seatId: seatRef.id,
+      orgId,
+      assignedUid: i === 0 ? uid : null,
+      assignedEmail: i === 0 ? email : null,
+      workbenchId: null,
+      status: i === 0 ? "active" : "available",
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      assignedAt: i === 0 ? admin.firestore.FieldValue.serverTimestamp() : null,
+    });
+  }
+
+  // Update user doc with org reference
+  batch.update(db.doc(`users/${uid}`), {
+    orgId,
+    updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+  });
+
+  await batch.commit();
+  console.log(
+    `Provisioned org ${orgId} with ${licensedBenches} seats for user ${uid}`
+  );
+}
+
+/* ─── Shared helpers ─── */
+
+async function getOrCreateStripeCustomer(
+  stripe: Stripe,
+  orgId: string,
+  email: string,
+): Promise<string> {
+  const billingRef = db.doc(orgBillingCustomerDocPath(orgId));
+  const billingSnap = await billingRef.get();
+
+  if (billingSnap.exists) {
+    const existing = billingSnap.data()?.stripeCustomerId as string | undefined;
+    if (existing) return existing;
+  }
+
+  const customer = await stripe.customers.create({
+    email,
+    metadata: { orgId },
+  });
+
+  await billingRef.set({
+    stripeCustomerId: customer.id,
+    email,
+    orgId,
+    createdAt: admin.firestore.FieldValue.serverTimestamp(),
+  });
+
+  return customer.id;
+}
+
+async function resolveOrgId(uid: string): Promise<string | null> {
   const userDoc = await db.doc(`users/${uid}`).get();
   const data = userDoc.data();
-  if (!data) throw new HttpsError("not-found", "User profile not found");
+  if (!data) return null;
 
-  const orgId =
+  return (
     (data.orgId as string) ??
     (data.orgIds as string[] | undefined)?.[0] ??
     (data.orgMemberships
       ? Object.keys(data.orgMemberships)[0]
-      : undefined);
+      : null)
+  );
+}
 
-  if (!orgId) throw new HttpsError("not-found", "No organization found");
-  return orgId;
+async function findOrgByStripeCustomer(
+  stripeCustomerId: string
+): Promise<string | null> {
+  const orgsSnap = await db.collection("orgs").get();
+  for (const orgDoc of orgsSnap.docs) {
+    const billingSnap = await db
+      .doc(orgBillingCustomerDocPath(orgDoc.id))
+      .get();
+    if (billingSnap.data()?.stripeCustomerId === stripeCustomerId) {
+      return orgDoc.id;
+    }
+  }
+  return null;
 }

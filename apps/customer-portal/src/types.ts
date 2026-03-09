@@ -37,7 +37,7 @@ export interface KpiSnapshot {
   operatorHours: number;
 }
 
-/** Subscription from orgs/{orgId}/subscriptions/* */
+/** Subscription from orgs/{orgId}/subscriptions/* — aligned with Flutter app */
 export interface Subscription {
   id: string;
   status: 'active' | 'past_due' | 'canceled' | 'trialing' | 'incomplete';
@@ -47,17 +47,24 @@ export interface Subscription {
   currentPeriodStart: Date;
   currentPeriodEnd: Date;
   cancelAtPeriodEnd: boolean;
-  stripeSubscriptionId?: string;
+  orgId?: string;
+  contractId?: string;
+  stripeCustomerId?: string;
+  priceId?: string;
 }
 
-/** Seat from orgs/{orgId}/seats/* */
+/** Seat from orgs/{orgId}/seats/* — aligned with Flutter app schema */
 export interface Seat {
   id: string;
-  benchName: string;
-  assignedTo?: string;
-  assignedEmail?: string;
+  seatId?: string;
+  orgId?: string;
+  assignedUid?: string | null;
+  assignedEmail?: string | null;
+  workbenchId?: string | null;
   status: 'active' | 'available' | 'suspended';
-  lastActive?: Date;
+  assignedAt?: Date | null;
+  releasedAt?: Date | null;
+  createdAt?: Date;
 }
 
 /** Available plan for onboarding */
@@ -73,17 +80,21 @@ export interface Plan {
   recommended?: boolean;
 }
 
-/** Contract from orgs/{orgId}/contracts/* */
+/** Contract from orgs/{orgId}/contracts/* — aligned with Flutter app schema */
 export interface Contract {
   id: string;
-  title: string;
-  status: 'draft' | 'pending' | 'active' | 'expired' | 'terminated';
+  contractId?: string;
+  title?: string;
+  status: 'draft' | 'sent' | 'signed' | 'cancelled' | 'pending' | 'active' | 'expired' | 'terminated';
   createdAt: Date;
   expiresAt?: Date;
   signedAt?: Date;
-  signedBy?: string;
-  documentUrl?: string;
-  terms?: string;
+  signatoryName?: string;
+  signedByUid?: string;
+  pdfPath?: string;
+  pdfSha256?: string;
+  terms?: Record<string, unknown>;
+  warnings?: string[];
 }
 
 /** Note from orgs/{orgId}/notes/* */

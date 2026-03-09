@@ -113,7 +113,9 @@ export default function Seats() {
             <Card key={seat.id} className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div>
-                  <p className="text-txt font-medium">{seat.benchName}</p>
+                  <p className="text-txt font-medium">
+                    {seat.seatId ? `Seat ${seat.id.slice(0, 6)}` : seat.id.slice(0, 8)}
+                  </p>
                   {seat.assignedEmail && (
                     <p className="text-muted text-sm">{seat.assignedEmail}</p>
                   )}

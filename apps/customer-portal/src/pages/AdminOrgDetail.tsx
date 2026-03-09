@@ -128,7 +128,7 @@ export default function AdminOrgDetail() {
               {seats.map((seat) => (
                 <div key={seat.id} className="flex items-center justify-between text-sm py-1.5 border-b border-line/30 last:border-0">
                   <div>
-                    <span className="text-txt">{seat.benchName}</span>
+                    <span className="text-txt">Seat {seat.id.slice(0, 6)}</span>
                     {seat.assignedEmail && (
                       <span className="text-muted ml-2">{seat.assignedEmail}</span>
                     )}

@@ -148,12 +148,16 @@ export function PageHeader({
 /* ─── Status badge for subscriptions/contracts ─── */
 const statusColors: Record<string, BadgeColor> = {
   active: 'green',
+  available: 'blue',
   trialing: 'blue',
   past_due: 'yellow',
   canceled: 'red',
+  cancelled: 'red',
   incomplete: 'gray',
   draft: 'gray',
   pending: 'yellow',
+  sent: 'yellow',
+  signed: 'green',
   expired: 'red',
   terminated: 'red',
   current: 'green',

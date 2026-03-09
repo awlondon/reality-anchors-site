@@ -11,6 +11,7 @@ import {
 } from 'recharts';
 import { useKpis, useUsageDaily } from '../lib/hooks';
 import { KpiCard, Card, PageHeader, Spinner } from '../components/ui';
+import NotesPanel from '../components/NotesPanel';
 
 function formatNum(n: number, decimals = 0): string {
   if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
@@ -133,6 +134,8 @@ export default function Dashboard() {
           </Card>
         </div>
       )}
+
+      <NotesPanel context="dashboard" title="Dashboard Notes" />
     </>
   );
 }

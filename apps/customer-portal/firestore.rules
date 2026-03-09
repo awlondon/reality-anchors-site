@@ -1,0 +1,42 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Leads — public create, no client read
+    match /leads/{document} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
+
+    // User profiles — users can read their own doc
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    // Org notes — authenticated users can read and create
+    match /orgs/{orgId}/notes/{noteId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update, delete: if false;
+    }
+
+    // Org data — members can read their org's subcollections
+    match /orgs/{orgId}/{subcollection}/{docId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // Org root doc
+    match /orgs/{orgId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // Admin analytics — only admin role via custom claims
+    match /admin_analytics/{docId} {
+      allow read: if request.auth != null && request.auth.token.role == 'admin';
+      allow write: if false;
+    }
+  }
+}

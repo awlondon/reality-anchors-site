@@ -29,12 +29,12 @@ export default function Contracts() {
               <Card className="flex items-center justify-between hover:border-muted/40 transition-colors cursor-pointer">
                 <div>
                   <div className="flex items-center gap-3 mb-1">
-                    <p className="text-txt font-medium">{c.title}</p>
+                    <p className="text-txt font-medium">{c.title || c.contractId || c.id}</p>
                     <StatusBadge status={c.status} />
                   </div>
                   <p className="text-muted text-sm">
                     Created {format(toDate(c.createdAt), 'MMM d, yyyy')}
-                    {c.expiresAt && ` · Expires ${format(toDate(c.expiresAt), 'MMM d, yyyy')}`}
+                    {c.signatoryName && ` · Signed by ${c.signatoryName}`}
                   </p>
                 </div>
                 <span className="text-muted">→</span>

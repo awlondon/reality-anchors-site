@@ -45,10 +45,12 @@ export default function ContractDetail() {
     );
   }
 
+  const displayTitle = contract.title || contract.contractId || contract.id;
+
   return (
     <>
       <PageHeader
-        title={contract.title}
+        title={displayTitle}
         action={
           <Link to="/contracts" className="text-accent-2 hover:underline text-sm">
             ← Back to contracts
@@ -77,7 +79,7 @@ export default function ContractDetail() {
               <dt className="text-muted">Signed</dt>
               <dd className="text-txt font-medium mt-1">
                 {format(toDate(contract.signedAt), 'MMM d, yyyy')}
-                {contract.signedBy && <span className="text-muted"> by {contract.signedBy}</span>}
+                {contract.signatoryName && <span className="text-muted"> by {contract.signatoryName}</span>}
               </dd>
             </div>
           )}
@@ -87,29 +89,30 @@ export default function ContractDetail() {
       {contract.terms && (
         <Card className="mb-6">
           <h3 className="text-sm font-medium text-muted mb-3">Terms</h3>
-          <div className="prose prose-invert prose-sm max-w-none text-muted whitespace-pre-wrap">
-            {contract.terms}
-          </div>
+          <dl className="grid grid-cols-2 gap-2 text-sm">
+            {Object.entries(contract.terms).map(([key, value]) => (
+              <div key={key}>
+                <dt className="text-muted capitalize">{key.replace(/([A-Z])/g, ' $1')}</dt>
+                <dd className="text-txt font-medium">{String(value)}</dd>
+              </div>
+            ))}
+          </dl>
         </Card>
       )}
 
       {error && <p className="text-danger text-sm mb-4">{error}</p>}
 
-      {contract.status === 'pending' && (
+      {(contract.status === 'pending' || contract.status === 'sent' || contract.status === 'draft') && (
         <Button onClick={handleSign} loading={signing}>
           Sign Contract
         </Button>
       )}
 
-      {contract.documentUrl && (
-        <a
-          href={contract.documentUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block mt-4"
-        >
-          <Button variant="secondary">Download Document</Button>
-        </a>
+      {contract.pdfPath && (
+        <p className="text-muted text-sm mt-4">
+          PDF stored at: {contract.pdfPath}
+          {contract.pdfSha256 && <span className="ml-2 font-mono text-xs">SHA256: {contract.pdfSha256.slice(0, 12)}...</span>}
+        </p>
       )}
     </>
   );

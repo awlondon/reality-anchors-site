@@ -8,40 +8,40 @@ export type Testimonial = {
 };
 
 export const testimonials: Testimonial[] = [
-  // ── Homepage (3 used: indices 0, 1, 3 of home-filtered list) ──
+  // ── Homepage ──
   {
     id: 'ops-manager-yard',
     quote:
-      'Rework dropped 34% in the first quarter and scrap fell from 6.1% to 4.3%. The biggest shift was catching bad cuts before they left the bench — not after they hit the field.',
-    attribution: 'Operations Manager',
-    company: '200-person fabrication yard',
+      'The biggest shift is catching bad cuts before they leave the bench — not after they hit the field. That changes the whole rework conversation.',
+    attribution: 'Representative scenario',
+    company: 'Fabrication yard operations',
     backgroundSrc: '/images/operator-work.jpg',
-    pages: ['home'],
+    pages: ['home', 'industries:rebar-cut-bend'],
   },
   {
     id: 'engineering-lead-steel',
     quote:
-      'RFI volume dropped 41% in two months. Now checks happen at the bench so my detailers focus on production drawings instead of cleaning up mistakes after the fact.',
-    attribution: 'Engineering Lead',
-    company: 'Structural steel shop, 45 employees',
+      'When checks happen at the bench, detailers can focus on production drawings instead of cleaning up mistakes after the fact.',
+    attribution: 'Representative scenario',
+    company: 'Structural steel shop',
     backgroundSrc: '/images/sparks-metal.jpg',
     pages: ['home'],
   },
   {
     id: 'safety-coordinator-home',
     quote:
-      'Field rejections went from about twelve a month to two. The operator catches the tolerance issue before the torch even lights — completely different way of working.',
-    attribution: 'Safety Coordinator',
-    company: 'Mid-Atlantic steel erector, 120 field crew',
+      'The goal is for operators to catch tolerance issues before the torch even lights — a completely different way of working.',
+    attribution: 'Representative scenario',
+    company: 'Steel erection crew',
     backgroundSrc: '/images/team-collaboration.jpg',
     pages: ['home'],
   },
   {
     id: 'it-director-multisite',
     quote:
-      'Three sites live in under four weeks, zero on-prem infrastructure, and a 7.2x ROI in the first year. When I showed the CFO, the conversation was already over.',
-    attribution: 'IT Director',
-    company: 'Multi-site fabricator, 600+ employees',
+      'Cloud-native deployment means no on-prem infrastructure. Multiple sites can go live quickly, and the ROI conversation with leadership becomes straightforward.',
+    attribution: 'Representative scenario',
+    company: 'Multi-site fabricator',
     backgroundSrc: '/images/commercial-fabrication.jpg',
     pages: ['home'],
   },
@@ -50,9 +50,9 @@ export const testimonials: Testimonial[] = [
   {
     id: 'procurement-lead-supply',
     quote:
-      'We used to just budget for waste and move on. Now we\u2019re catching cut-list errors and over-orders before they ship. It\u2019s one of those things where you wonder how you lived without it.',
-    attribution: 'Procurement Lead',
-    company: 'Regional construction supply company',
+      'Most shops budget for waste and move on. The opportunity is catching cut-list errors and over-orders before they ship — the kind of thing you wonder how you lived without.',
+    attribution: 'Representative scenario',
+    company: 'Construction supply operations',
     backgroundSrc: '/images/industrial-factory.jpg',
     pages: ['commercial'],
   },
@@ -61,19 +61,19 @@ export const testimonials: Testimonial[] = [
   {
     id: 'quality-manager-precast',
     quote:
-      'Three plants, three different ways of checking work \u2014 that was our reality before this. Now everyone validates the same way, and the QA team isn\u2019t babysitting every pour. Scrap\u2019s down about 22%.',
-    attribution: 'Quality Manager',
-    company: 'Precast concrete operation, 3 plants',
+      'When every plant validates the same way, the QA team stops babysitting every pour. Standardized checks are the foundation for consistent scrap reduction.',
+    attribution: 'Representative scenario',
+    company: 'Multi-plant precast operation',
     backgroundSrc: '/images/quality-control.jpg',
-    pages: ['industrial'],
+    pages: ['industrial', 'industries'],
   },
 
   // ── Personal ──
   {
     id: 'shop-foreman-personal',
     quote:
-      'I\u2019ve got five guys. I figured this stuff was built for the big shops with IT departments. But we got set up in a day and now my cuts and welds are tighter than they\u2019ve ever been. No extra paperwork.',
-    attribution: 'Shop Foreman',
+      'This kind of tooling doesn\u2019t have to be just for the big shops with IT departments. A small crew can get set up quickly and tighten up cuts and welds without extra paperwork.',
+    attribution: 'Representative scenario',
     company: 'Independent steel fabrication crew',
     backgroundSrc: '/images/workshop-personal.jpg',
     pages: ['personal'],
@@ -83,9 +83,9 @@ export const testimonials: Testimonial[] = [
   {
     id: 'cfo-board-strategy',
     quote:
-      'The board kept asking where the margin improvement was going to come from. When we showed them the execution layer numbers \u2014 real scrap delta, real labor savings \u2014 it was the first infrastructure pitch that didn\u2019t need a second meeting.',
-    attribution: 'CFO',
-    company: 'PE-backed fabrication platform, 4 facilities',
+      'When the execution layer shows real scrap delta and labor savings, the infrastructure pitch doesn\u2019t need a second meeting. That\u2019s the kind of margin story boards want to hear.',
+    attribution: 'Illustrative framing',
+    company: 'PE-backed fabrication platform',
     backgroundSrc: '/images/boardroom-strategy.jpg',
     pages: ['board-strategy'],
   },
@@ -94,20 +94,20 @@ export const testimonials: Testimonial[] = [
   {
     id: 'lead-fabricator-structural',
     quote:
-      'I\u2019ve been bending steel for nineteen years. This is the first system that actually matches how I think about a job \u2014 sequence, checks, confirmation. My error rate went from \u201Cpretty good\u201D to basically zero.',
-    attribution: 'Lead Fabricator',
-    company: 'Structural steel contractor, 60 employees',
+      'A system that matches how you actually think about a job — sequence, checks, confirmation — makes the difference between good work and guesswork.',
+    attribution: 'Representative scenario',
+    company: 'Structural steel contractor',
     backgroundSrc: '/images/sparks-metal.jpg',
-    pages: ['regime:structural-fabrication'],
+    pages: ['regime:structural-fabrication', 'industries:rebar-cut-bend'],
   },
 
   // ── Regime: Multi-Project Optimization ──
   {
     id: 'planner-multi-project',
     quote:
-      'We were running four jobs with overlapping material lists and nobody could see the shared inventory. First week on the platform, we consolidated two orders and saved a truckload \u2014 literally.',
-    attribution: 'Senior Planner',
-    company: 'General contractor, 15 concurrent projects',
+      'When you\u2019re running overlapping jobs with shared material lists, consolidating orders across projects is where the real savings show up.',
+    attribution: 'Representative scenario',
+    company: 'General contractor operations',
     backgroundSrc: '/images/industrial-factory.jpg',
     pages: ['regime:multi-project-optimization'],
   },
@@ -116,9 +116,9 @@ export const testimonials: Testimonial[] = [
   {
     id: 'maintenance-lead-calibration',
     quote:
-      'We had a press that was drifting a quarter-degree every 200 cycles. Used to catch it when the parts didn\u2019t fit. Now I get a flag before it\u2019s even a problem \u2014 saves us a full shift of rework every month.',
-    attribution: 'Maintenance Lead',
-    company: 'Plate fabrication shop, 8 CNC machines',
+      'Catching machine drift before parts don\u2019t fit — instead of after — can save a full shift of rework. Early flagging changes maintenance from reactive to proactive.',
+    attribution: 'Representative scenario',
+    company: 'Plate fabrication shop',
     backgroundSrc: '/images/cnc-precision.jpg',
     pages: ['regime:machine-calibration'],
   },
@@ -127,9 +127,9 @@ export const testimonials: Testimonial[] = [
   {
     id: 'fleet-supervisor-heavy',
     quote:
-      'We had twelve machines across two yards and every one was doing its own thing. Now I can see drift before it turns into scrap. Last month we caught a saw that was pulling 2mm left on every cut \u2014 would\u2019ve wasted a whole run.',
-    attribution: 'Fleet Supervisor',
-    company: 'Heavy civil contractor, 12 CNC stations',
+      'When every machine is doing its own thing across two yards, you need drift visibility before it turns into scrap. Centralized monitoring changes the equation.',
+    attribution: 'Representative scenario',
+    company: 'Heavy civil contractor',
     backgroundSrc: '/images/cnc-precision.jpg',
     pages: ['regime:fleet-grip'],
   },
@@ -138,9 +138,9 @@ export const testimonials: Testimonial[] = [
   {
     id: 'project-engineer-ar',
     quote:
-      'The AR overlay changed how the crew reads drawings on site. Instead of squinting at a tablet and guessing, they\u2019re seeing the alignment check right on the piece. Fit-up errors dropped off a cliff.',
-    attribution: 'Project Engineer',
-    company: 'Structural erection contractor, 80 employees',
+      'AR overlay changes how crews read drawings on site. Instead of squinting at a tablet and guessing, they see alignment checks right on the piece.',
+    attribution: 'Representative scenario',
+    company: 'Structural erection contractor',
     backgroundSrc: '/images/structural-steel.jpg',
     pages: ['regime:ar-execution'],
   },
@@ -149,9 +149,9 @@ export const testimonials: Testimonial[] = [
   {
     id: 'compliance-officer-ai',
     quote:
-      'When the auditors asked how we validate AI-generated cut plans, we had a full trail \u2014 every override, every operator confirmation, every exception. That used to take us weeks to reconstruct.',
-    attribution: 'Compliance Officer',
-    company: 'Publicly traded steel fabricator',
+      'A full audit trail — every override, every operator confirmation, every exception — is what auditors want to see when AI-generated plans are in play.',
+    attribution: 'Representative scenario',
+    company: 'Regulated steel fabricator',
     backgroundSrc: '/images/methodology-measurement.jpg',
     pages: ['regime:ai-governance'],
   },

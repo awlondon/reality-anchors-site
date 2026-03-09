@@ -6,6 +6,7 @@ export interface MetricItem {
   suffix: string;
   label: string;
   sub: string;
+  context?: string;
 }
 
 export interface HeroMetric {
@@ -30,11 +31,13 @@ export interface Regime {
   dataSources: string[];
   pipeline: string[];
   roi: string;
+  workcellIds?: string[];
 }
 
 export const siteMetrics = metrics as {
   hero: HeroMetric[];
-  measuredOutcomes: MetricItem[];
+  heroVariants: Record<string, HeroMetric[]>;
+  designTargets: MetricItem[];
   valueBridge: {
     governMetric: string;
     optimizeMetric: string;
@@ -46,4 +49,8 @@ export const regimeCatalog = regimes as Regime[];
 
 export function getRegimeById(id: string) {
   return regimeCatalog.find((regime) => regime.id === id);
+}
+
+export function getRegimesByWorkcell(workcellId: string): Regime[] {
+  return regimeCatalog.filter((r) => r.workcellIds?.includes(workcellId));
 }

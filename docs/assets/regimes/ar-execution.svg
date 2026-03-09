@@ -1,0 +1,36 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="700" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#09111D"/>
+      <stop offset="1" stop-color="#1A3144"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <rect x="58" y="58" width="1084" height="584" rx="24" fill="#0D1A2A" stroke="#38E18E" stroke-opacity="0.3"/>
+
+  <rect x="130" y="170" width="640" height="380" rx="18" fill="#12273A" stroke="#54F3A6" stroke-opacity="0.4"/>
+  <line x1="180" y1="230" x2="720" y2="230" stroke="#58D4B0" stroke-opacity="0.35"/>
+  <line x1="180" y1="290" x2="720" y2="290" stroke="#58D4B0" stroke-opacity="0.35"/>
+  <line x1="180" y1="350" x2="720" y2="350" stroke="#58D4B0" stroke-opacity="0.35"/>
+  <line x1="180" y1="410" x2="720" y2="410" stroke="#58D4B0" stroke-opacity="0.35"/>
+  <line x1="180" y1="470" x2="720" y2="470" stroke="#58D4B0" stroke-opacity="0.35"/>
+  <line x1="230" y1="210" x2="230" y2="520" stroke="#58D4B0" stroke-opacity="0.35"/>
+  <line x1="330" y1="210" x2="330" y2="520" stroke="#58D4B0" stroke-opacity="0.35"/>
+  <line x1="430" y1="210" x2="430" y2="520" stroke="#58D4B0" stroke-opacity="0.35"/>
+  <line x1="530" y1="210" x2="530" y2="520" stroke="#58D4B0" stroke-opacity="0.35"/>
+  <line x1="630" y1="210" x2="630" y2="520" stroke="#58D4B0" stroke-opacity="0.35"/>
+
+  <rect x="350" y="316" width="160" height="68" rx="10" fill="#1C3A4A" stroke="#58F1A7" stroke-width="2"/>
+  <text x="392" y="357" fill="#D7FFE9" font-size="28" font-family="Arial" font-weight="700">GO</text>
+
+  <rect x="560" y="320" width="140" height="60" rx="10" fill="#3D2631" stroke="#FF6A80" stroke-width="2" stroke-dasharray="6 6"/>
+  <text x="579" y="356" fill="#FFD0D7" font-size="24" font-family="Arial" font-weight="700">NO-GO</text>
+
+  <path d="M860 160C950 160 1010 220 1010 300C1010 380 950 440 860 440C770 440 710 380 710 300C710 220 770 160 860 160Z" fill="#13283A" stroke="#6CFFC0" stroke-opacity="0.4"/>
+  <rect x="812" y="250" width="96" height="14" rx="7" fill="#5AF5AC"/>
+  <rect x="772" y="280" width="176" height="14" rx="7" fill="#2F536A"/>
+  <rect x="790" y="310" width="140" height="14" rx="7" fill="#2F536A"/>
+
+  <rect x="780" y="475" width="250" height="82" rx="14" fill="#112536" stroke="#4DE7A0" stroke-opacity="0.45"/>
+  <text x="810" y="524" fill="#B9F9D4" font-size="22" font-family="Arial" font-weight="700">Audit: 100% logged</text>
+</svg>

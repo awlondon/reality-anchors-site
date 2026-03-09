@@ -5,27 +5,30 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { trackEvent } from '@/lib/analytics';
+import { CTA } from '@/lib/constants';
 
 const NAV_LINKS = [
+  { href: '/industries/', label: 'Industries' },
   { href: '/personal/', label: 'Personal' },
   { href: '/commercial/', label: 'Commercial' },
   { href: '/industrial/', label: 'Industrial' },
-  { href: '/calculator/', label: 'Quick Estimate' },
-  { href: '/margin-impact/', label: 'Margin Model' },
-  { href: '/board-strategy/', label: 'Strategy' },
+  { href: '/calculator/', label: 'ROI Estimate' },
 ];
 
 /** Map pathname prefixes to contextual CTA labels and destinations. */
 const CTA_MAP: Record<string, { label: string; href: string }> = {
-  '/personal':        { label: 'Get Started', href: '/personal/#contact' },
-  '/commercial':      { label: 'Request Demo', href: '/commercial/#contact' },
-  '/industrial':      { label: 'Schedule Review', href: '/industrial/#contact' },
-  '/calculator':      { label: 'Build Full Model', href: '/margin-impact/' },
-  '/margin-impact':   { label: 'Request Assessment', href: '/commercial/#contact' },
-  '/board-strategy':  { label: 'Schedule Briefing', href: '/commercial/#contact' },
-  '/pricing-methodology': { label: 'Explore Plans', href: '/commercial/' },
+  '/industries':      CTA.primary,
+  '/platform':        CTA.primary,
+  '/diligence':       { label: 'Request Package', href: '/diligence/#download' },
+  '/personal':        CTA.primary,
+  '/commercial':      CTA.secondary,
+  '/industrial':      CTA.secondary,
+  '/calculator':      CTA.secondary,
+  '/margin-impact':   CTA.secondary,
+  '/board-strategy':  CTA.secondary,
+  '/pricing-methodology': CTA.primary,
 };
-const DEFAULT_CTA = { label: 'Request Demo', href: '/commercial/#contact' };
+const DEFAULT_CTA = CTA.primary;
 
 function getCta(pathname: string) {
   for (const [prefix, cta] of Object.entries(CTA_MAP)) {
@@ -102,7 +105,7 @@ export default function Navbar({ activePath = '' }: { activePath?: string }) {
           ))}
         </nav>
 
-        {/* Desktop CTA — contextual per page */}
+        {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
           <Link
             href={cta.href}

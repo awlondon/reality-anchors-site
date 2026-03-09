@@ -3,9 +3,12 @@ import Link from 'next/link';
 import Footer from '@/components/Footer';
 import LeadForm from '@/components/LeadForm';
 import PhotoBackground from '@/components/PhotoBackground';
-import TestimonialBreak from '@/components/TestimonialBreak';
+// TODO: Re-enable with real testimonials
+// import TestimonialBreak from '@/components/TestimonialBreak';
 import { regimeCatalog } from '@/lib/siteData';
-import { getTestimonialsForPage } from '@/data/testimonials';
+import PhotoDivider from '@/components/PhotoDivider';
+import { getDividersForPage } from '@/data/photoDividers';
+// import { getTestimonialsForPage } from '@/data/testimonials';
 
 export const metadata: Metadata = {
   title: 'Personal Plans — Execution Guidance for Solo Operators',
@@ -49,7 +52,9 @@ const pricingTiers = [
   },
 ];
 
-const testimonial = getTestimonialsForPage('personal')[0]!;
+// const testimonial = getTestimonialsForPage('personal')[0]!;
+
+const dividers = getDividersForPage('personal');
 
 export default function PersonalPage() {
   return (
@@ -142,25 +147,25 @@ export default function PersonalPage() {
               </table>
             </div>
             <div className="mt-6 border border-line/50 rounded-xl bg-bg/50 px-5 py-4">
-              <h3 className="text-sm font-semibold text-txt mb-3">What the savings look like</h3>
+              <h3 className="text-sm font-semibold text-txt mb-3">Illustrative savings model</h3>
               <div className="grid md:grid-cols-3 gap-4 text-center">
                 <div>
                   <p className="text-[11px] uppercase tracking-wide text-muted mb-1">Solo · 200 t/yr</p>
                   <p className="font-mono text-accent-2 text-lg font-semibold">~$5k</p>
-                  <p className="text-[11px] text-muted">annual savings · 9× ROI</p>
+                  <p className="text-[11px] text-muted">modeled annual savings</p>
                 </div>
                 <div>
                   <p className="text-[11px] uppercase tracking-wide text-muted mb-1">Studio · 800 t/yr</p>
                   <p className="font-mono text-accent-2 text-lg font-semibold">~$21k</p>
-                  <p className="text-[11px] text-muted">annual savings · 12× ROI</p>
+                  <p className="text-[11px] text-muted">modeled annual savings</p>
                 </div>
                 <div>
                   <p className="text-[11px] uppercase tracking-wide text-muted mb-1">Crew · 3,000 t/yr</p>
                   <p className="font-mono text-accent-2 text-lg font-semibold">~$79k</p>
-                  <p className="text-[11px] text-muted">annual savings · 19× ROI</p>
+                  <p className="text-[11px] text-muted">modeled annual savings</p>
                 </div>
               </div>
-              <p className="text-[10px] text-muted/50 mt-3 text-center">Illustrative estimates based on $850/ton steel, 8% baseline scrap, 1.5pt improvement. Actual results vary by operation.</p>
+              <p className="text-[10px] text-muted/50 mt-3 text-center">Illustrative estimates based on $850/ton steel, 8% baseline scrap, 1.5pt improvement. Not guaranteed — actual results vary by operation.</p>
             </div>
             <div className="mt-5 border-t border-line pt-4">
               <p className="text-xs text-muted/70"><strong className="text-txt">Ready for more?</strong> Crew gets you started. When you need audit logs, multi-bench coordination, or formal compliance controls, <Link href="/commercial/" className="text-accent hover:text-blue-400 font-semibold">Commercial</Link> picks up where Crew leaves off — with your existing workflows intact.</p>
@@ -169,13 +174,7 @@ export default function PersonalPage() {
         </div>
       </section>
 
-      <TestimonialBreak
-        id={testimonial.id}
-        quote={testimonial.quote}
-        attribution={testimonial.attribution}
-        company={testimonial.company}
-        backgroundSrc={testimonial.backgroundSrc}
-      />
+      {dividers[0] && <PhotoDivider {...dividers[0]} />}
 
       <section className="pb-16">
         <div className="max-w-4xl mx-auto px-6">

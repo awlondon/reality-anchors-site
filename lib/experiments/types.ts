@@ -1,4 +1,4 @@
-export type ExperimentId = 'home_narrative_v1';
+export type ExperimentId = 'home_narrative_v1' | 'home_narrative_v2';
 
 export type VariantId = 'A' | 'B' | 'C';
 

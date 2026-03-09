@@ -2,6 +2,7 @@ import emailjs from '@emailjs/browser';
 import type { CalculatorContext } from '@/lib/calculatorContext';
 import { reportError, reportWarning } from '@/lib/errorReporting';
 import { EMAIL_SEND_TIMEOUT_MS, EMAIL_MAX_RETRIES, EMAIL_RETRY_DELAY_MS } from '@/lib/constants';
+import { isDisposableEmail } from '@/lib/spamGuard';
 
 const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? '';
 const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? '';
@@ -102,6 +103,7 @@ export async function sendLeadEmail(payload: LeadEmailPayload): Promise<void> {
     calcOversightRisk: fmtUSD(ctx?.oversightRiskSaved),
     calcEbitda: fmtUSD(ctx?.estimatedEbitda),
     hasCalculator: ctx ? 'yes' : '',
+    spam: isDisposableEmail(payload.email) ? 'SUSPECTED SPAM' : '',
   };
 
   await sendWithRetry(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY, 'lead_email');

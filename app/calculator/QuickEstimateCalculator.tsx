@@ -6,7 +6,7 @@ import { computeMarginImpact, formatUSD, formatNumber } from '@/lib/marginModel'
 import { setCalculatorContext } from '@/lib/calculatorContext';
 import { trackEvent } from '@/lib/analytics';
 
-// Conservative fixed assumptions matching observed median deployment outcomes.
+// Conservative fixed assumptions for illustrative estimates.
 // Users who want to tune these can use the full model at /margin-impact/.
 const FIXED = {
   scrapReductionPts: 1.5,
@@ -69,7 +69,7 @@ function ResultRow({ label, value, highlight = false }: { label: string; value: 
   return (
     <div className={`flex items-center justify-between py-3 border-b border-line last:border-0 ${highlight ? 'py-4' : ''}`}>
       <span className={`text-sm ${highlight ? 'font-semibold text-txt' : 'text-muted'}`}>{label}</span>
-      <span className={`font-mono tabular-nums ${highlight ? 'text-xl font-bold text-white' : 'text-sm text-white/90'}`}>
+      <span className={`font-mono tabular-nums ${highlight ? 'text-xl font-bold text-accent-2' : 'text-sm text-txt'}`}>
         {value}
       </span>
     </div>
@@ -159,8 +159,10 @@ export default function QuickEstimateCalculator() {
         Hides interactive UI and shows the print-only branded artifact.
       */}
       <style>{`
+        [data-print] { display: none; }
         @media print {
           body * { visibility: hidden !important; }
+          [data-print] { display: block !important; }
           [data-print], [data-print] * { visibility: visible !important; }
           [data-print] { position: fixed; inset: 0; padding: 2.5cm; background: white; }
           [data-no-print] { display: none !important; }
@@ -189,7 +191,7 @@ export default function QuickEstimateCalculator() {
                   ['Annual tonnage', `${formatNumber(tons, { maximumFractionDigits: 0 })} t`],
                   ['Current scrap rate', `${scrapRate.toFixed(1)}%`],
                   ['Material cost per ton', formatUSD(costPerTon, { maximumFractionDigits: 0 })],
-                  ['Assumed scrap reduction', '1.5 pts (observed median)'],
+                  ['Assumed scrap reduction', '1.5 pts (conservative model)'],
                 ] as [string, string][]).map(([k, v]) => (
                   <tr key={k} style={{ borderBottom: '1px solid #f1f5f9' }}>
                     <td style={{ padding: '0.4rem 0', color: '#64748b' }}>{k}</td>
@@ -241,7 +243,7 @@ export default function QuickEstimateCalculator() {
           </div>
 
           <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid #e2e8f0' }}>
-            Results are estimates based on observed customer data. Individual outcomes depend on shop configuration, material mix, and operator conditions. Not a guarantee of performance.
+            Results are illustrative estimates based on modeled assumptions. Individual outcomes depend on shop configuration, material mix, and operator conditions. Not a guarantee of performance.
           </div>
         </div>
       </div>
@@ -281,7 +283,7 @@ export default function QuickEstimateCalculator() {
             format={(v) => formatUSD(v, { maximumFractionDigits: 0 })}
           />
           <p className="text-xs text-muted/70 border-t border-line pt-4">
-            Assumes a 1.5-point scrap reduction — the observed median across deployments. Labor,
+            Assumes a 1.5-point scrap reduction based on conservative modeling. Labor,
             throughput, and oversight inputs are set to conservative defaults.
           </p>
         </div>
@@ -328,7 +330,7 @@ export default function QuickEstimateCalculator() {
             ].map(({ label, value }) => (
               <div key={label} className="border border-line rounded-lg px-3 py-2.5">
                 <div className="text-[10px] text-muted uppercase tracking-wide mb-1">{label}</div>
-                <div className="font-mono text-sm text-white/90">{formatUSD(value)} / yr</div>
+                <div className="font-mono text-sm text-txt">{formatUSD(value)} / yr</div>
               </div>
             ))}
           </div>
@@ -354,7 +356,7 @@ export default function QuickEstimateCalculator() {
         </div>
 
         <p className="text-xs text-muted/60 text-center leading-relaxed">
-          Results are estimates based on observed customer data. Individual outcomes depend on shop
+          Results are illustrative estimates based on modeled assumptions. Individual outcomes depend on shop
           configuration, material mix, and operator conditions. Not a guarantee of performance.
         </p>
       </div>

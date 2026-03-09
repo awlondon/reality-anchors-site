@@ -5,12 +5,14 @@ import Link from 'next/link';
 import PhotoBackground from '@/components/PhotoBackground';
 import { trackEvent } from '@/lib/analytics';
 import { stagger, fadeUp } from '@/lib/motion';
+import { CTA } from '@/lib/constants';
 
 const steps = [
   {
     number: '01',
     title: 'Import',
     description: 'Load cut lists from existing schedules, manual entry, or photo import with OCR assist. No special file format required.',
+    metric: null,
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -23,6 +25,7 @@ const steps = [
     number: '02',
     title: 'Guide',
     description: 'Operators follow step-by-step instructions with hold points, counters, and machine-specific parameters.',
+    metric: { value: '< 0.7%', label: 'fabrication errors' },
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -34,6 +37,7 @@ const steps = [
     number: '03',
     title: 'Validate',
     description: 'Each step is verified against live job context. Deviations are caught before they become scrap, rework, or delays.',
+    metric: { value: '8%', label: 'max scrap reduction' },
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -46,6 +50,7 @@ const steps = [
     number: '04',
     title: 'Record',
     description: 'Every action is logged with timestamps, operator ID, and machine profiles. Export for audits, QA, or ERP feedback.',
+    metric: { value: '99%', label: 'execution accuracy' },
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -108,8 +113,28 @@ export default function HowItWorks() {
               <p className="text-sm text-muted leading-relaxed flex-1">
                 {step.description}
               </p>
+              {step.metric && (
+                <div className="mt-3 flex items-baseline gap-2 border-t border-line/50 pt-3">
+                  <span className="font-mono text-lg font-bold text-accent-2">{step.metric.value}</span>
+                  <span className="text-[10px] text-muted">{step.metric.label}</span>
+                </div>
+              )}
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Risk reversal — from FieldProof */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="mt-8 max-w-xl mx-auto border border-line/70 bg-card/50 backdrop-blur-sm rounded-xl px-5 py-4 text-center"
+        >
+          <p className="text-sm font-semibold text-txt mb-1">Assists the bench. Doesn&apos;t control it.</p>
+          <p className="text-xs text-muted leading-relaxed">
+            Operators confirm every step. The system validates&nbsp;&mdash; it doesn&apos;t override.
+          </p>
         </motion.div>
 
         <motion.div
@@ -117,14 +142,21 @@ export default function HowItWorks() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="mt-10 text-center"
+          className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
           <Link
-            href="/calculator/"
+            href={CTA.primary.href}
             className="inline-flex px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px"
             onClick={() => trackEvent('how_it_works_cta')}
           >
-            Try the Quick Estimate →
+            {CTA.primary.label} →
+          </Link>
+          <Link
+            href={CTA.secondary.href}
+            className="inline-flex px-5 py-2.5 rounded-lg border border-white/25 hover:border-white/50 hover:bg-white/6 text-txt text-sm font-semibold transition-all hover:-translate-y-px"
+            onClick={() => trackEvent('how_it_works_cta_contact', { cta: 'book_review' })}
+          >
+            {CTA.secondary.label}
           </Link>
         </motion.div>
       </div>

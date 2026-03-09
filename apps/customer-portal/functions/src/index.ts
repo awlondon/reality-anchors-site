@@ -167,7 +167,7 @@ export const createCustomerPortalSession = onCall(async (request) => {
     throw new HttpsError("failed-precondition", "No Stripe customer found");
 
   const stripe = getStripe();
-  const session = await stripe.billingPortal.sessions.create({
+0  const session = await stripe.billingPortal.sessions.create({
     customer: customerId,
     return_url: `${PORTAL_URL}/billing`,
   });

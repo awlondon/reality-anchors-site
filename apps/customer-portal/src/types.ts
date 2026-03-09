@@ -109,6 +109,18 @@ export interface Note {
   pinned?: boolean;
 }
 
+/** Note from orgs/{orgId}/notes/* */
+export interface Note {
+  id: string;
+  text: string;
+  authorUid: string;
+  authorEmail: string;
+  authorName?: string;
+  context: string; // page/section where note was created: 'dashboard', 'seats', 'subscription', etc.
+  createdAt: Date;
+  pinned?: boolean;
+}
+
 /** Org health doc from admin_analytics/org_health_* */
 export interface OrgHealth {
   orgId: string;

@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "default": "reality-anchors"
+  },
+  "targets": {
+    "reality-anchors": {
+      "hosting": {
+        "portal": ["reality-anchors-portal"]
+      }
+    }
+  }
+}

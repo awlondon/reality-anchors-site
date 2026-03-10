@@ -358,7 +358,8 @@ export default function BarShapeCanvas({
 
       ctx.globalAlpha = 1;
     }
-  }, [shape, params, barSize, bendRadius, drawProgress, bendProgress, width, height, thumbnail]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- barSize used indirectly via bendRadius
+  }, [shape, params, bendRadius, drawProgress, bendProgress, width, height, thumbnail]);
 
   useEffect(() => {
     draw();

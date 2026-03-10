@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import Footer from '@/components/Footer';
 import BarShapeGrid from '@/components/BarShapeGrid';
 
@@ -103,7 +104,7 @@ export default function BarShapesPage() {
             The Reality Anchors app gives your fabrication team step-by-step bar bending
             sequences with real-time validation — right at the bending table.
           </p>
-          <a
+          <Link
             href="/#contact"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-white text-sm font-semibold transition-all hover:-translate-y-px"
             style={{ backgroundColor: '#F97316' }}
@@ -113,7 +114,7 @@ export default function BarShapesPage() {
               <line x1="7" y1="12" x2="9" y2="12" />
             </svg>
             Learn about the app
-          </a>
+          </Link>
         </div>
       </section>
 

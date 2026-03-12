@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, type ReactNode } from 'react';
 
 const ACCESS_KEY = 'ra_exec_access';
-const VALID_CODE = process.env.NEXT_PUBLIC_EXEC_ACCESS_CODE ?? 'ra2026';
+const VALID_CODE = process.env.NEXT_PUBLIC_EXEC_ACCESS_CODE ?? '';
 const MAX_ATTEMPTS = 5;
 const LOCKOUT_MS = 60_000; // 1 minute lockout after max attempts
 

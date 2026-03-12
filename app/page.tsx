@@ -6,6 +6,7 @@ import HowItWorks from '@/components/HowItWorks';
 import Features from '@/components/Features';
 import Metrics from '@/components/Metrics';
 import Tiers from '@/components/Tiers';
+import FeatureMatrix from '@/components/FeatureMatrix';
 import LeadForm from '@/components/LeadForm';
 import StickyCTA from '@/components/StickyCTA';
 import Footer from '@/components/Footer';
@@ -54,6 +55,16 @@ export default async function Home() {
       <Metrics />
       {dividers[1] && <PhotoDivider {...dividers[1]} />}
       <Tiers />
+      <FeatureMatrix />
+      {testimonials[3] && (
+        <TestimonialBreak
+          id={testimonials[3].id}
+          quote={testimonials[3].quote}
+          attribution={testimonials[3].attribution}
+          company={testimonials[3].company}
+          backgroundSrc={testimonials[3].backgroundSrc}
+        />
+      )}
       <FAQ />
       <LeadForm />
       <StickyCTA />

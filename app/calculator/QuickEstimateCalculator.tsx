@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { computeMarginImpact, formatUSD, formatNumber } from '@/lib/marginModel';
 import { setCalculatorContext } from '@/lib/calculatorContext';
 import { trackEvent } from '@/lib/analytics';
+import { disclaimers } from '@/data/disclaimers';
 
 // Conservative fixed assumptions for illustrative estimates.
 // Users who want to tune these can use the full model at /margin-impact/.
@@ -233,7 +234,7 @@ export default function QuickEstimateCalculator() {
           </div>
 
           <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid #e2e8f0' }}>
-            Results are illustrative estimates based on modeled assumptions. Individual outcomes depend on shop configuration, material mix, and operator conditions. Not a guarantee of performance.
+            {disclaimers.printFooter}
           </div>
         </div>
       </div>
@@ -347,9 +348,8 @@ export default function QuickEstimateCalculator() {
           </Link>
         </div>
 
-        <p className="text-xs text-muted/60 text-center leading-relaxed">
-          Results are illustrative estimates based on modeled assumptions. Individual outcomes depend on shop
-          configuration, material mix, and operator conditions. Not a guarantee of performance.
+        <p className="text-xs text-muted/60 text-center leading-relaxed max-w-2xl mx-auto">
+          {disclaimers.calculator}
         </p>
       </div>
     </>

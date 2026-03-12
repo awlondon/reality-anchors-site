@@ -7,9 +7,7 @@ import Link from 'next/link';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { trackEvent } from '@/lib/analytics';
 import { siteMetrics } from '@/lib/siteData';
-import { useExperiment } from '@/components/ExperimentProvider';
-import { HOME_EXPERIMENT } from '@/lib/experiments/config';
-import { CTA } from '@/lib/constants';
+import { disclaimers } from '@/data/disclaimers';
 
 const StructuredFieldBackground = dynamic(
   () => import('@/components/StructuredFieldBackground'),
@@ -263,6 +261,14 @@ export default function Hero() {
             </div>
           ))}
         </motion.div>
+        <motion.p
+          initial={reduce ? {} : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="mt-3 text-[10px] text-muted/50 max-w-3xl"
+        >
+          {disclaimers.heroFootnote}
+        </motion.p>
       </div>
 
       {/* Scroll indicator */}

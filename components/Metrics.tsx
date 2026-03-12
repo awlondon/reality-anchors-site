@@ -5,6 +5,7 @@ import { useRef, useEffect, useState } from 'react';
 import PhotoBackground from '@/components/PhotoBackground';
 import { fadeUp, stagger } from '@/lib/motion';
 import { siteMetrics } from '@/lib/siteData';
+import { disclaimers } from '@/data/disclaimers';
 
 function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -65,6 +66,15 @@ export default function Metrics() {
             </motion.div>
           ))}
         </motion.div>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="mt-8 text-[11px] text-muted/60 text-center max-w-2xl mx-auto leading-relaxed"
+        >
+          {disclaimers.metrics}
+        </motion.p>
       </div>
     </section>
   );

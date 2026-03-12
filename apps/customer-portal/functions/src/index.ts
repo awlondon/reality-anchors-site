@@ -6,7 +6,7 @@
  *
  * Key alignment points:
  * - Stripe customer stored at orgs/{orgId}/billing/customer
- * - Seats use seatId, assignedUid, workbenchId fields
+ * - Benches use seatId, assignedUid, workbenchId fields
  * - Contracts use "signed" status with signatoryName
  * - Plans read from Firestore app_config/plans with hardcoded fallback
  * - Webhook events are idempotent via stripe_events/{eventId}
@@ -317,7 +317,7 @@ export const stripeWebhook = onRequest(
 
 /* ─────────────────────────────────────────────
  * assignSeat
- * Assigns a seat to an operator. Uses the Flutter app's
+ * Assigns a bench to an operator. Uses the Flutter app's
  * schema (seatId, assignedUid, workbenchId).
  * ───────────────────────────────────────────── */
 export const assignSeat = onCall(async (request) => {
@@ -335,7 +335,7 @@ export const assignSeat = onCall(async (request) => {
   const orgId = await resolveOrgId(uid);
   if (!orgId) throw new HttpsError("not-found", "No organization found");
 
-  // Check licensed seat count
+  // Check licensed bench count
   const subsSnap = await db
     .collection(orgSubscriptionsCollectionPath(orgId))
     .where("status", "in", ["active", "past_due"])
@@ -353,7 +353,7 @@ export const assignSeat = onCall(async (request) => {
   if (activeSeats.size >= licensedBenches) {
     throw new HttpsError(
       "failed-precondition",
-      `All ${licensedBenches} licensed seats are in use`
+      `All ${licensedBenches} licensed benches are in use`
     );
   }
 
@@ -361,9 +361,9 @@ export const assignSeat = onCall(async (request) => {
   const seatDoc = await seatRef.get();
 
   if (!seatDoc.exists)
-    throw new HttpsError("not-found", "Seat not found");
+    throw new HttpsError("not-found", "Bench not found");
   if (seatDoc.data()?.status !== "available")
-    throw new HttpsError("failed-precondition", "Seat is not available");
+    throw new HttpsError("failed-precondition", "Bench is not available");
 
   // Look up the assignee's uid by email (if they exist in Firebase Auth)
   let assignedUid: string | null = null;
@@ -387,7 +387,7 @@ export const assignSeat = onCall(async (request) => {
 
 /* ─────────────────────────────────────────────
  * releaseSeat
- * Releases an active seat back to available.
+ * Releases an active bench back to available.
  * Uses null (not FieldValue.delete) to match Flutter app pattern.
  * ───────────────────────────────────────────── */
 export const releaseSeat = onCall(async (request) => {
@@ -403,9 +403,9 @@ export const releaseSeat = onCall(async (request) => {
   const seatRef = db.doc(orgSeatDocPath(orgId, seatId));
   const seatDoc = await seatRef.get();
 
-  if (!seatDoc.exists) throw new HttpsError("not-found", "Seat not found");
+  if (!seatDoc.exists) throw new HttpsError("not-found", "Bench not found");
   if (seatDoc.data()?.status !== "active")
-    throw new HttpsError("failed-precondition", "Seat is not active");
+    throw new HttpsError("failed-precondition", "Bench is not active");
 
   await seatRef.update({
     assignedUid: null,
@@ -422,7 +422,7 @@ export const releaseSeat = onCall(async (request) => {
 /* ─────────────────────────────────────────────
  * updateSeatCount
  * Updates Stripe subscription quantity with prorations.
- * Provisions new seat docs on increase.
+ * Provisions new bench docs on increase.
  * ───────────────────────────────────────────── */
 export const updateSeatCount = onCall(async (request) => {
   const uid = request.auth?.uid;
@@ -468,7 +468,7 @@ export const updateSeatCount = onCall(async (request) => {
     });
   }
 
-  // Provision new seat docs if adding seats
+  // Provision new bench docs if adding benches
   if (newCount > currentCount) {
     const batch = db.batch();
     for (let i = 0; i < newCount - currentCount; i++) {
@@ -644,7 +644,7 @@ async function provisionOrganization(params: {
     { merge: true }
   );
 
-  // Create initial seat assignments
+  // Create initial bench assignments
   for (let i = 0; i < licensedBenches; i++) {
     const seatRef = db.collection(orgSeatsCollectionPath(orgId)).doc();
     batch.set(seatRef, {
@@ -667,7 +667,7 @@ async function provisionOrganization(params: {
 
   await batch.commit();
   console.log(
-    `Provisioned org ${orgId} with ${licensedBenches} seats for user ${uid}`
+    `Provisioned org ${orgId} with ${licensedBenches} benches for user ${uid}`
   );
 }
 

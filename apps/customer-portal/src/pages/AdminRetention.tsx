@@ -64,7 +64,7 @@ export default function AdminRetention() {
               <th className="pb-3 text-muted font-medium">Churn Risk</th>
               <th className="pb-3 text-muted font-medium">Last Active</th>
               <th className="pb-3 text-muted font-medium">Bends (30d)</th>
-              <th className="pb-3 text-muted font-medium">Seats</th>
+              <th className="pb-3 text-muted font-medium">Benches</th>
               <th className="pb-3 text-muted font-medium">Payment</th>
               <th className="pb-3 text-muted font-medium">Adoption</th>
             </tr>

@@ -68,6 +68,26 @@ export default function BoardStrategyPage() {
         </section>
 
         <section className="border border-line bg-card rounded-2xl p-8">
+          <h2 className="text-xl font-semibold text-txt mb-4">From Theory to Field Evidence</h2>
+          <p className="text-sm text-muted leading-relaxed mb-4">
+            Execution validation claims become defensible the moment a real customer runs real jobs and measures actual waste. This is not an algorithm problem — it is a deployment problem.
+          </p>
+          <p className="text-sm text-muted leading-relaxed mb-4">
+            The data collection infrastructure already exists: every checklist step, every operator confirmation, and every deviation is captured as a telemetry event. Scrap predictions are continuously verified against actual production outcomes — not self-reported estimates.
+          </p>
+          <ul className="flex flex-col gap-2.5 text-sm text-muted">
+            {[
+              'One facility running real jobs produces more defensible evidence than any theoretical proof.',
+              'Actual-vs-predicted scrap ratios are computed from existing production telemetry — no additional instrumentation required.',
+              'Each facility that goes live compounds the evidence base and tightens prediction accuracy.',
+              'Field data replaces projections: fabricators see their own numbers, not industry averages.',
+            ].map((item) => (
+              <li key={item} className="flex gap-3"><span className="text-accent">›</span>{item}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">Strategic Implications for ERP & Detailing Leaders</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
@@ -183,8 +203,11 @@ export default function BoardStrategyPage() {
           <p className="text-sm text-muted leading-relaxed mb-4">
             Execution validation is margin-expansion infrastructure, not optional tooling. It improves cost structure, throughput predictability, compliance traceability, and planning accuracy simultaneously.
           </p>
+          <p className="text-sm text-muted leading-relaxed mb-4">
+            The remaining gap is not algorithmic — it is deployment. The telemetry infrastructure, validation logic, and feedback loops already exist. Value compounds with each facility that goes live, each job that generates field evidence, and each scrap prediction verified against actual outcomes.
+          </p>
           <p className="text-sm text-muted leading-relaxed">
-            The strategic question is not whether execution digitizes. It is who owns the execution layer that anchors the rest of the fabrication stack.
+            The strategic question is not whether execution digitizes. It is who owns the execution layer that anchors the rest of the fabrication stack — and who has the field evidence to prove it works.
           </p>
         </section>
       </div>

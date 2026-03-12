@@ -8,32 +8,32 @@ import { trackEvent } from '@/lib/analytics';
 
 const tiers = [
   {
-    name: 'Personal',
-    href: '/personal/',
-    price: '$49–$349/mo',
-    badge: 'Basic',
-    desc: 'Step-by-step guidance for solo operators and small crews. Works offline, supports 1–8 seats, and upgrades cleanly into commercial plans.',
-    tags: ['Execution guidance', 'Offline-first', '1–8 seats'],
-    cta: 'Explore Personal',
+    name: 'Pilot',
+    href: '/pilot/',
+    price: '$1,200/bench/mo',
+    badge: 'Evaluate',
+    desc: 'AR-guided execution overlay and daily usage dashboards. Start with one bench, prove the ROI in 60 days, then scale.',
+    tags: ['AR execution overlay', 'Daily dashboards', 'Email support (48h)'],
+    cta: 'Explore Pilot',
   },
   {
-    name: 'Commercial',
-    href: '/commercial/',
-    price: '$1.5k–$25k/yr',
-    badge: 'Pro',
-    desc: 'Full execution validation for fabrication yards. Cuts scrap, verifies every step at the bench, and feeds clean data back to your planning tools.',
-    tags: ['Bench execution', 'Scrap reduction', 'Audit logs'],
-    cta: 'Explore Commercial',
+    name: 'Production',
+    href: '/production/',
+    price: '$3,200/bench/mo',
+    badge: 'Recommended',
+    desc: 'Everything in Pilot plus advanced analytics, QA scoring, custom calibration profiles, and priority support.',
+    tags: ['Analytics & QA', 'Custom calibration', 'Priority support (24h)'],
+    cta: 'Explore Production',
     highlight: true,
   },
   {
-    name: 'Industrial',
-    href: '/industrial/',
-    price: 'Custom agreement',
-    badge: 'Advanced',
-    desc: 'Standardized execution across high-volume plants. ERP integration, machine calibration governance, and compliance-grade traceability built in.',
-    tags: ['Throughput', 'ERP integration', 'Traceability'],
-    cta: 'Explore Industrial',
+    name: 'Enterprise',
+    href: '/enterprise/',
+    price: '$4,800/bench/mo',
+    badge: 'Full Platform',
+    desc: 'Everything in Production plus compliance evidence export, tamper-proof audit trails, dedicated account manager, and SLA-backed uptime.',
+    tags: ['Compliance export', 'Audit trails', 'Dedicated AM'],
+    cta: 'Explore Enterprise',
   },
 ];
 
@@ -54,7 +54,7 @@ export default function Tiers() {
             Scope that fits the operation
           </h2>
           <p className="mt-3 text-muted max-w-xl">
-            From a single bench to an enterprise fleet. Pricing scales with the value delivered, not the number of features turned on.
+            From a single bench to an enterprise fleet. Pricing scales with the value delivered — per bench, per month.
           </p>
         </motion.div>
 

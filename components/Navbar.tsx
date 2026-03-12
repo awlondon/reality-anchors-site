@@ -9,9 +9,9 @@ import { CTA } from '@/lib/constants';
 
 const NAV_LINKS = [
   { href: '/industries/', label: 'Industries' },
-  { href: '/personal/', label: 'Personal' },
-  { href: '/commercial/', label: 'Commercial' },
-  { href: '/industrial/', label: 'Industrial' },
+  { href: '/pilot/', label: 'Pilot' },
+  { href: '/production/', label: 'Production' },
+  { href: '/enterprise/', label: 'Enterprise' },
   { href: '/calculator/', label: 'ROI Estimate' },
 ];
 
@@ -20,9 +20,9 @@ const CTA_MAP: Record<string, { label: string; href: string }> = {
   '/industries':      CTA.primary,
   '/platform':        CTA.primary,
   '/diligence':       { label: 'Request Package', href: '/diligence/#download' },
-  '/personal':        CTA.primary,
-  '/commercial':      CTA.secondary,
-  '/industrial':      CTA.secondary,
+  '/pilot':           CTA.primary,
+  '/production':      CTA.secondary,
+  '/enterprise':      CTA.secondary,
   '/calculator':      CTA.secondary,
   '/margin-impact':   CTA.secondary,
   '/board-strategy':  CTA.secondary,

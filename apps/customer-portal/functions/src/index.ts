@@ -244,6 +244,23 @@ export const stripeWebhook = onRequest(
         case "customer.subscription.deleted": {
           const sub = event.data.object as Stripe.Subscription;
           await syncSubscription(stripe, sub.id);
+
+          // Sync org fields when plan changes (upgrade/downgrade)
+          if (event.type === "customer.subscription.updated") {
+            const meta = sub.metadata || {};
+            if (meta.orgId && meta.planId) {
+              const plan = await resolvePlan(meta.planId);
+              if (plan) {
+                await db.collection("orgs").doc(meta.orgId).update({
+                  enabledModules: plan.enabledModules,
+                  supportTier: plan.supportTier,
+                  planId: meta.planId,
+                  licensedBenches: parseInt(meta.licensedBenches || "1", 10),
+                  updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+                });
+              }
+            }
+          }
           break;
         }
 

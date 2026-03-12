@@ -200,7 +200,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight text-txt max-w-4xl"
         >
-          {headline}
+          See Exactly What You&apos;ll Save — Before You Cut.
         </motion.h1>
 
         <motion.p
@@ -209,7 +209,7 @@ export default function Hero() {
           transition={{ duration: 0.55, delay: 0.32 }}
           className="mt-6 text-lg text-muted max-w-2xl leading-relaxed"
         >
-          {subhead}
+          Load your cut list. Get step-by-step guidance. Watch scrap drop and margin rise. Reality Anchors turns your existing fabrication workflow into a measurable money-saving operation.
         </motion.p>
 
         <motion.div
@@ -219,18 +219,18 @@ export default function Hero() {
           className="mt-10 flex flex-wrap gap-4"
         >
           <Link
-            href={ctas.primary.href}
+            href="/calculator/"
             className="px-7 py-4 rounded-lg bg-accent hover:bg-blue-500 text-white font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/25"
             onClick={() => trackEvent('hero_cta_primary', { variant, label: ctas.primary.label })}
           >
-            {ctas.primary.label}
+            Try It On Your Cut List
           </Link>
           <Link
-            href={ctas.secondary.href}
+            href="/margin-impact/"
             className="px-7 py-4 rounded-lg border border-white/25 hover:border-white/50 hover:bg-white/6 text-txt font-semibold transition-all hover:-translate-y-0.5"
             onClick={() => trackEvent('hero_cta_secondary', { variant, label: ctas.secondary.label })}
           >
-            {ctas.secondary.label}
+            Will This Save Me Money?
           </Link>
         </motion.div>
 

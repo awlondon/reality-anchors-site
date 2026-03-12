@@ -50,9 +50,19 @@ export default function Metrics() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-12 text-center"
+          className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3 text-center"
         >
           Design Targets
+        </motion.p>
+
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="text-sm text-muted mb-12 text-center"
+        >
+          Every metric verified against actual production data — not projections.
         </motion.p>
 
         <motion.div

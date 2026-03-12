@@ -7,6 +7,7 @@ import Features from '@/components/Features';
 import Metrics from '@/components/Metrics';
 import AdaptiveNarrative from '@/components/AdaptiveNarrative';
 import Tiers from '@/components/Tiers';
+import FeatureMatrix from '@/components/FeatureMatrix';
 import LeadForm from '@/components/LeadForm';
 import Footer from '@/components/Footer';
 import ErrorBoundary from '@/components/ErrorBoundary';
@@ -70,6 +71,7 @@ export default async function Home() {
       )}
       <Metrics />
       <Tiers />
+      <FeatureMatrix />
       {testimonials[3] && (
         <TestimonialBreak
           id={testimonials[3].id}

@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import PhotoBackground from '@/components/PhotoBackground';
-import TestimonialBreak from '@/components/TestimonialBreak';
-import { getTestimonialsForPage } from '@/data/testimonials';
+// TODO: Re-enable with real testimonials
+// import TestimonialBreak from '@/components/TestimonialBreak';
+// import { getTestimonialsForPage } from '@/data/testimonials';
 import { EbitdaWaterfall, ArrRamp, ScrapSensitivity } from './Charts';
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-const testimonial = getTestimonialsForPage('board-strategy')[0]!;
+// const testimonial = getTestimonialsForPage('board-strategy')[0]!;
 
 export default function BoardStrategyPage() {
   return (
@@ -131,13 +132,7 @@ export default function BoardStrategyPage() {
           </p>
         </section>
 
-        <TestimonialBreak
-          id={testimonial.id}
-          quote={testimonial.quote}
-          attribution={testimonial.attribution}
-          company={testimonial.company}
-          backgroundSrc={testimonial.backgroundSrc}
-        />
+        {/* TODO: Re-enable with real testimonials */}
 
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">SaaS Pricing Capture Strategy (Value Extraction Range)</h2>

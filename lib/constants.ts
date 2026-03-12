@@ -5,6 +5,13 @@
  * finance, and calculator components. Changing a value here propagates everywhere.
  */
 
+// ── Site-Wide CTAs ──────────────────────────────────────────────────────
+/** Canonical CTA labels used across all pages and components. */
+export const CTA = {
+  primary: { label: 'Get ROI Estimate', href: '/calculator/' },
+  secondary: { label: 'Book Technical Review', href: '/commercial/#contact' },
+} as const;
+
 // ── Conversion Model (conversionModel.ts) ──────────────────────────────
 /** Sigmoid weights for conversion score components */
 export const CONVERSION_WEIGHTS = {

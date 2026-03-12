@@ -72,7 +72,7 @@ export default function CalculatorPage() {
                 Open full EBITDA model
               </Link>
               <Link
-                href="/commercial/#contact"
+                href="/production/#contact"
                 className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all"
               >
                 Request a scoped assessment

@@ -55,7 +55,7 @@ export default function ValueBridge() {
       title: 'Action-Ready Guidance',
       body: 'Your operators stop guessing and start following exact steps for every cut and bend. The result: fewer mistakes, less wasted material, and faster job completion.',
       metric: siteMetrics.valueBridge.governMetric,
-      metricSuffix: 'fabrication errors',
+      metricSuffix: 'error rate target',
     },
     {
       icon: <ValidateIcon />,
@@ -63,7 +63,7 @@ export default function ValueBridge() {
       title: 'In-Process Verification',
       body: 'Every step is verified in real time — before a bad cut becomes scrap. Deviations are caught at the bench, not discovered in the field.',
       metric: siteMetrics.valueBridge.optimizeMetric,
-      metricSuffix: 'max scrap reduction',
+      metricSuffix: 'scrap reduction target',
     },
     {
       icon: <RecordIcon />,
@@ -71,7 +71,7 @@ export default function ValueBridge() {
       title: 'Operational Traceability',
       body: 'Every cut, every check, every decision — logged automatically. Your ERP gets cleaner data. Your auditors get a complete trail. Your team never reconstructs a job history again.',
       metric: siteMetrics.valueBridge.traceMetric,
-      metricSuffix: 'execution accuracy',
+      metricSuffix: 'accuracy target',
     },
   ];
 

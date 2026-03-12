@@ -1,29 +1,30 @@
 import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
-import VideoShowcase from '@/components/VideoShowcase';
-import ValueBridge from '@/components/ValueBridge';
+import ProofStrip from '@/components/ProofStrip';
+import VideoShowcasePlatform from '@/components/VideoShowcasePlatform';
 import HowItWorks from '@/components/HowItWorks';
 import Features from '@/components/Features';
 import Metrics from '@/components/Metrics';
-import AdaptiveNarrative from '@/components/AdaptiveNarrative';
 import Tiers from '@/components/Tiers';
 import FeatureMatrix from '@/components/FeatureMatrix';
 import LeadForm from '@/components/LeadForm';
+import StickyCTA from '@/components/StickyCTA';
 import Footer from '@/components/Footer';
-import ErrorBoundary from '@/components/ErrorBoundary';
-import TestimonialBreak from '@/components/TestimonialBreak';
+// TODO: Re-enable with real testimonials
+// import TestimonialBreak from '@/components/TestimonialBreak';
+import PhotoDivider from '@/components/PhotoDivider';
 import FAQ from '@/components/FAQ';
 import { faqStructuredData } from '@/data/faq';
-import { getRegimes } from '@/lib/getRegimes';
-import { getTestimonialsForPage } from '@/data/testimonials';
+import { getDividersForPage } from '@/data/photoDividers';
+// import { getTestimonialsForPage } from '@/data/testimonials';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
 };
 
 export default async function Home() {
-  const regimes = await getRegimes();
-  const testimonials = getTestimonialsForPage('home');
+  // const testimonials = getTestimonialsForPage('home');
+  const dividers = getDividersForPage('home');
 
   return (
     <main id="main-content" className="snap-y">
@@ -35,7 +36,7 @@ export default async function Home() {
             '@type': 'Organization',
             name: 'Reality Anchors',
             url: 'https://realityanchorsltd.com',
-            description: 'AI-guided validation for steel fabrication teams. Reduce scrap, eliminate rework, and build traceable execution records.',
+            description: 'AI-guided execution validation for industrial fabrication teams. Reduce scrap, eliminate rework, and build traceable execution records across every workcell.',
           }),
         }}
       />
@@ -46,30 +47,13 @@ export default async function Home() {
         }}
       />
       <Hero />
-      <VideoShowcase />
-      {testimonials[0] && (
-        <TestimonialBreak
-          id={testimonials[0].id}
-          quote={testimonials[0].quote}
-          attribution={testimonials[0].attribution}
-          company={testimonials[0].company}
-          backgroundSrc={testimonials[0].backgroundSrc}
-        />
-      )}
-      <ValueBridge />
+      <ProofStrip />
+      <VideoShowcasePlatform />
+      {dividers[0] && <PhotoDivider {...dividers[0]} />}
       <HowItWorks />
       <Features />
-      <AdaptiveNarrative initialRegimes={regimes} />
-      {testimonials[1] && (
-        <TestimonialBreak
-          id={testimonials[1].id}
-          quote={testimonials[1].quote}
-          attribution={testimonials[1].attribution}
-          company={testimonials[1].company}
-          backgroundSrc={testimonials[1].backgroundSrc}
-        />
-      )}
       <Metrics />
+      {dividers[1] && <PhotoDivider {...dividers[1]} />}
       <Tiers />
       <FeatureMatrix />
       {testimonials[3] && (
@@ -83,6 +67,7 @@ export default async function Home() {
       )}
       <FAQ />
       <LeadForm />
+      <StickyCTA />
       <Footer />
     </main>
   );

@@ -7,7 +7,7 @@ import { setCalculatorContext } from '@/lib/calculatorContext';
 import { trackEvent } from '@/lib/analytics';
 import { disclaimers } from '@/data/disclaimers';
 
-// Conservative fixed assumptions matching observed median deployment outcomes.
+// Conservative fixed assumptions for illustrative estimates.
 // Users who want to tune these can use the full model at /margin-impact/.
 const FIXED = {
   scrapReductionPts: 1.5,
@@ -70,7 +70,7 @@ function ResultRow({ label, value, highlight = false }: { label: string; value: 
   return (
     <div className={`flex items-center justify-between py-3 border-b border-line last:border-0 ${highlight ? 'py-4' : ''}`}>
       <span className={`text-sm ${highlight ? 'font-semibold text-txt' : 'text-muted'}`}>{label}</span>
-      <span className={`font-mono tabular-nums ${highlight ? 'text-xl font-bold text-white' : 'text-sm text-white/90'}`}>
+      <span className={`font-mono tabular-nums ${highlight ? 'text-xl font-bold text-accent-2' : 'text-sm text-txt'}`}>
         {value}
       </span>
     </div>
@@ -160,8 +160,10 @@ export default function QuickEstimateCalculator() {
         Hides interactive UI and shows the print-only branded artifact.
       */}
       <style>{`
+        [data-print] { display: none; }
         @media print {
           body * { visibility: hidden !important; }
+          [data-print] { display: block !important; }
           [data-print], [data-print] * { visibility: visible !important; }
           [data-print] { position: fixed; inset: 0; padding: 2.5cm; background: white; }
           [data-no-print] { display: none !important; }
@@ -190,7 +192,7 @@ export default function QuickEstimateCalculator() {
                   ['Annual tonnage', `${formatNumber(tons, { maximumFractionDigits: 0 })} t`],
                   ['Current scrap rate', `${scrapRate.toFixed(1)}%`],
                   ['Material cost per ton', formatUSD(costPerTon, { maximumFractionDigits: 0 })],
-                  ['Assumed scrap reduction', '1.5 pts (observed median)'],
+                  ['Assumed scrap reduction', '1.5 pts (conservative model)'],
                 ] as [string, string][]).map(([k, v]) => (
                   <tr key={k} style={{ borderBottom: '1px solid #f1f5f9' }}>
                     <td style={{ padding: '0.4rem 0', color: '#64748b' }}>{k}</td>
@@ -224,21 +226,11 @@ export default function QuickEstimateCalculator() {
           </div>
 
           <div style={{ marginBottom: '1.5rem' }}>
-            <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#94a3b8', marginBottom: '0.75rem' }}>Indicative Platform Investment</div>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
-              <tbody>
-                {([
-                  ['Low friction', formatUSD(results?.pricing.lowFrictionAnnual ?? 0)],
-                  ['Base', formatUSD(results?.pricing.baseAnnual ?? 0)],
-                  ['Full deployment', formatUSD(results?.pricing.aggressiveAnnual ?? 0)],
-                ] as [string, string][]).map(([k, v]) => (
-                  <tr key={k} style={{ borderBottom: '1px solid #f1f5f9' }}>
-                    <td style={{ padding: '0.4rem 0', color: '#64748b' }}>{k}</td>
-                    <td style={{ padding: '0.4rem 0', textAlign: 'right' }}>{v} / yr</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#94a3b8', marginBottom: '0.75rem' }}>Estimated Return on Platform Investment</div>
+            <div style={{ fontSize: '0.85rem', color: '#64748b' }}>
+              Up to {Math.max(1, Math.round(totalEbitda / 14_400))}x return on platform investment (based on entry-level annual cost).
+              See <span style={{ color: '#2563eb' }}>realityanchorsltd.com/production</span> for tier details.
+            </div>
           </div>
 
           <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '2rem', paddingTop: '1rem', borderTop: '1px solid #e2e8f0' }}>
@@ -282,7 +274,7 @@ export default function QuickEstimateCalculator() {
             format={(v) => formatUSD(v, { maximumFractionDigits: 0 })}
           />
           <p className="text-xs text-muted/70 border-t border-line pt-4">
-            Assumes a 1.5-point scrap reduction — the observed median across deployments. Labor,
+            Assumes a 1.5-point scrap reduction based on conservative modeling. Labor,
             throughput, and oversight inputs are set to conservative defaults.
           </p>
         </div>
@@ -321,19 +313,21 @@ export default function QuickEstimateCalculator() {
             <ResultRow label="Total EBITDA impact" value={formatUSD(totalEbitda)} highlight />
           </div>
 
-          <div className="mt-6 pt-5 border-t border-line grid grid-cols-3 gap-3 text-center">
-            {[
-              { label: 'Low friction', value: results?.pricing.lowFrictionAnnual ?? 0 },
-              { label: 'Base', value: results?.pricing.baseAnnual ?? 0 },
-              { label: 'Full deploy', value: results?.pricing.aggressiveAnnual ?? 0 },
-            ].map(({ label, value }) => (
-              <div key={label} className="border border-line rounded-lg px-3 py-2.5">
-                <div className="text-[10px] text-muted uppercase tracking-wide mb-1">{label}</div>
-                <div className="font-mono text-sm text-white/90">{formatUSD(value)} / yr</div>
+          <div className="mt-6 pt-5 border-t border-line text-center">
+            <div className="border border-line rounded-lg px-4 py-4 inline-block">
+              <div className="text-[10px] text-muted uppercase tracking-wide mb-1">Estimated ROI</div>
+              <div className="font-mono text-lg font-bold text-accent-2">
+                Up to {Math.max(1, Math.round(totalEbitda / 14_400))}x
               </div>
-            ))}
+              <div className="text-[10px] text-muted mt-1">return on platform investment</div>
+            </div>
+            <p className="text-[10px] text-muted mt-3">
+              Based on entry-level annual cost.{' '}
+              <Link href="/production/" className="text-accent hover:underline">
+                See recommended tier →
+              </Link>
+            </p>
           </div>
-          <p className="text-[10px] text-muted mt-3 text-center">Indicative platform investment range</p>
         </div>
 
         {/* CTAs */}
@@ -346,7 +340,7 @@ export default function QuickEstimateCalculator() {
             Build full EBITDA model →
           </Link>
           <Link
-            href="/commercial/#contact"
+            href="/production/#contact"
             className="flex-1 text-center px-5 py-3 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px hover:shadow-lg hover:shadow-accent/25"
             onClick={() => trackEvent('calculator_request_consult', { estimatedEbitda: Math.round(totalEbitda) })}
           >

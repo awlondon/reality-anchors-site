@@ -5,12 +5,14 @@ import Link from 'next/link';
 import PhotoBackground from '@/components/PhotoBackground';
 import { trackEvent } from '@/lib/analytics';
 import { stagger, fadeUp } from '@/lib/motion';
+import { CTA } from '@/lib/constants';
 
 const steps = [
   {
     number: '01',
     title: 'Import',
     description: 'Load cut lists from existing schedules, manual entry, or photo import with OCR assist. No special file format required.',
+    outcome: 'This is where your existing cut list becomes a money-saving plan.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -23,6 +25,7 @@ const steps = [
     number: '02',
     title: 'Guide',
     description: 'Operators follow step-by-step instructions with hold points, counters, and machine-specific parameters.',
+    outcome: 'This is where operators stop second-guessing and start saving material.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -34,6 +37,7 @@ const steps = [
     number: '03',
     title: 'Validate',
     description: 'Each step is verified against live job context. Deviations are caught before they become scrap, rework, or delays.',
+    outcome: 'This is where you catch the mistake that would have cost you a re-order.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -46,6 +50,7 @@ const steps = [
     number: '04',
     title: 'Record',
     description: 'Every action is logged with timestamps, operator ID, and machine profiles. Export for audits, QA, or ERP feedback.',
+    outcome: 'This is where every dollar saved becomes provable.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -108,8 +113,25 @@ export default function HowItWorks() {
               <p className="text-sm text-muted leading-relaxed flex-1">
                 {step.description}
               </p>
+              <p className="text-xs text-accent/80 italic mt-1">
+                {step.outcome}
+              </p>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Risk reversal — from FieldProof */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="mt-8 max-w-xl mx-auto border border-line/70 bg-card/50 backdrop-blur-sm rounded-xl px-5 py-4 text-center"
+        >
+          <p className="text-sm font-semibold text-txt mb-1">Assists the bench. Doesn&apos;t control it.</p>
+          <p className="text-xs text-muted leading-relaxed">
+            Operators confirm every step. The system validates&nbsp;&mdash; it doesn&apos;t override.
+          </p>
         </motion.div>
 
         <motion.div
@@ -117,14 +139,14 @@ export default function HowItWorks() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="mt-10 text-center"
+          className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
           <Link
-            href="/calculator/"
+            href={CTA.primary.href}
             className="inline-flex px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px"
             onClick={() => trackEvent('how_it_works_cta')}
           >
-            Try the Quick Estimate →
+            See It Work On Your Cut List →
           </Link>
         </motion.div>
       </div>

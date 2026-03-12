@@ -176,7 +176,7 @@ export default function AccessGate({ children }: { children: ReactNode }) {
         <p className="text-sm text-muted mb-6">Enter the access code to continue.</p>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
-            type="text"
+            type="password"
             value={code}
             onChange={(e) => {
               setCode(e.target.value);

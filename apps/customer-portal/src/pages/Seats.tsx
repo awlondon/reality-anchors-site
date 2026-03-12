@@ -33,7 +33,7 @@ export default function Seats() {
       setAssignModal(null);
       setAssignEmail('');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to assign seat');
+      setError(err instanceof Error ? err.message : 'Failed to assign bench');
     } finally {
       setActionLoading(null);
     }
@@ -45,7 +45,7 @@ export default function Seats() {
     try {
       await releaseSeat({ seatId });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to release seat');
+      setError(err instanceof Error ? err.message : 'Failed to release bench');
     } finally {
       setActionLoading(null);
     }
@@ -63,7 +63,7 @@ export default function Seats() {
       }
       setBuyCount('');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update seat count');
+      setError(err instanceof Error ? err.message : 'Failed to update bench count');
     } finally {
       setActionLoading(null);
     }
@@ -79,7 +79,7 @@ export default function Seats() {
   return (
     <>
       <PageHeader
-        title="Seat Management"
+        title="Bench Management"
         description={`${activeCount} active / ${availableCount} available / ${licensedCount} licensed`}
         action={
           <div className="flex items-center gap-2">
@@ -97,7 +97,7 @@ export default function Seats() {
               loading={actionLoading === 'buy'}
               disabled={!buyCount}
             >
-              Add Seats
+              Add Benches
             </Button>
           </div>
         }
@@ -106,7 +106,7 @@ export default function Seats() {
       {error && <p className="text-danger text-sm mb-4">{error}</p>}
 
       {seats.length === 0 ? (
-        <EmptyState title="No seats configured" description="Seats are provisioned when your subscription is created." />
+        <EmptyState title="No benches configured" description="Benches are provisioned when your subscription is created." />
       ) : (
         <div className="space-y-3">
           {seats.map((seat) => (
@@ -114,7 +114,7 @@ export default function Seats() {
               <div className="flex items-center gap-4">
                 <div>
                   <p className="text-txt font-medium">
-                    {seat.seatId ? `Seat ${seat.id.slice(0, 6)}` : seat.id.slice(0, 8)}
+                    {seat.seatId ? `Bench ${seat.id.slice(0, 6)}` : seat.id.slice(0, 8)}
                   </p>
                   {seat.assignedEmail && (
                     <p className="text-muted text-sm">{seat.assignedEmail}</p>
@@ -169,7 +169,7 @@ export default function Seats() {
         </div>
       )}
 
-      <NotesPanel context="seats" title="Seat Notes" />
+      <NotesPanel context="seats" title="Bench Notes" />
     </>
   );
 }

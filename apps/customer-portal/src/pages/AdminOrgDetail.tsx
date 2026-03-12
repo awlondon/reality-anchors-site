@@ -60,7 +60,7 @@ export default function AdminOrgDetail() {
   if (activeSub?.cancelAtPeriodEnd) alerts.push('Subscription set to cancel at period end');
   const licensedSeats = activeSub?.licensedBenches ?? 0;
   if (licensedSeats > 0 && activeSeatCount / licensedSeats < 0.5) {
-    alerts.push(`Low seat utilization: ${activeSeatCount}/${licensedSeats} seats active`);
+    alerts.push(`Low bench utilization: ${activeSeatCount}/${licensedSeats} benches active`);
   }
   const pendingContracts = contracts.filter((c) => c.status === 'pending');
   if (pendingContracts.length > 0) alerts.push(`${pendingContracts.length} contract(s) pending signature`);
@@ -91,7 +91,7 @@ export default function AdminOrgDetail() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <KpiCard label="Total Bends (30d)" value={totalBends.toLocaleString()} />
         <KpiCard label="Accuracy" value={accuracy} unit="%" />
-        <KpiCard label="Active Seats" value={`${activeSeatCount} / ${licensedSeats}`} />
+        <KpiCard label="Active Benches" value={`${activeSeatCount} / ${licensedSeats}`} />
         <KpiCard
           label="Subscription"
           value={activeSub?.status ?? 'None'}
@@ -120,15 +120,15 @@ export default function AdminOrgDetail() {
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Seats */}
         <Card>
-          <h3 className="text-sm font-medium text-muted mb-4">Seats ({seats.length})</h3>
+          <h3 className="text-sm font-medium text-muted mb-4">Benches ({seats.length})</h3>
           {seats.length === 0 ? (
-            <p className="text-muted/60 text-sm">No seats configured</p>
+            <p className="text-muted/60 text-sm">No benches configured</p>
           ) : (
             <div className="space-y-2 max-h-64 overflow-y-auto">
               {seats.map((seat) => (
                 <div key={seat.id} className="flex items-center justify-between text-sm py-1.5 border-b border-line/30 last:border-0">
                   <div>
-                    <span className="text-txt">Seat {seat.id.slice(0, 6)}</span>
+                    <span className="text-txt">Bench {seat.id.slice(0, 6)}</span>
                     {seat.assignedEmail && (
                       <span className="text-muted ml-2">{seat.assignedEmail}</span>
                     )}

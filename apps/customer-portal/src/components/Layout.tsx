@@ -6,7 +6,7 @@ const navItems = [
   { to: '/', label: 'Dashboard', icon: '⊞' },
   { to: '/subscription', label: 'Subscription', icon: '◈' },
   { to: '/billing', label: 'Billing', icon: '▤' },
-  { to: '/seats', label: 'Seats', icon: '◉' },
+  { to: '/seats', label: 'Benches', icon: '◉' },
   { to: '/contracts', label: 'Contracts', icon: '▧' },
 ];
 

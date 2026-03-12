@@ -66,7 +66,7 @@ export default function Dashboard() {
           unit="%"
         />
         <KpiCard
-          label="Active Seats"
+          label="Active Benches"
           value={kpis?.activeSeats ?? '—'}
         />
         <KpiCard

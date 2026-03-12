@@ -17,6 +17,7 @@ export interface PlanTier {
 
   // Stripe
   stripePriceId: string;
+  perSeatPriceId: string;
 
   // Pricing — portal displays monthly, Flutter app uses annual
   pricePerSeat: number; // monthly per-bench price
@@ -44,16 +45,17 @@ const FALLBACK_PLANS: PlanTier[] = [
     description: "Ideal for evaluation and small-scale deployment",
     active: true,
     stripePriceId: "",
+    perSeatPriceId: "",
     pricePerSeat: 1200,
     annualPriceUsd: 14400,
-    includedActions: 15000,
-    overagePerAction: 0.03,
+    includedActions: 0,
+    overagePerAction: 0,
     features: [
       "AR-guided execution overlay",
       "Daily usage dashboards",
       "Email support (48h SLA)",
     ],
-    enabledModules: ["ar_overlay", "usage_dashboard"],
+    enabledModules: ["ar_execution", "daily_dashboards"],
     supportTier: "standard",
     baseSeats: 1,
     recommended: false,
@@ -64,17 +66,18 @@ const FALLBACK_PLANS: PlanTier[] = [
     description: "For production fabrication teams running daily",
     active: true,
     stripePriceId: "",
+    perSeatPriceId: "",
     pricePerSeat: 3200,
     annualPriceUsd: 38400,
-    includedActions: 20000,
-    overagePerAction: 0.025,
+    includedActions: 0,
+    overagePerAction: 0,
     features: [
       "Everything in Pilot",
       "Advanced analytics & QA scoring",
       "Priority support (24h SLA)",
       "Custom calibration profiles",
     ],
-    enabledModules: ["ar_overlay", "usage_dashboard", "analytics", "qa_scoring", "calibration"],
+    enabledModules: ["ar_execution", "daily_dashboards", "analytics_qa", "custom_calibration"],
     supportTier: "premium",
     baseSeats: 1,
     recommended: true,
@@ -85,10 +88,11 @@ const FALLBACK_PLANS: PlanTier[] = [
     description: "Full platform with compliance, audit trails & dedicated support",
     active: true,
     stripePriceId: "",
+    perSeatPriceId: "",
     pricePerSeat: 4800,
     annualPriceUsd: 57600,
-    includedActions: 30000,
-    overagePerAction: 0.02,
+    includedActions: 0,
+    overagePerAction: 0,
     features: [
       "Everything in Production",
       "Compliance evidence export",
@@ -97,10 +101,10 @@ const FALLBACK_PLANS: PlanTier[] = [
       "SLA-backed uptime guarantee",
     ],
     enabledModules: [
-      "ar_overlay", "usage_dashboard", "analytics", "qa_scoring",
-      "calibration", "compliance", "audit_trails",
+      "ar_execution", "daily_dashboards", "analytics_qa", "custom_calibration",
+      "compliance_export", "audit_trails",
     ],
-    supportTier: "dedicated",
+    supportTier: "enterprise",
     baseSeats: 1,
     recommended: false,
   },
@@ -153,6 +157,7 @@ function parsePlanTier(planId: string, raw: Record<string, unknown>): PlanTier {
     description: (raw.description as string) || "",
     active: raw.active !== false,
     stripePriceId: (raw.stripePriceId as string) || "",
+    perSeatPriceId: (raw.perSeatPriceId as string) || "",
     pricePerSeat: (raw.pricePerSeat as number) || 0,
     annualPriceUsd: (raw.annualPriceUsd as number) || 0,
     includedActions: (raw.includedActions as number) || 0,

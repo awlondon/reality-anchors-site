@@ -9,50 +9,52 @@ import { stagger, fadeUp } from '@/lib/motion';
 const steps = [
   {
     number: '01',
-    title: 'Import',
-    description: 'Load cut lists from existing schedules, manual entry, or photo import with OCR assist. No special file format required.',
+    title: 'One Camera',
+    description: 'Start with a single reference camera and known bar sizes. Declare the facts, capture structured data, and get deterministic validation from day one.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
-        <path d="M14 26V14h12v12H14z" stroke="#2e7deb" strokeWidth="1.5" strokeLinejoin="round" />
-        <path d="M20 18v4m0 0l-2-2m2 2l2-2" stroke="#2e7deb" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="12" y="14" width="16" height="12" rx="2" stroke="#2e7deb" strokeWidth="1.5" />
+        <circle cx="20" cy="20" r="3" stroke="#2e7deb" strokeWidth="1.3" />
       </svg>
     ),
   },
   {
     number: '02',
-    title: 'Guide',
-    description: 'Operators follow step-by-step instructions with hold points, counters, and machine-specific parameters.',
+    title: 'Add Context',
+    description: 'Bring a second camera for wider context or coverage. Mixed device types work together — reference, context, and standard cameras in one fleet.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
-        <path d="M12 20l5.5 5.5L30 13" stroke="#2e7deb" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="10" y="15" width="10" height="8" rx="1.5" stroke="#2e7deb" strokeWidth="1.3" />
+        <rect x="22" y="13" width="10" height="8" rx="1.5" stroke="#2e7deb" strokeWidth="1.3" />
+        <path d="M20 26l-3-3m3 3l3-3" stroke="#2e7deb" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
     ),
   },
   {
     number: '03',
-    title: 'Validate',
-    description: 'Each step is verified against live job context. Deviations are caught before they become scrap, rework, or delays.',
+    title: 'Precision Depth',
+    description: 'When you need sub-millimetre accuracy, add a LiDAR-equipped device. Precision depth is a premium upgrade — not required for every setup.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
-        <path d="M20 12v8l4 4" stroke="#2e7deb" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="20" cy="20" r="8" stroke="#2e7deb" strokeWidth="1.3" />
+        <circle cx="20" cy="20" r="4" stroke="#2e7deb" strokeWidth="1.3" />
+        <circle cx="20" cy="20" r="7" stroke="#2e7deb" strokeWidth="0.8" strokeDasharray="3 3" />
+        <circle cx="20" cy="20" r="10" stroke="#2e7deb" strokeWidth="0.6" strokeDasharray="2 4" />
       </svg>
     ),
   },
   {
     number: '04',
-    title: 'Record',
-    description: 'Every action is logged with timestamps, operator ID, and machine profiles. Export for audits, QA, or ERP feedback.',
+    title: 'Train & Improve',
+    description: 'Every capture feeds the learning loop. Upload structured data, train models on verified outcomes, and improve accuracy with each cycle.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
-        <rect x="13" y="10" width="14" height="20" rx="2" stroke="#2e7deb" strokeWidth="1.5" />
-        <line x1="17" y1="16" x2="23" y2="16" stroke="#2e7deb" strokeWidth="1.2" strokeLinecap="round" />
-        <line x1="17" y1="20" x2="23" y2="20" stroke="#2e7deb" strokeWidth="1.2" strokeLinecap="round" />
-        <line x1="17" y1="24" x2="21" y2="24" stroke="#2e7deb" strokeWidth="1.2" strokeLinecap="round" />
+        <path d="M14 20a6 6 0 0 1 6-6m6 6a6 6 0 0 1-6 6" stroke="#2e7deb" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M20 14l2 -2m-2 2l-2-2" stroke="#2e7deb" strokeWidth="1.2" strokeLinecap="round" />
+        <path d="M20 26l2 2m-2-2l-2 2" stroke="#2e7deb" strokeWidth="1.2" strokeLinecap="round" />
       </svg>
     ),
   },
@@ -70,12 +72,12 @@ export default function HowItWorks() {
           variants={fadeUp}
           className="mb-14"
         >
-          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">How It Works</p>
+          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">The Capability Ladder</p>
           <h2 className="text-3xl md:text-4xl font-semibold text-txt max-w-lg leading-tight">
-            Four steps from job list to audit-ready record
+            Start simple. Add capability as you need it.
           </h2>
           <p className="mt-3 text-muted max-w-xl">
-            No complex integrations required. Start with manual entry and scale into automated workflows as your operation grows.
+            Begin with one camera and known facts. Scale to mixed fleets and LiDAR precision when your operation demands it.
           </p>
         </motion.div>
 

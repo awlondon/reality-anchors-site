@@ -163,7 +163,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-xs font-bold tracking-[0.2em] uppercase text-muted mb-4"
         >
-          AI for Steel Fabrication
+          Deterministic Capture for Steel Fabrication
         </motion.p>
 
         <motion.h1
@@ -172,7 +172,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight text-txt max-w-4xl"
         >
-          Every Cut Measured. Every Bend Verified. Every Ton Accounted For.
+          Start From What You Know. Capture Structured Data. Learn Faster.
         </motion.h1>
 
         <motion.p
@@ -181,7 +181,7 @@ export default function Hero() {
           transition={{ duration: 0.55, delay: 0.32 }}
           className="mt-6 text-lg text-muted max-w-2xl leading-relaxed"
         >
-          AI-guided validation that reduces scrap, eliminates rework, and turns material waste into margin. Built for fabrication yards that run on specifications, not guesswork.
+          The system starts from known bar sizes and structured capture — not guesswork. Use your own cameras, add LiDAR when you need precision, and let the software turn every capture into a faster learning cycle.
         </motion.p>
 
         <motion.div

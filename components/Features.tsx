@@ -85,10 +85,10 @@ export default function Features() {
         >
           <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">What It Covers</p>
           <h2 className="text-3xl md:text-4xl font-semibold text-txt max-w-3xl leading-tight">
-            From bench execution to fleet-wide oversight
+            Less repetitive setup. Faster data collection. Mixed hardware that just works.
           </h2>
           <p className="mt-4 text-muted max-w-2xl">
-            Reality Anchors works alongside your detailing and ERP systems — turning plans into verified outcomes on the shop floor.
+            Reality Anchors eliminates the busywork of configuring every camera and re-entering known facts. Declare once, capture everywhere, and let the system handle orchestration across whatever hardware you bring.
           </p>
         </motion.div>
 

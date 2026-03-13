@@ -12,8 +12,9 @@ const tiers = [
     href: '/personal/',
     price: '$49–$349/mo',
     badge: 'Basic',
-    desc: 'Step-by-step guidance for solo operators and small crews. Works offline, supports 1–8 seats, and upgrades cleanly into commercial plans.',
-    tags: ['Execution guidance', 'Offline-first', '1–8 seats'],
+    desc: 'One camera included. Structured capture and deterministic validation for solo operators and small crews. Works offline, supports 1–8 seats.',
+    tags: ['1 camera included', 'Offline-first', '1–8 seats'],
+    includes: 'Includes base storage. Overage billed per GB.',
     cta: 'Explore Personal',
   },
   {
@@ -21,8 +22,9 @@ const tiers = [
     href: '/commercial/',
     price: '$1.5k–$25k/yr',
     badge: 'Pro',
-    desc: 'Full execution validation for fabrication yards. Cuts scrap, verifies every step at the bench, and feeds clean data back to your planning tools.',
-    tags: ['Bench execution', 'Scrap reduction', 'Audit logs'],
+    desc: 'Mixed camera fleet support with reference, context, and depth devices. Bring your own compatible cameras — we handle orchestration, metadata, and cloud workflow.',
+    tags: ['Mixed fleet', 'Cloud workflow', 'Audit logs'],
+    includes: 'Multiple cameras included. Higher storage tiers available.',
     cta: 'Explore Commercial',
     highlight: true,
   },
@@ -31,8 +33,9 @@ const tiers = [
     href: '/industrial/',
     price: 'Custom agreement',
     badge: 'Advanced',
-    desc: 'Standardized execution across high-volume plants. ERP integration, machine calibration governance, and compliance-grade traceability built in.',
-    tags: ['Throughput', 'ERP integration', 'Traceability'],
+    desc: 'Full fleet orchestration with optional LiDAR-enhanced precision depth. ERP integration, traceability, and advanced safety capabilities available as add-ons.',
+    tags: ['LiDAR add-on', 'ERP integration', 'Traceability'],
+    includes: 'Custom camera and storage allocation.',
     cta: 'Explore Industrial',
   },
 ];
@@ -54,7 +57,7 @@ export default function Tiers() {
             Scope that fits the operation
           </h2>
           <p className="mt-3 text-muted max-w-xl">
-            From a single bench to an enterprise fleet. Pricing scales with the value delivered, not the number of features turned on.
+            Start with one camera, scale to a mixed fleet. Pricing includes base cameras and storage — add more devices or LiDAR precision as your operation grows.
           </p>
         </motion.div>
 
@@ -89,6 +92,12 @@ export default function Tiers() {
               </div>
 
               <p className="text-muted text-sm leading-relaxed flex-1">{t.desc}</p>
+
+              {t.includes && (
+                <p className="text-xs text-accent-2 font-medium border border-accent/20 rounded-lg px-3 py-2 bg-accent/5">
+                  {t.includes}
+                </p>
+              )}
 
               <div className="flex flex-wrap gap-2">
                 {t.tags.map((tag) => (

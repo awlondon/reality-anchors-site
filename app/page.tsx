@@ -6,6 +6,7 @@ import HowItWorks from '@/components/HowItWorks';
 import Features from '@/components/Features';
 import Metrics from '@/components/Metrics';
 import AdaptiveNarrative from '@/components/AdaptiveNarrative';
+import CaptureLoop from '@/components/CaptureLoop';
 import Tiers from '@/components/Tiers';
 import LeadForm from '@/components/LeadForm';
 import Footer from '@/components/Footer';
@@ -34,7 +35,7 @@ export default async function Home() {
             '@type': 'Organization',
             name: 'Reality Anchors',
             url: 'https://realityanchorsltd.com',
-            description: 'AI-guided validation for steel fabrication teams. Reduce scrap, eliminate rework, and build traceable execution records.',
+            description: 'Deterministic capture and structured validation for steel fabrication. Mixed camera fleets, customer-supplied hardware, and AI-driven learning loops that improve with every capture.',
           }),
         }}
       />
@@ -69,6 +70,7 @@ export default async function Home() {
         />
       )}
       <Metrics />
+      <CaptureLoop />
       <Tiers />
       {testimonials[3] && (
         <TestimonialBreak

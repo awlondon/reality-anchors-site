@@ -1,8 +1,8 @@
 {
   "hero": [
-    { "value": "1.8 pts", "label": "Scrap reduction" },
-    { "value": "4.2s", "label": "Cut-plan generation" },
-    { "value": "0.7%", "label": "Fabrication error rate" },
+    { "value": "1 cam", "label": "Baseline setup" },
+    { "value": "3 types", "label": "Mixed fleet support" },
+    { "value": "4.2s", "label": "Capture-to-plan" },
     { "value": "97.4%", "label": "Offline uptime" }
   ],
   "measuredOutcomes": [

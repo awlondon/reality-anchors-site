@@ -10,7 +10,7 @@ export const faqs: FAQItem[] = [
   },
   {
     question: 'What hardware or infrastructure is required?',
-    answer: 'Reality Anchors runs on standard tablets and laptops — no specialised hardware required. The platform works offline-first and syncs when connected. For industrial environments, we support integration with existing ERP and QA systems through structured data exports.',
+    answer: 'Bring your own compatible cameras — Reality Anchors provides the software orchestration, metadata tagging, and cloud workflow. The platform supports mixed fleets of reference, context, and depth devices. LiDAR-equipped cameras are optional and only needed when you require precision depth. The system works offline-first and syncs when connected.',
   },
   {
     question: 'How does it integrate with our existing ERP or detailing software?',
@@ -27,6 +27,14 @@ export const faqs: FAQItem[] = [
   {
     question: 'How are savings measured?',
     answer: 'We use published industry scrap rates as baselines — not self-reported numbers — and apply conservative reduction targets. All savings metrics (scrap, rework, throughput) are measured through the platform\'s own logged data, not estimates.',
+  },
+  {
+    question: 'Do I need LiDAR?',
+    answer: 'No. LiDAR is entirely optional. Most setups work with standard cameras that capture reference and context data. LiDAR-equipped devices add precision depth measurement when your workflow demands sub-millimetre accuracy — for example, verifying rebar spacing or confirming bend angles to tight tolerances. If you do not need that level of precision, a standard camera fleet is all you need.',
+  },
+  {
+    question: 'How many cameras are included?',
+    answer: 'Each plan includes a base number of cameras and a storage allocation. Personal plans include one camera with base storage. Commercial plans support multiple cameras across a mixed fleet with higher storage tiers available. Industrial agreements include custom camera and storage allocations. If you add more cameras or exceed your storage tier, overage is billed transparently — you always know what you are paying for and why.',
   },
 ];
 

@@ -2,18 +2,18 @@
   {
     "id": "structural-fabrication",
     "title": "Structural Fabrication",
-    "description": "Real-time fabrication guidance for lower scrap, consistent quality, and smoother bench execution.",
+    "description": "Real-time fabrication guidance targeting lower scrap, consistent quality, and smoother bench execution.",
     "image": "/assets/regimes/structural-fabrication.svg",
     "tier": "Core",
     "learnMoreHref": "/regimes/structural-fabrication",
     "metrics": [
       {
-        "label": "Scrap \u0394",
-        "value": "1.8 pts median"
+        "label": "Scrap \u0394 target",
+        "value": "Up to 1.8 pts"
       },
       {
-        "label": "Fabrication errors",
-        "value": "0.7%"
+        "label": "Error rate target",
+        "value": "< 0.7%"
       },
       {
         "label": "Plan time",
@@ -39,28 +39,29 @@
       "confirm",
       "report"
     ],
-    "roi": "Average monthly material impact observed: 6\u201310 tons recovered per 200-ton shop.",
-    "animationPreset": "fadeUp"
+    "roi": "Modeled monthly material impact: up to 6\u201310 tons recoverable per 200-ton shop.",
+    "animationPreset": "fadeUp",
+    "workcellIds": ["rebar-cut-bend"]
   },
   {
     "id": "multi-project-optimization",
     "title": "Multi-Project Optimization",
-    "description": "Plan across multiple jobs to improve material reuse, reduce over-ordering, and simplify scheduling.",
+    "description": "Plan across multiple jobs to target improved material reuse, reduced over-ordering, and simpler scheduling.",
     "image": "/assets/regimes/multi-project-optimization.svg",
     "tier": "Pro",
     "learnMoreHref": "/regimes/multi-project-optimization",
     "metrics": [
       {
-        "label": "Reuse uplift",
-        "value": "23%"
+        "label": "Reuse uplift target",
+        "value": "Up to 23%"
       },
       {
-        "label": "Planner hours",
-        "value": "-7.4 h/week"
+        "label": "Planner hours target",
+        "value": "Up to -7 h/week"
       },
       {
-        "label": "Stock-outs",
-        "value": "-18%"
+        "label": "Stock-out target",
+        "value": "Up to -18%"
       }
     ],
     "anchors": [
@@ -82,8 +83,9 @@
       "confirm",
       "report"
     ],
-    "roi": "Observed planning compression: 4\u201312 hours per week with lower material over-ordering.",
-    "animationPreset": "slideIn"
+    "roi": "Modeled planning compression: up to 4\u201312 hours per week with lower material over-ordering.",
+    "animationPreset": "slideIn",
+    "workcellIds": ["rebar-cut-bend"]
   },
   {
     "id": "machine-calibration",
@@ -94,7 +96,7 @@
     "learnMoreHref": "/regimes/machine-calibration",
     "metrics": [
       {
-        "label": "Drift band",
+        "label": "Drift band target",
         "value": "\u00b10.2\u00b0"
       },
       {
@@ -102,8 +104,8 @@
         "value": "14 days"
       },
       {
-        "label": "Override rate",
-        "value": "-31%"
+        "label": "Override rate target",
+        "value": "Up to -31%"
       }
     ],
     "anchors": [
@@ -125,8 +127,9 @@
       "confirm",
       "report"
     ],
-    "roi": "Lower drift volatility and fewer corrective reruns during high-throughput shifts.",
-    "animationPreset": "minimal"
+    "roi": "Designed to reduce drift volatility and corrective reruns during high-throughput shifts.",
+    "animationPreset": "minimal",
+    "workcellIds": ["rebar-cut-bend", "plate-press-brake"]
   },
   {
     "id": "fleet-grip",
@@ -137,16 +140,16 @@
     "learnMoreHref": "/regimes/fleet-grip",
     "metrics": [
       {
-        "label": "Slip alerts",
-        "value": "2.1s lead time"
+        "label": "Slip alert target",
+        "value": "< 2.5s lead time"
       },
       {
-        "label": "Surface model precision",
-        "value": "93%"
+        "label": "Surface model target",
+        "value": "> 90%"
       },
       {
-        "label": "Harsh events",
-        "value": "-19%"
+        "label": "Harsh event target",
+        "value": "Up to -19%"
       }
     ],
     "anchors": [
@@ -168,8 +171,9 @@
       "confirm",
       "report"
     ],
-    "roi": "Improves incident prevention and insurance telemetry quality for mixed terrain operations.",
-    "animationPreset": "scaleIn"
+    "roi": "Designed to improve incident prevention and insurance telemetry quality for mixed terrain operations.",
+    "animationPreset": "scaleIn",
+    "workcellIds": []
   },
   {
     "id": "ar-execution",
@@ -180,12 +184,12 @@
     "learnMoreHref": "/regimes/ar-execution",
     "metrics": [
       {
-        "label": "Hands-free steps",
-        "value": "84%"
+        "label": "Hands-free step target",
+        "value": "> 80%"
       },
       {
-        "label": "Tolerance violations",
-        "value": "-27%"
+        "label": "Tolerance violation target",
+        "value": "Up to -27%"
       },
       {
         "label": "Audit capture",
@@ -211,7 +215,8 @@
       "confirm",
       "report"
     ],
-    "roi": "Accelerates onboarding and reduces tolerance misses on complex assemblies."
+    "roi": "Designed to accelerate onboarding and reduce tolerance misses on complex assemblies.",
+    "workcellIds": []
   },
   {
     "id": "ai-governance",
@@ -222,16 +227,16 @@
     "learnMoreHref": "/regimes/ai-governance",
     "metrics": [
       {
-        "label": "Quorum agreement",
-        "value": "96.8%"
+        "label": "Quorum agreement target",
+        "value": "> 96%"
       },
       {
-        "label": "Schema validity",
-        "value": "99.5%"
+        "label": "Schema validity target",
+        "value": "> 99%"
       },
       {
         "label": "Rollback trigger",
-        "value": "<300ms"
+        "value": "< 300ms"
       }
     ],
     "anchors": [
@@ -253,6 +258,7 @@
       "confirm",
       "report"
     ],
-    "roi": "Compliance-grade decision governance for regulated and audit-heavy buyers."
+    "roi": "Designed for compliance-grade decision governance for regulated and audit-heavy buyers.",
+    "workcellIds": []
   }
 ]

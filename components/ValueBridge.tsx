@@ -63,7 +63,7 @@ export default function ValueBridge() {
       title: 'Deterministic Verification',
       body: 'The system starts from known bar sizes and structured capture — not autonomous guesswork. Every capture is checked against declared facts before training begins.',
       metric: siteMetrics.valueBridge.optimizeMetric,
-      metricSuffix: 'max scrap reduction',
+      metricSuffix: 'scrap reduction target',
     },
     {
       icon: <RecordIcon />,
@@ -71,7 +71,7 @@ export default function ValueBridge() {
       title: 'Faster Learning Cycles',
       body: 'Structured capture feeds cleaner data into the training loop. Your models improve with every upload — reducing repetitive setup and speeding data collection across mixed hardware.',
       metric: siteMetrics.valueBridge.traceMetric,
-      metricSuffix: 'execution accuracy',
+      metricSuffix: 'accuracy target',
     },
   ];
 

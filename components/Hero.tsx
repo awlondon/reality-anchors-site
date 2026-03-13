@@ -1,11 +1,16 @@
 'use client';
 
+import { useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { trackEvent } from '@/lib/analytics';
 import { siteMetrics } from '@/lib/siteData';
+import { useExperiment } from '@/components/ExperimentProvider';
+import { HOME_EXPERIMENT } from '@/lib/experiments/config';
+import { CTA } from '@/lib/constants';
+import { disclaimers } from '@/data/disclaimers';
 
 const StructuredFieldBackground = dynamic(
   () => import('@/components/StructuredFieldBackground'),
@@ -17,8 +22,32 @@ const StructuredFieldBackground = dynamic(
   }
 );
 
+const EYEBROW: Record<string, string> = {
+  A: 'Execution Validation Platform',
+  B: 'Fabrication Execution Software',
+  C: 'Execution Intelligence',
+};
+
+const CTA_CONFIG: Record<string, { primary: { label: string; href: string }; secondary: { label: string; href: string } }> = {
+  A: { primary: CTA.primary, secondary: CTA.secondary },
+  B: { primary: CTA.primary, secondary: CTA.secondary },
+  C: { primary: CTA.primary, secondary: CTA.secondary },
+};
+
 export default function Hero() {
   const reduce = useReducedMotion();
+  const { variant } = useExperiment();
+
+  const override = HOME_EXPERIMENT.narrative.heroOverride?.[variant];
+  const headline = override?.headline ?? 'Fewer Miscuts. Less Scrap. Every Bar Tracked.';
+  const subhead = override?.subhead ?? 'Reads your cut lists, applies stretch and bend rules, and generates step-by-step instructions. No hardware changes, works offline.';
+  const eyebrow = EYEBROW[variant] ?? EYEBROW.B;
+  const ctas = CTA_CONFIG[variant] ?? CTA_CONFIG.B;
+  const heroKPIs = siteMetrics.heroVariants?.[variant] ?? siteMetrics.hero;
+
+  useEffect(() => {
+    trackEvent('hero_variant_exposure', { variant, headline: headline.substring(0, 40) });
+  }, [variant, headline]);
 
   const hlsfNodes = [
     'S',
@@ -73,7 +102,7 @@ export default function Hero() {
         src="/images/hero-welding.jpg"
         alt=""
         aria-hidden="true"
-        loading="lazy"
+        loading="eager"
         decoding="async"
         className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity"
       />
@@ -191,20 +220,32 @@ export default function Hero() {
           className="mt-10 flex flex-wrap gap-4"
         >
           <Link
-            href="/commercial/#contact"
+            href="/calculator/"
             className="px-7 py-4 rounded-lg bg-accent hover:bg-blue-500 text-white font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-accent/25"
-            onClick={() => trackEvent('hero_cta_primary')}
+            onClick={() => trackEvent('hero_cta_primary', { variant, label: ctas.primary.label })}
           >
-            See What You Could Save
+            Try It On Your Cut List
           </Link>
           <Link
-            href="/board-strategy/"
+            href="/margin-impact/"
             className="px-7 py-4 rounded-lg border border-white/25 hover:border-white/50 hover:bg-white/6 text-txt font-semibold transition-all hover:-translate-y-0.5"
-            onClick={() => trackEvent('hero_cta_secondary')}
+            onClick={() => trackEvent('hero_cta_secondary', { variant, label: ctas.secondary.label })}
           >
-            Read the Strategic Case
+            Will This Save Me Money?
           </Link>
         </motion.div>
+
+        <motion.p
+          initial={reduce ? {} : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.54 }}
+          className="mt-6 text-xs text-muted/80 flex items-center gap-2"
+        >
+          <svg className="w-3.5 h-3.5 text-accent/70 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+          </svg>
+          Operators confirm every step. No changes to existing machines. Works offline.
+        </motion.p>
 
         {/* KPIs */}
         <motion.div
@@ -213,7 +254,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl"
         >
-          {siteMetrics.hero.map(({ value, label }) => (
+          {heroKPIs.map(({ value, label }) => (
             <div
               key={label}
               className="border border-line/70 bg-card/50 backdrop-blur-sm rounded-xl px-4 py-3"
@@ -223,6 +264,14 @@ export default function Hero() {
             </div>
           ))}
         </motion.div>
+        <motion.p
+          initial={reduce ? {} : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="mt-3 text-[10px] text-muted/50 max-w-3xl"
+        >
+          {disclaimers.heroFootnote}
+        </motion.p>
       </div>
 
       {/* Scroll indicator */}

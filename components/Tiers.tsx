@@ -8,32 +8,35 @@ import { trackEvent } from '@/lib/analytics';
 
 const tiers = [
   {
-    name: 'Pilot',
-    href: '/pilot/',
-    price: '$1,200/bench/mo',
-    badge: 'Evaluate',
-    desc: 'AR-guided execution overlay and daily usage dashboards. Start with one bench, prove the ROI in 60 days, then scale.',
-    tags: ['AR execution overlay', 'Daily dashboards', 'Email support (48h)'],
-    cta: 'Explore Pilot',
+    name: 'Personal',
+    href: '/personal/',
+    price: '$49–$349/mo',
+    badge: 'Basic',
+    desc: 'One camera included. Structured capture and deterministic validation for solo operators and small crews. Works offline, supports 1–8 seats.',
+    tags: ['1 camera included', 'Offline-first', '1–8 seats'],
+    includes: 'Includes base storage. Overage billed per GB.',
+    cta: 'Explore Personal',
   },
   {
-    name: 'Production',
-    href: '/production/',
-    price: '$3,200/bench/mo',
-    badge: 'Recommended',
-    desc: 'Everything in Pilot plus advanced analytics, QA scoring, custom calibration profiles, and priority support.',
-    tags: ['Analytics & QA', 'Custom calibration', 'Priority support (24h)'],
-    cta: 'Explore Production',
+    name: 'Commercial',
+    href: '/commercial/',
+    price: '$1.5k–$25k/yr',
+    badge: 'Pro',
+    desc: 'Mixed camera fleet support with reference, context, and depth devices. Bring your own compatible cameras — we handle orchestration, metadata, and cloud workflow.',
+    tags: ['Mixed fleet', 'Cloud workflow', 'Audit logs'],
+    includes: 'Multiple cameras included. Higher storage tiers available.',
+    cta: 'Explore Commercial',
     highlight: true,
   },
   {
-    name: 'Enterprise',
-    href: '/enterprise/',
-    price: '$4,800/bench/mo',
-    badge: 'Full Platform',
-    desc: 'Everything in Production plus compliance evidence export, tamper-proof audit trails, dedicated account manager, and SLA-backed uptime.',
-    tags: ['Compliance export', 'Audit trails', 'Dedicated AM'],
-    cta: 'Explore Enterprise',
+    name: 'Industrial',
+    href: '/industrial/',
+    price: 'Custom agreement',
+    badge: 'Advanced',
+    desc: 'Full fleet orchestration with optional LiDAR-enhanced precision depth. ERP integration, traceability, and advanced safety capabilities available as add-ons.',
+    tags: ['LiDAR add-on', 'ERP integration', 'Traceability'],
+    includes: 'Custom camera and storage allocation.',
+    cta: 'Explore Industrial',
   },
 ];
 
@@ -54,7 +57,7 @@ export default function Tiers() {
             Scope that fits the operation
           </h2>
           <p className="mt-3 text-muted max-w-xl">
-            From a single bench to an enterprise fleet. Pricing scales with the value delivered — per bench, per month.
+            Start with one camera, scale to a mixed fleet. Pricing includes base cameras and storage — add more devices or LiDAR precision as your operation grows.
           </p>
         </motion.div>
 
@@ -89,6 +92,12 @@ export default function Tiers() {
               </div>
 
               <p className="text-muted text-sm leading-relaxed flex-1">{t.desc}</p>
+
+              {t.includes && (
+                <p className="text-xs text-accent-2 font-medium border border-accent/20 rounded-lg px-3 py-2 bg-accent/5">
+                  {t.includes}
+                </p>
+              )}
 
               <div className="flex flex-wrap gap-2">
                 {t.tags.map((tag) => (

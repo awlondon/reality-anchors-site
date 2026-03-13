@@ -1,9 +1,9 @@
 {
   "hero": [
-    { "value": "4.2s", "label": "Cut-plan generation" },
-    { "value": "97.4%", "label": "Offline uptime" },
-    { "value": "0.7%", "label": "Error rate target" },
-    { "value": "0 hardware", "label": "changes required" }
+    { "value": "1 cam", "label": "Baseline setup" },
+    { "value": "3 types", "label": "Mixed fleet support" },
+    { "value": "4.2s", "label": "Capture-to-plan" },
+    { "value": "97.4%", "label": "Offline uptime" }
   ],
   "heroVariants": {
     "A": [

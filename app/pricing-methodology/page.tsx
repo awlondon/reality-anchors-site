@@ -114,7 +114,7 @@ export default function PricingMethodologyPage() {
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">3. Conservative Improvement Deltas</h2>
           <p className="text-muted text-sm mb-6">
-            Improvement deltas represent modeled reduction targets for scrap and preventable rework based on structured workflow enforcement. Values are set conservatively for pricing purposes and are not guaranteed outcomes.
+            Improvement deltas represent modeled reduction targets for scrap and preventable rework based on structured workflow enforcement. Values are set conservatively for pricing purposes. These are illustrative targets, not guarantees of performance — actual results vary by operation.
           </p>
           <div className="table-scroll-wrapper overflow-x-auto mb-6">
             <table className="ra-table">

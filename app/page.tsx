@@ -56,15 +56,6 @@ export default async function Home() {
       {dividers[1] && <PhotoDivider {...dividers[1]} />}
       <Tiers />
       <FeatureMatrix />
-      {testimonials[3] && (
-        <TestimonialBreak
-          id={testimonials[3].id}
-          quote={testimonials[3].quote}
-          attribution={testimonials[3].attribution}
-          company={testimonials[3].company}
-          backgroundSrc={testimonials[3].backgroundSrc}
-        />
-      )}
       <FAQ />
       <LeadForm />
       <StickyCTA />

@@ -7,6 +7,9 @@ import Link from 'next/link';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { trackEvent } from '@/lib/analytics';
 import { siteMetrics } from '@/lib/siteData';
+import { useExperiment } from '@/components/ExperimentProvider';
+import { HOME_EXPERIMENT } from '@/lib/experiments/config';
+import { CTA } from '@/lib/constants';
 import { disclaimers } from '@/data/disclaimers';
 
 const StructuredFieldBackground = dynamic(

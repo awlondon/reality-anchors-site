@@ -6,9 +6,9 @@ export interface Feature {
   description: string;
   category: 'Core' | 'Advanced' | 'Enterprise';
   tiers: {
-    personal: TierAvailability;
-    commercial: TierAvailability;
-    industrial: TierAvailability;
+    pilot: TierAvailability;
+    production: TierAvailability;
+    enterprise: TierAvailability;
   };
 }
 
@@ -21,35 +21,35 @@ export const features: Feature[] = [
     name: 'AR Execution Guidance',
     description: 'Step-by-step augmented reality overlays for cut, bend, and assembly verification at the bench.',
     category: 'Core',
-    tiers: { personal: true, commercial: true, industrial: true },
+    tiers: { pilot: true, production: true, enterprise: true },
   },
   {
     id: 'daily_dashboards',
     name: 'Daily Dashboards',
     description: 'Shift-level production summaries with scrap, throughput, and quality KPIs.',
     category: 'Core',
-    tiers: { personal: true, commercial: true, industrial: true },
+    tiers: { pilot: true, production: true, enterprise: true },
   },
   {
     id: 'offline_support',
     name: 'Offline-First Operation',
     description: 'Full functionality without internet. Syncs automatically when connectivity resumes.',
     category: 'Core',
-    tiers: { personal: true, commercial: true, industrial: true },
+    tiers: { pilot: true, production: true, enterprise: true },
   },
   {
     id: 'email_support',
-    name: 'Email Support',
-    description: 'Technical support via email with guaranteed response times.',
+    name: 'Email Support (48h)',
+    description: 'Technical support via email with 48-hour guaranteed response time.',
     category: 'Core',
-    tiers: { personal: 'limited', commercial: true, industrial: true },
+    tiers: { pilot: true, production: true, enterprise: true },
   },
   {
-    id: 'seat_capacity',
+    id: 'bench_capacity',
     name: 'Bench Capacity',
     description: 'Number of concurrent operator benches supported per license.',
     category: 'Core',
-    tiers: { personal: 'limited', commercial: true, industrial: true },
+    tiers: { pilot: 'limited', production: true, enterprise: true },
   },
   // Advanced
   {
@@ -57,28 +57,28 @@ export const features: Feature[] = [
     name: 'Analytics & QA',
     description: 'Statistical process control, trend analysis, and quality assurance dashboards across all benches.',
     category: 'Advanced',
-    tiers: { personal: false, commercial: true, industrial: true },
+    tiers: { pilot: false, production: true, enterprise: true },
   },
   {
     id: 'custom_calibration',
     name: 'Custom Calibration',
     description: 'Design and store custom die profiles for unlimited SKUs. Machine-specific calibration governance.',
     category: 'Advanced',
-    tiers: { personal: false, commercial: true, industrial: true },
+    tiers: { pilot: false, production: true, enterprise: true },
   },
   {
     id: 'priority_support',
     name: 'Priority Support (24h)',
     description: 'Dedicated priority queue with 24-hour response guarantee and phone escalation.',
     category: 'Advanced',
-    tiers: { personal: false, commercial: true, industrial: true },
+    tiers: { pilot: false, production: true, enterprise: true },
   },
   {
     id: 'scrap_reduction',
     name: 'Scrap Reduction Engine',
     description: 'AI-optimized cut plans that minimize material waste across job batches.',
     category: 'Advanced',
-    tiers: { personal: false, commercial: true, industrial: true },
+    tiers: { pilot: false, production: true, enterprise: true },
   },
   // Enterprise
   {
@@ -86,35 +86,35 @@ export const features: Feature[] = [
     name: 'Compliance Export',
     description: 'Export audit-ready compliance reports for regulatory submissions and third-party audits.',
     category: 'Enterprise',
-    tiers: { personal: false, commercial: false, industrial: true },
+    tiers: { pilot: false, production: false, enterprise: true },
   },
   {
     id: 'audit_trails',
     name: 'Audit Trails',
     description: 'Immutable, timestamped records of every operator action for traceability and accountability.',
     category: 'Enterprise',
-    tiers: { personal: false, commercial: false, industrial: true },
+    tiers: { pilot: false, production: false, enterprise: true },
   },
   {
     id: 'dedicated_am',
     name: 'Dedicated Account Manager',
     description: 'Named account manager with quarterly business reviews and proactive optimization recommendations.',
     category: 'Enterprise',
-    tiers: { personal: false, commercial: false, industrial: true },
+    tiers: { pilot: false, production: false, enterprise: true },
   },
   {
     id: 'sla_uptime',
     name: 'SLA-Backed Uptime',
     description: 'Contractual uptime guarantee with financial remedies for service-level breaches.',
     category: 'Enterprise',
-    tiers: { personal: false, commercial: false, industrial: true },
+    tiers: { pilot: false, production: false, enterprise: true },
   },
   {
     id: 'erp_integration',
     name: 'ERP Integration',
     description: 'Bi-directional data sync with SAP, Oracle, or custom ERP systems for unified production planning.',
     category: 'Enterprise',
-    tiers: { personal: false, commercial: false, industrial: true },
+    tiers: { pilot: false, production: false, enterprise: true },
   },
 ];
 

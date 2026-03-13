@@ -4,8 +4,17 @@ import { motion } from 'framer-motion';
 import { features, featureCategories, type TierAvailability } from '@/data/features';
 import { fadeUp, stagger } from '@/lib/motion';
 
-const tierNames = ['personal', 'commercial', 'industrial'] as const;
-const tierLabels = { personal: 'Personal', commercial: 'Commercial', industrial: 'Industrial' };
+const tierNames = ['pilot', 'production', 'enterprise'] as const;
+const tierLabels: Record<(typeof tierNames)[number], string> = {
+  pilot: 'Pilot',
+  production: 'Production',
+  enterprise: 'Enterprise',
+};
+const tierPrices: Record<(typeof tierNames)[number], string> = {
+  pilot: '$1,200/bench/mo',
+  production: '$3,200/bench/mo',
+  enterprise: '$4,800/bench/mo',
+};
 
 function AvailabilityIcon({ value }: { value: TierAvailability }) {
   if (value === true) {
@@ -65,8 +74,9 @@ export default function FeatureMatrix() {
               <tr className="border-b border-line">
                 <th className="text-left py-3 pr-4 text-sm font-medium text-muted w-2/5" />
                 {tierNames.map((t) => (
-                  <th key={t} className="py-3 px-3 text-center text-sm font-semibold text-txt w-1/5">
-                    {tierLabels[t]}
+                  <th key={t} className={`py-3 px-3 text-center w-1/5 ${t === 'production' ? 'bg-accent/5 rounded-t-lg' : ''}`}>
+                    <div className="text-sm font-semibold text-txt">{tierLabels[t]}</div>
+                    <div className="text-[11px] text-muted font-mono mt-0.5">{tierPrices[t]}</div>
                   </th>
                 ))}
               </tr>
@@ -92,7 +102,7 @@ export default function FeatureMatrix() {
                         </div>
                       </td>
                       {tierNames.map((t) => (
-                        <td key={t} className="py-3 px-3 text-center">
+                        <td key={t} className={`py-3 px-3 text-center ${t === 'production' ? 'bg-accent/5' : ''}`}>
                           <AvailabilityIcon value={feature.tiers[t]} />
                         </td>
                       ))}

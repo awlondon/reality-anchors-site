@@ -14,9 +14,9 @@ describe('features data', () => {
       expect(f.name).toBeTruthy();
       expect(f.description).toBeTruthy();
       expect(featureCategories).toContain(f.category);
-      expect(f.tiers).toHaveProperty('personal');
-      expect(f.tiers).toHaveProperty('commercial');
-      expect(f.tiers).toHaveProperty('industrial');
+      expect(f.tiers).toHaveProperty('pilot');
+      expect(f.tiers).toHaveProperty('production');
+      expect(f.tiers).toHaveProperty('enterprise');
     }
   });
 
@@ -25,12 +25,12 @@ describe('features data', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it('enterprise features are only available in industrial tier', () => {
+  it('enterprise features are only available in enterprise tier', () => {
     const enterprise = getFeaturesByCategory('Enterprise');
     for (const f of enterprise) {
-      expect(f.tiers.personal).toBe(false);
-      expect(f.tiers.commercial).toBe(false);
-      expect(f.tiers.industrial).toBe(true);
+      expect(f.tiers.pilot).toBe(false);
+      expect(f.tiers.production).toBe(false);
+      expect(f.tiers.enterprise).toBe(true);
     }
   });
 });

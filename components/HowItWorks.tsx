@@ -111,9 +111,6 @@ export default function HowItWorks() {
               <p className="text-sm text-muted leading-relaxed flex-1">
                 {step.description}
               </p>
-              <p className="text-xs text-accent/80 italic mt-1">
-                {step.outcome}
-              </p>
             </motion.div>
           ))}
         </motion.div>

@@ -22,35 +22,35 @@ export const workcells: Workcell[] = [
     slug: 'rebar-cut-bend',
     name: 'Rebar Cut & Bend',
     shortName: 'Rebar',
-    tagline: 'Rebar cut+bend execution — without scrap surprises.',
+    tagline: 'Deterministic capture for rebar cut and bend - one camera first, more precision when you need it.',
     description:
-      'AI-guided validation for rebar fabrication. Every cut measured, every bend verified, every ton accounted for.',
+      'Deterministic capture and execution validation for rebar fabrication. Start with one reference camera, expand to mixed coverage, and add LiDAR only where precision depth earns its keep.',
     status: 'live',
     heroImage: '/images/hero-welding.jpg',
     seoKeywords: [
+      'rebar capture software',
       'rebar cut and bend software',
-      'rebar fabrication execution',
-      'rebar scrap reduction',
-      'rebar production management',
+      'rebar fabrication execution validation',
+      'deterministic fabrication capture',
     ],
     regimeIds: ['structural-fabrication', 'multi-project-optimization', 'machine-calibration'],
     metrics: [
-      { value: '1.8 pts', label: 'Median scrap delta' },
-      { value: '6–10 t/mo', label: 'Material recovered' },
-      { value: '97.4%', label: 'Offline uptime' },
+      { value: '1 cam', label: 'Starting point' },
+      { value: 'Mixed fleet', label: 'Coverage path' },
+      { value: 'Optional LiDAR', label: 'Precision upgrade' },
       { value: '60 days', label: 'Validation window' },
     ],
     integrations: [
-      'ERP cut-list import',
-      'BLE bend telemetry',
-      'Tablet OCR',
-      'QA audit export',
+      'ERP and cut-list import',
+      'Tablet capture and operator signoff',
+      'QA and audit export',
+      'Calibration-aware job context',
     ],
     workflowSteps: [
-      'Import cut list from schedule, manual entry, or photo OCR',
-      'Follow step-by-step execution guidance with hold points',
-      'Validate each step against live job context and machine profile',
-      'Record every action with timestamps, operator ID, and traceability',
+      'Declare known job facts and start with one reference camera at the bench',
+      'Add context cameras when coverage or throughput demands broader visibility',
+      'Introduce LiDAR-equipped devices only for precision depth checks that justify the extra cost',
+      'Upload verified captures so the next run starts with a cleaner training baseline',
     ],
   },
   {
@@ -60,7 +60,7 @@ export const workcells: Workcell[] = [
     shortName: 'Plate',
     tagline: 'Precision forming with execution verification at every bend.',
     description:
-      'Guide, validate, and record press brake operations with AI-driven angle verification and sequence tracking.',
+      'Guide, validate, and record press brake operations with angle verification, sequence control, and cleaner execution records.',
     status: 'coming-soon',
     heroImage: '/images/cnc-precision.jpg',
     seoKeywords: ['press brake software', 'plate forming validation'],
@@ -76,7 +76,7 @@ export const workcells: Workcell[] = [
     shortName: 'Pipe',
     tagline: 'Verified pipe bending from spec to audit trail.',
     description:
-      'Execution validation for pipe and tube bending with springback compensation and dimensional tracking.',
+      'Execution validation for pipe and tube bending with springback compensation, dimensional tracking, and export-ready records.',
     status: 'coming-soon',
     heroImage: '/images/industrial-factory.jpg',
     seoKeywords: ['pipe bending software', 'tube fabrication validation'],
@@ -92,7 +92,7 @@ export const workcells: Workcell[] = [
     shortName: 'Precast',
     tagline: 'Reinforcement cage verification before the pour.',
     description:
-      'Quality verification for precast reinforcement cage assembly and placement, tied to pour documentation.',
+      'Quality verification for precast reinforcement cage assembly and placement, tied to pour documentation and handoff records.',
     status: 'adjacent',
     heroImage: '/images/structural-steel.jpg',
     seoKeywords: ['precast rebar verification', 'concrete cage validation'],
@@ -104,13 +104,13 @@ export const workcells: Workcell[] = [
 ];
 
 export function getWorkcellBySlug(slug: string): Workcell | undefined {
-  return workcells.find((w) => w.slug === slug);
+  return workcells.find((workcell) => workcell.slug === slug);
 }
 
 export function getLiveWorkcells(): Workcell[] {
-  return workcells.filter((w) => w.status === 'live');
+  return workcells.filter((workcell) => workcell.status === 'live');
 }
 
 export function getExpansionWorkcells(): Workcell[] {
-  return workcells.filter((w) => w.status !== 'live');
+  return workcells.filter((workcell) => workcell.status !== 'live');
 }

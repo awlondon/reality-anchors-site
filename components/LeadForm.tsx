@@ -65,11 +65,17 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
     const honeypot = form.elements.namedItem('website') as HTMLInputElement;
     if (honeypot?.value) return; // Bot detected, silently ignore
     const e = validate();
-    if (Object.keys(e).length) { setErrors(e); return; }
+    if (Object.keys(e).length) {
+      setErrors(e);
+      return;
+    }
 
     // Spam guard — disposable email, timing, rate limit
     const spam = runSpamChecks(data.email, formLoadedAt.current);
-    if (spam.blocked) { setSubmitError(spam.reason); return; }
+    if (spam.blocked) {
+      setSubmitError(spam.reason);
+      return;
+    }
 
     setErrors({});
     setSubmitError(null);
@@ -107,13 +113,16 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
       // Send confirmation email to submitter (best-effort)
       const calcCtx = getCalculatorContext();
       const confirmParams = buildConfirmationParams(calcCtx, formName);
-      if (process.env.NODE_ENV === 'development') console.log('[LeadForm] Confirmation params:', JSON.stringify(confirmParams));
+      if (process.env.NODE_ENV === 'development')
+        console.log('[LeadForm] Confirmation params:', JSON.stringify(confirmParams));
       sendConfirmationEmail({
         email: formEmail,
         name: formName,
         company: formCompany,
         params: { ...confirmParams },
-      }).catch((err) => { if (process.env.NODE_ENV === 'development') console.warn('Confirmation email failed (non-critical):', err); });
+      }).catch((err) => {
+        if (process.env.NODE_ENV === 'development') console.warn('Confirmation email failed (non-critical):', err);
+      });
 
       // Persist to Firebase (best-effort backup)
       saveLead({
@@ -125,7 +134,9 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
         sessionId,
         regimeId: attributedRegime,
         spam: isDisposableEmail(formEmail),
-      }).catch((err) => { if (process.env.NODE_ENV === 'development') console.warn('Firebase save failed (non-critical):', err); });
+      }).catch((err) => {
+        if (process.env.NODE_ENV === 'development') console.warn('Firebase save failed (non-critical):', err);
+      });
 
       trackEvent('lead_form_submit', {
         role: formRole,
@@ -143,16 +154,12 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
       trackEvent('sales_notification', { notificationType: alert.type });
     } catch (sideEffectErr) {
       // Non-critical side effects — log but don't block form completion
-      if (process.env.NODE_ENV === 'development') console.warn('Post-submit side effects failed (non-critical):', sideEffectErr);
+      if (process.env.NODE_ENV === 'development')
+        console.warn('Post-submit side effects failed (non-critical):', sideEffectErr);
     }
   };
 
-  const field = (
-    key: keyof FormData,
-    label: string,
-    type = 'text',
-    placeholder = '',
-  ) => (
+  const field = (key: keyof FormData, label: string, type = 'text', placeholder = '') => (
     <label className="flex flex-col gap-1.5">
       <span className="text-xs font-semibold text-muted uppercase tracking-wide">{label}</span>
       <input
@@ -165,7 +172,9 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
         aria-describedby={errors[key] ? `${key}-error` : undefined}
       />
       {errors[key] && (
-        <span id={`${key}-error`} className="text-xs text-red-400">{errors[key]}</span>
+        <span id={`${key}-error`} className="text-xs text-red-400">
+          {errors[key]}
+        </span>
       )}
     </label>
   );
@@ -186,28 +195,28 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-start">
           {/* Copy */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-4">Get in Touch</p>
             <h2 className="text-3xl md:text-4xl font-semibold text-txt mb-5 leading-tight">
               {heading || 'See if it fits your operation'}
             </h2>
             <p className="text-muted leading-relaxed mb-8">
-              {description || 'Complete the form and we\'ll return with a fit assessment, suggested rollout scope, and an estimate of what you could save.'}
+              {description ||
+                "Complete the form and we'll return with a fit assessment, suggested rollout scope, and an estimate of what you could save."}
             </p>
             <ul className="flex flex-col gap-3">
               {[
-                'Tailored walkthrough for your role — operations, engineering, or procurement.',
-                'Savings estimate based on your material throughput and scrap profile.',
-                'Optional technical deep-dive covering architecture, integration, and governance.',
+                'We map the right one-camera baseline, mixed-camera expansion path, and optional LiDAR upgrade for your workflow.',
+                'Pilot and beta evaluations include a documented review date and paid-conversion expectation before activation.',
+                'Optional technical deep-dive covering architecture, integration, governance, and export requirements.',
               ].map((item) => (
                 <li key={item} className="flex gap-3 text-sm text-muted">
                   <svg className="w-4 h-4 text-accent shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                   {item}
                 </li>
@@ -236,8 +245,17 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
                   aria-atomic="true"
                   tabIndex={-1}
                 >
-                  <div className="w-12 h-12 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center mx-auto mb-4" aria-hidden="true">
-                    <svg className="w-6 h-6 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                  <div
+                    className="w-12 h-12 rounded-full bg-green-500/15 border border-green-500/30 flex items-center justify-center mx-auto mb-4"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      className="w-6 h-6 text-green-400"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
@@ -247,19 +265,26 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
               ) : (
                 <motion.form
                   key="form"
-                  onSubmit={step === 1 ? (e) => {
-                    e.preventDefault();
-                    const emailErrors = validateEmail();
-                    if (Object.keys(emailErrors).length) { setErrors(emailErrors); return; }
-                    if (isDisposableEmail(data.email)) {
-                      setSubmitError('Please use a work email address — temporary addresses are not accepted.');
-                      return;
-                    }
-                    setErrors({});
-                    setSubmitError(null);
-                    setStep(2);
-                    trackEvent('lead_form_email_step');
-                  } : handleSubmit}
+                  onSubmit={
+                    step === 1
+                      ? (e) => {
+                          e.preventDefault();
+                          const emailErrors = validateEmail();
+                          if (Object.keys(emailErrors).length) {
+                            setErrors(emailErrors);
+                            return;
+                          }
+                          if (isDisposableEmail(data.email)) {
+                            setSubmitError('Please use a work email address — temporary addresses are not accepted.');
+                            return;
+                          }
+                          setErrors({});
+                          setSubmitError(null);
+                          setStep(2);
+                          trackEvent('lead_form_email_step');
+                        }
+                      : handleSubmit
+                  }
                   className="flex flex-col gap-4"
                   noValidate
                 >
@@ -279,19 +304,27 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
                       </div>
 
                       <label className="flex flex-col gap-1.5">
-                        <span className="text-xs font-semibold text-muted uppercase tracking-wide">Role (optional)</span>
+                        <span className="text-xs font-semibold text-muted uppercase tracking-wide">
+                          Role (optional)
+                        </span>
                         <select
                           value={data.role}
                           onChange={(e) => setData((d) => ({ ...d, role: e.target.value }))}
                           className="ra-input"
                         >
                           <option value="">Select…</option>
-                          {ROLES.map((r) => <option key={r} value={r}>{r}</option>)}
+                          {ROLES.map((r) => (
+                            <option key={r} value={r}>
+                              {r}
+                            </option>
+                          ))}
                         </select>
                       </label>
 
                       <label className="flex flex-col gap-1.5">
-                        <span className="text-xs font-semibold text-muted uppercase tracking-wide">Message (optional)</span>
+                        <span className="text-xs font-semibold text-muted uppercase tracking-wide">
+                          Message (optional)
+                        </span>
                         <textarea
                           value={data.message}
                           onChange={(e) => setData((d) => ({ ...d, message: e.target.value }))}
@@ -315,14 +348,18 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
                   />
 
                   {submitError && (
-                    <p className="text-sm text-amber-300" role="alert">{submitError}</p>
+                    <p className="text-sm text-amber-300" role="alert">
+                      {submitError}
+                    </p>
                   )}
 
                   <button
                     type="submit"
                     disabled={loading}
                     aria-busy={loading}
-                    aria-label={step === 1 ? 'Continue with email' : loading ? 'Sending your request…' : 'Submit contact request'}
+                    aria-label={
+                      step === 1 ? 'Continue with email' : loading ? 'Sending your request…' : 'Submit contact request'
+                    }
                     className="w-full py-3.5 rounded-lg bg-accent hover:bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold transition-all hover:-translate-y-px mt-1"
                   >
                     {step === 1 ? 'Continue' : loading ? 'Sending…' : 'Request Contact'}

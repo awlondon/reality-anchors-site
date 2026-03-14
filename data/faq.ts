@@ -1,44 +1,56 @@
+import { pricingTiers } from '@/data/pricing';
+
 export interface FAQItem {
   question: string;
   answer: string;
 }
 
+const pilot = pricingTiers.find((tier) => tier.id === 'pilot')!;
+const production = pricingTiers.find((tier) => tier.id === 'production')!;
+const enterprise = pricingTiers.find((tier) => tier.id === 'enterprise')!;
+
 export const faqs: FAQItem[] = [
   {
     question: 'How long does deployment take?',
-    answer: 'Pilot plans are self-service and operational within hours. Production deployments typically begin with a 2-week onboarding phase followed by a 60-day validation window. Enterprise engagements include a scoping assessment before deployment timelines are set.',
+    answer:
+      'Pilot plans can start in days because they begin with a single-bench workflow and customer-supplied hardware. Production deployments typically start with a short onboarding sprint and a 60-day validation window. Enterprise timelines depend on facility count, integration scope, and governance requirements.',
   },
   {
     question: 'What hardware or infrastructure is required?',
-    answer: 'Bring your own compatible cameras — Reality Anchors provides the software orchestration, metadata tagging, and cloud workflow. The platform supports mixed fleets of reference, context, and depth devices. LiDAR-equipped cameras are optional and only needed when you require precision depth. The system works offline-first and syncs when connected.',
+    answer:
+      'Bring your own compatible cameras. Reality Anchors provides the software orchestration, metadata tagging, workflow logic, and cloud sync. The platform supports mixed fleets of reference, context, and depth devices, works offline-first, and syncs when connected.',
   },
   {
     question: 'How does it integrate with our existing ERP or detailing software?',
-    answer: 'Reality Anchors works alongside your planning and detailing systems. It imports cut lists from existing schedules and exports verified execution records. Nothing to rip out — we plug into what you already run.',
+    answer:
+      'Reality Anchors works alongside your planning and detailing systems. It imports cut lists and job context from the tools you already use, then exports verified execution records, QA evidence, and audit-ready data without forcing you to replace upstream systems.',
   },
   {
     question: 'What happens to our data?',
-    answer: 'All data stays within your control. Every action is logged in tamper-proof event records you can export for audits at any time. Nothing is shared with third parties. See our privacy policy for full details.',
+    answer:
+      'All capture data stays within your control. Operator actions, validation events, and exported records are logged for traceability, and enterprise deployments can scope longer retention and formal export requirements during technical review.',
   },
   {
-    question: 'Is there a contract lock-in?',
-    answer: 'Pilot plans are month-to-month. Production and Enterprise agreements include a 60-day validation window to confirm fit and ROI before any long-term commitment. If the modeled value does not materialise, you can walk away.',
+    question: 'How are beta reviews and paid conversion handled?',
+    answer:
+      'Pilot and beta-style evaluations are framed up front. Before activation, you get a documented review date, the exact tier boundary, what converts to paid use, and what happens if you stop after validation. The goal is to avoid surprise billing and keep the commercial step explicit.',
   },
   {
     question: 'How are savings measured?',
-    answer: 'We use industry-typical scrap rates as baselines — not self-reported numbers — and apply conservative reduction targets. Savings metrics (scrap, rework, throughput) are tracked through the platform\'s own logged data during the validation window.',
+    answer:
+      'We use published industry baselines and logged operational metrics rather than self-reported numbers. During validation, the platform tracks scrap, rework, throughput, and usage against a stated baseline model so the economics stay transparent.',
   },
   {
     question: 'Do I need LiDAR?',
-    answer: 'No. LiDAR is entirely optional. Most setups work with standard cameras that capture reference and context data. LiDAR-equipped devices add precision depth measurement when your workflow demands sub-millimetre accuracy — for example, verifying rebar spacing or confirming bend angles to tight tolerances. If you do not need that level of precision, a standard camera fleet is all you need.',
+    answer:
+      'No. LiDAR is optional. Most deployments start with standard cameras for reference and context capture. LiDAR-equipped devices are added when you need precision depth, such as tighter bend verification or spacing checks, and are positioned as upgrades rather than universal requirements.',
   },
   {
     question: 'How many cameras are included?',
-    answer: 'Each plan includes a base number of cameras and a storage allocation. Personal plans include one camera with base storage. Commercial plans support multiple cameras across a mixed fleet with higher storage tiers available. Industrial agreements include custom camera and storage allocations. If you add more cameras or exceed your storage tier, overage is billed transparently — you always know what you are paying for and why.',
+    answer: `${pilot.name} includes ${pilot.includedUsage.cameras.toLowerCase()} and ${pilot.includedUsage.storage.toLowerCase()}. ${production.name} includes ${production.includedUsage.cameras.toLowerCase()} with ${production.includedUsage.storage.toLowerCase()}. ${enterprise.name} deployments use ${enterprise.includedUsage.cameras.toLowerCase()} with ${enterprise.includedUsage.storage.toLowerCase()}. ${production.includedUsage.overage}.`,
   },
 ];
 
-/** Structured data for FAQPage schema — embed in page head via JSON-LD */
 export function faqStructuredData() {
   return {
     '@context': 'https://schema.org',

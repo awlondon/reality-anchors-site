@@ -6,7 +6,6 @@ import ProgressBar from '@/components/ProgressBar';
 import AnalyticsProvider from '@/components/AnalyticsProvider';
 import ExperimentProvider from '@/components/ExperimentProvider';
 import CookieConsentBanner from '@/components/CookieConsentBanner';
-import WebVitals from '@/components/WebVitals';
 import { HOME_EXPERIMENT } from '@/lib/experiments/config';
 
 const inter = Inter({
@@ -25,11 +24,11 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Reality Anchors | Operational Validation Platform',
+    default: 'Reality Anchors | Fabrication Capture & Execution Validation Software',
     template: '%s | Reality Anchors',
   },
   description:
-    'AI-guided execution validation for industrial fabrication teams. Reduce scrap, eliminate rework, and build traceable execution records — from a single bench to an enterprise fleet.',
+    'Deterministic capture and execution validation software for fabrication teams. Start with one camera, bring your own compatible hardware, add LiDAR only when precision depth matters, and build traceable learning loops from bench to fleet.',
   metadataBase: new URL('https://realityanchorsltd.com'),
   openGraph: {
     siteName: 'Reality Anchors',
@@ -40,7 +39,7 @@ export const metadata: Metadata = {
         url: '/assets/brand/reality-anchors-lockup-dark.png',
         width: 1200,
         height: 630,
-        alt: 'Reality Anchors — Operational Validation Platform',
+        alt: 'Reality Anchors - Fabrication Capture Software',
       },
     ],
   },
@@ -58,26 +57,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#2e7deb" />
-        {/* Security headers (meta-tag equivalents for static hosting) */}
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <meta httpEquiv="X-Frame-Options" content="DENY" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
-        {/* Google Search Console verification */}
         {process.env.NEXT_PUBLIC_GSC_VERIFICATION && (
           <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GSC_VERIFICATION} />
         )}
-        {/* Prefetch hints for external APIs */}
         <link rel="dns-prefetch" href="https://api.emailjs.com" />
         <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://unpkg.com" />
-        {/* Consent Mode v2 — must precede GTM/GA4 scripts */}
         <script
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'});`,
           }}
         />
-        {/* Google tag (gtag.js) — GA4 + Google Ads */}
         {process.env.NEXT_PUBLIC_GA4_ID && (
           <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`} />
         )}
@@ -88,7 +82,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}
           />
         )}
-        {/* Google Tag Manager */}
         {process.env.NEXT_PUBLIC_GTM_ID && (
           <script
             dangerouslySetInnerHTML={{
@@ -102,7 +95,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         )}
       </head>
       <body className="overflow-x-hidden">
-        {/* Google Tag Manager (noscript) */}
         {process.env.NEXT_PUBLIC_GTM_ID && (
           <noscript>
             <iframe
@@ -121,8 +113,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </a>
         <ExperimentProvider config={HOME_EXPERIMENT}>
           <AnalyticsProvider />
-        <ProgressBar />
-        <Navbar />
+          <ProgressBar />
+          <Navbar />
           {children}
         </ExperimentProvider>
         <CookieConsentBanner />

@@ -12,23 +12,23 @@ import { HOME_EXPERIMENT } from '@/lib/experiments/config';
 import { CTA } from '@/lib/constants';
 import { disclaimers } from '@/data/disclaimers';
 
-const StructuredFieldBackground = dynamic(
-  () => import('@/components/StructuredFieldBackground'),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-accent/5 via-transparent to-transparent animate-pulse" />
-    ),
-  }
-);
+const StructuredFieldBackground = dynamic(() => import('@/components/StructuredFieldBackground'), {
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-accent/5 via-transparent to-transparent animate-pulse" />
+  ),
+});
 
 const EYEBROW: Record<string, string> = {
-  A: 'Execution Validation Platform',
-  B: 'Fabrication Execution Software',
-  C: 'Execution Intelligence',
+  A: 'Deterministic Capture for Fabrication',
+  B: 'Fabrication Capture Software',
+  C: 'Mixed-Camera Validation Platform',
 };
 
-const CTA_CONFIG: Record<string, { primary: { label: string; href: string }; secondary: { label: string; href: string } }> = {
+const CTA_CONFIG: Record<
+  string,
+  { primary: { label: string; href: string }; secondary: { label: string; href: string } }
+> = {
   A: { primary: CTA.primary, secondary: CTA.secondary },
   B: { primary: CTA.primary, secondary: CTA.secondary },
   C: { primary: CTA.primary, secondary: CTA.secondary },
@@ -39,8 +39,10 @@ export default function Hero() {
   const { variant } = useExperiment();
 
   const override = HOME_EXPERIMENT.narrative.heroOverride?.[variant];
-  const headline = override?.headline ?? 'Fewer Miscuts. Less Scrap. Every Bar Tracked.';
-  const subhead = override?.subhead ?? 'Reads your cut lists, applies stretch and bend rules, and generates step-by-step instructions. No hardware changes, works offline.';
+  const headline = override?.headline ?? 'Start From What You Know. Capture Structured Data. Learn Faster.';
+  const subhead =
+    override?.subhead ??
+    'Reality Anchors starts from declared bar data and structured capture, not autonomy theater. Use your own cameras, add LiDAR only when precision depth matters, and build a faster learning loop with every verified run.';
   const eyebrow = EYEBROW[variant] ?? EYEBROW.B;
   const ctas = CTA_CONFIG[variant] ?? CTA_CONFIG.B;
   const heroKPIs = siteMetrics.heroVariants?.[variant] ?? siteMetrics.hero;
@@ -49,18 +51,7 @@ export default function Hero() {
     trackEvent('hero_variant_exposure', { variant, headline: headline.substring(0, 40) });
   }, [variant, headline]);
 
-  const hlsfNodes = [
-    'S',
-    'V',
-    'L1',
-    'CTRL',
-    'TRACK',
-    'SYNC',
-    'R/T',
-    'HLSF',
-    'FLOW',
-    'STATE',
-  ];
+  const hlsfNodes = ['S', 'V', 'L1', 'CTRL', 'TRACK', 'SYNC', 'R/T', 'HLSF', 'FLOW', 'STATE'];
 
   const hlsfNodePositions = hlsfNodes.map((_, index) => {
     const angle = (index / hlsfNodes.length) * Math.PI * 2;
@@ -118,11 +109,7 @@ export default function Hero() {
         animate={reduce ? {} : { rotate: 360 }}
         transition={{ repeat: Infinity, ease: 'linear', duration: 75 }}
       >
-        <svg
-          viewBox="0 0 1000 1000"
-          className="h-[150vmin] w-[150vmin] opacity-55"
-          aria-hidden="true"
-        >
+        <svg viewBox="0 0 1000 1000" className="h-[150vmin] w-[150vmin] opacity-55" aria-hidden="true">
           <defs>
             <radialGradient id="hlsfGlow" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="rgb(59 130 246 / 0)" />
@@ -132,8 +119,24 @@ export default function Hero() {
           </defs>
 
           <circle cx="500" cy="500" r="356" fill="none" stroke="url(#hlsfGlow)" strokeWidth="1.5" />
-          <circle cx="500" cy="500" r="342" fill="none" stroke="rgb(148 163 184 / 0.38)" strokeWidth="1.2" strokeDasharray="5 10" />
-          <circle cx="500" cy="500" r="328" fill="none" stroke="rgb(59 130 246 / 0.45)" strokeWidth="0.9" strokeDasharray="2 14" />
+          <circle
+            cx="500"
+            cy="500"
+            r="342"
+            fill="none"
+            stroke="rgb(148 163 184 / 0.38)"
+            strokeWidth="1.2"
+            strokeDasharray="5 10"
+          />
+          <circle
+            cx="500"
+            cy="500"
+            r="328"
+            fill="none"
+            stroke="rgb(59 130 246 / 0.45)"
+            strokeWidth="0.9"
+            strokeDasharray="2 14"
+          />
 
           {hlsfInterconnects.map(({ key, x1, y1, x2, y2, opacity, strokeWidth }) => (
             <line
@@ -176,8 +179,23 @@ export default function Hero() {
             );
           })}
 
-          <circle cx="500" cy="500" r="66" fill="rgb(2 6 23 / 0.24)" stroke="rgb(148 163 184 / 0.25)" strokeWidth="0.8" />
-          <circle cx="500" cy="500" r="38" fill="none" stroke="rgb(125 211 252 / 0.3)" strokeWidth="0.8" strokeDasharray="3 9" />
+          <circle
+            cx="500"
+            cy="500"
+            r="66"
+            fill="rgb(2 6 23 / 0.24)"
+            stroke="rgb(148 163 184 / 0.25)"
+            strokeWidth="0.8"
+          />
+          <circle
+            cx="500"
+            cy="500"
+            r="38"
+            fill="none"
+            stroke="rgb(125 211 252 / 0.3)"
+            strokeWidth="0.8"
+            strokeDasharray="3 9"
+          />
         </svg>
       </motion.div>
 
@@ -192,7 +210,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-xs font-bold tracking-[0.2em] uppercase text-muted mb-4"
         >
-          Deterministic Capture for Steel Fabrication
+          {eyebrow}
         </motion.p>
 
         <motion.h1
@@ -201,7 +219,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-4xl md:text-6xl lg:text-7xl font-semibold leading-tight tracking-tight text-txt max-w-4xl"
         >
-          Start From What You Know. Capture Structured Data. Learn Faster.
+          {headline}
         </motion.h1>
 
         <motion.p
@@ -210,7 +228,7 @@ export default function Hero() {
           transition={{ duration: 0.55, delay: 0.32 }}
           className="mt-6 text-lg text-muted max-w-2xl leading-relaxed"
         >
-          The system starts from known bar sizes and structured capture — not guesswork. Use your own cameras, add LiDAR when you need precision, and let the software turn every capture into a faster learning cycle.
+          {subhead}
         </motion.p>
 
         <motion.div
@@ -241,10 +259,19 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.54 }}
           className="mt-6 text-xs text-muted/80 flex items-center gap-2"
         >
-          <svg className="w-3.5 h-3.5 text-accent/70 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+          <svg
+            className="w-3.5 h-3.5 text-accent/70 shrink-0"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+              clipRule="evenodd"
+            />
           </svg>
-          Operators confirm every step. No changes to existing machines. Works offline.
+          Operators confirm every step. Bring your own compatible cameras. Works offline.
         </motion.p>
 
         {/* KPIs */}
@@ -255,10 +282,7 @@ export default function Hero() {
           className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl"
         >
           {heroKPIs.map(({ value, label }) => (
-            <div
-              key={label}
-              className="border border-line/70 bg-card/50 backdrop-blur-sm rounded-xl px-4 py-3"
-            >
+            <div key={label} className="border border-line/70 bg-card/50 backdrop-blur-sm rounded-xl px-4 py-3">
               <div className="text-xl font-bold text-accent-2 font-mono">{value}</div>
               <div className="text-xs text-muted mt-1">{label}</div>
             </div>

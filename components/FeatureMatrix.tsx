@@ -5,11 +5,13 @@ import { features, featureCategories, type TierAvailability } from '@/data/featu
 import { fadeUp, stagger } from '@/lib/motion';
 
 const tierNames = ['pilot', 'production', 'enterprise'] as const;
+
 const tierLabels: Record<(typeof tierNames)[number], string> = {
   pilot: 'Pilot',
   production: 'Production',
   enterprise: 'Enterprise',
 };
+
 const tierPrices: Record<(typeof tierNames)[number], string> = {
   pilot: '$1,200/bench/mo',
   production: '$3,200/bench/mo',
@@ -20,25 +22,32 @@ function AvailabilityIcon({ value }: { value: TierAvailability }) {
   if (value === true) {
     return (
       <span aria-label="Included" className="text-emerald-400">
-        <svg className="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <svg className="mx-auto h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
         </svg>
       </span>
     );
   }
+
   if (value === 'limited') {
     return (
-      <span aria-label="Limited" className="text-xs text-amber-400 font-medium">Limited</span>
+      <span aria-label="Limited" className="text-xs font-medium text-amber-400">
+        Limited
+      </span>
     );
   }
+
   if (value === 'custom') {
     return (
-      <span aria-label="Custom" className="text-xs text-accent font-medium">Custom</span>
+      <span aria-label="Custom" className="text-xs font-medium text-accent">
+        Custom
+      </span>
     );
   }
+
   return (
     <span aria-label="Not included" className="text-muted/40">
-      <svg className="w-4 h-4 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <svg className="mx-auto h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
       </svg>
     </span>
@@ -56,10 +65,13 @@ export default function FeatureMatrix() {
           variants={fadeUp}
           className="mb-10 text-center"
         >
-          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Feature Comparison</p>
-          <h3 className="text-2xl md:text-3xl font-semibold text-txt">
-            What&rsquo;s included in each tier
-          </h3>
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-accent">Feature Comparison</p>
+          <h3 className="text-2xl md:text-3xl font-semibold text-txt">Tier boundaries mapped to real module IDs</h3>
+          <p className="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-muted">
+            Pilot includes <code>ar_execution</code> and <code>daily_dashboards</code>. Production adds{' '}
+            <code>analytics_qa</code> and <code>custom_calibration</code>. Enterprise adds{' '}
+            <code>compliance_export</code> and <code>audit_trails</code>.
+          </p>
         </motion.div>
 
         <motion.div
@@ -69,41 +81,48 @@ export default function FeatureMatrix() {
           variants={stagger}
           className="overflow-x-auto"
         >
-          <table className="w-full min-w-[600px] border-collapse">
+          <table className="min-w-[640px] w-full border-collapse">
             <thead>
               <tr className="border-b border-line">
-                <th className="text-left py-3 pr-4 text-sm font-medium text-muted w-2/5" />
-                {tierNames.map((t) => (
-                  <th key={t} className={`py-3 px-3 text-center w-1/5 ${t === 'production' ? 'bg-accent/5 rounded-t-lg' : ''}`}>
-                    <div className="text-sm font-semibold text-txt">{tierLabels[t]}</div>
-                    <div className="text-[11px] text-muted font-mono mt-0.5">{tierPrices[t]}</div>
+                <th className="w-2/5 py-3 pr-4 text-left text-sm font-medium text-muted" />
+                {tierNames.map((tier) => (
+                  <th
+                    key={tier}
+                    className={`w-1/5 py-3 px-3 text-center ${tier === 'production' ? 'rounded-t-lg bg-accent/5' : ''}`}
+                  >
+                    <div className="text-sm font-semibold text-txt">{tierLabels[tier]}</div>
+                    <div className="mt-0.5 font-mono text-[11px] text-muted">{tierPrices[tier]}</div>
                   </th>
                 ))}
               </tr>
             </thead>
+
             {featureCategories.map((category) => {
-              const categoryFeatures = features.filter((f) => f.category === category);
+              const categoryFeatures = features.filter((feature) => feature.category === category);
+
               return (
                 <motion.tbody key={category} variants={fadeUp}>
                   <tr>
-                    <td
-                      colSpan={4}
-                      className="pt-6 pb-2 text-xs font-bold tracking-[0.15em] uppercase text-accent"
-                    >
+                    <td colSpan={4} className="pt-6 pb-2 text-xs font-bold uppercase tracking-[0.15em] text-accent">
                       {category}
                     </td>
                   </tr>
+
                   {categoryFeatures.map((feature) => (
-                    <tr key={feature.id} className="border-b border-line/50 group">
-                      <td className="py-3 pr-4">
-                        <div className="text-sm text-txt font-medium">{feature.name}</div>
-                        <div className="text-[11px] text-muted/70 mt-0.5 leading-snug max-w-xs hidden group-hover:block">
+                    <tr key={feature.id} className="group border-b border-line/50">
+                      <td className="py-3 pr-4 align-top">
+                        <div className="text-sm font-medium text-txt">{feature.name}</div>
+                        <div className="mt-1 font-mono text-[10px] text-muted/70">{feature.id}</div>
+                        <div className="mt-1 hidden max-w-xs text-[11px] leading-snug text-muted/70 group-hover:block">
                           {feature.description}
                         </div>
                       </td>
-                      {tierNames.map((t) => (
-                        <td key={t} className={`py-3 px-3 text-center ${t === 'production' ? 'bg-accent/5' : ''}`}>
-                          <AvailabilityIcon value={feature.tiers[t]} />
+                      {tierNames.map((tier) => (
+                        <td
+                          key={tier}
+                          className={`py-3 px-3 text-center ${tier === 'production' ? 'bg-accent/5' : ''}`}
+                        >
+                          <AvailabilityIcon value={feature.tiers[tier]} />
                         </td>
                       ))}
                     </tr>
@@ -114,8 +133,9 @@ export default function FeatureMatrix() {
           </table>
         </motion.div>
 
-        <p className="text-[11px] text-muted/50 text-center mt-6">
-          All tiers include standard security and data encryption. Enterprise features available on annual agreements.
+        <p className="mt-6 text-center text-[11px] text-muted/50">
+          Advanced safety workflows and stronger protection boundaries are packaged separately from the base platform
+          until those controls are explicitly scoped.
         </p>
       </div>
     </section>

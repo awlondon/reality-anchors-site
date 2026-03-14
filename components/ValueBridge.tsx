@@ -10,7 +10,13 @@ function GuideIcon() {
   return (
     <svg viewBox="0 0 36 36" fill="none" className="w-9 h-9 flex-shrink-0" aria-hidden="true">
       <circle cx="18" cy="18" r="18" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
-      <path d="M10 18 L15.5 23.5 L27 11" stroke="#2e7deb" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M10 18 L15.5 23.5 L27 11"
+        stroke="#2e7deb"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -52,33 +58,38 @@ export default function ValueBridge() {
     {
       icon: <GuideIcon />,
       tag: 'CAPTURE',
-      title: 'Mixed Camera Fleets',
-      body: 'Not every camera needs LiDAR. Combine reference cameras, context cameras, and depth devices into a single fleet. Bring your own compatible hardware — we provide the software orchestration, metadata, and cloud workflow.',
+      title: 'Bring your own cameras',
+      body: 'Start with compatible hardware you already own. Reference, context, and depth devices can work together in one fleet, and not every camera needs LiDAR.',
       metric: siteMetrics.valueBridge.governMetric,
-      metricSuffix: 'baseline with one camera',
+      metricSuffix: 'error-rate target after deterministic validation',
     },
     {
       icon: <ValidateIcon />,
       tag: 'VALIDATE',
-      title: 'Deterministic Verification',
-      body: 'The system starts from known bar sizes and structured capture — not autonomous guesswork. Every capture is checked against declared facts before training begins.',
+      title: 'Anchor to known facts first',
+      body: 'The workflow begins with declared bar size, job context, and operator-confirmed steps. Reality Anchors validates against those constraints instead of pretending the system is fully autonomous on day one.',
       metric: siteMetrics.valueBridge.optimizeMetric,
-      metricSuffix: 'scrap reduction target',
+      metricSuffix: 'scrap-reduction target from cleaner execution',
     },
     {
       icon: <RecordIcon />,
       tag: 'LEARN',
-      title: 'Faster Learning Cycles',
-      body: 'Structured capture feeds cleaner data into the training loop. Your models improve with every upload — reducing repetitive setup and speeding data collection across mixed hardware.',
+      title: 'Save founder time and operator time',
+      body: 'Structured capture reduces repetitive setup, makes mixed hardware practical, and gives every upload a cleaner path into the next training cycle.',
       metric: siteMetrics.valueBridge.traceMetric,
-      metricSuffix: 'accuracy target',
+      metricSuffix: 'accuracy target as the loop improves',
     },
   ];
 
   return (
     <section className="relative overflow-hidden bg-bg py-12">
-      <PhotoBackground src="/images/operator-work.jpg" opacity={0.06} gradient="from-bg/90 via-bg/85 to-bg/90" position="center 40%" />
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <PhotoBackground
+        src="/images/operator-work.jpg"
+        opacity={0.06}
+        gradient="from-bg/90 via-bg/85 to-bg/90"
+        position="center 40%"
+      />
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -86,65 +97,53 @@ export default function ValueBridge() {
           variants={fadeUp}
           className="flex flex-col items-center gap-5"
         >
-          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent">
-            How It Adds Up
-          </p>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">How It Adds Up</p>
 
           <div
-            className="w-full max-w-5xl rounded-xl bg-bg-2 border border-line/50 p-3 md:p-5"
+            className="w-full max-w-5xl rounded-xl border border-line/50 bg-bg-2 p-3 md:p-5"
             role="region"
             aria-label="Reality Anchors core value: Capture, Validate, Learn"
           >
-            <div className="flex flex-col md:flex-row items-stretch gap-3">
-              {cards.flatMap((card, i) => {
-                const connector = i > 0 ? (
-                  <div
-                    key={`conn-${i}`}
-                    className="hidden md:flex items-center justify-center w-10 flex-shrink-0"
-                    aria-hidden="true"
-                  >
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-[5px] h-[5px] rounded-full bg-accent opacity-85" />
-                      <div className="w-[5px] h-[5px] rounded-full bg-accent opacity-55" />
-                      <div className="w-[5px] h-[5px] rounded-full bg-accent opacity-30" />
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="#1e3048">
-                        <path d="M0 0 L10 5 L0 10 z" />
-                      </svg>
+            <div className="flex flex-col items-stretch gap-3 md:flex-row">
+              {cards.flatMap((card, index) => {
+                const connector =
+                  index > 0 ? (
+                    <div
+                      key={`conn-${card.tag}`}
+                      className="hidden w-10 flex-shrink-0 items-center justify-center md:flex"
+                      aria-hidden="true"
+                    >
+                      <div className="flex items-center gap-1.5">
+                        <div className="h-[5px] w-[5px] rounded-full bg-accent opacity-85" />
+                        <div className="h-[5px] w-[5px] rounded-full bg-accent opacity-55" />
+                        <div className="h-[5px] w-[5px] rounded-full bg-accent opacity-30" />
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="#1e3048">
+                          <path d="M0 0 L10 5 L0 10 z" />
+                        </svg>
+                      </div>
                     </div>
-                  </div>
-                ) : null;
+                  ) : null;
 
                 const cardEl = (
                   <div
                     key={card.tag}
-                    className="flex-1 relative rounded-xl bg-card border border-line overflow-hidden px-5 pb-5 pt-6"
+                    className="relative flex-1 overflow-hidden rounded-xl border border-line bg-card px-5 pb-5 pt-6"
                   >
-                    {/* Accent top strip */}
-                    <div className="absolute top-0 left-0 right-0 h-[3px] bg-accent" />
-
-                    {/* Header */}
+                    <div className="absolute left-0 right-0 top-0 h-[3px] bg-accent" />
                     <div className="flex items-center gap-3">
                       {card.icon}
                       <div>
-                        <p className="text-[9px] font-bold tracking-[2.2px] text-accent uppercase leading-none mb-1">
+                        <p className="mb-1 text-[9px] font-bold uppercase leading-none tracking-[2.2px] text-accent">
                           {card.tag}
                         </p>
-                        <p className="text-sm font-semibold text-txt leading-snug">
-                          {card.title}
-                        </p>
+                        <p className="text-sm font-semibold leading-snug text-txt">{card.title}</p>
                       </div>
                     </div>
 
-                    {/* Body */}
-                    <p className="mt-3 text-xs text-muted leading-relaxed">
-                      {card.body}
-                    </p>
+                    <p className="mt-3 text-xs leading-relaxed text-muted">{card.body}</p>
 
-                    {/* Metric */}
                     <div className="mt-4 flex items-baseline gap-2">
-                      <span className="font-mono text-xl font-bold text-accent-2">
-                        {card.metric}
-                      </span>
+                      <span className="font-mono text-xl font-bold text-accent-2">{card.metric}</span>
                       <span className="text-[10px] text-muted">{card.metricSuffix}</span>
                     </div>
                   </div>

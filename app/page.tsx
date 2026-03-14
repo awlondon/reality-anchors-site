@@ -5,27 +5,31 @@ import VideoShowcasePlatform from '@/components/VideoShowcasePlatform';
 import HowItWorks from '@/components/HowItWorks';
 import Features from '@/components/Features';
 import Metrics from '@/components/Metrics';
-import AdaptiveNarrative from '@/components/AdaptiveNarrative';
+import ValueBridge from '@/components/ValueBridge';
 import CaptureLoop from '@/components/CaptureLoop';
 import Tiers from '@/components/Tiers';
 import FeatureMatrix from '@/components/FeatureMatrix';
 import LeadForm from '@/components/LeadForm';
 import StickyCTA from '@/components/StickyCTA';
 import Footer from '@/components/Footer';
-// TODO: Re-enable with real testimonials
-// import TestimonialBreak from '@/components/TestimonialBreak';
 import PhotoDivider from '@/components/PhotoDivider';
 import FAQ from '@/components/FAQ';
 import { faqStructuredData } from '@/data/faq';
 import { getDividersForPage } from '@/data/photoDividers';
-// import { getTestimonialsForPage } from '@/data/testimonials';
 
 export const metadata: Metadata = {
+  title: 'Fabrication Capture Software for Rebar and Industrial Workcells',
+  description:
+    'Reality Anchors is fabrication capture software for deterministic validation in rebar and industrial workcells. Start with one camera, use your own hardware, add LiDAR only when precision depth matters, and build faster learning loops.',
   alternates: { canonical: '/' },
+  openGraph: {
+    title: 'Reality Anchors | Fabrication Capture Software',
+    description:
+      'Deterministic capture and execution validation for fabrication teams using mixed camera fleets and customer-supplied hardware.',
+  },
 };
 
 export default async function Home() {
-  // const testimonials = getTestimonialsForPage('home');
   const dividers = getDividersForPage('home');
 
   return (
@@ -38,7 +42,8 @@ export default async function Home() {
             '@type': 'Organization',
             name: 'Reality Anchors',
             url: 'https://realityanchorsltd.com',
-            description: 'Deterministic capture and structured validation for steel fabrication. Mixed camera fleets, customer-supplied hardware, and AI-driven learning loops that improve with every capture.',
+            description:
+              'Deterministic capture and structured validation for steel fabrication. Mixed camera fleets, customer-supplied hardware, and AI-driven learning loops that improve with every capture.',
           }),
         }}
       />
@@ -54,6 +59,7 @@ export default async function Home() {
       {dividers[0] && <PhotoDivider {...dividers[0]} />}
       <HowItWorks />
       <Features />
+      <ValueBridge />
       <Metrics />
       <CaptureLoop />
       <Tiers />

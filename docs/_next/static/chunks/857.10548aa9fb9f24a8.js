@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[857],{3857:(e,t,o)=>{o.d(t,{getSessionId:()=>s});let n="exec_session_id";function s(){let e=window.localStorage.getItem(n);return e||(e=window.crypto.randomUUID(),window.localStorage.setItem(n,e)),e}}}]);

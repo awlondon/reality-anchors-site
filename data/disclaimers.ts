@@ -13,8 +13,7 @@ export const disclaimers = {
     'This calculator is a planning tool only. Actual results depend on your baseline metrics, implementation timeline, and operational factors. Reality Anchors does not guarantee specific financial outcomes. Consult with your financial team before making capital investments.',
 
   /** Compact version for Hero KPI row */
-  heroFootnote:
-    'Observed deployment metrics. Results vary by facility.',
+  heroFootnote: 'Observed deployment metrics and modeled targets. Results vary by facility.',
 
   /** Inline qualifier for any ROI claim (e.g., next to "7.2x ROI") */
   roiQualifier:

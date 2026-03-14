@@ -33,19 +33,20 @@ export const HOME_EXPERIMENT: ExperimentConfig = {
     },
     heroOverride: {
       A: {
-        headline: 'For fabrication teams, we reduce scrap and rework by up to 8%\u00a0\u2014 without changing your hardware.',
+        headline: 'Deterministic capture for fabrication teams that need faster learning, not day-one autonomy.',
         subhead:
-          'Tablet software that validates every cut, bend, and assembly step against your job data. Works offline, runs alongside existing machines.',
+          'Start from declared bar data, use customer-supplied cameras, and build a cleaner training loop from every validated run.',
       },
       B: {
-        headline: 'Fewer Miscuts. Less Scrap. Every Bar Tracked.',
+        headline: 'Start with one camera. Add coverage when the workflow earns it.',
         subhead:
-          'Reads your cut lists, applies stretch and bend rules, and generates step-by-step instructions. No hardware changes, works offline.',
+          'Reality Anchors makes one-camera deployment practical first, then expands into mixed-camera coverage and optional LiDAR only where precision depth matters.',
       },
       C: {
-        headline: 'For operations leaders, we close the plan-to-execution gap by up to 8%\u00a0\u2014 no new hardware.',
+        headline:
+          'Mixed camera fleets, operator-confirmed validation, and a clear path from pilot to paid production use.',
         subhead:
-          'Every fabrication step guided, validated, and recorded. Your ERP and QA systems get cleaner downstream data.',
+          'Reference, context, and depth devices can work together in one fleet while your team keeps control of each irreversible step.',
       },
     },
   },

@@ -19,14 +19,15 @@ export const features: Feature[] = [
   {
     id: 'ar_execution',
     name: 'AR Execution Guidance',
-    description: 'Step-by-step augmented reality overlays for cut, bend, and assembly verification at the bench.',
+    description:
+      'Step-by-step execution guidance and hold points that keep validation tied to the live job at the bench.',
     category: 'Core',
     tiers: { pilot: true, production: true, enterprise: true },
   },
   {
     id: 'daily_dashboards',
     name: 'Daily Dashboards',
-    description: 'Shift-level production summaries with scrap, throughput, and quality KPIs.',
+    description: 'Shift-level bench economics with scrap, throughput, capture usage, and quality KPIs.',
     category: 'Core',
     tiers: { pilot: true, production: true, enterprise: true },
   },
@@ -62,7 +63,8 @@ export const features: Feature[] = [
   {
     id: 'custom_calibration',
     name: 'Custom Calibration',
-    description: 'Design and store custom die profiles for unlimited SKUs. Machine-specific calibration governance.',
+    description:
+      'Store machine-specific calibration, tolerance, and geometry rules so validation stays tied to the real bench.',
     category: 'Advanced',
     tiers: { pilot: false, production: true, enterprise: true },
   },
@@ -76,7 +78,8 @@ export const features: Feature[] = [
   {
     id: 'scrap_reduction',
     name: 'Scrap Reduction Engine',
-    description: 'AI-optimized cut plans that minimize material waste across job batches.',
+    description:
+      'Modeled optimization workflows that reduce preventable waste and improve reuse decisions across job batches.',
     category: 'Advanced',
     tiers: { pilot: false, production: true, enterprise: true },
   },

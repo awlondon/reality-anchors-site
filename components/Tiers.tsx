@@ -54,7 +54,7 @@ export default function Tiers() {
             Scope that fits the operation
           </h2>
           <p className="mt-3 text-muted max-w-xl">
-            Start with one camera, scale to a mixed fleet. Pricing includes base cameras and storage — add more devices or LiDAR precision as your operation grows.
+            From a single bench to an enterprise fleet. Pricing scales with the value delivered, not the number of features turned on.
           </p>
         </motion.div>
 
@@ -89,12 +89,6 @@ export default function Tiers() {
               </div>
 
               <p className="text-muted text-sm leading-relaxed flex-1">{t.desc}</p>
-
-              {t.includes && (
-                <p className="text-xs text-accent-2 font-medium border border-accent/20 rounded-lg px-3 py-2 bg-accent/5">
-                  {t.includes}
-                </p>
-              )}
 
               <div className="flex flex-wrap gap-2">
                 {t.tags.map((tag) => (

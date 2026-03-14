@@ -1,6 +1,11 @@
-'use client';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import Footer from '@/components/Footer';
+import LeadForm from '@/components/LeadForm';
+import PhotoBackground from '@/components/PhotoBackground';
+import TestimonialBreak from '@/components/TestimonialBreak';
+import { regimeCatalog } from '@/lib/siteData';
+import { getTestimonialsForPage } from '@/data/testimonials';
 
 export const metadata: Metadata = {
   title: 'Pilot Plans — Execution Guidance for Solo Operators',

@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: '%s | Reality Anchors',
   },
   description:
-    'AI-guided validation for steel fabrication teams. Reduce scrap, eliminate rework, and build traceable execution records — from a single bench to an enterprise fleet.',
+    'AI-guided execution validation for industrial fabrication teams. Reduce scrap, eliminate rework, and build traceable execution records — from a single bench to an enterprise fleet.',
   metadataBase: new URL('https://realityanchorsltd.com'),
   openGraph: {
     siteName: 'Reality Anchors',
@@ -70,22 +70,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="https://api.emailjs.com" />
         <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://unpkg.com" />
         {/* Consent Mode v2 — must precede GTM/GA4 scripts */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});`,
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'});`,
           }}
         />
-        {/* Google tag (gtag.js) — GA4 */}
+        {/* Google tag (gtag.js) — GA4 + Google Ads */}
         {process.env.NEXT_PUBLIC_GA4_ID && (
-          <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`} />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA4_ID}');`,
-              }}
-            />
-          </>
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`} />
+        )}
+        {process.env.NEXT_PUBLIC_GA4_ID && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA4_ID}');${process.env.NEXT_PUBLIC_GADS_ID ? `gtag('config','${process.env.NEXT_PUBLIC_GADS_ID}');` : ''}`,
+            }}
+          />
         )}
         {/* Google Tag Manager */}
         {process.env.NEXT_PUBLIC_GTM_ID && (
@@ -125,12 +126,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           {children}
         </ExperimentProvider>
         <CookieConsentBanner />
-        <WebVitals />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').catch(()=>{});})}`,
-          }}
-        />
       </body>
     </html>
   );

@@ -51,27 +51,27 @@ export default function ValueBridge() {
   const cards: CardData[] = [
     {
       icon: <GuideIcon />,
-      tag: 'GUIDE',
-      title: 'Action-Ready Guidance',
-      body: 'Turn cut lists and schedules into clear, step-by-step workstation actions. Operators know exactly what to do next — no second-guessing drawings or manual look-ups.',
+      tag: 'CAPTURE',
+      title: 'Mixed Camera Fleets',
+      body: 'Not every camera needs LiDAR. Combine reference cameras, context cameras, and depth devices into a single fleet. Bring your own compatible hardware — we provide the software orchestration, metadata, and cloud workflow.',
       metric: siteMetrics.valueBridge.governMetric,
-      metricSuffix: 'fabrication errors',
+      metricSuffix: 'baseline with one camera',
     },
     {
       icon: <ValidateIcon />,
       tag: 'VALIDATE',
-      title: 'In-Process Verification',
-      body: 'Each step is checked against the live job and machine profile. Deviations are caught before they turn into scrap, delay, or rework.',
+      title: 'Deterministic Verification',
+      body: 'The system starts from known bar sizes and structured capture — not autonomous guesswork. Every capture is checked against declared facts before training begins.',
       metric: siteMetrics.valueBridge.optimizeMetric,
-      metricSuffix: 'max scrap reduction',
+      metricSuffix: 'scrap reduction target',
     },
     {
       icon: <RecordIcon />,
-      tag: 'RECORD',
-      title: 'Operational Traceability',
-      body: 'Every decision logged and reproducible. Your ERP, detailing, and QA systems get cleaner data on material use, timing, and performance.',
+      tag: 'LEARN',
+      title: 'Faster Learning Cycles',
+      body: 'Structured capture feeds cleaner data into the training loop. Your models improve with every upload — reducing repetitive setup and speeding data collection across mixed hardware.',
       metric: siteMetrics.valueBridge.traceMetric,
-      metricSuffix: 'execution accuracy',
+      metricSuffix: 'accuracy target',
     },
   ];
 
@@ -93,7 +93,7 @@ export default function ValueBridge() {
           <div
             className="w-full max-w-5xl rounded-xl bg-bg-2 border border-line/50 p-3 md:p-5"
             role="region"
-            aria-label="Reality Anchors core value: Guide, Validate, Record"
+            aria-label="Reality Anchors core value: Capture, Validate, Learn"
           >
             <div className="flex flex-col md:flex-row items-stretch gap-3">
               {cards.flatMap((card, i) => {

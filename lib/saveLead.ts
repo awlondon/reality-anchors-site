@@ -11,6 +11,8 @@ export interface LeadPayload {
   message: string;
   sessionId: string;
   regimeId: string | null;
+  /** Flagged as suspicious by client-side spam heuristics */
+  spam?: boolean;
 }
 
 export async function saveLead(payload: LeadPayload): Promise<void> {

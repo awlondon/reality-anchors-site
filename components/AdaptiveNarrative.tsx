@@ -119,7 +119,11 @@ export default function AdaptiveNarrative({ initialRegimes }: Props) {
     );
   }, [aggregate.totalFormSubmits, aggregate.totalFormViews, globalPosteriors, intent, regimes, seen, sourcePosteriors, trafficSource]);
 
-  const rendered = useMemo(() => regimes, [regimes]);
+  // Show only core/pro regimes on homepage; specialty regimes live on sub-pages
+  const rendered = useMemo(
+    () => regimes.filter((r) => r.visualTier === 'visualCore' || r.visualTier === 'visualPro'),
+    [regimes],
+  );
 
   return (
     <section className="bg-bg">

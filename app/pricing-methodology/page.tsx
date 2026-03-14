@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/pricing-methodology/' },
   openGraph: {
     title: 'Pricing Methodology | Reality Anchors',
-    description: 'Transparent pricing methodology with published baseline models and conservative improvement deltas.',
+    description: 'Transparent pricing methodology with industry-typical baseline models and conservative improvement deltas.',
   },
 };
 
@@ -28,7 +28,7 @@ export default function PricingMethodologyPage() {
             Platform Architecture &amp; Pricing Methodology
           </h1>
           <p className="text-xl text-muted max-w-2xl leading-relaxed">
-            Transparent pricing based on published industry baseline models, conservative improvement deltas, and value-aligned subscription structures.
+            Transparent pricing based on industry-typical baseline models, conservative improvement deltas, and value-aligned subscription structures.
           </p>
           <div className="flex flex-wrap gap-3 mt-8">
             <Link href="/commercial/" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
@@ -53,7 +53,7 @@ export default function PricingMethodologyPage() {
             This document provides a transparent view of Reality Anchors pricing assumptions, baseline models, and subscription structures. Its purpose is to support buyer due diligence, provide contractual stability, and establish a clear causal link between platform value delivery and subscription cost.
           </p>
           <p className="text-muted text-sm leading-relaxed">
-            Pricing is not based on self-reported scrap rates or percentage-of-savings models. Instead, it references published industry ranges and applies conservative deltas to arrive at a modeled value from which subscription tiers are derived.
+            Pricing is not based on self-reported scrap rates or percentage-of-savings models. Instead, it references industry-typical ranges and applies conservative deltas to arrive at a modeled value from which subscription tiers are derived.
           </p>
         </section>
 
@@ -61,7 +61,7 @@ export default function PricingMethodologyPage() {
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">2. Baseline Model Assumptions (Scrap + Rework)</h2>
           <p className="text-muted text-sm mb-6">
-            Segment classifications and baseline scrap/rework rates are derived from published Australian Standards, fabrication surveys, and operator benchmark studies. All rates are conservative mid-points of observable ranges.
+            Segment classifications and baseline scrap/rework rates are modeled from industry-typical ranges. All rates are conservative mid-points intended for pricing illustration, not guaranteed outcomes.
           </p>
           <div className="table-scroll-wrapper overflow-x-auto mb-6">
             <table className="ra-table">
@@ -107,14 +107,14 @@ export default function PricingMethodologyPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-muted/70">Contracts reference the published baseline model version number for contractual stability.</p>
+          <p className="text-xs text-muted/70">Contracts reference the baseline model version number for contractual stability.</p>
         </section>
 
         {/* Improvement Deltas */}
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">3. Conservative Improvement Deltas</h2>
           <p className="text-muted text-sm mb-6">
-            Improvement deltas represent expected reduction in scrap and preventable rework attributable to structured workflow enforcement. Values are set at lower observable bounds to preserve conservative estimates.
+            Improvement deltas represent modeled reduction targets for scrap and preventable rework based on structured workflow enforcement. Values are set conservatively for pricing purposes and are not guaranteed outcomes.
           </p>
           <div className="table-scroll-wrapper overflow-x-auto mb-6">
             <table className="ra-table">

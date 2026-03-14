@@ -5,14 +5,22 @@ import { useRef, useEffect, useState } from 'react';
 import PhotoBackground from '@/components/PhotoBackground';
 import { fadeUp, stagger } from '@/lib/motion';
 import { siteMetrics } from '@/lib/siteData';
+import { disclaimers } from '@/data/disclaimers';
 
 function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
-  const [count, setCount] = useState(0);
+  // Initialize to target so static HTML contains real values (not 0)
+  const [count, setCount] = useState(target);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    if (!inView) return;
+    setHydrated(true);
+    setCount(0);
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated || !inView) return;
     const duration = 1000;
     const steps = Math.min(target, 60);
     const stepTime = duration / steps;
@@ -27,7 +35,7 @@ function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
       }
     }, stepTime);
     return () => clearInterval(timer);
-  }, [inView, target]);
+  }, [hydrated, inView, target]);
 
   return <span ref={ref}>{count}{suffix}</span>;
 }
@@ -43,9 +51,19 @@ export default function Metrics() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-12 text-center"
+          className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3 text-center"
         >
-          Measured Outcomes
+          Design Targets
+        </motion.p>
+
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="text-sm text-muted mb-12 text-center"
+        >
+          Every metric verified against actual production data — not projections.
         </motion.p>
 
         <motion.div
@@ -55,7 +73,7 @@ export default function Metrics() {
           variants={stagger}
           className="grid grid-cols-2 md:grid-cols-4 gap-8"
         >
-          {siteMetrics.measuredOutcomes.map(({ value, suffix, label, sub }) => (
+          {siteMetrics.designTargets.map(({ value, suffix, label, sub }) => (
             <motion.div key={label} variants={fadeUp} className="text-center">
               <div className="text-4xl md:text-5xl font-bold text-txt font-mono mb-2">
                 <Counter target={value} suffix={suffix} />
@@ -65,6 +83,15 @@ export default function Metrics() {
             </motion.div>
           ))}
         </motion.div>
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="mt-8 text-[11px] text-muted/60 text-center max-w-2xl mx-auto leading-relaxed"
+        >
+          {disclaimers.metrics}
+        </motion.p>
       </div>
     </section>
   );

@@ -1,19 +1,39 @@
 {
   "hero": [
-    { "value": "1.8 pts", "label": "Scrap reduction" },
-    { "value": "4.2s", "label": "Cut-plan generation" },
-    { "value": "0.7%", "label": "Fabrication error rate" },
+    { "value": "1 cam", "label": "Baseline setup" },
+    { "value": "3 types", "label": "Mixed fleet support" },
+    { "value": "4.2s", "label": "Capture-to-plan" },
     { "value": "97.4%", "label": "Offline uptime" }
   ],
-  "measuredOutcomes": [
-    { "value": 8, "suffix": "%", "label": "Average scrap reduction", "sub": "across deployed fabrication sites" },
-    { "value": 4, "suffix": "s", "label": "Cut-plan generation", "sub": "from job schedule to ready-to-cut plan" },
-    { "value": 99, "suffix": "%", "label": "Execution reliability", "sub": "of steps completed without preventable rework" },
-    { "value": 14, "suffix": " days", "label": "Calibration lock-in", "sub": "to stable, drift-free machine profiles" }
+  "heroVariants": {
+    "A": [
+      { "value": "99%", "label": "Execution reliability target" },
+      { "value": "< 5s", "label": "Validation response" },
+      { "value": "Up to 8%", "label": "Scrap reduction target" },
+      { "value": "97.4%", "label": "Offline uptime" }
+    ],
+    "B": [
+      { "value": "4.2s", "label": "Cut-plan generation" },
+      { "value": "97.4%", "label": "Offline uptime" },
+      { "value": "0.7%", "label": "Error rate target" },
+      { "value": "0 hardware", "label": "changes required" }
+    ],
+    "C": [
+      { "value": "99%", "label": "Data accuracy target" },
+      { "value": "Up to 8%", "label": "Scrap reduction target" },
+      { "value": "Up to 40%", "label": "RFI reduction target" },
+      { "value": "Up to 7x", "label": "Modeled first-year ROI" }
+    ]
+  },
+  "designTargets": [
+    { "value": 8, "suffix": "%", "label": "Scrap reduction target", "sub": "modeled for typical fabrication sites" },
+    { "value": 14, "suffix": " days", "label": "Calibration lock-in target", "sub": "to stable, drift-free machine profiles" },
+    { "value": 99, "suffix": "%", "label": "Execution reliability target", "sub": "of steps completed without preventable rework" },
+    { "value": 7, "suffix": ".2x", "label": "Modeled first-year ROI", "sub": "conservative model based on published baselines" }
   ],
   "valueBridge": {
     "governMetric": "< 0.7%",
-    "optimizeMetric": "8%",
+    "optimizeMetric": "Up to 8%",
     "traceMetric": "99%"
   }
 }

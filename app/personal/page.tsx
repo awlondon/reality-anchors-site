@@ -9,7 +9,7 @@ import { getTestimonialsForPage } from '@/data/testimonials';
 
 export const metadata: Metadata = {
   title: 'Pilot Plans — Execution Guidance for Solo Operators',
-  description: 'Practical execution layer for solo operators and small teams. $49-$349/month for 1-8 seats with offline-first operation.',
+  description: 'Practical execution layer for solo operators and small teams. $1,200/bench/mo with offline-first operation.',
   alternates: { canonical: '/personal/' },
   openGraph: {
     title: 'Pilot Plans | Reality Anchors',
@@ -30,22 +30,10 @@ const features = [
 
 const pricingTiers = [
   {
-    tier: 'Solo',
-    monthly: '$49',
-    includes: '1 operator seat, core execution workflows, personal job history',
-    fit: 'Independent tradesperson or side business',
-  },
-  {
-    tier: 'Studio',
-    monthly: '$149',
-    includes: 'Up to 3 seats, shared templates, QA checkpoints, exportable work logs',
-    fit: 'Small shop standardizing repeatable work',
-  },
-  {
-    tier: 'Crew',
-    monthly: '$349',
-    includes: 'Up to 8 seats, supervisor view, calibration packs, onboarding support',
-    fit: 'Growing team preparing for commercial-grade operations',
+    tier: 'Pilot',
+    monthly: '$1,200/bench',
+    includes: 'Step-by-step execution guidance, offline-first operation, 1–8 seats',
+    fit: 'Solo operators and small crews',
   },
 ];
 
@@ -67,9 +55,9 @@ export default function PersonalPage() {
             offers: {
               '@type': 'AggregateOffer',
               priceCurrency: 'USD',
-              lowPrice: '49',
-              highPrice: '349',
-              offerCount: 3,
+              lowPrice: '1200',
+              highPrice: '1200',
+              offerCount: 1,
             },
           }),
         }}
@@ -84,7 +72,7 @@ export default function PersonalPage() {
             A practical execution layer for solo operators and small teams that need fewer errors, cleaner handoffs, and a clear path into larger-scale deployments.
           </p>
           <div className="flex flex-wrap gap-2 mt-6">
-            {['$49–$349/month', 'Built for 1–8 seats', 'Scales into Production'].map((t) => (
+            {['$1,200/bench/mo', 'Built for 1–8 seats', 'Scales into Production'].map((t) => (
               <span key={t} className="text-xs font-semibold px-3 py-1.5 rounded-full border border-line text-muted">{t}</span>
             ))}
           </div>

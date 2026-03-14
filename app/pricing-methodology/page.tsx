@@ -175,16 +175,15 @@ AnnualReworkSavings =
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">4. Value-Aligned Subscription Structure</h2>
           <p className="text-muted text-sm mb-6">
-            Production and Enterprise subscriptions are typically set at 8–20% of modeled annual savings. Pilot entry plans capture less by design, keeping adoption friction low and ROI high for smaller operations. Across all tiers, the upside stays strongly in the buyer&apos;s favor.
+            All tiers are priced per bench, per month. Pricing scales with execution complexity and governance requirements, keeping the value proposition clear at every level.
           </p>
           <div className="table-scroll-wrapper overflow-x-auto mb-6">
             <table className="ra-table">
-              <thead><tr><th>Modeled annual value</th><th>Typical subscription</th><th>Notes</th></tr></thead>
+              <thead><tr><th>Tier</th><th>Monthly per bench</th><th>Notes</th></tr></thead>
               <tbody>
-                <tr><td className="font-mono text-accent-2">Up to $15k</td><td className="font-mono text-txt">$1.5k–$2.5k</td><td className="text-muted text-sm">Small bench, low volume</td></tr>
-                <tr><td className="font-mono text-accent-2">$15k–$50k</td><td className="font-mono text-txt">$6k–$9k</td><td className="text-muted text-sm">Typical small-to-mid shop</td></tr>
-                <tr><td className="font-mono text-accent-2">$50k–$150k</td><td className="font-mono text-txt">$15k–$25k</td><td className="text-muted text-sm">High utilisation benches</td></tr>
-                <tr><td className="font-mono text-accent-2">$150k+</td><td className="font-mono text-txt">Custom</td><td className="text-muted text-sm">Multi-bench / multi-facility</td></tr>
+                <tr><td>Pilot</td><td className="font-mono text-accent-2">$1,200</td><td className="text-muted text-sm">Solo operators and small crews</td></tr>
+                <tr><td>Production</td><td className="font-mono text-accent-2">$3,200</td><td className="text-muted text-sm">Fabrication yards and multi-bench shops</td></tr>
+                <tr><td>Enterprise</td><td className="font-mono text-accent-2">$4,800</td><td className="text-muted text-sm">High-volume plants with ERP integration</td></tr>
               </tbody>
             </table>
           </div>

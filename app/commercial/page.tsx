@@ -142,15 +142,14 @@ export default function CommercialPage() {
               Your subscription is typically set at 8–20% of modeled annual savings. This keeps upside strongly in your favor while supporting continuous product development and support.
             </p>
 
-            <h3 className="text-sm font-semibold text-muted uppercase tracking-wide mb-3">Suggested annual plans</h3>
+            <h3 className="text-sm font-semibold text-muted uppercase tracking-wide mb-3">Per-bench monthly pricing</h3>
             <div className="overflow-x-auto mb-8">
               <table className="ra-table">
-                <thead><tr><th>Predicted annual value</th><th>Typical annual subscription</th><th>Intended fit</th></tr></thead>
+                <thead><tr><th>Tier</th><th>Monthly per bench</th><th>Intended fit</th></tr></thead>
                 <tbody>
-                  <tr><td className="font-mono text-accent-2">Up to $15k</td><td className="font-mono text-txt">$1.5k–$2.5k</td><td className="text-muted text-sm">Small bench, low volume</td></tr>
-                  <tr><td className="font-mono text-accent-2">$15k–$50k</td><td className="font-mono text-txt">$6k–$9k</td><td className="text-muted text-sm">Typical small-to-mid shop</td></tr>
-                  <tr><td className="font-mono text-accent-2">$50k–$150k</td><td className="font-mono text-txt">$15k–$25k</td><td className="text-muted text-sm">High utilisation benches</td></tr>
-                  <tr><td className="font-mono text-accent-2">$150k+</td><td className="font-mono text-txt">Custom enterprise agreement</td><td className="text-muted text-sm">Multi-bench / multi-facility</td></tr>
+                  <tr><td>Pilot</td><td className="font-mono text-accent-2">$1,200</td><td className="text-muted text-sm">Solo operators and small crews</td></tr>
+                  <tr><td className="font-semibold text-txt">Production</td><td className="font-mono text-accent-2">$3,200</td><td className="text-muted text-sm">Fabrication yards and multi-bench shops</td></tr>
+                  <tr><td>Enterprise</td><td className="font-mono text-accent-2">$4,800</td><td className="text-muted text-sm">High-volume plants with ERP integration</td></tr>
                 </tbody>
               </table>
             </div>

@@ -8,32 +8,32 @@ import { trackEvent } from '@/lib/analytics';
 
 const tiers = [
   {
-    name: 'Personal',
+    name: 'Pilot',
     href: '/personal/',
     price: '$49–$349/mo',
     badge: 'Basic',
-    desc: 'Step-by-step guidance for solo operators and small crews. Works offline, supports 1–8 seats, and upgrades cleanly into commercial plans.',
+    desc: 'Step-by-step guidance for solo operators and small crews. Works offline, supports 1–8 seats, and upgrades cleanly into production plans.',
     tags: ['Execution guidance', 'Offline-first', '1–8 seats'],
-    cta: 'Explore Personal',
+    cta: 'Explore Pilot',
   },
   {
-    name: 'Commercial',
+    name: 'Production',
     href: '/commercial/',
     price: '$1.5k–$25k/yr',
     badge: 'Pro',
     desc: 'Full execution validation for fabrication yards. Cuts scrap, verifies every step at the bench, and feeds clean data back to your planning tools.',
     tags: ['Bench execution', 'Scrap reduction', 'Audit logs'],
-    cta: 'Explore Commercial',
+    cta: 'Explore Production',
     highlight: true,
   },
   {
-    name: 'Industrial',
+    name: 'Enterprise',
     href: '/industrial/',
     price: 'Custom agreement',
     badge: 'Advanced',
     desc: 'Standardized execution across high-volume plants. ERP integration, machine calibration governance, and compliance-grade traceability built in.',
     tags: ['Throughput', 'ERP integration', 'Traceability'],
-    cta: 'Explore Industrial',
+    cta: 'Explore Enterprise',
   },
 ];
 

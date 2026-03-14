@@ -8,11 +8,11 @@ import { regimeCatalog } from '@/lib/siteData';
 import { getTestimonialsForPage } from '@/data/testimonials';
 
 export const metadata: Metadata = {
-  title: 'Industrial Solutions — Enterprise Execution Validation at Scale',
+  title: 'Enterprise Solutions — Execution Validation at Scale',
   description: 'High-volume execution standardization with ERP integration, compliance-grade traceability, and enterprise commercial structure.',
   alternates: { canonical: '/industrial/' },
   openGraph: {
-    title: 'Industrial Solutions | Reality Anchors',
+    title: 'Enterprise Solutions | Reality Anchors',
     description: 'Enterprise execution validation — ERP integration, compliance traceability, and high-volume operational controls.',
   },
 };
@@ -30,7 +30,7 @@ export default function IndustrialPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Service',
-            name: 'Reality Anchors Industrial',
+            name: 'Reality Anchors Enterprise',
             provider: { '@type': 'Organization', name: 'Reality Anchors' },
             description: 'Enterprise execution validation — ERP integration, compliance traceability, and high-volume operational controls.',
             url: 'https://realityanchorsltd.com/industrial/',
@@ -42,8 +42,8 @@ export default function IndustrialPage() {
       <section className="relative overflow-hidden py-16 border-b border-line">
         <PhotoBackground src="/images/industrial-factory.jpg" opacity={0.18} position="center 40%" />
         <div className="relative z-10 max-w-4xl mx-auto px-6">
-          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions / Industrial</p>
-          <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">Industrial</h1>
+          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions / Enterprise</p>
+          <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">Enterprise</h1>
           <p className="text-xl text-muted max-w-2xl leading-relaxed">
             High-volume environments need an execution layer that increases planning-system fidelity, traceability, and margin control at scale.
           </p>
@@ -59,7 +59,7 @@ export default function IndustrialPage() {
         <PhotoBackground src="/images/cnc-precision.jpg" opacity={0.06} gradient="from-bg/95 via-bg/85 to-bg/95" position="center 40%" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 grid md:grid-cols-2 gap-6">
           <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-4">Industrial outcomes</h2>
+            <h2 className="text-lg font-semibold text-txt mb-4">Enterprise outcomes</h2>
             <ul className="flex flex-col gap-2.5">
               {['Run-level scrap accounting and reuse inventory', 'Operator and station traceability', 'Versioned machine calibration profiles', 'QA exports suitable for internal audits', 'Standardized execution across shifts'].map((i) => (
                 <li key={i} className="flex gap-3 text-sm text-muted"><span className="text-accent">›</span>{i}</li>
@@ -118,7 +118,7 @@ export default function IndustrialPage() {
       <section className="pb-14">
         <div className="max-w-4xl mx-auto px-6">
           <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-3">Commercial structure for industrial deployments</h2>
+            <h2 className="text-lg font-semibold text-txt mb-3">Commercial structure for enterprise deployments</h2>
             <p className="text-muted text-sm mb-4">
               Enterprise agreements are structured around facility count, governance requirements, integration scope, and compliance documentation needs. Subscription is aligned to 8–15% of modeled annual value, keeping ROI firmly in your favor.
             </p>
@@ -156,7 +156,7 @@ export default function IndustrialPage() {
         <PhotoBackground src="/images/structural-steel.jpg" opacity={0.05} gradient="from-bg/95 via-bg/90 to-bg/95" position="center 30%" />
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-3">Industrial program set</h2>
+            <h2 className="text-lg font-semibold text-txt mb-3">Enterprise program set</h2>
             <p className="text-muted text-sm mb-5">Machine calibration support, traceable execution, and compliance-ready controls for ERP-connected plants.</p>
             <div className="grid md:grid-cols-3 gap-4">
               {industrialRegimes.map((regime) => (

@@ -8,11 +8,11 @@ import { regimeCatalog } from '@/lib/siteData';
 import { getTestimonialsForPage } from '@/data/testimonials';
 
 export const metadata: Metadata = {
-  title: 'Personal Plans — Execution Guidance for Solo Operators',
+  title: 'Pilot Plans — Execution Guidance for Solo Operators',
   description: 'Practical execution layer for solo operators and small teams. $49-$349/month for 1-8 seats with offline-first operation.',
   alternates: { canonical: '/personal/' },
   openGraph: {
-    title: 'Personal Plans | Reality Anchors',
+    title: 'Pilot Plans | Reality Anchors',
     description: 'Execution guidance for solo operators and small teams — fewer errors, cleaner handoffs, path to scale.',
   },
 };
@@ -25,7 +25,7 @@ const features = [
   { cap: 'Photo import + OCR assist', note: 'Optional import with manual verification.' },
   { cap: 'Cut + bend execution guidance', note: 'Step sequence, counters, and hold points.' },
   { cap: 'Offline-first operation', note: 'Works on device; sync when connected.' },
-  { cap: 'Progressive upgrade path', note: 'Transition to Commercial without rework or data migration.' },
+  { cap: 'Progressive upgrade path', note: 'Transition to Production without rework or data migration.' },
 ];
 
 const pricingTiers = [
@@ -60,7 +60,7 @@ export default function PersonalPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Product',
-            name: 'Reality Anchors Personal',
+            name: 'Reality Anchors Pilot',
             description: 'Execution guidance for solo operators and small teams — fewer errors, cleaner handoffs, path to scale.',
             url: 'https://realityanchorsltd.com/personal/',
             brand: { '@type': 'Organization', name: 'Reality Anchors' },
@@ -78,13 +78,13 @@ export default function PersonalPage() {
       <section className="relative overflow-hidden py-16 border-b border-line">
         <PhotoBackground src="/images/workshop-personal.jpg" opacity={0.15} position="center 60%" />
         <div className="relative z-10 max-w-4xl mx-auto px-6">
-          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions / Personal</p>
-          <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">Personal</h1>
+          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions / Pilot</p>
+          <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">Pilot</h1>
           <p className="text-xl text-muted max-w-2xl leading-relaxed">
             A practical execution layer for solo operators and small teams that need fewer errors, cleaner handoffs, and a clear path into larger-scale deployments.
           </p>
           <div className="flex flex-wrap gap-2 mt-6">
-            {['$49–$349/month', 'Built for 1–8 seats', 'Scales into Commercial'].map((t) => (
+            {['$49–$349/month', 'Built for 1–8 seats', 'Scales into Production'].map((t) => (
               <span key={t} className="text-xs font-semibold px-3 py-1.5 rounded-full border border-line text-muted">{t}</span>
             ))}
           </div>
@@ -120,9 +120,9 @@ export default function PersonalPage() {
       <section className="py-8 pb-16">
         <div className="max-w-4xl mx-auto px-6">
           <div className="border border-line bg-card rounded-2xl p-7">
-            <h2 className="text-lg font-semibold text-txt mb-2">Personal SaaS plans</h2>
+            <h2 className="text-lg font-semibold text-txt mb-2">Pilot SaaS plans</h2>
             <p className="text-muted text-sm mb-6">
-              Personal pricing is seat-based so small teams can start quickly, then transition into Commercial plans without retraining or data migration. Every tier includes the same workflow foundation; higher tiers add coordination and governance.
+              Pilot pricing is seat-based so small teams can start quickly, then transition into Production plans without retraining or data migration. Every tier includes the same workflow foundation; higher tiers add coordination and governance.
             </p>
             <div className="overflow-x-auto">
               <table className="ra-table">
@@ -163,7 +163,7 @@ export default function PersonalPage() {
               <p className="text-[10px] text-muted/50 mt-3 text-center">Illustrative estimates based on $850/ton steel, 8% baseline scrap, 1.5pt improvement. Actual results vary by operation.</p>
             </div>
             <div className="mt-5 border-t border-line pt-4">
-              <p className="text-xs text-muted/70"><strong className="text-txt">Ready for more?</strong> Crew gets you started. When you need audit logs, multi-bench coordination, or formal compliance controls, <Link href="/commercial/" className="text-accent hover:text-blue-400 font-semibold">Commercial</Link> picks up where Crew leaves off — with your existing workflows intact.</p>
+              <p className="text-xs text-muted/70"><strong className="text-txt">Ready for more?</strong> Crew gets you started. When you need audit logs, multi-bench coordination, or formal compliance controls, <Link href="/commercial/" className="text-accent hover:text-blue-400 font-semibold">Production</Link> picks up where Crew leaves off — with your existing workflows intact.</p>
             </div>
           </div>
         </div>
@@ -222,7 +222,7 @@ export default function PersonalPage() {
 
       <LeadForm
         id="contact"
-        heading="Get started with Personal"
+        heading="Get started with Pilot"
         description="Tell us about your operation and we'll help you pick the right plan. No commitment required."
       />
       <Footer />

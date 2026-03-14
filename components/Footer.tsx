@@ -14,9 +14,9 @@ export default function Footer() {
         </div>
 
         <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted" aria-label="Footer navigation">
-          <Link href="/personal/" className="hover:text-txt transition-colors">Personal</Link>
-          <Link href="/commercial/" className="hover:text-txt transition-colors">Commercial</Link>
-          <Link href="/industrial/" className="hover:text-txt transition-colors">Industrial</Link>
+          <Link href="/personal/" className="hover:text-txt transition-colors">Pilot</Link>
+          <Link href="/commercial/" className="hover:text-txt transition-colors">Production</Link>
+          <Link href="/industrial/" className="hover:text-txt transition-colors">Enterprise</Link>
           <Link href="/calculator/" className="hover:text-txt transition-colors">Estimator</Link>
           <Link href="/margin-impact/" className="hover:text-txt transition-colors">Margin Model</Link>
           <Link href="/pricing-methodology/" className="hover:text-txt transition-colors">Methodology</Link>

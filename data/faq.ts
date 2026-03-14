@@ -6,7 +6,7 @@ export interface FAQItem {
 export const faqs: FAQItem[] = [
   {
     question: 'How long does deployment take?',
-    answer: 'Personal plans are self-service and operational within hours. Commercial deployments typically begin with a 2-week onboarding phase followed by a 60-day validation window. Industrial engagements include a scoping assessment before deployment timelines are set.',
+    answer: 'Pilot plans are self-service and operational within hours. Production deployments typically begin with a 2-week onboarding phase followed by a 60-day validation window. Enterprise engagements include a scoping assessment before deployment timelines are set.',
   },
   {
     question: 'What hardware or infrastructure is required?',
@@ -22,7 +22,7 @@ export const faqs: FAQItem[] = [
   },
   {
     question: 'Is there a contract lock-in?',
-    answer: 'Personal plans are month-to-month. Commercial and Industrial agreements include a 60-day validation window to confirm fit and ROI before any long-term commitment. If the modeled value does not materialise, you can walk away.',
+    answer: 'Pilot plans are month-to-month. Production and Enterprise agreements include a 60-day validation window to confirm fit and ROI before any long-term commitment. If the modeled value does not materialise, you can walk away.',
   },
   {
     question: 'How are savings measured?',

@@ -7,9 +7,9 @@ import { usePathname } from 'next/navigation';
 import { trackEvent } from '@/lib/analytics';
 
 const NAV_LINKS = [
-  { href: '/personal/', label: 'Personal' },
-  { href: '/commercial/', label: 'Commercial' },
-  { href: '/industrial/', label: 'Industrial' },
+  { href: '/personal/', label: 'Pilot' },
+  { href: '/commercial/', label: 'Production' },
+  { href: '/industrial/', label: 'Enterprise' },
   { href: '/calculator/', label: 'Quick Estimate' },
   { href: '/margin-impact/', label: 'Margin Model' },
   { href: '/board-strategy/', label: 'Strategy' },

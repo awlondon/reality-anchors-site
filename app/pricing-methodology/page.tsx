@@ -32,7 +32,7 @@ export default function PricingMethodologyPage() {
           </p>
           <div className="flex flex-wrap gap-3 mt-8">
             <Link href="/commercial/" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
-              Explore commercial plans
+              Explore production plans
             </Link>
             <Link href="/margin-impact/" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
               Run the calculator
@@ -175,7 +175,7 @@ AnnualReworkSavings =
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">4. Value-Aligned Subscription Structure</h2>
           <p className="text-muted text-sm mb-6">
-            Commercial and Industrial subscriptions are typically set at 8–20% of modeled annual savings. Personal entry plans capture less by design, keeping adoption friction low and ROI high for smaller operations. Across all tiers, the upside stays strongly in the buyer&apos;s favor.
+            Production and Enterprise subscriptions are typically set at 8–20% of modeled annual savings. Pilot entry plans capture less by design, keeping adoption friction low and ROI high for smaller operations. Across all tiers, the upside stays strongly in the buyer&apos;s favor.
           </p>
           <div className="table-scroll-wrapper overflow-x-auto mb-6">
             <table className="ra-table">

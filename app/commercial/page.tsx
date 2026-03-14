@@ -9,11 +9,11 @@ import { getTestimonialsForPage } from '@/data/testimonials';
 import { ScrapRanges } from './Charts';
 
 export const metadata: Metadata = {
-  title: 'Commercial Solutions — Execution Intelligence for Fabrication Yards',
+  title: 'Production Solutions — Execution Intelligence for Fabrication Yards',
   description: 'Execution-layer infrastructure for crews and yards. Value-amplification pricing aligned to measurable scrap reduction and margin improvement.',
   alternates: { canonical: '/commercial/' },
   openGraph: {
-    title: 'Commercial Solutions | Reality Anchors',
+    title: 'Production Solutions | Reality Anchors',
     description: 'Execution intelligence for fabrication yards — measurable scrap reduction, audit-ready workflows, and value-aligned pricing.',
   },
 };
@@ -31,7 +31,7 @@ export default function CommercialPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Service',
-            name: 'Reality Anchors Commercial',
+            name: 'Reality Anchors Production',
             provider: { '@type': 'Organization', name: 'Reality Anchors' },
             description: 'Execution intelligence for fabrication yards — measurable scrap reduction, audit-ready workflows, and value-aligned pricing.',
             url: 'https://realityanchorsltd.com/commercial/',
@@ -44,8 +44,8 @@ export default function CommercialPage() {
       <section className="relative overflow-hidden py-16 border-b border-line">
         <PhotoBackground src="/images/commercial-fabrication.jpg" opacity={0.18} position="center 30%" />
         <div className="relative z-10 max-w-4xl mx-auto px-6">
-          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions / Commercial</p>
-          <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">Commercial</h1>
+          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">Solutions / Production</p>
+          <h1 className="text-4xl md:text-5xl font-semibold text-txt mb-5 leading-tight">Production</h1>
           <p className="text-xl text-muted max-w-2xl leading-relaxed">
             Execution intelligence for crews and fabrication yards. Designed to reinforce upstream planning tools through verified downstream execution outcomes.
           </p>

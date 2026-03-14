@@ -8,16 +8,17 @@ describe('FeatureMatrix', () => {
 
   it('renders all three tier column headers', () => {
     render(<FeatureMatrix />);
-    expect(screen.getByText('Personal')).toBeInTheDocument();
-    expect(screen.getByText('Commercial')).toBeInTheDocument();
-    expect(screen.getByText('Industrial')).toBeInTheDocument();
+    expect(screen.getByText('Pilot')).toBeInTheDocument();
+    expect(screen.getByText('Production')).toBeInTheDocument();
+    expect(screen.getAllByText('Enterprise').length).toBeGreaterThanOrEqual(1);
   });
 
   it('renders category headers', () => {
     render(<FeatureMatrix />);
     expect(screen.getByText('Core')).toBeInTheDocument();
     expect(screen.getByText('Advanced')).toBeInTheDocument();
-    expect(screen.getByText('Enterprise')).toBeInTheDocument();
+    // 'Enterprise' appears as both a column header and a category header
+    expect(screen.getAllByText('Enterprise').length).toBe(2);
   });
 
   it('renders feature names', () => {

@@ -16,8 +16,14 @@
 import * as admin from "firebase-admin";
 import { onCall, HttpsError } from "firebase-functions/v2/https";
 import { onRequest } from "firebase-functions/v2/https";
+import { setGlobalOptions } from "firebase-functions/v2/options";
 import Stripe from "stripe";
-import { STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, PORTAL_URL } from "./config";
+import {
+  CALLABLE_ORIGINS,
+  PORTAL_URL,
+  stripeSecretKey,
+  stripeWebhookSecret,
+} from "./config";
 import { getAllPlans, resolvePlan } from "./plans";
 import {
   orgBillingCustomerDocPath,
@@ -32,15 +38,26 @@ import { claimStripeEventIdempotency } from "./stripeWebhookIdempotency";
 admin.initializeApp();
 const db = admin.firestore();
 
+setGlobalOptions({ region: "us-central1", invoker: "public" });
+
+const PUBLIC_CALLABLE_OPTIONS = {
+  cors: CALLABLE_ORIGINS,
+};
+
+const STRIPE_CALLABLE_OPTIONS = {
+  ...PUBLIC_CALLABLE_OPTIONS,
+  secrets: [stripeSecretKey],
+};
+
 function getStripe(): Stripe {
-  return new Stripe(STRIPE_SECRET_KEY, { apiVersion: "2025-02-24.acacia" });
+  return new Stripe(stripeSecretKey.value(), { apiVersion: "2025-02-24.acacia" });
 }
 
 /* ─────────────────────────────────────────────
  * getAvailablePlans
  * Returns the pricing tiers from Firestore (or fallback)
  * ───────────────────────────────────────────── */
-export const getAvailablePlans = onCall(async () => {
+export const getAvailablePlans = onCall(PUBLIC_CALLABLE_OPTIONS, async () => {
   const plans = await getAllPlans();
   return {
     plans: plans.map((p) => ({
@@ -62,7 +79,9 @@ export const getAvailablePlans = onCall(async () => {
  * Creates a Stripe Checkout for new subscription.
  * Stores customer at orgs/{orgId}/billing/customer (aligned with Flutter app).
  * ───────────────────────────────────────────── */
-export const createStripeCheckoutSession = onCall(async (request) => {
+export const createStripeCheckoutSession = onCall(
+  STRIPE_CALLABLE_OPTIONS,
+  async (request) => {
   const uid = request.auth?.uid;
   if (!uid) throw new HttpsError("unauthenticated", "Must be signed in");
 
@@ -145,15 +164,18 @@ export const createStripeCheckoutSession = onCall(async (request) => {
     },
   });
 
-  return { url: session.url };
-});
+    return { url: session.url };
+  }
+);
 
 /* ─────────────────────────────────────────────
  * createCustomerPortalSession
  * Opens the Stripe Customer Portal for billing mgmt.
  * Reads customer from orgs/{orgId}/billing/customer.
  * ───────────────────────────────────────────── */
-export const createCustomerPortalSession = onCall(async (request) => {
+export const createCustomerPortalSession = onCall(
+  STRIPE_CALLABLE_OPTIONS,
+  async (request) => {
   const uid = request.auth?.uid;
   if (!uid) throw new HttpsError("unauthenticated", "Must be signed in");
 
@@ -166,14 +188,15 @@ export const createCustomerPortalSession = onCall(async (request) => {
   if (!customerId)
     throw new HttpsError("failed-precondition", "No Stripe customer found");
 
-  const stripe = getStripe();
-0  const session = await stripe.billingPortal.sessions.create({
+    const stripe = getStripe();
+    const session = await stripe.billingPortal.sessions.create({
     customer: customerId,
     return_url: `${PORTAL_URL}/billing`,
   });
 
-  return { url: session.url };
-});
+    return { url: session.url };
+  }
+);
 
 /* ─────────────────────────────────────────────
  * Stripe Webhook
@@ -181,7 +204,10 @@ export const createCustomerPortalSession = onCall(async (request) => {
  * Data model aligned with Flutter app's handleStripeWebhook.
  * ───────────────────────────────────────────── */
 export const stripeWebhook = onRequest(
-  { cors: false },
+  {
+    cors: false,
+    secrets: [stripeSecretKey, stripeWebhookSecret],
+  },
   async (req, res) => {
     if (req.method !== "POST") {
       res.status(405).send("Method Not Allowed");
@@ -196,7 +222,7 @@ export const stripeWebhook = onRequest(
       event = stripe.webhooks.constructEvent(
         req.rawBody,
         sig,
-        STRIPE_WEBHOOK_SECRET
+        stripeWebhookSecret.value()
       );
     } catch (err) {
       console.error("Webhook signature verification failed:", err);
@@ -320,7 +346,7 @@ export const stripeWebhook = onRequest(
  * Assigns a bench to an operator. Uses the Flutter app's
  * schema (seatId, assignedUid, workbenchId).
  * ───────────────────────────────────────────── */
-export const assignSeat = onCall(async (request) => {
+export const assignSeat = onCall(PUBLIC_CALLABLE_OPTIONS, async (request) => {
   const uid = request.auth?.uid;
   if (!uid) throw new HttpsError("unauthenticated", "Must be signed in");
 
@@ -390,7 +416,7 @@ export const assignSeat = onCall(async (request) => {
  * Releases an active bench back to available.
  * Uses null (not FieldValue.delete) to match Flutter app pattern.
  * ───────────────────────────────────────────── */
-export const releaseSeat = onCall(async (request) => {
+export const releaseSeat = onCall(PUBLIC_CALLABLE_OPTIONS, async (request) => {
   const uid = request.auth?.uid;
   if (!uid) throw new HttpsError("unauthenticated", "Must be signed in");
 
@@ -424,7 +450,9 @@ export const releaseSeat = onCall(async (request) => {
  * Updates Stripe subscription quantity with prorations.
  * Provisions new bench docs on increase.
  * ───────────────────────────────────────────── */
-export const updateSeatCount = onCall(async (request) => {
+export const updateSeatCount = onCall(
+  STRIPE_CALLABLE_OPTIONS,
+  async (request) => {
   const uid = request.auth?.uid;
   if (!uid) throw new HttpsError("unauthenticated", "Must be signed in");
 
@@ -487,15 +515,16 @@ export const updateSeatCount = onCall(async (request) => {
     await batch.commit();
   }
 
-  return { success: true };
-});
+    return { success: true };
+  }
+);
 
 /* ─────────────────────────────────────────────
  * signContract
  * Records a contract signature. Uses "signed" status
  * and signatoryName field (aligned with Flutter app).
  * ───────────────────────────────────────────── */
-export const signContract = onCall(async (request) => {
+export const signContract = onCall(PUBLIC_CALLABLE_OPTIONS, async (request) => {
   const uid = request.auth?.uid;
   if (!uid) throw new HttpsError("unauthenticated", "Must be signed in");
 

@@ -8,11 +8,12 @@ import { trackEvent } from '@/lib/analytics';
 import { CTA } from '@/lib/constants';
 
 const NAV_LINKS = [
-  { href: '/industries/', label: 'Industries' },
-  { href: '/pilot/', label: 'Pilot' },
-  { href: '/production/', label: 'Production' },
-  { href: '/enterprise/', label: 'Enterprise' },
-  { href: '/calculator/', label: 'ROI Estimate' },
+  { href: '/personal/', label: 'Pilot' },
+  { href: '/commercial/', label: 'Production' },
+  { href: '/industrial/', label: 'Enterprise' },
+  { href: '/calculator/', label: 'Quick Estimate' },
+  { href: '/margin-impact/', label: 'Margin Model' },
+  { href: '/board-strategy/', label: 'Strategy' },
 ];
 
 /** Map pathname prefixes to contextual CTA labels and destinations. */

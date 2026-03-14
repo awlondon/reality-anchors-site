@@ -48,23 +48,18 @@ export default function Footer() {
             </div>
           </div>
 
-          <nav className="grid grid-cols-2 sm:grid-cols-4 gap-8" aria-label="Footer navigation">
-            {columns.map((col) => (
-              <div key={col.title}>
-                <p className="text-[10px] font-bold tracking-[2px] uppercase text-muted/60 mb-3">{col.title}</p>
-                <ul className="flex flex-col gap-2">
-                  {col.links.map((link) => (
-                    <li key={link.href}>
-                      <Link href={link.href} className="text-sm text-muted hover:text-txt transition-colors">
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </nav>
-        </div>
+        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted" aria-label="Footer navigation">
+          <Link href="/personal/" className="hover:text-txt transition-colors">Pilot</Link>
+          <Link href="/commercial/" className="hover:text-txt transition-colors">Production</Link>
+          <Link href="/industrial/" className="hover:text-txt transition-colors">Enterprise</Link>
+          <Link href="/calculator/" className="hover:text-txt transition-colors">Estimator</Link>
+          <Link href="/margin-impact/" className="hover:text-txt transition-colors">Margin Model</Link>
+          <Link href="/pricing-methodology/" className="hover:text-txt transition-colors">Methodology</Link>
+          <Link href="/board-strategy/" className="hover:text-txt transition-colors">Strategy</Link>
+          <Link href="/commercial/#contact" className="hover:text-txt transition-colors">Contact</Link>
+          <Link href="/privacy/" className="hover:text-txt transition-colors">Privacy</Link>
+          <Link href="/terms/" className="hover:text-txt transition-colors">Terms</Link>
+        </nav>
 
         <div className="mt-8 pt-6 border-t border-line/50 text-xs text-muted/80">
           © {new Date().getFullYear()} Reality Anchors LLC

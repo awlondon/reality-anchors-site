@@ -44,7 +44,7 @@ test.describe('Navigation', () => {
     await page.goto('/');
     await expect(page).toHaveTitle(/Reality Anchors/);
 
-    await page.getByRole('link', { name: 'Commercial' }).first().click();
+    await page.getByRole('link', { name: 'Production' }).first().click();
     await expect(page).toHaveURL(/commercial/);
   });
 

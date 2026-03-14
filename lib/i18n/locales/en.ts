@@ -14,9 +14,9 @@ const en = {
   'hero.cta.secondary': 'Read the Strategic Case',
 
   // Navigation
-  'nav.personal': 'Personal',
-  'nav.commercial': 'Commercial',
-  'nav.industrial': 'Industrial',
+  'nav.personal': 'Pilot',
+  'nav.commercial': 'Production',
+  'nav.industrial': 'Enterprise',
   'nav.quickEstimate': 'Quick Estimate',
   'nav.marginModel': 'Margin Model',
   'nav.strategy': 'Strategy',

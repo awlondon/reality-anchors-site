@@ -30,10 +30,10 @@ export function stripeEventDocPath(eventId: string): string {
   return `stripe_events/${eventId}`;
 }
 
-export function orgSeatsCollectionPath(orgId: string): string {
-  return `orgs/${orgId}/seats`;
+export function orgBenchesCollectionPath(orgId: string): string {
+  return `orgs/${orgId}/benches`;
 }
 
-export function orgSeatDocPath(orgId: string, seatId: string): string {
-  return `${orgSeatsCollectionPath(orgId)}/${seatId}`;
+export function orgBenchDocPath(orgId: string, benchId: string): string {
+  return `${orgBenchesCollectionPath(orgId)}/${benchId}`;
 }

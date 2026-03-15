@@ -8,6 +8,33 @@ import * as admin from "firebase-admin";
 
 const PLANS_DOC_PATH = "app_config/plans";
 
+/** Device add-on pricing. Shared between checkout and webhook. */
+export interface DeviceAddOnConfig {
+  deviceId: "context_camera" | "lidar_device";
+  name: string;
+  monthlyUsd: number;
+  stripePriceId: string;
+}
+
+export const DEVICE_ADD_ONS: DeviceAddOnConfig[] = [
+  {
+    deviceId: "context_camera",
+    name: "Context Camera",
+    monthlyUsd: 200,
+    stripePriceId: "", // populated from Stripe dashboard
+  },
+  {
+    deviceId: "lidar_device",
+    name: "LiDAR-Equipped Device",
+    monthlyUsd: 450,
+    stripePriceId: "", // populated from Stripe dashboard
+  },
+];
+
+export function resolveDeviceAddOn(deviceId: string): DeviceAddOnConfig | undefined {
+  return DEVICE_ADD_ONS.find((d) => d.deviceId === deviceId);
+}
+
 /** Unified plan tier combining fields needed by both portal and Flutter app. */
 export interface PlanTier {
   planId: string;
@@ -17,10 +44,10 @@ export interface PlanTier {
 
   // Stripe
   stripePriceId: string;
-  perSeatPriceId: string;
+  perBenchPriceId: string;
 
   // Pricing — portal displays monthly, Flutter app uses annual
-  pricePerSeat: number; // monthly per-bench price
+  pricePerBench: number; // monthly per-bench price
   annualPriceUsd: number; // annual equivalent
 
   // Usage limits
@@ -31,7 +58,7 @@ export interface PlanTier {
   features: string[];
   enabledModules: string[];
   supportTier: string;
-  baseSeats: number;
+  baseBenches: number;
 
   // Display
   recommended: boolean;
@@ -45,8 +72,8 @@ const FALLBACK_PLANS: PlanTier[] = [
     description: "Ideal for evaluation and small-scale deployment",
     active: true,
     stripePriceId: "",
-    perSeatPriceId: "",
-    pricePerSeat: 1200,
+    perBenchPriceId: "",
+    pricePerBench: 1200,
     annualPriceUsd: 14400,
     includedActions: 0,
     overagePerAction: 0,
@@ -57,7 +84,7 @@ const FALLBACK_PLANS: PlanTier[] = [
     ],
     enabledModules: ["ar_execution", "daily_dashboards"],
     supportTier: "standard",
-    baseSeats: 1,
+    baseBenches: 1,
     recommended: false,
   },
   {
@@ -66,8 +93,8 @@ const FALLBACK_PLANS: PlanTier[] = [
     description: "For production fabrication teams running daily",
     active: true,
     stripePriceId: "",
-    perSeatPriceId: "",
-    pricePerSeat: 3200,
+    perBenchPriceId: "",
+    pricePerBench: 3200,
     annualPriceUsd: 38400,
     includedActions: 0,
     overagePerAction: 0,
@@ -79,7 +106,7 @@ const FALLBACK_PLANS: PlanTier[] = [
     ],
     enabledModules: ["ar_execution", "daily_dashboards", "analytics_qa", "custom_calibration"],
     supportTier: "premium",
-    baseSeats: 1,
+    baseBenches: 1,
     recommended: true,
   },
   {
@@ -88,8 +115,8 @@ const FALLBACK_PLANS: PlanTier[] = [
     description: "Full platform with compliance, audit trails & dedicated support",
     active: true,
     stripePriceId: "",
-    perSeatPriceId: "",
-    pricePerSeat: 4800,
+    perBenchPriceId: "",
+    pricePerBench: 4800,
     annualPriceUsd: 57600,
     includedActions: 0,
     overagePerAction: 0,
@@ -105,7 +132,7 @@ const FALLBACK_PLANS: PlanTier[] = [
       "compliance_export", "audit_trails",
     ],
     supportTier: "enterprise",
-    baseSeats: 1,
+    baseBenches: 1,
     recommended: false,
   },
 ];
@@ -157,15 +184,15 @@ function parsePlanTier(planId: string, raw: Record<string, unknown>): PlanTier {
     description: (raw.description as string) || "",
     active: raw.active !== false,
     stripePriceId: (raw.stripePriceId as string) || "",
-    perSeatPriceId: (raw.perSeatPriceId as string) || "",
-    pricePerSeat: (raw.pricePerSeat as number) || 0,
+    perBenchPriceId: (raw.perBenchPriceId as string) || (raw.perSeatPriceId as string) || "",
+    pricePerBench: (raw.pricePerBench as number) || (raw.pricePerSeat as number) || 0,
     annualPriceUsd: (raw.annualPriceUsd as number) || 0,
     includedActions: (raw.includedActions as number) || 0,
     overagePerAction: (raw.overagePerAction as number) || 0,
     features: Array.isArray(raw.features) ? (raw.features as string[]) : [],
     enabledModules: Array.isArray(raw.enabledModules) ? (raw.enabledModules as string[]) : [],
     supportTier: (raw.supportTier as string) || "standard",
-    baseSeats: (raw.baseSeats as number) || 1,
+    baseBenches: (raw.baseBenches as number) || (raw.baseSeats as number) || 1,
     recommended: (raw.recommended as boolean) || false,
   };
 }

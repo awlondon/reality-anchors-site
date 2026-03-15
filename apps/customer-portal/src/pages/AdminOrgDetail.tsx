@@ -11,7 +11,7 @@ import {
 import {
   useOrgDetails,
   useOrgUsageDaily,
-  useOrgSeats,
+  useOrgBenches,
   useOrgSubscriptions,
   useOrgContracts,
 } from '../lib/hooks';
@@ -34,7 +34,7 @@ export default function AdminOrgDetail() {
   const { orgId } = useParams<{ orgId: string }>();
   const { org, loading: orgLoading } = useOrgDetails(orgId);
   const { data: usage, loading: usageLoading } = useOrgUsageDaily(orgId, 30);
-  const { data: seats } = useOrgSeats(orgId);
+  const { data: benches } = useOrgBenches(orgId);
   const { data: subs } = useOrgSubscriptions(orgId);
   const { data: contracts } = useOrgContracts(orgId);
 
@@ -45,22 +45,22 @@ export default function AdminOrgDetail() {
   const chartData = [...usage].reverse().map((d) => ({
     date: d.date?.slice(5),
     bends: d.totalBends,
-    activeSeats: d.activeSeats,
+    activeBenches: d.activeBenches,
   }));
 
   const totalBends = usage.reduce((s, d) => s + (d.totalBends ?? 0), 0);
   const totalAccurate = usage.reduce((s, d) => s + (d.accurateBends ?? 0), 0);
   const accuracy = totalBends > 0 ? ((totalAccurate / totalBends) * 100).toFixed(1) : '0';
-  const activeSeatCount = seats.filter((s) => s.status === 'active').length;
+  const activeBenchCount = benches.filter((b) => b.status === 'active').length;
   const activeSub = subs.find((s) => s.status === 'active' || s.status === 'trialing');
 
   // Operational alerts
   const alerts: string[] = [];
   if (activeSub?.status === 'past_due') alerts.push('Payment is past due');
   if (activeSub?.cancelAtPeriodEnd) alerts.push('Subscription set to cancel at period end');
-  const licensedSeats = activeSub?.licensedBenches ?? 0;
-  if (licensedSeats > 0 && activeSeatCount / licensedSeats < 0.5) {
-    alerts.push(`Low bench utilization: ${activeSeatCount}/${licensedSeats} benches active`);
+  const licensedBenchCount = activeSub?.licensedBenches ?? 0;
+  if (licensedBenchCount > 0 && activeBenchCount / licensedBenchCount < 0.5) {
+    alerts.push(`Low bench utilization: ${activeBenchCount}/${licensedBenchCount} benches active`);
   }
   const pendingContracts = contracts.filter((c) => c.status === 'pending');
   if (pendingContracts.length > 0) alerts.push(`${pendingContracts.length} contract(s) pending signature`);
@@ -91,7 +91,7 @@ export default function AdminOrgDetail() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <KpiCard label="Total Bends (30d)" value={totalBends.toLocaleString()} />
         <KpiCard label="Accuracy" value={accuracy} unit="%" />
-        <KpiCard label="Active Benches" value={`${activeSeatCount} / ${licensedSeats}`} />
+        <KpiCard label="Active Benches" value={`${activeBenchCount} / ${licensedBenchCount}`} />
         <KpiCard
           label="Subscription"
           value={activeSub?.status ?? 'None'}
@@ -118,22 +118,22 @@ export default function AdminOrgDetail() {
       )}
 
       <div className="grid lg:grid-cols-2 gap-6">
-        {/* Seats */}
+        {/* Benches */}
         <Card>
-          <h3 className="text-sm font-medium text-muted mb-4">Benches ({seats.length})</h3>
-          {seats.length === 0 ? (
+          <h3 className="text-sm font-medium text-muted mb-4">Benches ({benches.length})</h3>
+          {benches.length === 0 ? (
             <p className="text-muted/60 text-sm">No benches configured</p>
           ) : (
             <div className="space-y-2 max-h-64 overflow-y-auto">
-              {seats.map((seat) => (
-                <div key={seat.id} className="flex items-center justify-between text-sm py-1.5 border-b border-line/30 last:border-0">
+              {benches.map((bench) => (
+                <div key={bench.id} className="flex items-center justify-between text-sm py-1.5 border-b border-line/30 last:border-0">
                   <div>
-                    <span className="text-txt">Bench {seat.id.slice(0, 6)}</span>
-                    {seat.assignedEmail && (
-                      <span className="text-muted ml-2">{seat.assignedEmail}</span>
+                    <span className="text-txt">Bench {bench.id.slice(0, 6)}</span>
+                    {bench.assignedEmail && (
+                      <span className="text-muted ml-2">{bench.assignedEmail}</span>
                     )}
                   </div>
-                  <StatusBadge status={seat.status} />
+                  <StatusBadge status={bench.status} />
                 </div>
               ))}
             </div>

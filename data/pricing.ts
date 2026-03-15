@@ -19,6 +19,37 @@ export interface PricingTier {
   highlight?: boolean;
 }
 
+export interface DeviceAddOn {
+  id: 'context_camera' | 'lidar_device';
+  name: string;
+  price: string;
+  monthlyUsd: number;
+  description: string;
+  valueAnchor: string;
+  capabilityStep: string;
+}
+
+export const deviceAddOns: DeviceAddOn[] = [
+  {
+    id: 'context_camera',
+    name: 'Context Camera',
+    price: '$200/device/mo',
+    monthlyUsd: 200,
+    description: 'Add wider coverage, redundancy, or multi-angle capture to any bench.',
+    valueAnchor: 'Wider coverage without complexity',
+    capabilityStep: '02',
+  },
+  {
+    id: 'lidar_device',
+    name: 'LiDAR-Equipped Device',
+    price: '$450/device/mo',
+    monthlyUsd: 450,
+    description: 'Sub-millimetre precision depth for tighter bend verification or spacing checks.',
+    valueAnchor: 'Precision depth where accuracy earns its keep',
+    capabilityStep: '03',
+  },
+];
+
 export const pricingTiers: PricingTier[] = [
   {
     id: 'pilot',
@@ -30,7 +61,7 @@ export const pricingTiers: PricingTier[] = [
       'Start with deterministic capture on one bench. Bring your own compatible camera, declare known facts once, and prove fit before you expand.',
     fit: 'Single benches, small crews, and beta evaluations that need a clean path into paid production use.',
     includedUsage: {
-      cameras: '1 reference camera',
+      cameras: '1 reference camera (included)',
       storage: 'Starter capture storage for one active bench',
       overage: 'Additional cameras or storage can be added without changing tiers',
     },
@@ -52,7 +83,7 @@ export const pricingTiers: PricingTier[] = [
       'Scale from a single reference camera into mixed-camera coverage. Production adds the analytics and calibration controls teams expect before wider rollout.',
     fit: 'Fabrication yards, multi-bench shops, and operators who need repeatable validation with cleaner economics.',
     includedUsage: {
-      cameras: 'Mixed-camera starter coverage for active benches',
+      cameras: '1 reference camera (included) — add context or LiDAR devices as needed',
       storage: 'Pooled capture storage sized for daily production workflows',
       overage: 'Transparent add-ons for higher camera density or heavier storage volumes',
     },
@@ -75,7 +106,7 @@ export const pricingTiers: PricingTier[] = [
       'Standardize execution across yards and plants with governance, auditability, and scoped hardware/storage pools that reflect the real rollout.',
     fit: 'High-volume plants, ERP-connected operations, and multi-site programs that need formal controls.',
     includedUsage: {
-      cameras: 'Scoped camera allocation by site, bench density, and validation scope',
+      cameras: '1 reference camera (included) — scoped device allocation by site and validation scope',
       storage: 'Contracted storage pools for long-run traceability and exports',
       overage: 'Custom overage schedules agreed during technical review',
     },
@@ -98,7 +129,7 @@ export const pricingNarrative = {
   body: 'A bench is one active fabrication station with its own operators, capture workflow, and validation history. Pricing follows the bench so buyers can connect setup effort, included usage, and measured value without guessing what is bundled.',
   bullets: [
     'Pilot and beta evaluations include a documented review date, tier boundary, and conversion expectation before activation.',
-    'Reality Anchors software orchestrates the capture workflow; customers bring their own compatible cameras and add LiDAR only where precision depth matters.',
+    'Every bench includes one reference camera. Context cameras ($200/mo) and LiDAR-equipped devices ($450/mo) are added per device when wider coverage or precision depth is needed.',
     'Advanced safety workflows and stronger protection boundaries are scoped separately from the base offer until the technical and legal limits are explicit.',
   ],
 };

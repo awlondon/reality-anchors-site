@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useSeats, useSubscriptions } from '../lib/hooks';
+import { useBenches, useSubscriptions } from '../lib/hooks';
 import NotesPanel from '../components/NotesPanel';
-import { assignSeat, releaseSeat, updateSeatCount } from '../lib/callable';
+import { assignBench, releaseBench, updateBenchCount } from '../lib/callable';
 import {
   Card,
   PageHeader,
@@ -13,7 +13,7 @@ import {
 } from '../components/ui';
 
 export default function Seats() {
-  const { data: seats, loading } = useSeats();
+  const { data: benches, loading } = useBenches();
   const { data: subs } = useSubscriptions();
   const activeSub = subs.find((s) => s.status === 'active' || s.status === 'trialing');
   const licensedCount = activeSub?.licensedBenches ?? 0;
@@ -24,12 +24,12 @@ export default function Seats() {
   const [error, setError] = useState('');
   const [buyCount, setBuyCount] = useState('');
 
-  const handleAssign = async (seatId: string) => {
+  const handleAssign = async (benchId: string) => {
     if (!assignEmail.trim()) return;
     setError('');
-    setActionLoading(seatId);
+    setActionLoading(benchId);
     try {
-      await assignSeat({ seatId, email: assignEmail.trim() });
+      await assignBench({ benchId, email: assignEmail.trim() });
       setAssignModal(null);
       setAssignEmail('');
     } catch (err) {
@@ -39,11 +39,11 @@ export default function Seats() {
     }
   };
 
-  const handleRelease = async (seatId: string) => {
+  const handleRelease = async (benchId: string) => {
     setError('');
-    setActionLoading(seatId);
+    setActionLoading(benchId);
     try {
-      await releaseSeat({ seatId });
+      await releaseBench({ benchId });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to release bench');
     } finally {
@@ -51,15 +51,15 @@ export default function Seats() {
     }
   };
 
-  const handleBuySeats = async () => {
+  const handleBuyBenches = async () => {
     const count = parseInt(buyCount, 10);
     if (!count || count <= 0) return;
     setError('');
     setActionLoading('buy');
     try {
-      const result = await updateSeatCount({ newCount: licensedCount + count });
+      const result = await updateBenchCount({ newCount: licensedCount + count });
       if (result.url) {
-        window.location.href = result.url; // Redirect to Stripe if payment needed
+        window.location.href = result.url;
       }
       setBuyCount('');
     } catch (err) {
@@ -73,8 +73,8 @@ export default function Seats() {
     return <div className="flex justify-center h-64 items-center"><Spinner size="lg" /></div>;
   }
 
-  const activeCount = seats.filter((s) => s.status === 'active').length;
-  const availableCount = seats.filter((s) => s.status === 'available').length;
+  const activeCount = benches.filter((b) => b.status === 'active').length;
+  const availableCount = benches.filter((b) => b.status === 'available').length;
 
   return (
     <>
@@ -93,7 +93,7 @@ export default function Seats() {
             />
             <Button
               variant="secondary"
-              onClick={handleBuySeats}
+              onClick={handleBuyBenches}
               loading={actionLoading === 'buy'}
               disabled={!buyCount}
             >
@@ -105,28 +105,28 @@ export default function Seats() {
 
       {error && <p className="text-danger text-sm mb-4">{error}</p>}
 
-      {seats.length === 0 ? (
+      {benches.length === 0 ? (
         <EmptyState title="No benches configured" description="Benches are provisioned when your subscription is created." />
       ) : (
         <div className="space-y-3">
-          {seats.map((seat) => (
-            <Card key={seat.id} className="flex items-center justify-between">
+          {benches.map((bench) => (
+            <Card key={bench.id} className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div>
                   <p className="text-txt font-medium">
-                    {seat.seatId ? `Bench ${seat.id.slice(0, 6)}` : seat.id.slice(0, 8)}
+                    {bench.benchId ? `Bench ${bench.id.slice(0, 6)}` : bench.id.slice(0, 8)}
                   </p>
-                  {seat.assignedEmail && (
-                    <p className="text-muted text-sm">{seat.assignedEmail}</p>
+                  {bench.assignedEmail && (
+                    <p className="text-muted text-sm">{bench.assignedEmail}</p>
                   )}
                 </div>
-                <StatusBadge status={seat.status} />
+                <StatusBadge status={bench.status} />
               </div>
 
               <div className="flex items-center gap-2">
-                {seat.status === 'available' && (
+                {bench.status === 'available' && (
                   <>
-                    {assignModal === seat.id ? (
+                    {assignModal === bench.id ? (
                       <div className="flex items-center gap-2">
                         <Input
                           type="email"
@@ -134,11 +134,11 @@ export default function Seats() {
                           className="w-56"
                           value={assignEmail}
                           onChange={(e) => setAssignEmail(e.target.value)}
-                          onKeyDown={(e) => e.key === 'Enter' && handleAssign(seat.id)}
+                          onKeyDown={(e) => e.key === 'Enter' && handleAssign(bench.id)}
                         />
                         <Button
-                          onClick={() => handleAssign(seat.id)}
-                          loading={actionLoading === seat.id}
+                          onClick={() => handleAssign(bench.id)}
+                          loading={actionLoading === bench.id}
                           disabled={!assignEmail.trim()}
                         >
                           Assign
@@ -148,17 +148,17 @@ export default function Seats() {
                         </Button>
                       </div>
                     ) : (
-                      <Button variant="secondary" onClick={() => setAssignModal(seat.id)}>
+                      <Button variant="secondary" onClick={() => setAssignModal(bench.id)}>
                         Assign
                       </Button>
                     )}
                   </>
                 )}
-                {seat.status === 'active' && (
+                {bench.status === 'active' && (
                   <Button
                     variant="danger"
-                    onClick={() => handleRelease(seat.id)}
-                    loading={actionLoading === seat.id}
+                    onClick={() => handleRelease(bench.id)}
+                    loading={actionLoading === bench.id}
                   >
                     Release
                   </Button>
@@ -169,7 +169,7 @@ export default function Seats() {
         </div>
       )}
 
-      <NotesPanel context="seats" title="Bench Notes" />
+      <NotesPanel context="benches" title="Bench Notes" />
     </>
   );
 }

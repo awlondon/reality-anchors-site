@@ -6,11 +6,12 @@
  *
  * Key alignment points:
  * - Stripe customer stored at orgs/{orgId}/billing/customer
- * - Benches use seatId, assignedUid, workbenchId fields
+ * - Benches use benchId, assignedUid, workbenchId fields
  * - Contracts use "signed" status with signatoryName
  * - Plans read from Firestore app_config/plans with hardcoded fallback
  * - Webhook events are idempotent via stripe_events/{eventId}
  * - Org provisioning creates orgs/{orgId}/members/{uid} membership
+ * - Pricing model: plan tier (per bench) + optional device add-ons
  */
 
 import * as admin from "firebase-admin";
@@ -24,13 +25,13 @@ import {
   stripeSecretKey,
   stripeWebhookSecret,
 } from "./config";
-import { getAllPlans, resolvePlan } from "./plans";
+import { getAllPlans, resolvePlan, resolveDeviceAddOn, DEVICE_ADD_ONS } from "./plans";
 import {
   orgBillingCustomerDocPath,
   orgSubscriptionDocPath,
   orgSubscriptionsCollectionPath,
-  orgSeatsCollectionPath,
-  orgSeatDocPath,
+  orgBenchesCollectionPath,
+  orgBenchDocPath,
   orgContractDocPath,
 } from "./commercialPaths";
 import { claimStripeEventIdempotency } from "./stripeWebhookIdempotency";
@@ -55,7 +56,7 @@ function getStripe(): Stripe {
 
 /* ─────────────────────────────────────────────
  * getAvailablePlans
- * Returns the pricing tiers from Firestore (or fallback)
+ * Returns the pricing tiers and device add-ons from Firestore (or fallback)
  * ───────────────────────────────────────────── */
 export const getAvailablePlans = onCall(PUBLIC_CALLABLE_OPTIONS, async () => {
   const plans = await getAllPlans();
@@ -64,19 +65,31 @@ export const getAvailablePlans = onCall(PUBLIC_CALLABLE_OPTIONS, async () => {
       id: p.planId,
       name: p.name,
       description: p.description,
-      pricePerSeat: p.pricePerSeat,
+      pricePerBench: p.pricePerBench,
       interval: "month" as const,
       includedActions: p.includedActions,
       overagePerAction: p.overagePerAction,
       features: p.features,
       recommended: p.recommended,
     })),
+    deviceAddOns: DEVICE_ADD_ONS.map((d) => ({
+      deviceId: d.deviceId,
+      name: d.name,
+      monthlyUsd: d.monthlyUsd,
+    })),
   };
 });
+
+/** Device selection from the client */
+interface DeviceSelection {
+  deviceId: string;
+  quantity: number;
+}
 
 /* ─────────────────────────────────────────────
  * createStripeCheckoutSession
  * Creates a Stripe Checkout for new subscription.
+ * Pricing model: plan tier (per bench) + optional device add-ons.
  * Stores customer at orgs/{orgId}/billing/customer (aligned with Flutter app).
  * ───────────────────────────────────────────── */
 export const createStripeCheckoutSession = onCall(
@@ -85,15 +98,27 @@ export const createStripeCheckoutSession = onCall(
   const uid = request.auth?.uid;
   if (!uid) throw new HttpsError("unauthenticated", "Must be signed in");
 
-  const { planId, licensedBenches } = request.data as {
+  const { planId, licensedBenches, devices } = request.data as {
     planId: string;
     licensedBenches: number;
+    devices?: DeviceSelection[];
   };
 
   const plan = await resolvePlan(planId);
   if (!plan) throw new HttpsError("not-found", `Plan "${planId}" not found`);
   if (!licensedBenches || licensedBenches < 1)
     throw new HttpsError("invalid-argument", "licensedBenches must be >= 1");
+
+  // Validate device selections
+  const validatedDevices: DeviceSelection[] = [];
+  if (devices && devices.length > 0) {
+    for (const d of devices) {
+      if (d.quantity < 1) continue;
+      const addon = resolveDeviceAddOn(d.deviceId);
+      if (!addon) throw new HttpsError("invalid-argument", `Unknown device: ${d.deviceId}`);
+      validatedDevices.push({ deviceId: d.deviceId, quantity: d.quantity });
+    }
+  }
 
   const userDoc = await db.doc(`users/${uid}`).get();
   const userData = userDoc.data();
@@ -102,7 +127,6 @@ export const createStripeCheckoutSession = onCall(
   // Resolve or create org
   let orgId = await resolveOrgId(uid);
   if (!orgId) {
-    // Create org shell — will be fully provisioned by webhook
     const orgRef = db.collection("orgs").doc();
     orgId = orgRef.id;
     await orgRef.set({
@@ -119,7 +143,7 @@ export const createStripeCheckoutSession = onCall(
   const stripe = getStripe();
   const customerId = await getOrCreateStripeCustomer(stripe, orgId, email);
 
-  // Build line items
+  // Build line items — plan tier (per bench)
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
   if (plan.stripePriceId) {
@@ -133,14 +157,43 @@ export const createStripeCheckoutSession = onCall(
         currency: "usd",
         product_data: {
           name: `${plan.name} — Production System License`,
-          description: `${plan.includedActions.toLocaleString()} fabrication actions/bench/mo included`,
+          description: `Per-bench plan tier`,
         },
-        unit_amount: plan.pricePerSeat * 100,
+        unit_amount: plan.pricePerBench * 100,
         recurring: { interval: "month" },
       },
       quantity: licensedBenches,
     });
   }
+
+  // Add device add-on line items
+  for (const d of validatedDevices) {
+    const addon = resolveDeviceAddOn(d.deviceId)!;
+    if (addon.stripePriceId) {
+      lineItems.push({
+        price: addon.stripePriceId,
+        quantity: d.quantity,
+      });
+    } else {
+      lineItems.push({
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: addon.name,
+            description: `Optional device add-on`,
+          },
+          unit_amount: addon.monthlyUsd * 100,
+          recurring: { interval: "month" },
+        },
+        quantity: d.quantity,
+      });
+    }
+  }
+
+  // Serialize device selections for metadata
+  const devicesJson = validatedDevices.length > 0
+    ? JSON.stringify(validatedDevices)
+    : "";
 
   const session = await stripe.checkout.sessions.create({
     customer: customerId,
@@ -159,7 +212,8 @@ export const createStripeCheckoutSession = onCall(
         planId: plan.planId,
         planName: plan.name,
         licensedBenches: String(licensedBenches),
-        planVersion: "v2",
+        devices: devicesJson,
+        planVersion: "v3",
       },
     },
   });
@@ -259,6 +313,7 @@ export const stripeWebhook = onRequest(
                 planId: meta.planId,
                 planName: meta.planName,
                 licensedBenches: parseInt(meta.licensedBenches || "1", 10),
+                devices: meta.devices ? JSON.parse(meta.devices) : [],
               });
             }
           }
@@ -282,6 +337,7 @@ export const stripeWebhook = onRequest(
                   supportTier: plan.supportTier,
                   planId: meta.planId,
                   licensedBenches: parseInt(meta.licensedBenches || "1", 10),
+                  devices: meta.devices ? JSON.parse(meta.devices) : [],
                   updatedAt: admin.firestore.FieldValue.serverTimestamp(),
                 });
               }
@@ -342,21 +398,20 @@ export const stripeWebhook = onRequest(
 );
 
 /* ─────────────────────────────────────────────
- * assignSeat
- * Assigns a bench to an operator. Uses the Flutter app's
- * schema (seatId, assignedUid, workbenchId).
+ * assignBench
+ * Assigns a bench to an operator.
  * ───────────────────────────────────────────── */
-export const assignSeat = onCall(PUBLIC_CALLABLE_OPTIONS, async (request) => {
+export const assignBench = onCall(PUBLIC_CALLABLE_OPTIONS, async (request) => {
   const uid = request.auth?.uid;
   if (!uid) throw new HttpsError("unauthenticated", "Must be signed in");
 
-  const { seatId, email } = request.data as {
-    seatId: string;
+  const { benchId, email } = request.data as {
+    benchId: string;
     email: string;
   };
 
-  if (!seatId || !email)
-    throw new HttpsError("invalid-argument", "seatId and email required");
+  if (!benchId || !email)
+    throw new HttpsError("invalid-argument", "benchId and email required");
 
   const orgId = await resolveOrgId(uid);
   if (!orgId) throw new HttpsError("not-found", "No organization found");
@@ -371,24 +426,24 @@ export const assignSeat = onCall(PUBLIC_CALLABLE_OPTIONS, async (request) => {
   const licensedBenches =
     (subsSnap.docs[0]?.data()?.licensedBenches as number) || 0;
 
-  const activeSeats = await db
-    .collection(orgSeatsCollectionPath(orgId))
+  const activeBenches = await db
+    .collection(orgBenchesCollectionPath(orgId))
     .where("status", "==", "active")
     .get();
 
-  if (activeSeats.size >= licensedBenches) {
+  if (activeBenches.size >= licensedBenches) {
     throw new HttpsError(
       "failed-precondition",
       `All ${licensedBenches} licensed benches are in use`
     );
   }
 
-  const seatRef = db.doc(orgSeatDocPath(orgId, seatId));
-  const seatDoc = await seatRef.get();
+  const benchRef = db.doc(orgBenchDocPath(orgId, benchId));
+  const benchDoc = await benchRef.get();
 
-  if (!seatDoc.exists)
+  if (!benchDoc.exists)
     throw new HttpsError("not-found", "Bench not found");
-  if (seatDoc.data()?.status !== "available")
+  if (benchDoc.data()?.status !== "available")
     throw new HttpsError("failed-precondition", "Bench is not available");
 
   // Look up the assignee's uid by email (if they exist in Firebase Auth)
@@ -400,7 +455,7 @@ export const assignSeat = onCall(PUBLIC_CALLABLE_OPTIONS, async (request) => {
     // User may not exist yet — store email for now
   }
 
-  await seatRef.update({
+  await benchRef.update({
     assignedUid,
     assignedEmail: email,
     workbenchId: null,
@@ -412,28 +467,28 @@ export const assignSeat = onCall(PUBLIC_CALLABLE_OPTIONS, async (request) => {
 });
 
 /* ─────────────────────────────────────────────
- * releaseSeat
+ * releaseBench
  * Releases an active bench back to available.
  * Uses null (not FieldValue.delete) to match Flutter app pattern.
  * ───────────────────────────────────────────── */
-export const releaseSeat = onCall(PUBLIC_CALLABLE_OPTIONS, async (request) => {
+export const releaseBench = onCall(PUBLIC_CALLABLE_OPTIONS, async (request) => {
   const uid = request.auth?.uid;
   if (!uid) throw new HttpsError("unauthenticated", "Must be signed in");
 
-  const { seatId } = request.data as { seatId: string };
-  if (!seatId) throw new HttpsError("invalid-argument", "seatId required");
+  const { benchId } = request.data as { benchId: string };
+  if (!benchId) throw new HttpsError("invalid-argument", "benchId required");
 
   const orgId = await resolveOrgId(uid);
   if (!orgId) throw new HttpsError("not-found", "No organization found");
 
-  const seatRef = db.doc(orgSeatDocPath(orgId, seatId));
-  const seatDoc = await seatRef.get();
+  const benchRef = db.doc(orgBenchDocPath(orgId, benchId));
+  const benchDoc = await benchRef.get();
 
-  if (!seatDoc.exists) throw new HttpsError("not-found", "Bench not found");
-  if (seatDoc.data()?.status !== "active")
+  if (!benchDoc.exists) throw new HttpsError("not-found", "Bench not found");
+  if (benchDoc.data()?.status !== "active")
     throw new HttpsError("failed-precondition", "Bench is not active");
 
-  await seatRef.update({
+  await benchRef.update({
     assignedUid: null,
     assignedEmail: null,
     workbenchId: null,
@@ -446,11 +501,11 @@ export const releaseSeat = onCall(PUBLIC_CALLABLE_OPTIONS, async (request) => {
 });
 
 /* ─────────────────────────────────────────────
- * updateSeatCount
- * Updates Stripe subscription quantity with prorations.
+ * updateBenchCount
+ * Updates Stripe subscription bench quantity with prorations.
  * Provisions new bench docs on increase.
  * ───────────────────────────────────────────── */
-export const updateSeatCount = onCall(
+export const updateBenchCount = onCall(
   STRIPE_CALLABLE_OPTIONS,
   async (request) => {
   const uid = request.auth?.uid;
@@ -483,6 +538,7 @@ export const updateSeatCount = onCall(
 
   const stripe = getStripe();
   const sub = await stripe.subscriptions.retrieve(stripeSubId);
+  // First item is the plan tier line item
   const itemId = sub.items.data[0]?.id;
 
   if (itemId) {
@@ -500,9 +556,9 @@ export const updateSeatCount = onCall(
   if (newCount > currentCount) {
     const batch = db.batch();
     for (let i = 0; i < newCount - currentCount; i++) {
-      const seatRef = db.collection(orgSeatsCollectionPath(orgId)).doc();
-      batch.set(seatRef, {
-        seatId: seatRef.id,
+      const benchRef = db.collection(orgBenchesCollectionPath(orgId)).doc();
+      batch.set(benchRef, {
+        benchId: benchRef.id,
         orgId,
         assignedUid: null,
         assignedEmail: null,
@@ -568,7 +624,7 @@ export const signContract = onCall(PUBLIC_CALLABLE_OPTIONS, async (request) => {
 
 /**
  * Syncs a Stripe subscription to Firestore.
- * Aligned with the Flutter app's syncSubscription.
+ * Stores device add-on metadata alongside bench count.
  */
 async function syncSubscription(
   stripe: Stripe,
@@ -587,6 +643,7 @@ async function syncSubscription(
   const planId = metadata.planId || null;
   const planName = metadata.planName || null;
   const priceId = sub.items.data[0]?.price.id || null;
+  const devices = metadata.devices ? JSON.parse(metadata.devices) : [];
 
   await db.doc(orgSubscriptionDocPath(orgId, sub.id)).set({
     orgId,
@@ -604,13 +661,14 @@ async function syncSubscription(
     cancelAtPeriodEnd: sub.cancel_at_period_end,
     priceId,
     licensedBenches,
+    devices,
     updatedAt: admin.firestore.FieldValue.serverTimestamp(),
   });
 }
 
 /**
  * Provisions a new organization after Stripe checkout.
- * Aligned with the Flutter app's provisionOrganization.
+ * Creates bench docs and stores device add-on info on the org.
  */
 async function provisionOrganization(params: {
   orgId: string;
@@ -619,8 +677,9 @@ async function provisionOrganization(params: {
   planId?: string;
   planName?: string;
   licensedBenches: number;
+  devices?: DeviceSelection[];
 }): Promise<void> {
-  const { orgId, uid, email, planId, planName, licensedBenches } = params;
+  const { orgId, uid, email, planId, planName, licensedBenches, devices } = params;
 
   const orgRef = db.collection("orgs").doc(orgId);
   const orgSnap = await orgRef.get();
@@ -638,26 +697,25 @@ async function provisionOrganization(params: {
 
   const batch = db.batch();
 
+  const orgData = {
+    licensedBenches,
+    enabledModules,
+    supportTier,
+    planId: planId || null,
+    devices: devices || [],
+    updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+  };
+
   if (!orgSnap.exists) {
     batch.set(orgRef, {
       name: planName
         ? `Organization (${planName})`
         : "New Organization",
-      licensedBenches,
-      enabledModules,
-      supportTier,
-      planId: planId || null,
+      ...orgData,
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
   } else {
-    batch.update(orgRef, {
-      licensedBenches,
-      enabledModules,
-      supportTier,
-      planId: planId || null,
-      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-    });
+    batch.update(orgRef, orgData);
   }
 
   // Add the purchasing user as org owner
@@ -675,9 +733,9 @@ async function provisionOrganization(params: {
 
   // Create initial bench assignments
   for (let i = 0; i < licensedBenches; i++) {
-    const seatRef = db.collection(orgSeatsCollectionPath(orgId)).doc();
-    batch.set(seatRef, {
-      seatId: seatRef.id,
+    const benchRef = db.collection(orgBenchesCollectionPath(orgId)).doc();
+    batch.set(benchRef, {
+      benchId: benchRef.id,
       orgId,
       assignedUid: i === 0 ? uid : null,
       assignedEmail: i === 0 ? email : null,
@@ -696,7 +754,9 @@ async function provisionOrganization(params: {
 
   await batch.commit();
   console.log(
-    `Provisioned org ${orgId} with ${licensedBenches} benches for user ${uid}`
+    `Provisioned org ${orgId} with ${licensedBenches} benches` +
+    (devices?.length ? ` + ${devices.length} device add-on(s)` : "") +
+    ` for user ${uid}`
   );
 }
 

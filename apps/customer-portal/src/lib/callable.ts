@@ -1,5 +1,6 @@
 import { httpsCallable } from 'firebase/functions';
 import { functions } from '../firebase';
+import type { DeviceSelection } from '../types';
 
 /** Typed wrapper around httpsCallable */
 function callable<TData, TResult>(name: string) {
@@ -17,30 +18,33 @@ export const createCustomerPortalSession = callable<
 >('createCustomerPortalSession');
 
 export const createStripeCheckoutSession = callable<
-  { planId: string; licensedBenches: number },
+  { planId: string; licensedBenches: number; devices?: DeviceSelection[] },
   { url: string }
 >('createStripeCheckoutSession');
 
-// Seat management
-export const assignSeat = callable<
-  { seatId: string; email: string },
+// Bench management
+export const assignBench = callable<
+  { benchId: string; email: string },
   { success: boolean }
->('assignSeat');
+>('assignBench');
 
-export const releaseSeat = callable<
-  { seatId: string },
+export const releaseBench = callable<
+  { benchId: string },
   { success: boolean }
->('releaseSeat');
+>('releaseBench');
 
-export const updateSeatCount = callable<
+export const updateBenchCount = callable<
   { newCount: number },
   { url?: string; success: boolean }
->('updateSeatCount');
+>('updateBenchCount');
 
 // Onboarding
 export const getAvailablePlans = callable<
   Record<string, never>,
-  { plans: Array<{ id: string; name: string; description: string; pricePerSeat: number; interval: string; includedActions: number; overagePerAction: number; features: string[]; recommended?: boolean }> }
+  {
+    plans: Array<{ id: string; name: string; description: string; pricePerBench: number; interval: string; includedActions: number; overagePerAction: number; features: string[]; recommended?: boolean }>;
+    deviceAddOns?: Array<{ deviceId: string; name: string; monthlyUsd: number }>;
+  }
 >('getAvailablePlans');
 
 // Contracts

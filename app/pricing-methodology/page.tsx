@@ -185,6 +185,11 @@ AnnualReworkSavings =
                 <tr><td>Production</td><td className="font-mono text-accent-2">$3,200</td><td className="text-muted text-sm">Fabrication yards and multi-bench shops</td></tr>
                 <tr><td>Enterprise</td><td className="font-mono text-accent-2">$4,800</td><td className="text-muted text-sm">High-volume plants with ERP integration</td></tr>
               </tbody>
+              <tbody>
+                <tr><td colSpan={3} className="pt-4 pb-2 text-xs font-bold uppercase tracking-[0.15em] text-accent">Device Add-Ons (per device, any tier)</td></tr>
+                <tr><td>Context Camera</td><td className="font-mono text-accent-2">$200/device/mo</td><td className="text-muted text-sm">Wider coverage, multi-angle capture</td></tr>
+                <tr><td>LiDAR-Equipped Device</td><td className="font-mono text-accent-2">$450/device/mo</td><td className="text-muted text-sm">Sub-mm precision depth</td></tr>
+              </tbody>
             </table>
           </div>
           <p className="text-xs text-muted/70">Final pricing depends on bench count, instrumentation scope, calibration governance requirements, and multi-project optimization complexity.</p>

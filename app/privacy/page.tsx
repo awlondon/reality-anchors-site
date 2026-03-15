@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   },
 };
 
-const EFFECTIVE_DATE = '1 March 2026';
+const EFFECTIVE_DATE = '15 March 2026';
 const CONTACT_EMAIL = 'privacy@realityanchors.co';
 
 export default function PrivacyPage() {
@@ -59,7 +59,33 @@ export default function PrivacyPage() {
             <p>We do not sell, rent, or share your personal information with third parties for their own marketing purposes.</p>
           </Section>
 
-          <Section title="4. Third-party services">
+          <Section title="4. Data usage tiers">
+            <p>
+              We organise data usage into three tiers to make our practices transparent:
+            </p>
+            <ul>
+              <li>
+                <strong>Tier 1 — Operational:</strong> data used solely to deliver the service to you. This includes
+                running execution workflows, storing validation records, and generating reports you request. Operational
+                use is always permitted under your subscription agreement.
+              </li>
+              <li>
+                <strong>Tier 2 — Aggregated and anonymised analytics:</strong> de-identified data used to improve
+                product quality, benchmark performance across the industry, and generate aggregate insights. No
+                customer-identifiable information leaves this tier. This usage is disclosed here and in your
+                subscription agreement.
+              </li>
+              <li>
+                <strong>Tier 3 — Model training on customer-specific data:</strong> use of your facility-specific
+                operational data to train machine learning models. This tier requires your explicit written opt-in
+                consent, documented in your subscription or enterprise agreement. You may revoke this consent at any
+                time by contacting us at{' '}
+                <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+              </li>
+            </ul>
+          </Section>
+
+          <Section title="5. Third-party services">
             <p>We use the following third-party services to operate the site:</p>
             <ul>
               <li>
@@ -98,14 +124,54 @@ export default function PrivacyPage() {
             </p>
           </Section>
 
-          <Section title="5. Data retention">
+          <Section title="6. Fabrication telemetry and sensor data">
             <p>
-              Contact form submissions are retained for up to 24 months for sales follow-up purposes, after which
-              they are deleted. Anonymised session analytics may be retained indefinitely in aggregated form.
+              When you use the Reality Anchors platform, the following categories of operational data may be collected
+              during execution sessions:
+            </p>
+            <ul>
+              <li>Rebar reference measurements (bar size, count, length, weight).</li>
+              <li>AR calibration data and session metadata.</li>
+              <li>Camera frames captured during validation workflows.</li>
+              <li>LiDAR depth maps (when LiDAR-equipped devices are used).</li>
+              <li>Device identifiers and operator session metadata.</li>
+            </ul>
+            <p>
+              Telemetry is processed both on-device and in our cloud infrastructure. Raw sensor data (camera frames,
+              depth maps) is never shared with third parties. All fabrication telemetry falls under Tier 1
+              (Operational) usage unless you have opted into Tier 3 (Model Training) as described in Section 4.
             </p>
           </Section>
 
-          <Section title="6. Your rights">
+          <Section title="7. Data retention">
+            <p>We retain different categories of data for different periods:</p>
+            <ul>
+              <li>
+                <strong>Contact form submissions:</strong> retained for up to 24 months for sales follow-up purposes,
+                after which they are deleted.
+              </li>
+              <li>
+                <strong>Anonymised session analytics:</strong> may be retained indefinitely in aggregated form.
+              </li>
+              <li>
+                <strong>Fabrication telemetry metadata:</strong> retained for up to 90 days from the date of capture.
+              </li>
+              <li>
+                <strong>Raw camera frames and sensor data:</strong> retained for up to 30 days, then automatically
+                purged. Raw frames may contain device identifiers and shop-floor imagery.
+              </li>
+              <li>
+                <strong>Contracts, audit logs, and compliance records:</strong> retained indefinitely or as required
+                by applicable law and your subscription agreement.
+              </li>
+            </ul>
+            <p>
+              Retention windows may be customised under your enterprise subscription agreement. Contact your account
+              manager or <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> to discuss specific requirements.
+            </p>
+          </Section>
+
+          <Section title="8. Your rights">
             <p>
               Depending on your jurisdiction, you may have rights to access, correct, or delete personal data we hold
               about you. To exercise any of these rights, contact us at{' '}
@@ -113,7 +179,60 @@ export default function PrivacyPage() {
             </p>
           </Section>
 
-          <Section title="7. Cookies and similar technologies">
+          <Section title="9. California privacy rights (CCPA / CPRA)">
+            <p>
+              If you are a California resident, you have additional rights under the California Consumer Privacy Act
+              (CCPA) and the California Privacy Rights Act (CPRA):
+            </p>
+            <ul>
+              <li>
+                <strong>Right to know:</strong> you may request details about what personal information we have
+                collected and how it is used, as described in Sections 2–4 above.
+              </li>
+              <li>
+                <strong>Right to delete:</strong> you may request deletion of personal information we hold about you,
+                subject to certain legal exceptions.
+              </li>
+              <li>
+                <strong>Right to opt out of sale or sharing:</strong> we do not sell your personal information. We do
+                not share your personal information for cross-context behavioural advertising.
+              </li>
+              <li>
+                <strong>Right to non-discrimination:</strong> we will not discriminate against you for exercising any
+                of your privacy rights.
+              </li>
+            </ul>
+            <p>
+              To exercise any of these rights, contact us at{' '}
+              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. We will respond within 45 days of receiving
+              a verifiable request. In the preceding 12 months, we have collected the categories of personal
+              information described in Section 2 above.
+            </p>
+          </Section>
+
+          <Section title="10. Data breach notification">
+            <p>
+              In the event of a confirmed data breach affecting your personal information, we will notify affected
+              customers within 72 hours of confirmation, consistent with GDPR Article 33 and applicable US state
+              breach notification laws. Notification will be sent via the email address associated with your account
+              or submission.
+            </p>
+          </Section>
+
+          <Section title="11. Data portability and export">
+            <p>
+              You may request a copy of your personal data in a structured, commonly used, machine-readable format.
+              Enterprise customers can request bulk data exports through their account manager. All other requests
+              should be directed to{' '}
+              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+            </p>
+            <p>
+              We will fulfil export requests within 30 days. For more information about what data is available for
+              export, see our <a href="/data-practices/">Data Practices FAQ</a>.
+            </p>
+          </Section>
+
+          <Section title="12. Cookies and similar technologies">
             <p>
               This site uses cookies and similar technologies for the following purposes, subject to your consent
               choices:
@@ -143,21 +262,22 @@ export default function PrivacyPage() {
             </p>
           </Section>
 
-          <Section title="8. Security">
+          <Section title="13. Security">
             <p>
               We take reasonable technical measures to protect information transmitted to us, including HTTPS
-              encryption. No transmission method is 100% secure; we cannot guarantee absolute security.
+              encryption and access controls scoped to organisational membership. No transmission method is 100%
+              secure; we cannot guarantee absolute security.
             </p>
           </Section>
 
-          <Section title="9. Changes to this policy">
+          <Section title="14. Changes to this policy">
             <p>
               We may update this policy from time to time. Material changes will be reflected in an updated effective
               date at the top of this page.
             </p>
           </Section>
 
-          <Section title="10. Contact">
+          <Section title="15. Contact">
             <p>
               Questions about this policy? Contact us at{' '}
               <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.

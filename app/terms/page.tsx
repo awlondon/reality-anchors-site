@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   },
 };
 
-const EFFECTIVE_DATE = '1 March 2026';
+const EFFECTIVE_DATE = '15 March 2026';
 const CONTACT_EMAIL = 'legal@realityanchors.co';
 
 export default function TermsPage() {
@@ -57,7 +57,23 @@ export default function TermsPage() {
             </p>
           </Section>
 
-          <Section title="5. No warranty">
+          <Section title="5. Data usage framework">
+            <p>
+              When you use the Reality Anchors platform, data generated through your use is governed by a three-tier
+              framework described in our <a href="/privacy/">Privacy Policy</a>:
+            </p>
+            <ul>
+              <li><strong>Tier 1 (Operational):</strong> data used to deliver the service — always permitted.</li>
+              <li><strong>Tier 2 (Aggregated Analytics):</strong> de-identified data used to improve product quality — disclosed in our Privacy Policy.</li>
+              <li><strong>Tier 3 (Model Training):</strong> facility-specific data used to train ML models — requires your explicit written opt-in and may be revoked at any time.</li>
+            </ul>
+            <p>
+              For full details on data collection, retention, and your rights, see our{' '}
+              <a href="/privacy/">Privacy Policy</a> and <a href="/data-practices/">Data Practices FAQ</a>.
+            </p>
+          </Section>
+
+          <Section title="6. No warranty">
             <p>
               The Site and its content are provided &quot;as is&quot; without warranty of any kind, express or
               implied, including warranties of merchantability, fitness for a particular purpose, or
@@ -66,7 +82,7 @@ export default function TermsPage() {
             </p>
           </Section>
 
-          <Section title="6. Limitation of liability">
+          <Section title="7. Limitation of liability">
             <p>
               To the fullest extent permitted by law, Reality Anchors LLC shall not be liable for any indirect,
               incidental, consequential, or punitive damages arising from your use of the Site. Our total liability
@@ -74,14 +90,14 @@ export default function TermsPage() {
             </p>
           </Section>
 
-          <Section title="7. Third-party links">
+          <Section title="8. Third-party links">
             <p>
               The Site may link to third-party websites. We are not responsible for the content, privacy practices,
               or accuracy of any third-party site.
             </p>
           </Section>
 
-          <Section title="8. Governing law">
+          <Section title="9. Governing law">
             <p>
               These Terms are governed by the laws of the State of California, United States. Any disputes arising
               under these Terms shall be subject to the exclusive jurisdiction of the state and federal courts
@@ -89,7 +105,7 @@ export default function TermsPage() {
             </p>
           </Section>
 
-          <Section title="9. Changes to these terms">
+          <Section title="10. Changes to these terms">
             <p>
               We reserve the right to modify these Terms at any time. Material changes will be indicated by an
               updated effective date. Continued use of the Site after changes constitutes acceptance of the revised
@@ -97,7 +113,7 @@ export default function TermsPage() {
             </p>
           </Section>
 
-          <Section title="10. Contact">
+          <Section title="11. Contact">
             <p>
               Questions about these Terms? Contact us at{' '}
               <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.

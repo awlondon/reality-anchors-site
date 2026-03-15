@@ -24,6 +24,7 @@ export default function Footer() {
           <Link href="/requirements/" className="hover:text-txt transition-colors">Requirements</Link>
           <Link href="/commercial/#contact" className="hover:text-txt transition-colors">Contact</Link>
           <Link href="/privacy/" className="hover:text-txt transition-colors">Privacy</Link>
+          <Link href="/data-practices/" className="hover:text-txt transition-colors">Data Practices</Link>
           <Link href="/terms/" className="hover:text-txt transition-colors">Terms</Link>
         </nav>
 

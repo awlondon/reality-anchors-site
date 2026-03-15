@@ -42,7 +42,7 @@ export default function Hero() {
   const headline = override?.headline ?? 'Start From What You Know. Capture Structured Data. Learn Faster.';
   const subhead =
     override?.subhead ??
-    'Reality Anchors starts from declared bar data and structured capture, not autonomy theater. Use your own cameras, add LiDAR only when precision depth matters, and build a faster learning loop with every verified run.';
+    'Your bench, your cameras, your data. Start with one reference camera and known bar sizes. Add context cameras or LiDAR only when your operation needs wider coverage or precision depth. Every verified run builds proof.';
   const eyebrow = EYEBROW[variant] ?? EYEBROW.B;
   const ctas = CTA_CONFIG[variant] ?? CTA_CONFIG.B;
   const heroKPIs = siteMetrics.heroVariants?.[variant] ?? siteMetrics.hero;
@@ -271,7 +271,7 @@ export default function Hero() {
               clipRule="evenodd"
             />
           </svg>
-          Operators confirm every step. Bring your own compatible cameras. Works offline.
+          Operators confirm every step. 1 reference camera included. Add devices only when value justifies it.
         </motion.p>
 
         {/* KPIs */}

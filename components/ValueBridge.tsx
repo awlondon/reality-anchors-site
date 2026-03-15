@@ -74,8 +74,8 @@ export default function ValueBridge() {
     {
       icon: <RecordIcon />,
       tag: 'LEARN',
-      title: 'Save founder time and operator time',
-      body: 'Structured capture reduces repetitive setup, makes mixed hardware practical, and gives every upload a cleaner path into the next training cycle.',
+      title: 'Every capture builds proof',
+      body: 'Structured capture turns each verified run into training data. The loop tightens accuracy over time — and every metric is verified against actual production outcomes, not projections.',
       metric: siteMetrics.valueBridge.traceMetric,
       metricSuffix: 'accuracy target as the loop improves',
     },

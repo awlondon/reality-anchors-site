@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 import { fadeUp } from '@/lib/motion';
 
 const proofPoints = [
-  { value: '1 camera', label: 'Baseline setup' },
-  { value: 'BYO', label: 'Compatible hardware' },
-  { value: 'Optional', label: 'LiDAR upgrade' },
+  { value: '1 camera', label: 'Included per bench' },
+  { value: '+$200', label: 'Context device add-on' },
+  { value: '+$450', label: 'LiDAR device add-on' },
   { value: '60 days', label: 'Validation window' },
 ];
 

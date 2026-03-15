@@ -34,3 +34,14 @@ export function trackEvent(name: string, data?: EventData): void {
     console.log('[analytics]', name, data);
   }
 }
+
+/** Fire a Google Ads conversion event via gtag. */
+export function trackGadsConversion(): void {
+  if (typeof window === 'undefined') return;
+  const gadsId = process.env.NEXT_PUBLIC_GADS_ID;
+  const label = process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL;
+  if (!gadsId || !label) return;
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'conversion', { send_to: `${gadsId}/${label}` });
+  }
+}

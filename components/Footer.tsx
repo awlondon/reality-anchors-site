@@ -21,6 +21,7 @@ export default function Footer() {
           <Link href="/margin-impact/" className="hover:text-txt transition-colors">Margin Model</Link>
           <Link href="/pricing-methodology/" className="hover:text-txt transition-colors">Methodology</Link>
           <Link href="/board-strategy/" className="hover:text-txt transition-colors">Strategy</Link>
+          <Link href="/requirements/" className="hover:text-txt transition-colors">Requirements</Link>
           <Link href="/commercial/#contact" className="hover:text-txt transition-colors">Contact</Link>
           <Link href="/privacy/" className="hover:text-txt transition-colors">Privacy</Link>
           <Link href="/terms/" className="hover:text-txt transition-colors">Terms</Link>

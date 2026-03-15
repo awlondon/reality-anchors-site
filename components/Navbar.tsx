@@ -14,6 +14,7 @@ const NAV_LINKS = [
   { href: '/calculator/', label: 'Quick Estimate' },
   { href: '/margin-impact/', label: 'Margin Model' },
   { href: '/board-strategy/', label: 'Strategy' },
+  { href: '/requirements/', label: 'Requirements' },
 ];
 
 /** Map pathname prefixes to contextual CTA labels and destinations. */

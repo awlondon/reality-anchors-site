@@ -92,6 +92,7 @@ export default function FeatureMatrix() {
                   >
                     <div className="text-sm font-semibold text-txt">{tierLabels[tier]}</div>
                     <div className="mt-0.5 font-mono text-[11px] text-muted">{tierPrices[tier]}</div>
+                    <div className="mt-0.5 text-[10px] text-muted/70">Incl. 1 reference camera</div>
                   </th>
                 ))}
               </tr>
@@ -134,8 +135,8 @@ export default function FeatureMatrix() {
         </motion.div>
 
         <p className="mt-6 text-center text-[11px] text-muted/50">
-          Advanced safety workflows and stronger protection boundaries are packaged separately from the base platform
-          until those controls are explicitly scoped.
+          Additional devices: context cameras at $200/device/mo, LiDAR-equipped devices at $450/device/mo.
+          Advanced safety workflows are packaged separately until those controls are explicitly scoped.
         </p>
       </div>
     </section>

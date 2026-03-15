@@ -47,7 +47,18 @@ export const faqs: FAQItem[] = [
   },
   {
     question: 'How many cameras are included?',
-    answer: `${pilot.name} includes ${pilot.includedUsage.cameras.toLowerCase()} and ${pilot.includedUsage.storage.toLowerCase()}. ${production.name} includes ${production.includedUsage.cameras.toLowerCase()} with ${production.includedUsage.storage.toLowerCase()}. ${enterprise.name} deployments use ${enterprise.includedUsage.cameras.toLowerCase()} with ${enterprise.includedUsage.storage.toLowerCase()}. ${production.includedUsage.overage}.`,
+    answer:
+      'Every tier includes one reference camera per bench at no extra cost. Context cameras ($200/device/mo) and LiDAR-equipped devices ($450/device/mo) are available as add-ons across all tiers. The number of additional devices depends on your bench layout, coverage needs, and whether precision depth is required for your validation workflow.',
+  },
+  {
+    question: 'How does per-device pricing work?',
+    answer:
+      'Every bench plan includes one reference camera at no extra cost. When you need wider coverage, add context cameras at $200/device/month. For sub-millimetre precision depth, add LiDAR-equipped devices at $450/device/month. You only pay for the devices your operation actually uses — no bundles, no minimums beyond the included reference camera.',
+  },
+  {
+    question: 'What is the difference between a reference camera, a context camera, and a LiDAR device?',
+    answer:
+      'A reference camera is your baseline capture device — it records structured data tied to known bar sizes and operator-declared facts. A context camera adds wider coverage, additional angles, or redundancy to your bench setup. A LiDAR-equipped device adds precision depth measurement for tighter bend verification or spacing checks. Most operations start with the included reference camera and add devices as validation requirements grow.',
   },
 ];
 

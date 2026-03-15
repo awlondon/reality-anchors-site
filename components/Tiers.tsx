@@ -5,7 +5,7 @@ import Link from 'next/link';
 import PhotoBackground from '@/components/PhotoBackground';
 import { stagger, fadeUp } from '@/lib/motion';
 import { trackEvent } from '@/lib/analytics';
-import { pricingNarrative, pricingTiers } from '@/data/pricing';
+import { pricingNarrative, pricingTiers, deviceAddOns } from '@/data/pricing';
 
 export default function Tiers() {
   return (
@@ -135,6 +135,31 @@ export default function Tiers() {
               </Link>
             </motion.article>
           ))}
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="mt-10 border border-line bg-card rounded-2xl p-7"
+        >
+          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-2">Device Add-Ons</p>
+          <p className="text-sm text-muted mb-5">
+            Every bench includes one reference camera. Add devices when your operation needs wider coverage or precision depth.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {deviceAddOns.map((device) => (
+              <div key={device.id} className="border border-line/70 rounded-xl p-5 bg-bg/40">
+                <div className="flex items-baseline justify-between mb-2">
+                  <span className="text-sm font-semibold text-txt">{device.name}</span>
+                  <span className="font-mono text-sm text-accent-2">{device.price}</span>
+                </div>
+                <p className="text-xs text-muted leading-relaxed">{device.description}</p>
+                <p className="mt-2 text-[10px] text-muted/70 italic">{device.valueAnchor}</p>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

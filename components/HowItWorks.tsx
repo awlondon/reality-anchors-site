@@ -11,7 +11,7 @@ const steps = [
   {
     number: '01',
     title: 'One Camera',
-    description: 'Start with a single reference camera and known bar sizes. Declare the facts, capture structured data, and get deterministic validation from day one.',
+    description: 'Start with a single reference camera and known bar sizes. Declare the facts, capture structured data, and get deterministic validation from day one. Included in your bench plan.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -23,7 +23,7 @@ const steps = [
   {
     number: '02',
     title: 'Add Context',
-    description: 'Bring a second camera for wider context or coverage. Mixed device types work together — reference, context, and standard cameras in one fleet.',
+    description: 'Bring a second camera for wider context or coverage. Mixed device types work together — reference, context, and standard cameras in one fleet. +$200/device/mo.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -36,7 +36,7 @@ const steps = [
   {
     number: '03',
     title: 'Precision Depth',
-    description: 'When you need sub-millimetre accuracy, add a LiDAR-equipped device. Precision depth is a premium upgrade — not required for every setup.',
+    description: 'When you need sub-millimetre accuracy, add a LiDAR-equipped device. Precision depth is a premium upgrade — not required for every setup. +$450/device/mo.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -49,7 +49,7 @@ const steps = [
   {
     number: '04',
     title: 'Train & Improve',
-    description: 'Every capture feeds the learning loop. Upload structured data, train models on verified outcomes, and improve accuracy with each cycle.',
+    description: 'Every capture feeds the learning loop. Upload structured data, train models on verified outcomes, and improve accuracy with each cycle. Included — every run builds proof.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />

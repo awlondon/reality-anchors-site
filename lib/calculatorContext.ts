@@ -14,6 +14,8 @@ export interface CalculatorContext {
   annualTons: number;
   scrapRatePct: number;
   costPerTon: number;
+  contextCameras?: number;
+  lidarDevices?: number;
   estimatedEbitda: number;
   estimatedMaterialSavings: number;
   estimatedTonsSaved: number;

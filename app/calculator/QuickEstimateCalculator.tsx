@@ -81,6 +81,8 @@ export default function QuickEstimateCalculator() {
   const [tons, setTons] = useState(12_500);
   const [scrapRate, setScrapRate] = useState(8);
   const [costPerTon, setCostPerTon] = useState(850);
+  const [contextCameras, setContextCameras] = useState(0);
+  const [lidarDevices, setLidarDevices] = useState(0);
 
   const results = useMemo(() => {
     const targetScrap = clamp(scrapRate - FIXED.scrapReductionPts, 0, scrapRate);
@@ -106,6 +108,8 @@ export default function QuickEstimateCalculator() {
     }
   }, [tons, scrapRate, costPerTon]);
 
+  const annualPlatformCost = 14_400 + (contextCameras * 200 * 12) + (lidarDevices * 450 * 12);
+
   const tonsSaved = results?.material.tonsSaved ?? 0;
   const materialSavings = results?.material.dollarsSaved ?? 0;
   const totalEbitda = results?.totals.annualEbitdaIncrease ?? 0;
@@ -118,6 +122,8 @@ export default function QuickEstimateCalculator() {
       annualTons: tons,
       scrapRatePct: scrapRate,
       costPerTon,
+      contextCameras,
+      lidarDevices,
       estimatedEbitda: totalEbitda,
       estimatedMaterialSavings: materialSavings,
       estimatedTonsSaved: tonsSaved,
@@ -133,6 +139,8 @@ export default function QuickEstimateCalculator() {
         annualTons: tons,
         scrapRatePct: scrapRate,
         costPerTon,
+        contextCameras,
+        lidarDevices,
         estimatedEbitda: Math.round(totalEbitda),
       });
     }, 800);
@@ -140,7 +148,7 @@ export default function QuickEstimateCalculator() {
     return () => {
       if (debounceRef.current) clearTimeout(debounceRef.current);
     };
-  }, [tons, scrapRate, costPerTon, totalEbitda, materialSavings, tonsSaved]);
+  }, [tons, scrapRate, costPerTon, contextCameras, lidarDevices, totalEbitda, materialSavings, tonsSaved]);
 
   const handlePrint = useCallback(() => {
     trackEvent('calculator_print', { estimatedEbitda: Math.round(totalEbitda) });
@@ -192,6 +200,8 @@ export default function QuickEstimateCalculator() {
                   ['Annual tonnage', `${formatNumber(tons, { maximumFractionDigits: 0 })} t`],
                   ['Current scrap rate', `${scrapRate.toFixed(1)}%`],
                   ['Material cost per ton', formatUSD(costPerTon, { maximumFractionDigits: 0 })],
+                  ['Additional context cameras', `${contextCameras} × $200/mo`],
+                  ['LiDAR-equipped devices', `${lidarDevices} × $450/mo`],
                   ['Assumed scrap reduction', '1.5 pts (conservative model)'],
                 ] as [string, string][]).map(([k, v]) => (
                   <tr key={k} style={{ borderBottom: '1px solid #f1f5f9' }}>
@@ -228,7 +238,7 @@ export default function QuickEstimateCalculator() {
           <div style={{ marginBottom: '1.5rem' }}>
             <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#94a3b8', marginBottom: '0.75rem' }}>Estimated Return on Platform Investment</div>
             <div style={{ fontSize: '0.85rem', color: '#64748b' }}>
-              Up to {Math.max(1, Math.round(totalEbitda / 14_400))}x return on platform investment (based on entry-level annual cost).
+              Up to {Math.max(1, Math.round(totalEbitda / annualPlatformCost))}x return on platform investment (based on entry-level annual cost).
               See <span style={{ color: '#2563eb' }}>realityanchorsltd.com/production</span> for tier details.
             </div>
           </div>
@@ -277,6 +287,32 @@ export default function QuickEstimateCalculator() {
             Assumes a 1.5-point scrap reduction based on conservative modeling. Labor,
             throughput, and oversight inputs are set to conservative defaults.
           </p>
+          <div className="border-t border-line pt-5 mt-2">
+            <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-accent mb-4">Device Fleet (optional)</p>
+            <p className="text-xs text-muted mb-4">1 reference camera is included in your bench plan. Add devices for wider coverage or precision depth.</p>
+            <div className="space-y-5">
+              <Slider
+                id="context-cameras"
+                label="Additional context cameras"
+                min={0}
+                max={5}
+                step={1}
+                value={contextCameras}
+                onChange={setContextCameras}
+                format={(v) => `${v} × $200/mo`}
+              />
+              <Slider
+                id="lidar-devices"
+                label="LiDAR-equipped devices"
+                min={0}
+                max={3}
+                step={1}
+                value={lidarDevices}
+                onChange={setLidarDevices}
+                format={(v) => `${v} × $450/mo`}
+              />
+            </div>
+          </div>
         </div>
 
         {/* Live Results */}
@@ -313,11 +349,18 @@ export default function QuickEstimateCalculator() {
             <ResultRow label="Total EBITDA impact" value={formatUSD(totalEbitda)} highlight />
           </div>
 
+          <div className="mt-4 pt-4 border-t border-line/50">
+            <ResultRow
+              label="Annual platform cost (bench + devices)"
+              value={formatUSD(annualPlatformCost, { maximumFractionDigits: 0 })}
+            />
+          </div>
+
           <div className="mt-6 pt-5 border-t border-line text-center">
             <div className="border border-line rounded-lg px-4 py-4 inline-block">
               <div className="text-[10px] text-muted uppercase tracking-wide mb-1">Estimated ROI</div>
               <div className="font-mono text-lg font-bold text-accent-2">
-                Up to {Math.max(1, Math.round(totalEbitda / 14_400))}x
+                Up to {Math.max(1, Math.round(totalEbitda / annualPlatformCost))}x
               </div>
               <div className="text-[10px] text-muted mt-1">return on platform investment</div>
             </div>

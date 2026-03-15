@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { fadeUp } from '@/lib/motion';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, trackGadsConversion } from '@/lib/analytics';
 import { sendLeadEmail } from '@/lib/sendLeadEmail';
 import { getCalculatorContext } from '@/lib/calculatorContext';
 import { getSessionId } from '@/lib/session';
@@ -54,6 +54,7 @@ export default function InlineCapture() {
       setSubmitted(true);
       recordSubmission();
       trackEvent('inline_capture_submit');
+      trackGadsConversion();
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {

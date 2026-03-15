@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { trackEvent } from '@/lib/analytics';
+import { trackEvent, trackGadsConversion } from '@/lib/analytics';
 import { fadeUp } from '@/lib/motion';
 import { getLastRegime } from '@/lib/funnelContext';
 import { getSessionId } from '@/lib/session';
@@ -143,6 +143,7 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
         regimeId: attributedRegime ?? 'unknown',
         company: formCompany,
       });
+      trackGadsConversion();
 
       const alert = {
         id: `${sessionId}_form_submit`,

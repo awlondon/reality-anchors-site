@@ -23,7 +23,7 @@ export interface UsageDaily {
   accurateBends: number;
   totalPieces: number;
   scrapPieces: number;
-  activeSeats: number;
+  activeBenches: number;
   operatorHoursMinutes: number; // in minutes
 }
 
@@ -33,7 +33,7 @@ export interface KpiSnapshot {
   bendAccuracy: number; // percentage
   piecesPerHour: number;
   scrapRate: number; // percentage
-  activeSeats: number;
+  activeBenches: number;
   operatorHours: number;
 }
 
@@ -53,10 +53,10 @@ export interface Subscription {
   priceId?: string;
 }
 
-/** Seat from orgs/{orgId}/seats/* — aligned with Flutter app schema */
-export interface Seat {
+/** Bench from orgs/{orgId}/benches/* — aligned with Flutter app schema */
+export interface Bench {
   id: string;
-  seatId?: string;
+  benchId?: string;
   orgId?: string;
   assignedUid?: string | null;
   assignedEmail?: string | null;
@@ -67,12 +67,18 @@ export interface Seat {
   createdAt?: Date;
 }
 
+/** Device add-on selected during checkout */
+export interface DeviceSelection {
+  deviceId: 'context_camera' | 'lidar_device';
+  quantity: number;
+}
+
 /** Available plan for onboarding */
 export interface Plan {
   id: string;
   name: string;
   description: string;
-  pricePerSeat: number;
+  pricePerBench: number;
   interval: 'month' | 'year';
   includedActions: number;
   overagePerAction: number;
@@ -128,8 +134,8 @@ export interface OrgHealth {
   churnRiskScore: number; // 0-100
   lastActive: Date;
   totalBends30d: number;
-  activeSeats: number;
-  licensedSeats: number;
+  activeBenches: number;
+  licensedBenches: number;
   paymentStatus: 'current' | 'past_due' | 'canceled' | 'none';
   featureAdoption: number; // percentage
 }

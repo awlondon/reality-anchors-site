@@ -19,7 +19,7 @@ import { useAuth } from './auth';
 import type {
   UsageDaily,
   Subscription,
-  Seat,
+  Bench,
   Contract,
   KpiSnapshot,
   OrgHealth,
@@ -107,7 +107,7 @@ export function useKpis(): { kpis: KpiSnapshot | null; loading: boolean } {
   const scrapPieces = usage.reduce((sum, d) => sum + (d.scrapPieces ?? 0), 0);
   const totalMinutes = usage.reduce((sum, d) => sum + (d.operatorHoursMinutes ?? 0), 0);
   const operatorHours = totalMinutes / 60;
-  const activeSeats = Math.max(...usage.map((d) => d.activeSeats ?? 0));
+  const activeBenches = Math.max(...usage.map((d) => d.activeBenches ?? 0));
 
   return {
     kpis: {
@@ -115,7 +115,7 @@ export function useKpis(): { kpis: KpiSnapshot | null; loading: boolean } {
       bendAccuracy: totalBends > 0 ? (accurateBends / totalBends) * 100 : 0,
       piecesPerHour: operatorHours > 0 ? totalPieces / operatorHours : 0,
       scrapRate: totalPieces > 0 ? (scrapPieces / totalPieces) * 100 : 0,
-      activeSeats,
+      activeBenches,
       operatorHours: Math.round(operatorHours * 10) / 10,
     },
     loading,
@@ -129,11 +129,11 @@ export function useSubscriptions() {
   return useCollection<Subscription>(path);
 }
 
-/** Seats */
-export function useSeats() {
+/** Benches */
+export function useBenches() {
   const { orgId } = useAuth();
-  const path = orgId ? `orgs/${orgId}/seats` : null;
-  return useCollection<Seat>(path);
+  const path = orgId ? `orgs/${orgId}/benches` : null;
+  return useCollection<Bench>(path);
 }
 
 /** Contracts */
@@ -200,10 +200,10 @@ export function useOrgUsageDaily(orgId: string | undefined, days = 30) {
   ]);
 }
 
-/** Admin: seats for a specific org */
-export function useOrgSeats(orgId: string | undefined) {
-  const path = orgId ? `orgs/${orgId}/seats` : null;
-  return useCollection<Seat>(path);
+/** Admin: benches for a specific org */
+export function useOrgBenches(orgId: string | undefined) {
+  const path = orgId ? `orgs/${orgId}/benches` : null;
+  return useCollection<Bench>(path);
 }
 
 /** Admin: subscriptions for a specific org */

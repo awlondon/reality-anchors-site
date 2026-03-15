@@ -67,7 +67,7 @@ export default function Dashboard() {
         />
         <KpiCard
           label="Active Benches"
-          value={kpis?.activeSeats ?? '—'}
+          value={kpis?.activeBenches ?? '—'}
         />
         <KpiCard
           label="Operator Hours"

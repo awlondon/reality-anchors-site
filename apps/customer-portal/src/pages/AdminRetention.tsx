@@ -26,17 +26,17 @@ function isChurnRisk(org: {
   churnRiskScore: number;
   lastActive: unknown;
   paymentStatus: string;
-  activeSeats: number;
-  licensedSeats: number;
+  activeBenches: number;
+  licensedBenches: number;
 }): boolean {
   const daysSinceActive = differenceInDays(new Date(), toDate(org.lastActive));
-  const seatUtilization = org.licensedSeats > 0 ? org.activeSeats / org.licensedSeats : 0;
+  const benchUtilization = org.licensedBenches > 0 ? org.activeBenches / org.licensedBenches : 0;
   return (
     org.churnRiskScore >= 70 ||
     daysSinceActive > 14 ||
     org.paymentStatus === 'past_due' ||
     org.paymentStatus === 'canceled' ||
-    seatUtilization < 0.5
+    benchUtilization < 0.5
   );
 }
 
@@ -102,10 +102,10 @@ export default function AdminRetention() {
                   <td className="py-3 text-txt">{org.totalBends30d.toLocaleString()}</td>
                   <td className="py-3">
                     <span className={
-                      org.licensedSeats > 0 && (org.activeSeats / org.licensedSeats) < 0.5
+                      org.licensedBenches > 0 && (org.activeBenches / org.licensedBenches) < 0.5
                         ? 'text-warning' : 'text-txt'
                     }>
-                      {org.activeSeats} / {org.licensedSeats}
+                      {org.activeBenches} / {org.licensedBenches}
                     </span>
                   </td>
                   <td className="py-3">

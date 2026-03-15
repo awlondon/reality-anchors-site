@@ -19,7 +19,7 @@ import { useState, useEffect, useCallback, type ReactNode } from 'react';
 
 /* ── Constants ─────────────────────────────────────────────────────────── */
 const ACCESS_KEY = 'ra_exec_access';
-const VALID_CODE = process.env.NEXT_PUBLIC_EXEC_ACCESS_CODE ?? 'ra2026';
+const VALID_CODE = process.env.NEXT_PUBLIC_EXEC_ACCESS_CODE ?? ''; // fails closed when env var is missing
 
 const MAX_ATTEMPTS = 3;
 const LOCKOUT_DURATION_MS = 5 * 60 * 1000; // 5 minutes

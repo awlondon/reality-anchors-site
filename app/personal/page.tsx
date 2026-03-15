@@ -32,7 +32,7 @@ const pricingTiers = [
   {
     tier: 'Pilot',
     monthly: '$1,200/bench',
-    includes: 'Step-by-step execution guidance, offline-first operation, 1–8 seats',
+    includes: 'Step-by-step execution guidance, offline-first operation, 1–8 benches',
     fit: 'Solo operators and small crews',
   },
 ];
@@ -72,7 +72,7 @@ export default function PersonalPage() {
             A practical execution layer for solo operators and small teams that need fewer errors, cleaner handoffs, and a clear path into larger-scale deployments.
           </p>
           <div className="flex flex-wrap gap-2 mt-6">
-            {['$1,200/bench/mo', 'Built for 1–8 seats', 'Scales into Production'].map((t) => (
+            {['$1,200/bench/mo', 'Built for 1–8 benches', 'Scales into Production'].map((t) => (
               <span key={t} className="text-xs font-semibold px-3 py-1.5 rounded-full border border-line text-muted">{t}</span>
             ))}
           </div>
@@ -110,7 +110,7 @@ export default function PersonalPage() {
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-2">Pilot SaaS plans</h2>
             <p className="text-muted text-sm mb-6">
-              Pilot pricing is seat-based so small teams can start quickly, then transition into Production plans without retraining or data migration. Every tier includes the same workflow foundation; higher tiers add coordination and governance.
+              Pilot pricing is bench-based so small teams can start quickly, then transition into Production plans without retraining or data migration. Every tier includes the same workflow foundation; higher tiers add coordination and governance.
             </p>
             <div className="overflow-x-auto">
               <table className="ra-table">

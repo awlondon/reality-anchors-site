@@ -19,6 +19,17 @@ export function trackEvent(name: string, data?: EventData): void {
     new CustomEvent('analytics', { detail: { type: name, ...data } })
   );
 
+  // Fire Google Ads conversion for lead form submissions
+  if (name === 'lead_form_submit' && typeof window.gtag === 'function') {
+    const gadsId = process.env.NEXT_PUBLIC_GADS_ID;
+    const convLabel = process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL;
+    if (gadsId && convLabel) {
+      window.gtag('event', 'conversion', {
+        send_to: `${gadsId}/${convLabel}`,
+      });
+    }
+  }
+
   if (process.env.NODE_ENV === 'development') {
     console.log('[analytics]', name, data);
   }

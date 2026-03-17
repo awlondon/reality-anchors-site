@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -d C:/dev/reality-anchors-site/output/roundtable-sessions/ra_agent_roundtable_*)",
+      "Bash(ls -d C:/dev/reality-anchors-site/output/roundtable-sessions/huddle_*)"
+    ]
+  }
+}

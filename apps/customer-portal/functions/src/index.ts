@@ -51,7 +51,7 @@ const STRIPE_CALLABLE_OPTIONS = {
 };
 
 function getStripe(): Stripe {
-  return new Stripe(stripeSecretKey.value(), { apiVersion: "2025-02-24.acacia" });
+  return new Stripe(stripeSecretKey.value(), { apiVersion: "2026-02-25.clover" });
 }
 
 /* ─────────────────────────────────────────────

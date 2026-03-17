@@ -21,13 +21,13 @@ export const DEVICE_ADD_ONS: DeviceAddOnConfig[] = [
     deviceId: "context_camera",
     name: "Context Camera",
     monthlyUsd: 200,
-    stripePriceId: "", // populated from Stripe dashboard
+    stripePriceId: "price_1TBsiJJYdvJ3JaTL37InxzN3",
   },
   {
     deviceId: "lidar_device",
     name: "LiDAR-Equipped Device",
     monthlyUsd: 450,
-    stripePriceId: "", // populated from Stripe dashboard
+    stripePriceId: "price_1TBsiiJYdvJ3JaTLroOSHTY4",
   },
 ];
 
@@ -71,8 +71,8 @@ const FALLBACK_PLANS: PlanTier[] = [
     name: "Pilot",
     description: "Ideal for evaluation and small-scale deployment",
     active: true,
-    stripePriceId: "",
-    perBenchPriceId: "",
+    stripePriceId: "price_1TBsXcJYdvJ3JaTLpxB3dfEJ",
+    perBenchPriceId: "price_1TBsXcJYdvJ3JaTLpxB3dfEJ",
     pricePerBench: 1200,
     annualPriceUsd: 14400,
     includedActions: 0,
@@ -92,8 +92,8 @@ const FALLBACK_PLANS: PlanTier[] = [
     name: "Production",
     description: "For production fabrication teams running daily",
     active: true,
-    stripePriceId: "",
-    perBenchPriceId: "",
+    stripePriceId: "price_1TBsY8JYdvJ3JaTLroQnfEsF",
+    perBenchPriceId: "price_1TBsY8JYdvJ3JaTLroQnfEsF",
     pricePerBench: 3200,
     annualPriceUsd: 38400,
     includedActions: 0,
@@ -114,8 +114,8 @@ const FALLBACK_PLANS: PlanTier[] = [
     name: "Enterprise",
     description: "Full platform with compliance, audit trails & dedicated support",
     active: true,
-    stripePriceId: "",
-    perBenchPriceId: "",
+    stripePriceId: "price_1TBsYRJYdvJ3JaTLU1mRu6ZA",
+    perBenchPriceId: "price_1TBsYRJYdvJ3JaTLU1mRu6ZA",
     pricePerBench: 4800,
     annualPriceUsd: 57600,
     includedActions: 0,

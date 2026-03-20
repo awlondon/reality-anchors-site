@@ -9,7 +9,7 @@ export default function Footer() {
           <Image src="/assets/brand/svg/logo-ra-speed-square-dark.svg" alt="Reality Anchors" width={36} height={36} className="h-9 w-auto" />
           <div>
             <div className="text-sm font-semibold text-txt">Reality Anchors</div>
-            <div className="text-xs text-muted">Measured. Anchored. Deterministic.</div>
+            <div className="text-xs text-muted">Measured. Anchored. Calibrated.</div>
           </div>
         </div>
 

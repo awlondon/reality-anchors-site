@@ -21,8 +21,8 @@ const displayOverrides: Record<
   }
 > = {
   'structural-fabrication': {
-    stat: 'Deterministic bench guidance',
-    statTwo: 'Known facts declared once',
+    stat: 'Calibrated bench guidance',
+    statTwo: 'Set up once, validated every run',
     cta: 'See Fabrication Intelligence',
     href: '/commercial/',
     bg: 'from-slate-900 via-slate-800 to-slate-950',
@@ -66,7 +66,7 @@ const displayOverrides: Record<
     imageMobile: '/assets/regimes/ar-execution-mobile.svg',
   },
   'ai-governance': {
-    stat: 'Audit-ready learning loop',
+    stat: 'Audit-ready validation controls',
     statTwo: 'Governance before broader rollout',
     cta: 'Review Governance Controls',
     href: '/pricing-methodology/',
@@ -168,7 +168,7 @@ export default function Features() {
             Less repetitive setup. Faster data collection. Mixed hardware that just works.
           </h2>
           <p className="mt-4 max-w-2xl text-muted">
-            Reality Anchors eliminates the busywork of configuring every camera and re-entering known facts. Declare
+            Reality Anchors eliminates the busywork of configuring every camera and re-entering job specs. Set up
             once, capture everywhere, and let the system handle orchestration across the compatible hardware your team
             already owns.
           </p>

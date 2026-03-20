@@ -61,23 +61,23 @@ export default function ValueBridge() {
       title: 'Bring your own cameras',
       body: 'Start with compatible hardware you already own. Reference, context, and depth devices can work together in one fleet, and not every camera needs LiDAR.',
       metric: siteMetrics.valueBridge.governMetric,
-      metricSuffix: 'error-rate target after deterministic validation',
+      metricSuffix: 'error-rate target after calibrated validation',
     },
     {
       icon: <ValidateIcon />,
       tag: 'VALIDATE',
-      title: 'Anchor to known facts first',
-      body: 'The workflow begins with declared bar size, job context, and operator-confirmed steps. Reality Anchors validates against those constraints instead of pretending the system is fully autonomous on day one.',
+      title: 'Catches problems before they leave the bench',
+      body: 'The workflow starts with your job specs and operator-confirmed steps. Reality Anchors validates every run so problems get caught at the bench — not in the field.',
       metric: siteMetrics.valueBridge.optimizeMetric,
       metricSuffix: 'scrap-reduction target from cleaner execution',
     },
     {
       icon: <RecordIcon />,
-      tag: 'LEARN',
-      title: 'Every capture builds proof',
-      body: 'Structured capture turns each verified run into training data. The loop tightens accuracy over time — and every metric is verified against actual production outcomes, not projections.',
+      tag: 'PROVE',
+      title: 'Every run builds auditable proof',
+      body: 'Each verified run produces a measurable record. Accuracy is visible over time — and every metric is verified against actual production outcomes, not projections.',
       metric: siteMetrics.valueBridge.traceMetric,
-      metricSuffix: 'accuracy target as the loop improves',
+      metricSuffix: 'accuracy target verified against production',
     },
   ];
 
@@ -102,7 +102,7 @@ export default function ValueBridge() {
           <div
             className="w-full max-w-5xl rounded-xl border border-line/50 bg-bg-2 p-3 md:p-5"
             role="region"
-            aria-label="Reality Anchors core value: Capture, Validate, Learn"
+            aria-label="Reality Anchors core value: Capture, Validate, Prove"
           >
             <div className="flex flex-col items-stretch gap-3 md:flex-row">
               {cards.flatMap((card, index) => {

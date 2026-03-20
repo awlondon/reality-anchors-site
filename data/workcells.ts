@@ -22,16 +22,16 @@ export const workcells: Workcell[] = [
     slug: 'rebar-cut-bend',
     name: 'Rebar Cut & Bend',
     shortName: 'Rebar',
-    tagline: 'Deterministic capture for rebar cut and bend - one camera first, more precision when you need it.',
+    tagline: 'Calibrated capture for rebar cut and bend — one camera first, more precision when you need it.',
     description:
-      'Deterministic capture and execution validation for rebar fabrication. Start with one reference camera, expand to mixed coverage, and add LiDAR only where precision depth earns its keep.',
+      'Calibrated capture and execution validation for rebar fabrication. Start with one reference camera, expand to mixed coverage, and add LiDAR only where precision depth earns its keep.',
     status: 'live',
     heroImage: '/images/hero-welding.jpg',
     seoKeywords: [
       'rebar capture software',
       'rebar cut and bend software',
       'rebar fabrication execution validation',
-      'deterministic fabrication capture',
+      'calibrated fabrication capture',
     ],
     regimeIds: ['structural-fabrication', 'multi-project-optimization', 'machine-calibration'],
     metrics: [
@@ -47,10 +47,10 @@ export const workcells: Workcell[] = [
       'Calibration-aware job context',
     ],
     workflowSteps: [
-      'Declare known job facts and start with one reference camera at the bench',
+      'Set up your job specs and start with one reference camera at the bench',
       'Add context cameras when coverage or throughput demands broader visibility',
       'Introduce LiDAR-equipped devices only for precision depth checks that justify the extra cost',
-      'Upload verified captures so the next run starts with a cleaner training baseline',
+      'Upload verified captures so every run builds on proven results',
     ],
   },
   {

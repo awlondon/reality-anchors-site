@@ -33,9 +33,9 @@ export const HOME_EXPERIMENT: ExperimentConfig = {
     },
     heroOverride: {
       A: {
-        headline: 'Deterministic capture for fabrication teams that need faster learning, not day-one autonomy.',
+        headline: 'Calibrated capture for fabrication teams that need proof, not day-one autonomy.',
         subhead:
-          'Start from declared bar data, use customer-supplied cameras, and build a cleaner training loop from every validated run.',
+          'Start with your own cameras, validate every run against your job specs, and build measurable proof from every bench.',
       },
       B: {
         headline: 'Start with one camera. Add coverage when the workflow earns it.',

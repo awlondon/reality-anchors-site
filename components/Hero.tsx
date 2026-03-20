@@ -20,7 +20,7 @@ const StructuredFieldBackground = dynamic(() => import('@/components/StructuredF
 });
 
 const EYEBROW: Record<string, string> = {
-  A: 'Deterministic Capture for Fabrication',
+  A: 'Calibrated Capture for Fabrication',
   B: 'Fabrication Capture Software',
   C: 'Mixed-Camera Validation Platform',
 };
@@ -39,10 +39,10 @@ export default function Hero() {
   const { variant } = useExperiment();
 
   const override = HOME_EXPERIMENT.narrative.heroOverride?.[variant];
-  const headline = override?.headline ?? 'Start From What You Know. Capture Structured Data. Learn Faster.';
+  const headline = override?.headline ?? 'Every Cut Measured. Every Bend Verified. Every Run Proven.';
   const subhead =
     override?.subhead ??
-    'Your bench, your cameras, your data. Start with one reference camera and known bar sizes. Add context cameras or LiDAR only when your operation needs wider coverage or precision depth. Every verified run builds proof.';
+    'Your bench, your cameras, your data. Start with one reference camera. Add coverage or precision depth only when your operation needs it. Every verified run builds proof you can measure.';
   const eyebrow = EYEBROW[variant] ?? EYEBROW.B;
   const ctas = CTA_CONFIG[variant] ?? CTA_CONFIG.B;
   const heroKPIs = siteMetrics.heroVariants?.[variant] ?? siteMetrics.hero;

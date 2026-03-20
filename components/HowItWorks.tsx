@@ -11,7 +11,7 @@ const steps = [
   {
     number: '01',
     title: 'One Camera',
-    description: 'Start with a single reference camera and known bar sizes. Declare the facts, capture structured data, and get deterministic validation from day one. Included in your bench plan.',
+    description: 'Start with a single reference camera. Set up your job specs once, capture structured data, and get calibrated validation from day one. Included in your bench plan.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -48,14 +48,14 @@ const steps = [
   },
   {
     number: '04',
-    title: 'Train & Improve',
-    description: 'Every capture feeds the learning loop. Upload structured data, train models on verified outcomes, and improve accuracy with each cycle. Included — every run builds proof.',
+    title: 'Measure & Prove',
+    description: 'Every run produces auditable results. Track accuracy, review verified outcomes, and see measurable improvement over time. Included — every run builds proof.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
-        <path d="M14 20a6 6 0 0 1 6-6m6 6a6 6 0 0 1-6 6" stroke="#2e7deb" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M20 14l2 -2m-2 2l-2-2" stroke="#2e7deb" strokeWidth="1.2" strokeLinecap="round" />
-        <path d="M20 26l2 2m-2-2l-2 2" stroke="#2e7deb" strokeWidth="1.2" strokeLinecap="round" />
+        <rect x="13" y="24" width="4" height="6" rx="1" fill="#2e7deb" />
+        <rect x="19" y="19" width="4" height="11" rx="1" fill="#2e7deb" />
+        <rect x="25" y="14" width="4" height="16" rx="1" fill="#2e7deb" />
       </svg>
     ),
   },
@@ -78,7 +78,7 @@ export default function HowItWorks() {
             Start simple. Add capability as you need it.
           </h2>
           <p className="mt-3 text-muted max-w-xl">
-            Begin with one camera and known facts. Scale to mixed fleets and LiDAR precision when your operation demands it.
+            Begin with one camera. Scale to mixed fleets and LiDAR precision when your operation demands it.
           </p>
         </motion.div>
 

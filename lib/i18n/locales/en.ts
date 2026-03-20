@@ -30,7 +30,7 @@ const en = {
   'form.success.message': "We'll follow up with a fit assessment and suggested scope.",
 
   // Footer
-  'footer.tagline': 'Measured. Anchored. Deterministic.',
+  'footer.tagline': 'Measured. Anchored. Calibrated.',
 } as const;
 
 export default en;

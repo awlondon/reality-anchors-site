@@ -58,7 +58,7 @@ export const pricingTiers: PricingTier[] = [
     price: '$1,200/bench/mo',
     badge: 'Start Here',
     description:
-      'Start with deterministic capture on one bench. Bring your own compatible camera, declare known facts once, and prove fit before you expand.',
+      'Start with calibrated capture on one bench. Bring your own compatible camera, set up your job specs once, and prove fit before you expand.',
     fit: 'Single benches, small crews, and beta evaluations that need a clean path into paid production use.',
     includedUsage: {
       cameras: '1 reference camera (included)',

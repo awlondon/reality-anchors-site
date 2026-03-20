@@ -64,7 +64,7 @@ export const features: Feature[] = [
     id: 'custom_calibration',
     name: 'Custom Calibration',
     description:
-      'Store machine-specific calibration, tolerance, and geometry rules so validation stays tied to the real bench.',
+      'Stays calibrated to your specific machines and tolerances so validation matches the real bench.',
     category: 'Advanced',
     tiers: { pilot: false, production: true, enterprise: true },
   },

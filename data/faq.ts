@@ -58,7 +58,7 @@ export const faqs: FAQItem[] = [
   {
     question: 'What is the difference between a reference camera, a context camera, and a LiDAR device?',
     answer:
-      'A reference camera is your baseline capture device — it records structured data tied to known bar sizes and operator-declared facts. A context camera adds wider coverage, additional angles, or redundancy to your bench setup. A LiDAR-equipped device adds precision depth measurement for tighter bend verification or spacing checks. Most operations start with the included reference camera and add devices as validation requirements grow.',
+      'A reference camera is your baseline capture device — it records structured data tied to your job specs and operator-confirmed steps. A context camera adds wider coverage, additional angles, or redundancy to your bench setup. A LiDAR-equipped device adds precision depth measurement for tighter bend verification or spacing checks. Most operations start with the included reference camera and add devices as validation requirements grow.',
   },
 ];
 

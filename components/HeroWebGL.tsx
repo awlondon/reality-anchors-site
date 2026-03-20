@@ -19,7 +19,7 @@ export default function HeroWebGL() {
           transition={{ duration: 0.55, ease: "easeOut" }}
           className="text-5xl font-semibold leading-tight tracking-tight md:text-7xl"
         >
-          Deterministic Intelligence for Industrial Execution
+          Calibrated Intelligence for Industrial Execution
         </motion.h1>
 
         <motion.p

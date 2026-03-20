@@ -163,7 +163,7 @@ export default function BoardStrategyPage() {
             <table className="ra-table">
               <thead><tr><th>Configuration</th><th>Monthly / bench</th><th>Annual / bench</th><th>Revenue driver</th></tr></thead>
               <tbody>
-                <tr><td>Base (1 reference camera)</td><td className="font-mono text-accent-2">$1,200</td><td className="font-mono">$14,400</td><td>Entry — deterministic capture from day one</td></tr>
+                <tr><td>Base (1 reference camera)</td><td className="font-mono text-accent-2">$1,200</td><td className="font-mono">$14,400</td><td>Entry — calibrated capture from day one</td></tr>
                 <tr><td>+ 1 context camera</td><td className="font-mono text-accent-2">$1,400</td><td className="font-mono">$16,800</td><td>Wider coverage, multi-angle validation</td></tr>
                 <tr><td>+ 2 context + 1 LiDAR</td><td className="font-mono text-accent-2">$2,050</td><td className="font-mono">$24,600</td><td>Full fleet with precision depth</td></tr>
               </tbody>
@@ -173,7 +173,7 @@ export default function BoardStrategyPage() {
             At Production tier ($3,200/bench/mo), the same device expansion pattern yields $3,400 → $4,050/bench/mo. Device add-ons are identical across tiers — customers pay for accuracy, not for permission.
           </p>
           <p className="text-xs text-muted/70">
-            Each additional device adds capture data that feeds the learning loop, widening the empirical calibration moat. The more devices a customer deploys, the more defensible their accuracy advantage — and the stickier the subscription.
+            Each additional device adds capture data that strengthens the calibration moat. The more devices a customer deploys, the more defensible their accuracy advantage — and the stickier the subscription.
           </p>
         </section>
 

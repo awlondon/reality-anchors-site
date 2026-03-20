@@ -14,12 +14,12 @@ const regimes = getRegimesByWorkcell('rebar-cut-bend');
 export const metadata: Metadata = {
   title: 'Rebar Cut & Bend Fabrication Capture Software',
   description:
-    'Deterministic capture and execution validation software for rebar cut and bend workflows. Start with one camera, expand to mixed coverage, and add LiDAR only when precision depth matters.',
+    'Calibrated capture and execution validation software for rebar cut and bend workflows. Start with one camera, expand to mixed coverage, and add LiDAR only when precision depth matters.',
   alternates: { canonical: '/industries/rebar-cut-bend/' },
   openGraph: {
     title: 'Rebar Cut & Bend Fabrication Capture Software | Reality Anchors',
     description:
-      'Deterministic rebar fabrication capture with one-camera baselines, mixed-camera coverage, and optional LiDAR precision.',
+      'Calibrated rebar fabrication capture with one-camera baselines, mixed-camera coverage, and optional LiDAR precision.',
   },
 };
 

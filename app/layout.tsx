@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: '%s | Reality Anchors',
   },
   description:
-    'Deterministic capture and execution validation software for fabrication teams. Start with one camera, bring your own compatible hardware, add LiDAR only when precision depth matters, and build traceable learning loops from bench to fleet.',
+    'Calibrated capture and execution validation software for fabrication teams. Start with one camera, bring your own compatible hardware, and add LiDAR only when precision depth matters.',
   metadataBase: new URL('https://realityanchorsltd.com'),
   openGraph: {
     siteName: 'Reality Anchors',

@@ -12,6 +12,7 @@ import { getCalculatorContext } from '@/lib/calculatorContext';
 import { sendLeadEmail, sendConfirmationEmail } from '@/lib/sendLeadEmail';
 import { buildConfirmationParams } from '@/lib/buildConfirmationHtml';
 import { markFormLoaded, runSpamChecks, recordSubmission, isDisposableEmail } from '@/lib/spamGuard';
+import { verifyTurnstileToken } from '@/lib/turnstile';
 
 interface FormData {
   name: string;
@@ -40,6 +41,8 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
   const [step, setStep] = useState<1 | 2>(1);
   const successRef = useRef<HTMLDivElement>(null);
   const formLoadedAt = useRef(markFormLoaded());
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   useEffect(() => {
     trackEvent('lead_form_view');
@@ -48,6 +51,21 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
   useEffect(() => {
     if (submitted) successRef.current?.focus();
   }, [submitted]);
+
+  useEffect(() => {
+    const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+    if (!siteKey || !turnstileRef.current) return;
+    if (!window.turnstile) return;
+    const widgetId = window.turnstile.render(turnstileRef.current, {
+      sitekey: siteKey,
+      callback: (token: string) => setTurnstileToken(token),
+      'error-callback': () => setTurnstileToken(null),
+      'expired-callback': () => setTurnstileToken(null),
+      theme: 'dark',
+      size: 'flexible',
+    });
+    return () => { window.turnstile?.reset(widgetId); };
+  }, [step]);
 
   const validateEmail = () => {
     const e: Partial<FormData> = {};
@@ -77,6 +95,19 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
       return;
     }
 
+    // Turnstile verification
+    if (process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY) {
+      if (!turnstileToken) {
+        setSubmitError('Please complete the verification challenge.');
+        return;
+      }
+      const isHuman = await verifyTurnstileToken(turnstileToken);
+      if (!isHuman) {
+        setSubmitError('Verification failed. Please refresh and try again.');
+        return;
+      }
+    }
+
     setErrors({});
     setSubmitError(null);
     setLoading(true);
@@ -93,6 +124,7 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
         submittedAt: new Date().toISOString(),
         calculatorContext: getCalculatorContext(),
       });
+      trackGadsConversion();
       setSubmitted(true);
       recordSubmission();
     } catch (err) {
@@ -143,7 +175,6 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
         regimeId: attributedRegime ?? 'unknown',
         company: formCompany,
       });
-      trackGadsConversion();
 
       const alert = {
         id: `${sessionId}_form_submit`,
@@ -347,6 +378,11 @@ export default function LeadForm({ id = 'contact', heading, description }: LeadF
                     tabIndex={-1}
                     aria-hidden="true"
                   />
+
+                  {/* Turnstile challenge */}
+                  {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && step === 2 && (
+                    <div ref={turnstileRef} className="flex justify-center" />
+                  )}
 
                   {submitError && (
                     <p className="text-sm text-amber-300" role="alert">

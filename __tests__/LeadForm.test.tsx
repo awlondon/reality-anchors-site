@@ -40,6 +40,15 @@ vi.mock('@/lib/spamGuard', () => ({
   isDisposableEmail: vi.fn().mockReturnValue(false),
 }));
 
+vi.mock('@/lib/turnstile', () => ({
+  verifyTurnstileToken: vi.fn().mockResolvedValue(true),
+}));
+
+vi.mock('@/lib/analytics', () => ({
+  trackEvent: vi.fn(),
+  trackGadsConversion: vi.fn(),
+}));
+
 describe('LeadForm', () => {
   afterEach(() => {
     cleanup();

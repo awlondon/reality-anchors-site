@@ -18,18 +18,6 @@ export function trackEvent(name: string, data?: EventData): void {
   window.dispatchEvent(
     new CustomEvent('analytics', { detail: { type: name, ...data } })
   );
-
-  // Fire Google Ads conversion for lead form submissions
-  if (name === 'lead_form_submit' && typeof window.gtag === 'function') {
-    const gadsId = process.env.NEXT_PUBLIC_GADS_ID;
-    const convLabel = process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL;
-    if (gadsId && convLabel) {
-      window.gtag('event', 'conversion', {
-        send_to: `${gadsId}/${convLabel}`,
-      });
-    }
-  }
-
   if (process.env.NODE_ENV === 'development') {
     console.log('[analytics]', name, data);
   }
@@ -42,6 +30,11 @@ export function trackGadsConversion(): void {
   const label = process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL;
   if (!gadsId || !label) return;
   if (typeof window.gtag === 'function') {
-    window.gtag('event', 'conversion', { send_to: `${gadsId}/${label}` });
+    const value = parseFloat(process.env.NEXT_PUBLIC_GADS_CONVERSION_VALUE || '100');
+    window.gtag('event', 'conversion', {
+      send_to: `${gadsId}/${label}`,
+      value,
+      currency: 'USD',
+    });
   }
 }

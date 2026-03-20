@@ -9,6 +9,7 @@ import { getCalculatorContext } from '@/lib/calculatorContext';
 import { getSessionId } from '@/lib/session';
 import { getLastRegime } from '@/lib/funnelContext';
 import { markFormLoaded, runSpamChecks, recordSubmission } from '@/lib/spamGuard';
+import { verifyTurnstileToken } from '@/lib/turnstile';
 
 export default function InlineCapture() {
   const [email, setEmail] = useState('');
@@ -16,9 +17,26 @@ export default function InlineCapture() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const formLoadedAt = useRef(markFormLoaded());
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   useEffect(() => {
     trackEvent('inline_capture_view');
+  }, []);
+
+  useEffect(() => {
+    const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+    if (!siteKey || !turnstileRef.current) return;
+    if (!window.turnstile) return;
+    const widgetId = window.turnstile.render(turnstileRef.current, {
+      sitekey: siteKey,
+      callback: (token: string) => setTurnstileToken(token),
+      'error-callback': () => setTurnstileToken(null),
+      'expired-callback': () => setTurnstileToken(null),
+      theme: 'dark',
+      size: 'flexible',
+    });
+    return () => { window.turnstile?.reset(widgetId); };
   }, []);
 
   const handleSubmit = async (evt: React.FormEvent) => {
@@ -36,6 +54,19 @@ export default function InlineCapture() {
     const spam = runSpamChecks(email, formLoadedAt.current);
     if (spam.blocked) { setError(spam.reason); return; }
 
+    // Turnstile verification
+    if (process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY) {
+      if (!turnstileToken) {
+        setError('Please complete the verification challenge.');
+        return;
+      }
+      const isHuman = await verifyTurnstileToken(turnstileToken);
+      if (!isHuman) {
+        setError('Verification failed. Please refresh and try again.');
+        return;
+      }
+    }
+
     setError(null);
     setLoading(true);
     try {
@@ -51,10 +82,10 @@ export default function InlineCapture() {
         submittedAt: new Date().toISOString(),
         calculatorContext: getCalculatorContext(),
       });
+      trackGadsConversion();
       setSubmitted(true);
       recordSubmission();
       trackEvent('inline_capture_submit');
-      trackGadsConversion();
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -107,6 +138,9 @@ export default function InlineCapture() {
                 tabIndex={-1}
                 aria-hidden="true"
               />
+              {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
+                <div ref={turnstileRef} className="flex justify-center" />
+              )}
               <button
                 type="submit"
                 disabled={loading}

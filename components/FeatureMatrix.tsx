@@ -66,11 +66,12 @@ export default function FeatureMatrix() {
           className="mb-10 text-center"
         >
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-accent">Feature Comparison</p>
-          <h3 className="text-2xl md:text-3xl font-semibold text-txt">Tier boundaries mapped to real module IDs</h3>
+          <h3 className="text-2xl md:text-3xl font-semibold text-txt">Plan designations mapped to real module IDs</h3>
           <p className="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-muted">
             Pilot includes <code>ar_execution</code> and <code>daily_dashboards</code>. Production adds{' '}
             <code>analytics_qa</code> and <code>custom_calibration</code>. Enterprise adds{' '}
-            <code>compliance_export</code> and <code>audit_trails</code>.
+            <code>compliance_export</code> and <code>audit_trails</code>. Public plan labels are live now; some access
+            gates are still rolling out behind them.
           </p>
         </motion.div>
 

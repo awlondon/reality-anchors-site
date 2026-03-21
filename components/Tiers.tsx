@@ -108,7 +108,7 @@ export default function Tiers() {
 
               <div>
                 <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.18em] text-muted">
-                  Tier-defining modules
+                  Included in this plan
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {tier.moduleIds.map((moduleId) => (
@@ -120,6 +120,10 @@ export default function Tiers() {
                     </span>
                   ))}
                 </div>
+                <p className="mt-3 text-[11px] leading-relaxed text-muted/70">
+                  These module IDs show the public plan designation. Where access gates are still rolling out, the pricing
+                  methodology page calls that out explicitly.
+                </p>
               </div>
 
               <Link
@@ -161,6 +165,10 @@ export default function Tiers() {
             ))}
           </div>
         </motion.div>
+        <p className="mt-5 text-center text-[11px] text-muted/60">
+          Production and Enterprise plan labels describe what is included in each plan. Some access boundaries are still
+          moving from documented designation into fully enforced gates.
+        </p>
       </div>
     </section>
   );

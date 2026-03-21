@@ -11,7 +11,8 @@ const steps = [
   {
     number: '01',
     title: 'One Camera',
-    description: 'Start with a single reference camera. Set up your job specs once, capture structured data, and get calibrated validation from day one. Included in your bench plan.',
+    description:
+      'Start with a single reference camera and a known object in frame. Reality anchors establish real-world scale from day one so capture stays tied to the physical bench, not manual guesswork.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -23,7 +24,8 @@ const steps = [
   {
     number: '02',
     title: 'Add Context',
-    description: 'Bring a second camera for wider context or coverage. Mixed device types work together — reference, context, and standard cameras in one fleet. +$200/device/mo.',
+    description:
+      'Bring a second camera for wider context or coverage. Mixed device types work together, and measured signals can determine bar size instead of depending on user declaration. +$200/device/mo.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -36,7 +38,8 @@ const steps = [
   {
     number: '03',
     title: 'Precision Depth',
-    description: 'When you need sub-millimetre accuracy, add a LiDAR-equipped device. Precision depth is a premium upgrade — not required for every setup. +$450/device/mo.',
+    description:
+      'When you need sub-millimetre accuracy, add a LiDAR-equipped device. Precision depth is a premium upgrade, not required for every setup. +$450/device/mo.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -49,7 +52,8 @@ const steps = [
   {
     number: '04',
     title: 'Measure & Prove',
-    description: 'Every run produces auditable results. Track accuracy, review verified outcomes, and see measurable improvement over time. Included — every run builds proof.',
+    description:
+      'Every run produces auditable results. Track accuracy, review verified outcomes, and see measurable improvement over time. Included - every run builds proof.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -63,9 +67,14 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="relative overflow-hidden py-24 bg-bg-2 border-y border-line/50">
-      <PhotoBackground src="/images/steel-closeup.jpg" opacity={0.05} gradient="from-bg-2/95 via-bg-2/85 to-bg-2/95" position="center 50%" />
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
+    <section className="relative overflow-hidden border-y border-line/50 bg-bg-2 py-24">
+      <PhotoBackground
+        src="/images/steel-closeup.jpg"
+        opacity={0.05}
+        gradient="from-bg-2/95 via-bg-2/85 to-bg-2/95"
+        position="center 50%"
+      />
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -73,12 +82,13 @@ export default function HowItWorks() {
           variants={fadeUp}
           className="mb-14"
         >
-          <p className="text-xs font-bold tracking-[0.18em] uppercase text-accent mb-3">The Capability Ladder</p>
-          <h2 className="text-3xl md:text-4xl font-semibold text-txt max-w-lg leading-tight">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-accent">The Capability Ladder</p>
+          <h2 className="max-w-lg text-3xl font-semibold leading-tight text-txt md:text-4xl">
             Start simple. Add capability as you need it.
           </h2>
-          <p className="mt-3 text-muted max-w-xl">
-            Begin with one camera. Scale to mixed fleets and LiDAR precision when your operation demands it.
+          <p className="mt-3 max-w-xl text-muted">
+            Begin with one camera and a reality anchor. Scale to mixed fleets and LiDAR precision only when your
+            operation demands it.
           </p>
         </motion.div>
 
@@ -87,44 +97,38 @@ export default function HowItWorks() {
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
           variants={stagger}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
               variants={fadeUp}
-              className="relative border border-line bg-card rounded-2xl p-6 flex flex-col gap-4"
+              className="relative flex flex-col gap-4 rounded-2xl border border-line bg-card p-6"
             >
-              {/* Connector line (hidden on first card and mobile) */}
-              {i > 0 && (
-                <div className="hidden lg:block absolute -left-3 top-1/2 w-6 h-px bg-line" aria-hidden="true" />
-              )}
+              {i > 0 && <div className="absolute -left-3 top-1/2 hidden h-px w-6 bg-line lg:block" aria-hidden="true" />}
 
               <div className="flex items-center gap-3">
                 {step.icon}
                 <div>
-                  <p className="text-[10px] font-bold tracking-[2px] text-accent uppercase">{step.number}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[2px] text-accent">{step.number}</p>
                   <p className="text-base font-semibold text-txt">{step.title}</p>
                 </div>
               </div>
 
-              <p className="text-sm text-muted leading-relaxed flex-1">
-                {step.description}
-              </p>
+              <p className="flex-1 text-sm leading-relaxed text-muted">{step.description}</p>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Risk reversal — from FieldProof */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="mt-8 max-w-xl mx-auto border border-line/70 bg-card/50 backdrop-blur-sm rounded-xl px-5 py-4 text-center"
+          className="mx-auto mt-8 max-w-xl rounded-xl border border-line/70 bg-card/50 px-5 py-4 text-center backdrop-blur-sm"
         >
-          <p className="text-sm font-semibold text-txt mb-1">Assists the bench. Doesn&apos;t control it.</p>
-          <p className="text-xs text-muted leading-relaxed">
+          <p className="mb-1 text-sm font-semibold text-txt">Assists the bench. Doesn&apos;t control it.</p>
+          <p className="text-xs leading-relaxed text-muted">
             Operators confirm every step. The system validates&nbsp;&mdash; it doesn&apos;t override.
           </p>
         </motion.div>
@@ -138,10 +142,10 @@ export default function HowItWorks() {
         >
           <Link
             href={CTA.primary.href}
-            className="inline-flex px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px"
+            className="inline-flex rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-all hover:-translate-y-px hover:bg-blue-500"
             onClick={() => trackEvent('how_it_works_cta')}
           >
-            See It Work On Your Cut List →
+            See It Work On Your Cut List &rarr;
           </Link>
         </motion.div>
       </div>

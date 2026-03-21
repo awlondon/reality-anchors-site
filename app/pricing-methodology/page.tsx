@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/components/Footer';
 import PhotoBackground from '@/components/PhotoBackground';
+import { pricingModuleStatus } from '@/data/pricing';
 import { ScrapBeforeAfter } from './Charts';
 
 export const metadata: Metadata = {
@@ -195,9 +196,52 @@ AnnualReworkSavings =
           <p className="text-xs text-muted/70">Final pricing depends on bench count, instrumentation scope, calibration governance requirements, and multi-project optimization complexity.</p>
         </section>
 
+        <section className="border border-line bg-card rounded-2xl p-8">
+          <h2 className="text-xl font-semibold text-txt mb-4">5. Plan Designations and Enforcement Status</h2>
+          <p className="text-muted text-sm mb-6">
+            Public pricing uses &quot;included in [Plan]&quot; language to show the intended commercial boundary for each module.
+            Where product-level gates are still rolling out, that status is disclosed here rather than implied away.
+          </p>
+          <div className="table-scroll-wrapper overflow-x-auto mb-5">
+            <table className="ra-table">
+              <thead><tr><th>Module</th><th>Included in</th><th>Enforcement status</th><th>Current note</th></tr></thead>
+              <tbody>
+                {pricingModuleStatus.map((module) => (
+                  <tr key={module.id}>
+                    <td>
+                      <div className="font-semibold text-txt">{module.name}</div>
+                      <div className="font-mono text-[11px] text-muted/70">{module.id}</div>
+                    </td>
+                    <td className="text-muted text-sm">{module.includedIn}</td>
+                    <td className="text-sm">
+                      <span
+                        className={`inline-flex rounded-full px-2.5 py-1 text-[11px] font-semibold ${
+                          module.enforcementStatus === 'Available now'
+                            ? 'bg-emerald-500/10 text-emerald-300'
+                            : 'bg-amber-500/10 text-amber-300'
+                        }`}
+                      >
+                        {module.enforcementStatus}
+                      </span>
+                    </td>
+                    <td className="text-muted text-sm">{module.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="rounded-xl border border-line/70 bg-bg/50 px-5 py-4">
+            <p className="text-sm font-semibold text-txt mb-2">FAQ: Why use &quot;included in&quot; before every gate is enforced?</p>
+            <p className="text-sm leading-relaxed text-muted">
+              Because the pricing page is describing the commercial plan boundary, not claiming that every entitlement check is already complete.
+              The enforcement note makes the rollout state explicit so buyers can see both the intended plan designation and where gate wiring is still in progress.
+            </p>
+          </div>
+        </section>
+
         {/* Governance */}
         <section className="border border-line bg-card rounded-2xl p-8">
-          <h2 className="text-xl font-semibold text-txt mb-4">5. Governance &amp; Compliance Framework</h2>
+          <h2 className="text-xl font-semibold text-txt mb-4">6. Governance &amp; Compliance Framework</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-sm font-semibold text-muted uppercase tracking-wide mb-3">Versioning</h3>

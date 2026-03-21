@@ -22,7 +22,7 @@ const CORE_LOOP = [
   {
     step: 'Validate',
     headline: 'In-process verification before the action is irreversible',
-    copy: 'Each step is checked against the live job context, machine profile, and tolerance envelope. Deviations are caught before they turn into scrap, delay, or rework.',
+    copy: 'Each step is checked against the live job context, measured reality anchors, machine profile, and tolerance envelope. Deviations are caught before they turn into scrap, delay, or rework.',
     metric: '8%',
     metricLabel: 'Max scrap reduction',
   },
@@ -44,7 +44,12 @@ const TECH_CAPABILITIES = [
   {
     title: 'Edge inference',
     description:
-      'On-device AI validation runs at the workstation. Decisions happen in milliseconds, not round-trips.',
+      'Deterministic on-device measurement and validation run at the workstation. Decisions happen in milliseconds, not cloud round-trips.',
+  },
+  {
+    title: 'Reality anchor measurement',
+    description:
+      'Any identified object of known dimensions can establish scale in-frame. The platform uses that measured reference as a ruler for everything else it validates.',
   },
   {
     title: 'Immutable audit trail',
@@ -107,7 +112,7 @@ export default function PlatformPage() {
             Upstream systems generate intent &mdash; schedules, cut lists, specifications.
             Downstream reality is irreversible &mdash; cuts, bends, welds, pours.
             The platform sits at the point of execution: guiding the action, validating it against
-            the spec, and recording the outcome.
+            the spec, measuring against reality anchors in-frame, and recording the outcome.
           </p>
         </div>
       </section>

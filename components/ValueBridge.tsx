@@ -8,22 +8,16 @@ import { siteMetrics } from '@/lib/siteData';
 
 function GuideIcon() {
   return (
-    <svg viewBox="0 0 36 36" fill="none" className="w-9 h-9 flex-shrink-0" aria-hidden="true">
+    <svg viewBox="0 0 36 36" fill="none" className="h-9 w-9 flex-shrink-0" aria-hidden="true">
       <circle cx="18" cy="18" r="18" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
-      <path
-        d="M10 18 L15.5 23.5 L27 11"
-        stroke="#2e7deb"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M10 18 L15.5 23.5 L27 11" stroke="#2e7deb" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
 function ValidateIcon() {
   return (
-    <svg viewBox="0 0 36 36" fill="none" className="w-9 h-9 flex-shrink-0" aria-hidden="true">
+    <svg viewBox="0 0 36 36" fill="none" className="h-9 w-9 flex-shrink-0" aria-hidden="true">
       <circle cx="18" cy="18" r="18" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
       <rect x="11" y="22" width="5" height="8" rx="1" fill="#2e7deb" />
       <rect x="18" y="16" width="5" height="14" rx="1" fill="#2e7deb" />
@@ -34,7 +28,7 @@ function ValidateIcon() {
 
 function RecordIcon() {
   return (
-    <svg viewBox="0 0 36 36" fill="none" className="w-9 h-9 flex-shrink-0" aria-hidden="true">
+    <svg viewBox="0 0 36 36" fill="none" className="h-9 w-9 flex-shrink-0" aria-hidden="true">
       <circle cx="18" cy="18" r="18" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
       <rect x="11" y="6" width="18" height="23" rx="2" stroke="#2e7deb" strokeWidth="1.5" />
       <line x1="15" y1="12" x2="25" y2="12" stroke="#2e7deb" strokeWidth="1.2" strokeLinecap="round" />
@@ -67,7 +61,7 @@ export default function ValueBridge() {
       icon: <ValidateIcon />,
       tag: 'VALIDATE',
       title: 'Catches problems before they leave the bench',
-      body: 'The workflow starts with your job specs and operator-confirmed steps. Reality Anchors validates every run so problems get caught at the bench — not in the field.',
+      body: 'The workflow starts with your job specs, measured reality anchors, and operator-confirmed steps. Reality Anchors determines bar size and scale from the frame so problems get caught at the bench - not in the field.',
       metric: siteMetrics.valueBridge.optimizeMetric,
       metricSuffix: 'scrap-reduction target from cleaner execution',
     },
@@ -75,7 +69,7 @@ export default function ValueBridge() {
       icon: <RecordIcon />,
       tag: 'PROVE',
       title: 'Every run builds auditable proof',
-      body: 'Each verified run produces a measurable record. Accuracy is visible over time — and every metric is verified against actual production outcomes, not projections.',
+      body: 'Each verified run produces a measurable record. Accuracy is visible over time - and every metric is verified against actual production outcomes, not projections.',
       metric: siteMetrics.valueBridge.traceMetric,
       metricSuffix: 'accuracy target verified against production',
     },

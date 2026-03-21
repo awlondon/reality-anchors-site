@@ -41,6 +41,11 @@ export const faqs: FAQItem[] = [
       'We use published industry baselines and logged operational metrics rather than self-reported numbers. During validation, the platform tracks scrap, rework, throughput, and usage against a stated baseline model so the economics stay transparent.',
   },
   {
+    question: 'What does "included in Production" mean if some gates are still rolling out?',
+    answer:
+      'It means Production is the commercial plan designation for those capabilities today. Some access boundaries are already enforced and some are still moving from documented plan designation into product-level gates. Where enforcement is still rolling out, we call that out in the pricing methodology so buyers understand both the intended tier boundary and the current rollout state.',
+  },
+  {
     question: 'Do I need LiDAR?',
     answer:
       'No. LiDAR is optional. Most deployments start with standard cameras for reference and context capture. LiDAR-equipped devices are added when you need precision depth, such as tighter bend verification or spacing checks, and are positioned as upgrades rather than universal requirements.',

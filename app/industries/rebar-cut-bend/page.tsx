@@ -64,6 +64,13 @@ export default function RebarCutBendPage() {
             Start with one camera. Validate every rebar run. Expand only when the workflow earns it.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{workcell.description}</p>
+          <div className="mt-6 max-w-2xl rounded-2xl border border-accent/20 bg-card/70 px-5 py-4">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">Reality Anchor</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted">
+              Place a known object in frame and the system uses it as a ruler for everything else it validates. In the
+              rebar workflow, bar size is determined from measured signals rather than user declaration alone.
+            </p>
+          </div>
 
           <div className="mt-10 flex flex-wrap gap-4">
             <Link

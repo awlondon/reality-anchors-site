@@ -1,0 +1,329 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Reality Anchors home" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Reality Anchors" [ref=e6]
+        - generic [ref=e7]: Reality Anchors
+      - navigation "Main navigation" [ref=e8]:
+        - link "Pilot" [ref=e9] [cursor=pointer]:
+          - /url: /personal/
+        - link "Production" [ref=e10] [cursor=pointer]:
+          - /url: /commercial/
+        - link "Enterprise" [ref=e11] [cursor=pointer]:
+          - /url: /industrial/
+        - link "Quick Estimate" [ref=e12] [cursor=pointer]:
+          - /url: /calculator/
+        - link "Margin Model" [ref=e13] [cursor=pointer]:
+          - /url: /margin-impact/
+        - link "Strategy" [ref=e14] [cursor=pointer]:
+          - /url: /board-strategy/
+        - link "Requirements" [ref=e15] [cursor=pointer]:
+          - /url: /requirements/
+      - link "Get ROI Estimate" [ref=e17] [cursor=pointer]:
+        - /url: /calculator/
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - img
+      - generic [ref=e20]:
+        - paragraph [ref=e21]: Document RA-WP-001 · Version 1.0 · January 2026
+        - heading "Platform Architecture & Pricing Methodology" [level=1] [ref=e22]
+        - paragraph [ref=e23]: Transparent pricing based on industry-typical baseline models, conservative improvement deltas, and value-aligned subscription structures.
+        - generic [ref=e24]:
+          - link "Explore production plans" [ref=e25] [cursor=pointer]:
+            - /url: /commercial/
+          - link "Run the calculator" [ref=e26] [cursor=pointer]:
+            - /url: /margin-impact/
+    - generic [ref=e27]:
+      - img
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - heading "1. Purpose" [level=2] [ref=e30]
+          - paragraph [ref=e31]: This document provides a transparent view of Reality Anchors pricing assumptions, baseline models, and subscription structures. Its purpose is to support buyer due diligence, provide contractual stability, and establish a clear causal link between platform value delivery and subscription cost.
+          - paragraph [ref=e32]: Pricing is not based on self-reported scrap rates or percentage-of-savings models. Instead, it references industry-typical ranges and applies conservative deltas to arrive at a modeled value from which subscription tiers are derived.
+        - generic [ref=e33]:
+          - heading "2. Baseline Model Assumptions (Scrap + Rework)" [level=2] [ref=e34]
+          - paragraph [ref=e35]: Segment classifications and baseline scrap/rework rates are modeled from industry-typical ranges. All rates are conservative mid-points intended for pricing illustration, not guaranteed outcomes.
+          - table [ref=e37]:
+            - rowgroup [ref=e38]:
+              - row "Segment Scrap range Scrap model baseline Basis" [ref=e39]:
+                - columnheader "Segment" [ref=e40]
+                - columnheader "Scrap range" [ref=e41]
+                - columnheader "Scrap model baseline" [ref=e42]
+                - columnheader "Basis" [ref=e43]
+            - rowgroup [ref=e44]:
+              - row "Small commercial shop 6–10% 8.0% Mid-point, conservative" [ref=e45]:
+                - cell "Small commercial shop" [ref=e46]
+                - cell "6–10%" [ref=e47]
+                - cell "8.0%" [ref=e48]
+                - cell "Mid-point, conservative" [ref=e49]
+              - row "Prefab yard 4–7% 5.5% Mid-point, conservative" [ref=e50]:
+                - cell "Prefab yard" [ref=e51]
+                - cell "4–7%" [ref=e52]
+                - cell "5.5%" [ref=e53]
+                - cell "Mid-point, conservative" [ref=e54]
+              - row "Industrial 2–5% 3.5% Mid-point, conservative" [ref=e55]:
+                - cell "Industrial" [ref=e56]
+                - cell "2–5%" [ref=e57]
+                - cell "3.5%" [ref=e58]
+                - cell "Mid-point, conservative" [ref=e59]
+          - table [ref=e61]:
+            - rowgroup [ref=e62]:
+              - row "Rework metric Industry range Model baseline Basis" [ref=e63]:
+                - columnheader "Rework metric" [ref=e64]
+                - columnheader "Industry range" [ref=e65]
+                - columnheader "Model baseline" [ref=e66]
+                - columnheader "Basis" [ref=e67]
+            - rowgroup [ref=e68]:
+              - row "Fabrication remake rate (% of pieces) 1.0–3.0% 1.5% Conservative benchmark midpoint" [ref=e69]:
+                - cell "Fabrication remake rate (% of pieces)" [ref=e70]
+                - cell "1.0–3.0%" [ref=e71]
+                - cell "1.5%" [ref=e72]
+                - cell "Conservative benchmark midpoint" [ref=e73]
+              - row "Blended remake cost per affected piece $8–$40 $20 Material + labor + bench disruption allowance" [ref=e74]:
+                - cell "Blended remake cost per affected piece" [ref=e75]
+                - cell "$8–$40" [ref=e76]
+                - cell "$20" [ref=e77]
+                - cell "Material + labor + bench disruption allowance" [ref=e78]
+          - paragraph [ref=e79]: Contracts reference the baseline model version number for contractual stability.
+        - generic [ref=e80]:
+          - heading "3. Conservative Improvement Deltas" [level=2] [ref=e81]
+          - paragraph [ref=e82]: Improvement deltas represent modeled reduction targets for scrap and preventable rework based on structured workflow enforcement. Values are set conservatively for pricing purposes and are not guaranteed outcomes.
+          - table [ref=e84]:
+            - rowgroup [ref=e85]:
+              - row "Segment Baseline Conservative delta Post-deployment model" [ref=e86]:
+                - columnheader "Segment" [ref=e87]
+                - columnheader "Baseline" [ref=e88]
+                - columnheader "Conservative delta" [ref=e89]
+                - columnheader "Post-deployment model" [ref=e90]
+            - rowgroup [ref=e91]:
+              - row "Small commercial shop 8.0% 2.0 pts 6.0%" [ref=e92]:
+                - cell "Small commercial shop" [ref=e93]
+                - cell "8.0%" [ref=e94]
+                - cell "2.0 pts" [ref=e95]
+                - cell "6.0%" [ref=e96]
+              - row "Prefab yard 5.5% 1.5 pts 4.0%" [ref=e97]:
+                - cell "Prefab yard" [ref=e98]
+                - cell "5.5%" [ref=e99]
+                - cell "1.5 pts" [ref=e100]
+                - cell "4.0%" [ref=e101]
+              - row "Industrial 3.5% 1.0 pt 2.5%" [ref=e102]:
+                - cell "Industrial" [ref=e103]
+                - cell "3.5%" [ref=e104]
+                - cell "1.0 pt" [ref=e105]
+                - cell "2.5%" [ref=e106]
+          - table [ref=e108]:
+            - rowgroup [ref=e109]:
+              - row "Rework metric Baseline Conservative delta Post-deployment model" [ref=e110]:
+                - columnheader "Rework metric" [ref=e111]
+                - columnheader "Baseline" [ref=e112]
+                - columnheader "Conservative delta" [ref=e113]
+                - columnheader "Post-deployment model" [ref=e114]
+            - rowgroup [ref=e115]:
+              - row "Remake rate (% of pieces) 1.5% 0.8 pts 0.7%" [ref=e116]:
+                - cell "Remake rate (% of pieces)" [ref=e117]
+                - cell "1.5%" [ref=e118]
+                - cell "0.8 pts" [ref=e119]
+                - cell "0.7%" [ref=e120]
+              - row "Relative improvement — 40–70% Steady-state target band" [ref=e121]:
+                - cell "Relative improvement" [ref=e122]
+                - cell "—" [ref=e123]
+                - cell "40–70%" [ref=e124]
+                - cell "Steady-state target band" [ref=e125]
+          - 'img "Before/after scrap rates by segment: small commercial 8% to 6%, prefab 5.5% to 4%, industrial 3.5% to 2.5%" [ref=e127]':
+            - generic [ref=e129]: Baseline
+            - generic [ref=e131]: Post-deployment
+            - generic [ref=e132]:
+              - generic [ref=e133]: Small commercial
+              - generic [ref=e134]: 8%
+              - generic [ref=e135]: 6%
+              - generic [ref=e136]: −2.0 pts
+            - generic [ref=e137]:
+              - generic [ref=e138]: Prefab yard
+              - generic [ref=e139]: 5.5%
+              - generic [ref=e140]: 4%
+              - generic [ref=e141]: −1.5 pts
+            - generic [ref=e142]:
+              - generic [ref=e143]: Industrial
+              - generic [ref=e144]: 3.5%
+              - generic [ref=e145]: 2.5%
+              - generic [ref=e146]: −1.0 pt
+          - generic [ref=e147]: AnnualMaterialSavings = TonsPerMonth × 12 × SteelCostPerTon × ScrapDelta AnnualLaborSavings (optional) = TonsPerMonth × 12 × HoursSavedPerTon × LoadedLaborRate AnnualReworkSavings = PiecesPerMonth × 12 × (ReworkBaseline - ReworkPost) × BlendedReworkCostPerPiece
+        - generic [ref=e148]:
+          - heading "4. Value-Aligned Subscription Structure" [level=2] [ref=e149]
+          - paragraph [ref=e150]: All tiers are priced per bench, per month. Pricing scales with execution complexity and governance requirements, keeping the value proposition clear at every level.
+          - table [ref=e152]:
+            - rowgroup [ref=e153]:
+              - row "Tier Monthly per bench Notes" [ref=e154]:
+                - columnheader "Tier" [ref=e155]
+                - columnheader "Monthly per bench" [ref=e156]
+                - columnheader "Notes" [ref=e157]
+            - rowgroup [ref=e158]:
+              - row "Pilot $1,200 Solo operators and small crews" [ref=e159]:
+                - cell "Pilot" [ref=e160]
+                - cell "$1,200" [ref=e161]
+                - cell "Solo operators and small crews" [ref=e162]
+              - row "Production $3,200 Fabrication yards and multi-bench shops" [ref=e163]:
+                - cell "Production" [ref=e164]
+                - cell "$3,200" [ref=e165]
+                - cell "Fabrication yards and multi-bench shops" [ref=e166]
+              - row "Enterprise $4,800 High-volume plants with ERP integration" [ref=e167]:
+                - cell "Enterprise" [ref=e168]
+                - cell "$4,800" [ref=e169]
+                - cell "High-volume plants with ERP integration" [ref=e170]
+            - rowgroup [ref=e171]:
+              - row "Device Add-Ons (per device, any tier)" [ref=e172]:
+                - cell "Device Add-Ons (per device, any tier)" [ref=e173]
+              - row "Context Camera $200/device/mo Wider coverage, multi-angle capture" [ref=e174]:
+                - cell "Context Camera" [ref=e175]
+                - cell "$200/device/mo" [ref=e176]
+                - cell "Wider coverage, multi-angle capture" [ref=e177]
+              - row "LiDAR-Equipped Device $450/device/mo Sub-mm precision depth" [ref=e178]:
+                - cell "LiDAR-Equipped Device" [ref=e179]
+                - cell "$450/device/mo" [ref=e180]
+                - cell "Sub-mm precision depth" [ref=e181]
+          - paragraph [ref=e182]: Final pricing depends on bench count, instrumentation scope, calibration governance requirements, and multi-project optimization complexity.
+        - generic [ref=e183]:
+          - heading "5. Plan Designations and Enforcement Status" [level=2] [ref=e184]
+          - paragraph [ref=e185]: Public pricing uses "included in [Plan]" language to show the intended commercial boundary for each module. Where product-level gates are still rolling out, that status is disclosed here rather than implied away.
+          - table [ref=e187]:
+            - rowgroup [ref=e188]:
+              - row "Module Included in Enforcement status Current note" [ref=e189]:
+                - columnheader "Module" [ref=e190]
+                - columnheader "Included in" [ref=e191]
+                - columnheader "Enforcement status" [ref=e192]
+                - columnheader "Current note" [ref=e193]
+            - rowgroup [ref=e194]:
+              - row "AR Execution Guidance ar_execution Pilot, Production, Enterprise Available now Core workflow module already live across plans." [ref=e195]:
+                - cell "AR Execution Guidance ar_execution" [ref=e196]:
+                  - generic [ref=e197]: AR Execution Guidance
+                  - generic [ref=e198]: ar_execution
+                - cell "Pilot, Production, Enterprise" [ref=e199]
+                - cell "Available now" [ref=e200]:
+                  - generic [ref=e201]: Available now
+                - cell "Core workflow module already live across plans." [ref=e202]
+              - row "Daily Dashboards daily_dashboards Pilot, Production, Enterprise Available now Core reporting module already live across plans." [ref=e203]:
+                - cell "Daily Dashboards daily_dashboards" [ref=e204]:
+                  - generic [ref=e205]: Daily Dashboards
+                  - generic [ref=e206]: daily_dashboards
+                - cell "Pilot, Production, Enterprise" [ref=e207]
+                - cell "Available now" [ref=e208]:
+                  - generic [ref=e209]: Available now
+                - cell "Core reporting module already live across plans." [ref=e210]
+              - row "Analytics & QA analytics_qa Production, Enterprise Progressive enforcement Public plan designation is live; feature-gate wiring is still rolling out." [ref=e211]:
+                - cell "Analytics & QA analytics_qa" [ref=e212]:
+                  - generic [ref=e213]: Analytics & QA
+                  - generic [ref=e214]: analytics_qa
+                - cell "Production, Enterprise" [ref=e215]
+                - cell "Progressive enforcement" [ref=e216]:
+                  - generic [ref=e217]: Progressive enforcement
+                - cell "Public plan designation is live; feature-gate wiring is still rolling out." [ref=e218]
+              - row "Custom Calibration custom_calibration Production, Enterprise Progressive enforcement Custom profile gating is documented but not fully wired yet." [ref=e219]:
+                - cell "Custom Calibration custom_calibration" [ref=e220]:
+                  - generic [ref=e221]: Custom Calibration
+                  - generic [ref=e222]: custom_calibration
+                - cell "Production, Enterprise" [ref=e223]
+                - cell "Progressive enforcement" [ref=e224]:
+                  - generic [ref=e225]: Progressive enforcement
+                - cell "Custom profile gating is documented but not fully wired yet." [ref=e226]
+              - row "Compliance Export compliance_export Enterprise Progressive enforcement Enterprise designation is public; export gating is still being wired." [ref=e227]:
+                - cell "Compliance Export compliance_export" [ref=e228]:
+                  - generic [ref=e229]: Compliance Export
+                  - generic [ref=e230]: compliance_export
+                - cell "Enterprise" [ref=e231]
+                - cell "Progressive enforcement" [ref=e232]:
+                  - generic [ref=e233]: Progressive enforcement
+                - cell "Enterprise designation is public; export gating is still being wired." [ref=e234]
+              - row "Audit Trails audit_trails Enterprise Progressive enforcement Enterprise designation is public; access enforcement is still rolling out." [ref=e235]:
+                - cell "Audit Trails audit_trails" [ref=e236]:
+                  - generic [ref=e237]: Audit Trails
+                  - generic [ref=e238]: audit_trails
+                - cell "Enterprise" [ref=e239]
+                - cell "Progressive enforcement" [ref=e240]:
+                  - generic [ref=e241]: Progressive enforcement
+                - cell "Enterprise designation is public; access enforcement is still rolling out." [ref=e242]
+          - generic [ref=e243]:
+            - paragraph [ref=e244]: "FAQ: Why use \"included in\" before every gate is enforced?"
+            - paragraph [ref=e245]: Because the pricing page is describing the commercial plan boundary, not claiming that every entitlement check is already complete. The enforcement note makes the rollout state explicit so buyers can see both the intended plan designation and where gate wiring is still in progress.
+        - generic [ref=e246]:
+          - heading "6. Governance & Compliance Framework" [level=2] [ref=e247]
+          - generic [ref=e248]:
+            - generic [ref=e249]:
+              - heading "Versioning" [level=3] [ref=e250]
+              - list [ref=e251]:
+                - listitem [ref=e252]:
+                  - generic [ref=e253]: ›
+                  - text: Baseline model versioned and referenced in contracts
+                - listitem [ref=e254]:
+                  - generic [ref=e255]: ›
+                  - text: Regime releases after internal QA review
+                - listitem [ref=e256]:
+                  - generic [ref=e257]: ›
+                  - text: Machine calibration profiles versioned
+                - listitem [ref=e258]:
+                  - generic [ref=e259]: ›
+                  - text: Subscription tier recalibration at 60-day window
+            - generic [ref=e260]:
+              - heading "Auditability" [level=3] [ref=e261]
+              - list [ref=e262]:
+                - listitem [ref=e263]:
+                  - generic [ref=e264]: ›
+                  - text: Immutable event streams
+                - listitem [ref=e265]:
+                  - generic [ref=e266]: ›
+                  - text: Per-run scrap and time reports
+                - listitem [ref=e267]:
+                  - generic [ref=e268]: ›
+                  - text: Exception registry for drift and overrides
+                - listitem [ref=e269]:
+                  - generic [ref=e270]: ›
+                  - text: Role-based access controls
+        - generic [ref=e271]:
+          - link "Request enterprise assessment" [ref=e272] [cursor=pointer]:
+            - /url: /commercial/#contact
+          - link "Run savings calculator" [ref=e273] [cursor=pointer]:
+            - /url: /margin-impact/
+    - generic [ref=e275]:
+      - generic [ref=e276]:
+        - img "Reality Anchors" [ref=e277]
+        - generic [ref=e278]:
+          - generic [ref=e279]: Reality Anchors
+          - generic [ref=e280]: Measured. Anchored. Calibrated.
+      - navigation "Footer navigation" [ref=e281]:
+        - link "Pilot" [ref=e282] [cursor=pointer]:
+          - /url: /personal/
+        - link "Production" [ref=e283] [cursor=pointer]:
+          - /url: /commercial/
+        - link "Enterprise" [ref=e284] [cursor=pointer]:
+          - /url: /industrial/
+        - link "Estimator" [ref=e285] [cursor=pointer]:
+          - /url: /calculator/
+        - link "Margin Model" [ref=e286] [cursor=pointer]:
+          - /url: /margin-impact/
+        - link "Methodology" [ref=e287] [cursor=pointer]:
+          - /url: /pricing-methodology/
+        - link "Strategy" [ref=e288] [cursor=pointer]:
+          - /url: /board-strategy/
+        - link "Requirements" [ref=e289] [cursor=pointer]:
+          - /url: /requirements/
+        - link "Contact" [ref=e290] [cursor=pointer]:
+          - /url: /commercial/#contact
+        - link "Privacy" [ref=e291] [cursor=pointer]:
+          - /url: /privacy/
+        - link "Data Practices" [ref=e292] [cursor=pointer]:
+          - /url: /data-practices/
+        - link "Terms" [ref=e293] [cursor=pointer]:
+          - /url: /terms/
+      - generic [ref=e294]: © 2026 Reality Anchors LLC
+  - alert [ref=e295]
+  - dialog "Cookie consent" [ref=e296]:
+    - generic [ref=e297]:
+      - paragraph [ref=e298]:
+        - text: We use cookies for analytics and advertising measurement.
+        - link "Privacy Policy" [ref=e299] [cursor=pointer]:
+          - /url: /privacy/
+      - generic [ref=e300]:
+        - button "Reject" [ref=e301] [cursor=pointer]
+        - button "Accept" [ref=e302] [cursor=pointer]

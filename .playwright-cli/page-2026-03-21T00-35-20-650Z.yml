@@ -1,0 +1,238 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Reality Anchors home" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Reality Anchors" [ref=e6]
+        - generic [ref=e7]: Reality Anchors
+      - navigation "Main navigation" [ref=e8]:
+        - link "Pilot" [ref=e9] [cursor=pointer]:
+          - /url: /personal/
+        - link "Production" [ref=e10] [cursor=pointer]:
+          - /url: /commercial/
+        - link "Enterprise" [ref=e11] [cursor=pointer]:
+          - /url: /industrial/
+        - link "Quick Estimate" [ref=e12] [cursor=pointer]:
+          - /url: /calculator/
+        - link "Margin Model" [ref=e13] [cursor=pointer]:
+          - /url: /margin-impact/
+        - link "Strategy" [ref=e14] [cursor=pointer]:
+          - /url: /board-strategy/
+        - link "Requirements" [ref=e15] [cursor=pointer]:
+          - /url: /requirements/
+      - link "Get ROI Estimate" [ref=e17] [cursor=pointer]:
+        - /url: /calculator/
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - img [ref=e20]
+      - generic [ref=e21]:
+        - paragraph [ref=e22]: Flagship Workcell
+        - heading "Start with one camera. Validate every rebar run. Expand only when the workflow earns it." [level=1] [ref=e23]
+        - paragraph [ref=e24]: Calibrated capture and execution validation for rebar fabrication. Start with one reference camera, expand to mixed coverage, and add LiDAR only where precision depth earns its keep.
+        - generic [ref=e25]:
+          - paragraph [ref=e26]: Reality Anchor
+          - paragraph [ref=e27]: Place a known object in frame and the system uses it as a ruler for everything else it validates. In the rebar workflow, bar size is determined from measured signals rather than user declaration alone.
+        - generic [ref=e28]:
+          - link "Estimate Your Savings" [ref=e29] [cursor=pointer]:
+            - /url: /calculator/
+          - link "Talk to a Representative" [ref=e30] [cursor=pointer]:
+            - /url: "#contact"
+        - generic [ref=e31]:
+          - generic [ref=e32]:
+            - generic [ref=e33]: 1 cam
+            - generic [ref=e34]: Starting point
+          - generic [ref=e35]:
+            - generic [ref=e36]: Mixed fleet
+            - generic [ref=e37]: Coverage path
+          - generic [ref=e38]:
+            - generic [ref=e39]: Optional LiDAR
+            - generic [ref=e40]: Precision upgrade
+          - generic [ref=e41]:
+            - generic [ref=e42]: 60 days
+            - generic [ref=e43]: Validation window
+    - generic [ref=e46]:
+      - img "AI-guided rebar fabrication process overview" [ref=e48]:
+        - generic [ref=e52]:
+          - generic [ref=e332]: 6,000 mm
+          - generic [ref=e334]: ⌀ 16mm
+          - generic [ref=e336]: N16 500L
+          - generic [ref=e338]: Every bar of steel carries a specification.
+      - generic [ref=e339]:
+        - 'button "Scene 1: Every bar of steel carries a specification." [ref=e340] [cursor=pointer]'
+        - 'button "Scene 2: AI vision confirms the cut before the blade moves." [ref=e341] [cursor=pointer]'
+        - 'button "Scene 3: Every bend is verified against the spec in real time." [ref=e342] [cursor=pointer]'
+    - generic [ref=e345]:
+      - generic [ref=e347]:
+        - img "Steel fabrication worker cutting metal with angle grinder and sparks" [ref=e350]
+        - img [ref=e351]
+      - generic [ref=e355]:
+        - paragraph [ref=e357]: Precision at the Bench
+        - heading "Every measurement confirmed. Every bend angle verified." [level=2] [ref=e358]
+        - paragraph [ref=e359]: Operators follow guided sequences on a ruggedized tablet. The system validates each step against the cut list — catching errors before material is wasted.
+    - generic [ref=e361]:
+      - heading "The capability ladder from baseline capture to precision depth" [level=2] [ref=e362]
+      - paragraph [ref=e363]: Start with a one-camera baseline, then add context and precision only where they create real operational value.
+      - generic [ref=e364]:
+        - generic [ref=e365]:
+          - generic [ref=e366]: "01"
+          - paragraph [ref=e367]: Set up your job specs and start with one reference camera at the bench
+        - generic [ref=e368]:
+          - generic [ref=e369]: "02"
+          - paragraph [ref=e370]: Add context cameras when coverage or throughput demands broader visibility
+        - generic [ref=e371]:
+          - generic [ref=e372]: "03"
+          - paragraph [ref=e373]: Introduce LiDAR-equipped devices only for precision depth checks that justify the extra cost
+        - generic [ref=e374]:
+          - generic [ref=e375]: "04"
+          - paragraph [ref=e376]: Upload verified captures so every run builds on proven results
+    - generic [ref=e378]:
+      - heading "Programs deployed in rebar cut & bend" [level=2] [ref=e379]
+      - paragraph [ref=e380]: Each program is a validation regime tuned to a specific operational concern.
+      - generic [ref=e381]:
+        - generic [ref=e382]:
+          - generic [ref=e383]: Core
+          - heading "Structural Fabrication" [level=3] [ref=e384]
+          - paragraph [ref=e385]: Real-time fabrication guidance targeting lower scrap, consistent quality, and smoother bench execution.
+          - generic [ref=e386]:
+            - generic [ref=e387]:
+              - generic [ref=e388]: Up to 1.8 pts
+              - generic [ref=e389]: Scrap Δ target
+            - generic [ref=e390]:
+              - generic [ref=e391]: < 0.7%
+              - generic [ref=e392]: Error rate target
+            - generic [ref=e393]:
+              - generic [ref=e394]: 4.2s
+              - generic [ref=e395]: Plan time
+          - link "Learn more →" [ref=e396] [cursor=pointer]:
+            - /url: /regimes/structural-fabrication/
+        - generic [ref=e397]:
+          - generic [ref=e398]: Pro
+          - heading "Multi-Project Optimization" [level=3] [ref=e399]
+          - paragraph [ref=e400]: Plan across multiple jobs to target improved material reuse, reduced over-ordering, and simpler scheduling.
+          - generic [ref=e401]:
+            - generic [ref=e402]:
+              - generic [ref=e403]: Up to 23%
+              - generic [ref=e404]: Reuse uplift target
+            - generic [ref=e405]:
+              - generic [ref=e406]: Up to -7 h/week
+              - generic [ref=e407]: Planner hours target
+            - generic [ref=e408]:
+              - generic [ref=e409]: Up to -18%
+              - generic [ref=e410]: Stock-out target
+          - link "Learn more →" [ref=e411] [cursor=pointer]:
+            - /url: /regimes/multi-project-optimization/
+        - generic [ref=e412]:
+          - generic [ref=e413]: Pro
+          - heading "Machine Calibration" [level=3] [ref=e414]
+          - paragraph [ref=e415]: Keep machine output stable with continuous performance checks and practical drift visibility.
+          - generic [ref=e416]:
+            - generic [ref=e417]:
+              - generic [ref=e418]: ±0.2°
+              - generic [ref=e419]: Drift band target
+            - generic [ref=e420]:
+              - generic [ref=e421]: 14 days
+              - generic [ref=e422]: Recalibration cycle
+            - generic [ref=e423]:
+              - generic [ref=e424]: Up to -31%
+              - generic [ref=e425]: Override rate target
+          - link "Learn more →" [ref=e426] [cursor=pointer]:
+            - /url: /regimes/machine-calibration/
+    - generic [ref=e428]:
+      - heading "What connects to the rebar workcell" [level=2] [ref=e429]
+      - paragraph [ref=e430]: Reality Anchors works alongside your detailing and ERP systems, turning plans into verified outcomes on the shop floor.
+      - generic [ref=e431]:
+        - generic [ref=e432]:
+          - img [ref=e434]
+          - generic [ref=e436]: ERP and cut-list import
+        - generic [ref=e437]:
+          - img [ref=e439]
+          - generic [ref=e441]: Tablet capture and operator signoff
+        - generic [ref=e442]:
+          - img [ref=e444]
+          - generic [ref=e446]: QA and audit export
+        - generic [ref=e447]:
+          - img [ref=e449]
+          - generic [ref=e451]: Calibration-aware job context
+    - generic [ref=e453]:
+      - heading "Model the impact for your operation" [level=2] [ref=e454]
+      - paragraph [ref=e455]: Use the Quick Estimate calculator to see projected material savings, labor reduction, and EBITDA impact based on your tonnage and scrap profile.
+      - generic [ref=e456]:
+        - link "Quick Estimate" [ref=e457] [cursor=pointer]:
+          - /url: /calculator/
+        - link "Full Margin Model" [ref=e458] [cursor=pointer]:
+          - /url: /margin-impact/
+    - generic [ref=e461]:
+      - generic [ref=e463]:
+        - img "Two supervisors in safety vests discussing operations on construction site" [ref=e466]
+        - img [ref=e467]
+      - generic [ref=e471]:
+        - paragraph [ref=e473]: Crew Coordination
+        - heading "One view of every job, every bench, every shift." [level=2] [ref=e474]
+        - paragraph [ref=e475]: Supervisors see real-time progress across work orders without walking the yard. Exception alerts surface problems before they compound.
+    - generic [ref=e476]:
+      - img
+      - generic [ref=e478]:
+        - generic [ref=e479]:
+          - paragraph [ref=e480]: Get in Touch
+          - heading "See if rebar cut & bend fits your operation" [level=2] [ref=e481]
+          - paragraph [ref=e482]: Complete the form and we'll return with a fit assessment, suggested rollout scope, and an estimate of what you could save.
+          - list [ref=e483]:
+            - listitem [ref=e484]:
+              - img [ref=e485]
+              - text: We map the right one-camera baseline, mixed-camera expansion path, and optional LiDAR upgrade for your workflow.
+            - listitem [ref=e487]:
+              - img [ref=e488]
+              - text: Pilot and beta evaluations include a documented review date and paid-conversion expectation before activation.
+            - listitem [ref=e490]:
+              - img [ref=e491]
+              - text: Optional technical deep-dive covering architecture, integration, governance, and export requirements.
+        - generic [ref=e494]:
+          - generic [ref=e495]:
+            - generic [ref=e496]: Work email
+            - textbox "Work email" [ref=e497]:
+              - /placeholder: jane@company.com
+          - button "Continue with email" [ref=e498] [cursor=pointer]: Continue
+    - generic [ref=e500]:
+      - generic [ref=e501]:
+        - img "Reality Anchors" [ref=e502]
+        - generic [ref=e503]:
+          - generic [ref=e504]: Reality Anchors
+          - generic [ref=e505]: Measured. Anchored. Calibrated.
+      - navigation "Footer navigation" [ref=e506]:
+        - link "Pilot" [ref=e507] [cursor=pointer]:
+          - /url: /personal/
+        - link "Production" [ref=e508] [cursor=pointer]:
+          - /url: /commercial/
+        - link "Enterprise" [ref=e509] [cursor=pointer]:
+          - /url: /industrial/
+        - link "Estimator" [ref=e510] [cursor=pointer]:
+          - /url: /calculator/
+        - link "Margin Model" [ref=e511] [cursor=pointer]:
+          - /url: /margin-impact/
+        - link "Methodology" [ref=e512] [cursor=pointer]:
+          - /url: /pricing-methodology/
+        - link "Strategy" [ref=e513] [cursor=pointer]:
+          - /url: /board-strategy/
+        - link "Requirements" [ref=e514] [cursor=pointer]:
+          - /url: /requirements/
+        - link "Contact" [ref=e515] [cursor=pointer]:
+          - /url: /commercial/#contact
+        - link "Privacy" [ref=e516] [cursor=pointer]:
+          - /url: /privacy/
+        - link "Data Practices" [ref=e517] [cursor=pointer]:
+          - /url: /data-practices/
+        - link "Terms" [ref=e518] [cursor=pointer]:
+          - /url: /terms/
+      - generic [ref=e519]: © 2026 Reality Anchors LLC
+  - alert [ref=e520]
+  - dialog "Cookie consent" [ref=e521]:
+    - generic [ref=e522]:
+      - paragraph [ref=e523]:
+        - text: We use cookies for analytics and advertising measurement.
+        - link "Privacy Policy" [ref=e524] [cursor=pointer]:
+          - /url: /privacy/
+      - generic [ref=e525]:
+        - button "Reject" [ref=e526] [cursor=pointer]
+        - button "Accept" [ref=e527] [cursor=pointer]

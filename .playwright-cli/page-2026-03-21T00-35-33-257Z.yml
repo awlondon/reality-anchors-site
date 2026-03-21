@@ -1,0 +1,199 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Reality Anchors home" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Reality Anchors" [ref=e6]
+        - generic [ref=e7]: Reality Anchors
+      - navigation "Main navigation" [ref=e8]:
+        - link "Pilot" [ref=e9] [cursor=pointer]:
+          - /url: /personal/
+        - link "Production" [ref=e10] [cursor=pointer]:
+          - /url: /commercial/
+        - link "Enterprise" [ref=e11] [cursor=pointer]:
+          - /url: /industrial/
+        - link "Quick Estimate" [ref=e12] [cursor=pointer]:
+          - /url: /calculator/
+        - link "Margin Model" [ref=e13] [cursor=pointer]:
+          - /url: /margin-impact/
+        - link "Strategy" [ref=e14] [cursor=pointer]:
+          - /url: /board-strategy/
+        - link "Requirements" [ref=e15] [cursor=pointer]:
+          - /url: /requirements/
+      - link "Get ROI Estimate" [ref=e17] [cursor=pointer]:
+        - /url: /calculator/
+  - alert [ref=e18]
+  - main [ref=e19]:
+    - generic [ref=e21]:
+      - paragraph [ref=e22]: Platform Architecture
+      - heading "The execution validation layer between planning and outcomes." [level=1] [ref=e23]
+      - paragraph [ref=e24]: "Upstream systems generate intent — schedules, cut lists, specifications. Downstream reality is irreversible — cuts, bends, welds, pours. The platform sits at the point of execution: guiding the action, validating it against the spec, measuring against reality anchors in-frame, and recording the outcome."
+    - generic [ref=e26]:
+      - heading "The execution loop" [level=2] [ref=e27]
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - generic [ref=e30]:
+            - generic [ref=e31]: "01"
+            - generic [ref=e32]: Guide
+          - generic [ref=e33]:
+            - heading "Action-ready workstation instructions" [level=3] [ref=e34]
+            - paragraph [ref=e35]: Turn specifications, cut lists, and schedules into clear step-by-step actions. Operators see exactly what to do next — no second-guessing drawings, no manual look-ups.
+          - generic [ref=e36]:
+            - generic [ref=e37]: < 0.7%
+            - generic [ref=e38]: Fabrication errors
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - generic [ref=e41]: "02"
+            - generic [ref=e42]: Validate
+          - generic [ref=e43]:
+            - heading "In-process verification before the action is irreversible" [level=3] [ref=e44]
+            - paragraph [ref=e45]: Each step is checked against the live job context, measured reality anchors, machine profile, and tolerance envelope. Deviations are caught before they turn into scrap, delay, or rework.
+          - generic [ref=e46]:
+            - generic [ref=e47]: 8%
+            - generic [ref=e48]: Max scrap reduction
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - generic [ref=e51]: "03"
+            - generic [ref=e52]: Record
+          - generic [ref=e53]:
+            - heading "Operational traceability from bench to audit" [level=3] [ref=e54]
+            - paragraph [ref=e55]: Every decision, measurement, and operator action is logged with timestamps and device context. Your ERP, detailing, and QA systems receive cleaner data on material use, timing, and outcomes.
+          - generic [ref=e56]:
+            - generic [ref=e57]: 99%
+            - generic [ref=e58]: Execution accuracy
+    - generic [ref=e60]:
+      - heading "Not MES. Not generic SOPs." [level=2] [ref=e61]
+      - paragraph [ref=e62]: The execution layer between your planning tools and the physical outcome. It complements ERP and detailing systems — it does not replace them.
+      - generic [ref=e63]:
+        - generic [ref=e64]:
+          - heading "Classical MES" [level=3] [ref=e65]
+          - paragraph [ref=e66]: Track, schedule, and control production at the plant level.
+          - paragraph [ref=e67]: Reality Anchors imports scheduling intent and exports verified execution data.
+        - generic [ref=e68]:
+          - heading "Connected Worker" [level=3] [ref=e69]
+          - paragraph [ref=e70]: Digitize SOPs, training, and general work instructions.
+          - paragraph [ref=e71]: "Reality Anchors is fabrication-specific: tied to specifications, tolerances, and irreversible actions."
+        - generic [ref=e72]:
+          - heading "ERP / Detailing" [level=3] [ref=e73]
+          - paragraph [ref=e74]: Generate the plan — schedules, cut lists, material orders.
+          - paragraph [ref=e75]: "Reality Anchors closes the loop: what actually happened vs. what was planned."
+    - generic [ref=e77]:
+      - heading "Same loop, different workcells" [level=2] [ref=e78]
+      - paragraph [ref=e79]: The Guide → Validate → Record pattern is workcell-agnostic. Each deployment configures the inputs, constraints, tolerances, and logging schema for a specific fabrication context.
+      - generic [ref=e80]:
+        - link "Rebar Cut & BendLive Calibrated capture for rebar cut and bend — one camera first, more precision when you need it." [ref=e81] [cursor=pointer]:
+          - /url: /industries/rebar-cut-bend/
+          - generic [ref=e83]:
+            - text: Rebar Cut & BendLive
+            - paragraph [ref=e84]: Calibrated capture for rebar cut and bend — one camera first, more precision when you need it.
+        - generic [ref=e87]:
+          - text: Plate & Press BrakeComing Soon
+          - paragraph [ref=e88]: Precision forming with execution verification at every bend.
+        - generic [ref=e91]:
+          - text: Pipe & TubeComing Soon
+          - paragraph [ref=e92]: Verified pipe bending from spec to audit trail.
+        - generic [ref=e95]:
+          - text: Precast ReinforcementExploring
+          - paragraph [ref=e96]: Reinforcement cage verification before the pour.
+      - paragraph [ref=e97]:
+        - link "Full workcell map →" [ref=e98] [cursor=pointer]:
+          - /url: /industries/
+    - generic [ref=e100]:
+      - heading "Built for the shop floor" [level=2] [ref=e101]
+      - paragraph [ref=e102]: "Infrastructure decisions that reflect how fabrication actually works: intermittent connectivity, dusty environments, shift changes, and compliance audits."
+      - generic [ref=e103]:
+        - generic [ref=e104]:
+          - heading "Offline-first architecture" [level=3] [ref=e105]
+          - paragraph [ref=e106]: Full execution capability with no network dependency. Data syncs when connectivity returns — no interruption to bench operations.
+        - generic [ref=e107]:
+          - heading "Edge inference" [level=3] [ref=e108]
+          - paragraph [ref=e109]: Deterministic on-device measurement and validation run at the workstation. Decisions happen in milliseconds, not cloud round-trips.
+        - generic [ref=e110]:
+          - heading "Reality anchor measurement" [level=3] [ref=e111]
+          - paragraph [ref=e112]: Any identified object of known dimensions can establish scale in-frame. The platform uses that measured reference as a ruler for everything else it validates.
+        - generic [ref=e113]:
+          - heading "Immutable audit trail" [level=3] [ref=e114]
+          - paragraph [ref=e115]: Every event is tamper-evident and append-only. Operator actions, machine readings, and validation outcomes form a continuous, reproducible record.
+        - generic [ref=e116]:
+          - heading "Versioned machine profiles" [level=3] [ref=e117]
+          - paragraph [ref=e118]: Machine calibration data is tracked over time. Drift is visible, and profile changes require controlled release — no silent overrides.
+        - generic [ref=e119]:
+          - heading "Role-based access" [level=3] [ref=e120]
+          - paragraph [ref=e121]: Operators, supervisors, QA, and admins see different surfaces. Governance controls are built in, not bolted on.
+        - generic [ref=e122]:
+          - heading "Structured exports" [level=3] [ref=e123]
+          - paragraph [ref=e124]: Per-run reports, per-job trace logs, exception registries, and calibration summaries export in formats your ERP and QA systems expect.
+    - generic [ref=e126]:
+      - heading "See it applied to a real workflow" [level=2] [ref=e127]
+      - paragraph [ref=e128]: Rebar cut & bend is the flagship deployment. Walk through the execution loop from cut list to audit record.
+      - generic [ref=e129]:
+        - link "See Rebar Cut & Bend" [ref=e130] [cursor=pointer]:
+          - /url: /industries/rebar-cut-bend/
+        - link "View All Workcells" [ref=e131] [cursor=pointer]:
+          - /url: /industries/
+    - generic [ref=e132]:
+      - img
+      - generic [ref=e134]:
+        - generic [ref=e135]:
+          - paragraph [ref=e136]: Get in Touch
+          - heading "Request a technical review" [level=2] [ref=e137]
+          - paragraph [ref=e138]: Tell us about your fabrication environment and we'll walk through how the platform applies.
+          - list [ref=e139]:
+            - listitem [ref=e140]:
+              - img [ref=e141]
+              - text: We map the right one-camera baseline, mixed-camera expansion path, and optional LiDAR upgrade for your workflow.
+            - listitem [ref=e143]:
+              - img [ref=e144]
+              - text: Pilot and beta evaluations include a documented review date and paid-conversion expectation before activation.
+            - listitem [ref=e146]:
+              - img [ref=e147]
+              - text: Optional technical deep-dive covering architecture, integration, governance, and export requirements.
+        - generic [ref=e150]:
+          - generic [ref=e151]:
+            - generic [ref=e152]: Work email
+            - textbox "Work email" [ref=e153]:
+              - /placeholder: jane@company.com
+          - button "Continue with email" [ref=e154] [cursor=pointer]: Continue
+    - generic [ref=e156]:
+      - generic [ref=e157]:
+        - img "Reality Anchors" [ref=e158]
+        - generic [ref=e159]:
+          - generic [ref=e160]: Reality Anchors
+          - generic [ref=e161]: Measured. Anchored. Calibrated.
+      - navigation "Footer navigation" [ref=e162]:
+        - link "Pilot" [ref=e163] [cursor=pointer]:
+          - /url: /personal/
+        - link "Production" [ref=e164] [cursor=pointer]:
+          - /url: /commercial/
+        - link "Enterprise" [ref=e165] [cursor=pointer]:
+          - /url: /industrial/
+        - link "Estimator" [ref=e166] [cursor=pointer]:
+          - /url: /calculator/
+        - link "Margin Model" [ref=e167] [cursor=pointer]:
+          - /url: /margin-impact/
+        - link "Methodology" [ref=e168] [cursor=pointer]:
+          - /url: /pricing-methodology/
+        - link "Strategy" [ref=e169] [cursor=pointer]:
+          - /url: /board-strategy/
+        - link "Requirements" [ref=e170] [cursor=pointer]:
+          - /url: /requirements/
+        - link "Contact" [ref=e171] [cursor=pointer]:
+          - /url: /commercial/#contact
+        - link "Privacy" [ref=e172] [cursor=pointer]:
+          - /url: /privacy/
+        - link "Data Practices" [ref=e173] [cursor=pointer]:
+          - /url: /data-practices/
+        - link "Terms" [ref=e174] [cursor=pointer]:
+          - /url: /terms/
+      - generic [ref=e175]: © 2026 Reality Anchors LLC
+  - dialog "Cookie consent" [ref=e176]:
+    - generic [ref=e177]:
+      - paragraph [ref=e178]:
+        - text: We use cookies for analytics and advertising measurement.
+        - link "Privacy Policy" [ref=e179] [cursor=pointer]:
+          - /url: /privacy/
+      - generic [ref=e180]:
+        - button "Reject" [ref=e181] [cursor=pointer]
+        - button "Accept" [ref=e182] [cursor=pointer]

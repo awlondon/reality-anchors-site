@@ -1,0 +1,3 @@
+[     225ms] [ERROR] X-Frame-Options may only be set via an HTTP header sent along with a document. It may not be set inside <meta>. @ http://127.0.0.1:4173/industries/rebar-cut-bend/:0
+[     253ms] [WARNING] [Firebase] Missing config: apiKey, authDomain, projectId, appId — Firestore writes will be skipped @ http://127.0.0.1:4173/_next/static/chunks/936-34eee4d906d8acc2.js:0
+[     253ms] [WARNING] [EmailJS] Missing env vars — email notifications will be skipped @ http://127.0.0.1:4173/_next/static/chunks/936-34eee4d906d8acc2.js:0

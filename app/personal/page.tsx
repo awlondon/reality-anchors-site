@@ -210,8 +210,8 @@ export default function PersonalPage() {
 
       <LeadForm
         id="contact"
-        heading="Get started with Pilot"
-        description="Tell us about your operation and we'll help you pick the right plan. No commitment required."
+        heading="Join Our Waitlist"
+        description="Tell us about your operation and we'll reach out when a slot opens. No commitment required."
       />
       <Footer />
     </main>

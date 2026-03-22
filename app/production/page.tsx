@@ -168,7 +168,7 @@ export default function ProductionPage() {
             </div>
             <div className="flex flex-wrap gap-3">
               <Link href="#contact" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
-                Start a pilot
+                Join Our Waitlist
               </Link>
               <Link href={CTA.primary.href} className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
                 {CTA.primary.label}

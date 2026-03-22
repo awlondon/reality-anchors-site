@@ -8,7 +8,7 @@
     "Assign — name a demo inbox owner with a 24hr SLA",
     "Defer — continue without a named inbox owner"
   ],
-  "context": "From ra_agent_roundtable_daily_adversarial_2026_03_21: A test inquiry went 3 days unanswered. The website has CTAs leading to contact forms but no named owner is responsible for responding within a defined SLA. This blocks the waitlist CTA deployment (existing HITL item) and degrades conversion from any live lead capture. Need a named human owner with a committed response window.",
+  "context": "From ra_agent_roundtable_daily_adversarial_2026_03_21 and 2026_03_22: Demo inbox went 4 days without response (up from 3 yesterday). Trade show season is 6 weeks away. First real inbound lead before NRSCA cycle = live risk. CTAs now updated to 'Join Our Waitlist' language site-wide (2026-03-22), making a responsive inbox even more critical. Need a named human owner with a committed 24hr response window.",
   "urgency": "HIGH",
   "source_task": "execute-website-todos",
   "source_agent": "execute-website-todos",

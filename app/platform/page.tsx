@@ -296,8 +296,8 @@ export default function PlatformPage() {
       </section>
 
       <LeadForm
-        heading="Request a technical review"
-        description="Tell us about your fabrication environment and we'll walk through how the platform applies."
+        heading="Join Our Waitlist"
+        description="Tell us about your fabrication environment and we'll reach out when a slot opens."
       />
       <Footer />
     </main>

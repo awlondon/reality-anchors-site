@@ -1,0 +1,17 @@
+{
+  "decision_id": "HITL-SITE-AUTORESPONDER-20260322",
+  "requires": "ANY",
+  "primary": "alexlwlondon@gmail.com",
+  "secondary": "russell.d.brunner@gmail.com",
+  "options": ["DEPLOY_AUTORESPONDER", "DEFER"],
+  "option_labels": [
+    "Deploy — configure EmailJS auto-responder for waitlist signups with response timing expectations",
+    "Defer — continue without auto-responder"
+  ],
+  "context": "From ra_agent_roundtable_daily_adversarial_2026_03_22: Auto-responder proposed 3 sessions ago, still not deployed. With CTAs now updated to 'Join Our Waitlist' site-wide, a form submission without any confirmation degrades trust. Need: (1) auto-responder email copy approved, (2) EmailJS template configured. This is decoupled from inbox owner decision — auto-responder can go live independently.",
+  "urgency": "MEDIUM",
+  "source_task": "execute-website-todos",
+  "source_agent": "execute-website-todos",
+  "expires_hours": 72,
+  "created": "2026-03-22"
+}

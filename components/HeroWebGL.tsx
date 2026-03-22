@@ -39,10 +39,10 @@ export default function HeroWebGL() {
         >
           <a
             href="#contact"
-            onClick={() => trackEvent("cta_click", { location: "hero_webgl", cta: "request_demo" })}
+            onClick={() => trackEvent("cta_click", { location: "hero_webgl", cta: "join_waitlist" })}
             className="rounded bg-indigo-600 px-7 py-4 font-medium transition hover:bg-indigo-700"
           >
-            Request Demo
+            Join Our Waitlist
           </a>
           <a
             href="#case-studies"

@@ -116,7 +116,7 @@ export default function PilotPage() {
             </div>
             <div className="flex flex-wrap gap-3">
               <Link href="#contact" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
-                Start a pilot
+                Join Our Waitlist
               </Link>
               <Link href="/production/" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
                 Compare Production tier
@@ -159,7 +159,7 @@ export default function PilotPage() {
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <Link href="#contact" className="px-5 py-2.5 rounded-lg bg-accent hover:bg-blue-500 text-white text-sm font-semibold transition-all hover:-translate-y-px">
-                Start a pilot
+                Join Our Waitlist
               </Link>
               <Link href="/calculator/" className="px-5 py-2.5 rounded-lg border border-line hover:border-accent/40 text-txt text-sm font-semibold transition-all">
                 Get ROI Estimate
@@ -171,8 +171,8 @@ export default function PilotPage() {
 
       <LeadForm
         id="contact"
-        heading="Get started with Pilot"
-        description="Tell us about your operation and we'll help you get set up. No commitment required."
+        heading="Join Our Waitlist"
+        description="Tell us about your operation and we'll reach out when a slot opens. No commitment required."
       />
       <Footer />
     </main>

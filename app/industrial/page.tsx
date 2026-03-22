@@ -173,8 +173,8 @@ export default function IndustrialPage() {
 
       <LeadForm
         id="contact"
-        heading="Schedule a technical review"
-        description="Share your facility profile and we'll return with a scoped assessment, integration requirements, and deployment timeline."
+        heading="Join Our Waitlist"
+        description="Share your facility profile and we'll reach out when a slot opens with a scoped assessment, integration requirements, and deployment timeline."
       />
       <Footer />
     </main>

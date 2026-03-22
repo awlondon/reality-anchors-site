@@ -9,7 +9,7 @@
 /** Canonical CTA labels used across all pages and components. */
 export const CTA = {
   primary: { label: 'Get ROI Estimate', href: '/calculator/' },
-  secondary: { label: 'Book Technical Review', href: '/commercial/#contact' },
+  secondary: { label: 'Join Our Waitlist', href: '/commercial/#contact' },
 } as const;
 
 // ── Conversion Model (conversionModel.ts) ──────────────────────────────

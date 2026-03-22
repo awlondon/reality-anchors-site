@@ -1,0 +1,17 @@
+{
+  "decision_id": "HITL-SITE-DEMO-INBOX-20260321",
+  "requires": "ANY",
+  "primary": "alexlwlondon@gmail.com",
+  "secondary": "russell.d.brunner@gmail.com",
+  "options": ["ASSIGN_OWNER", "DEFER"],
+  "option_labels": [
+    "Assign — name a demo inbox owner with a 24hr SLA",
+    "Defer — continue without a named inbox owner"
+  ],
+  "context": "From ra_agent_roundtable_daily_adversarial_2026_03_21: A test inquiry went 3 days unanswered. The website has CTAs leading to contact forms but no named owner is responsible for responding within a defined SLA. This blocks the waitlist CTA deployment (existing HITL item) and degrades conversion from any live lead capture. Need a named human owner with a committed response window.",
+  "urgency": "HIGH",
+  "source_task": "execute-website-todos",
+  "source_agent": "execute-website-todos",
+  "expires_hours": 48,
+  "created": "2026-03-21"
+}

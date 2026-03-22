@@ -1,0 +1,17 @@
+{
+  "decision_id": "HITL-SITE-ONBOARDING-REWRITE-20260321",
+  "requires": "ANY",
+  "primary": "alexlwlondon@gmail.com",
+  "secondary": "russell.d.brunner@gmail.com",
+  "options": ["PROVIDE_SCREEN_LIST", "DEFER"],
+  "option_labels": [
+    "Provide — supply the list of currently shipping screens so website onboarding copy can be rewritten to match",
+    "Defer — keep current onboarding descriptions as-is until the product stabilizes"
+  ],
+  "context": "From ra_agent_roundtable_daily_adversarial_2026_03_21: 3 of 5 onboarding steps on the website reference non-existent product screens. The roundtable flagged this but did not provide specific replacement wording or a list of which screens currently ship. This is a public-facing claims change that requires human input on what the product actually shows today.",
+  "urgency": "MEDIUM",
+  "source_task": "execute-website-todos",
+  "source_agent": "execute-website-todos",
+  "expires_hours": 72,
+  "created": "2026-03-21"
+}

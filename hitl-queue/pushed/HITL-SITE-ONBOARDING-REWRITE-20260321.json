@@ -1,5 +1,9 @@
 {
   "decision_id": "HITL-SITE-ONBOARDING-REWRITE-20260321",
+  "status": "RESOLVED",
+  "resolved": "2026-03-23",
+  "resolution": "EXECUTED",
+  "notes": "CTO confirmed to proceed. Updated VideoShowcasePlatform.tsx Scene 1 steps (Load material/Position to datum/Execute operation/Verify tolerance/Sign off & advance → Open job/Place anchor/Bend to guidance/Log outcome/Next bar). Updated Scene 3 event log: removed 'QC photo captured' and 'AI + manual confirm' — replaced with 'Anchor locked/Bend guided/Angle measured/Outcome logged/Session synced'. Updated workcells.ts step 4 to remove upload-pipeline overstatement. Build verified.",
   "requires": "ANY",
   "primary": "alexlwlondon@gmail.com",
   "secondary": "russell.d.brunner@gmail.com",

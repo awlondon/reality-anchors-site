@@ -1,5 +1,9 @@
 {
   "decision_id": "HITL-SITE-DEMO-INBOX-20260321",
+  "status": "RESOLVED",
+  "resolved": "2026-03-23",
+  "resolution": "DEFERRED",
+  "notes": "CTO confirmed: waitlist is mostly Google Ads spam. Russell will handle genuine inbounds on an ad-hoc basis. No named SLA owner needed at this time. Google Ads budget reduced from $36.36 to $25.00/day. Revisit if lead quality improves post-NRSCA.",
   "requires": "ANY",
   "primary": "alexlwlondon@gmail.com",
   "secondary": "russell.d.brunner@gmail.com",

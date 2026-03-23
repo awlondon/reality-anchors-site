@@ -1,5 +1,9 @@
 {
   "decision_id": "HITL-SITE-AUTORESPONDER-20260322",
+  "status": "RESOLVED",
+  "resolved": "2026-03-23",
+  "resolution": "DEFER",
+  "notes": "CTO confirmed: EmailJS auto-responder confirmations are already set up and have been for weeks. The current email copy is acceptable as-is. No changes needed — stale blocker.",
   "requires": "ANY",
   "primary": "alexlwlondon@gmail.com",
   "secondary": "russell.d.brunner@gmail.com",

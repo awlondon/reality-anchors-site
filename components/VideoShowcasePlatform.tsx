@@ -33,11 +33,11 @@ const C = {
    ═══════════════════════════════════════════════════════════════ */
 function Scene1() {
   const steps = [
-    { label: 'Load material',     done: true },
-    { label: 'Position to datum', done: true },
-    { label: 'Execute operation',  active: true },
-    { label: 'Verify tolerance',  done: false },
-    { label: 'Sign off & advance', done: false },
+    { label: 'Open job',          done: true },
+    { label: 'Place anchor',      done: true },
+    { label: 'Bend to guidance',  active: true },
+    { label: 'Log outcome',       done: false },
+    { label: 'Next bar',          done: false },
   ];
 
   return (
@@ -92,7 +92,7 @@ function Scene1() {
 
       {/* Tablet header */}
       <rect x="472" y="92" width="266" height="24" rx="4" fill={C.green} opacity="0.08" />
-      <text x="482" y="109" fill={C.green} fontSize="10" fontFamily="monospace" fontWeight="bold">INSTRUCTIONS — Step 3 of 5</text>
+      <text x="482" y="109" fill={C.green} fontSize="10" fontFamily="monospace" fontWeight="bold">BEND GUIDANCE — Bar 3 of 5</text>
 
       {/* Step list */}
       {steps.map((s, i) => {
@@ -309,12 +309,12 @@ function Scene2() {
    ═══════════════════════════════════════════════════════════════ */
 function Scene3() {
   const events = [
-    { y: 118, time: '14:32:01', event: 'Operation started',   detail: 'Operator authenticated',  status: 'logged' },
-    { y: 152, time: '14:32:18', event: 'Dimension checked',   detail: 'Within tolerance',        status: 'pass' },
-    { y: 186, time: '14:33:04', event: 'Hold-point cleared',  detail: 'AI + manual confirm',     status: 'pass' },
-    { y: 220, time: '14:33:22', event: 'QC photo captured',   detail: 'Auto-tagged to step',     status: 'pass' },
-    { y: 254, time: '14:33:45', event: 'Step signed off',     detail: 'Operator: M. Torres',     status: 'logged' },
-    { y: 288, time: '14:33:46', event: 'Record exported',     detail: 'ERP + QA sync queued',    status: 'sync' },
+    { y: 118, time: '14:32:01', event: 'Session started',     detail: 'Operator authenticated',  status: 'logged' },
+    { y: 152, time: '14:32:18', event: 'Anchor locked',       detail: 'Calibration confirmed',   status: 'pass' },
+    { y: 186, time: '14:33:04', event: 'Bend guided',         detail: 'Voice cue delivered',     status: 'pass' },
+    { y: 220, time: '14:33:22', event: 'Angle measured',      detail: 'Within tolerance ±0.5°',  status: 'pass' },
+    { y: 254, time: '14:33:45', event: 'Outcome logged',      detail: 'Bend result saved',       status: 'logged' },
+    { y: 288, time: '14:33:46', event: 'Session synced',      detail: 'Cloud upload queued',     status: 'sync' },
   ];
 
   return (

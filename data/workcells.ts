@@ -50,7 +50,7 @@ export const workcells: Workcell[] = [
       'Set up your job specs and start with one reference camera at the bench',
       'Add context cameras when coverage or throughput demands broader visibility',
       'Introduce LiDAR-equipped devices only for precision depth checks that justify the extra cost',
-      'Upload verified captures so every run builds on proven results',
+      'Every run produces logged outcomes — accuracy is visible and improves over time',
     ],
   },
   {

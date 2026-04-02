@@ -14,12 +14,12 @@ const ABSTRACT_SECTIONS = [
   {
     title: 'Architecture',
     content:
-      'Offline-first mobile + web platform with edge inference, structured sync, and immutable event logging. Static-export marketing site backed by Firebase for lead capture and analytics. Flutter app with camera, OCR, AR, and BLE telemetry integration.',
+      'Offline-first capture and execution-validation platform with structured sync, measurable validation checkpoints, and audit-ready event records. Buyer-facing materials stay high level in public; detailed system architecture is available in the gated diligence package.',
   },
   {
     title: 'Deployment model',
     content:
-      'Cloud-native SaaS with zero on-prem infrastructure. Per-facility onboarding with a 60-day validation window. Baseline metrics are modeled from industry-typical scrap rates — not self-reported. Subscription is value-aligned: 8\u201320% of modeled annual savings.',
+      'Cloud-native SaaS with zero on-prem infrastructure. Per-facility onboarding with a 60-day validation window. Baseline metrics are modeled from industry-typical scrap rates — not self-reported. Subscription is value-aligned: 8\u201315% of modeled annual savings.',
   },
   {
     title: 'Unit economics',

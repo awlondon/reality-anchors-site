@@ -256,7 +256,7 @@ function Scene2() {
       {/* ── Caption graphic ───────────────────────────────────── */}
       <rect x="0" y="370" width="800" height="80" fill="url(#captionFade2)" />
       <text x="400" y="410" textAnchor="middle" fill={C.txt} fontSize="20" fontFamily="Inter, system-ui, sans-serif" fontWeight="600" letterSpacing="0.5">
-        AI vision confirms the cut before the blade moves.
+        Validation checks the setup before the operator confirms the cut.
       </text>
       <line x1="220" y1="425" x2="580" y2="425" stroke={C.accent} strokeWidth="2" opacity="0.4" />
 
@@ -445,7 +445,7 @@ const SCENE_COMPONENTS = [Scene1, Scene2, Scene3];
 
 const CAPTIONS = [
   'Every bar of steel carries a specification.',
-  'AI vision confirms the cut before the blade moves.',
+  'Validation checks the setup before the operator confirms the cut.',
   'Every bend is verified against the spec in real time.',
 ];
 
@@ -488,7 +488,7 @@ export default function VideoShowcase() {
           {/* SVG animation — 16:9 */}
           <div className="relative w-full aspect-video overflow-hidden sm:rounded-2xl border border-line/50 bg-bg-2">
             <svg viewBox="0 0 800 450" className="w-full h-full" role="img"
-              aria-label="AI-guided rebar fabrication process overview">
+              aria-label="Operator-confirmed rebar validation workflow overview">
               {/* Background */}
               <rect width="800" height="450" fill={C.bg} />
               {/* Grid */}

@@ -71,17 +71,17 @@ export default function BoardStrategyPage() {
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">From Theory to Field Evidence</h2>
           <p className="text-sm text-muted leading-relaxed mb-4">
-            Execution validation claims become defensible the moment a real customer runs real jobs and measures actual waste. This is not an algorithm problem — it is a deployment problem.
+            Execution validation claims become defensible when a facility measures real jobs against a documented baseline. Today the public narrative is intentionally limited to modeled baselines and transparent measurement design, not claimed fleet-wide deployment proof.
           </p>
           <p className="text-sm text-muted leading-relaxed mb-4">
-            The data collection infrastructure already exists: every checklist step, every operator confirmation, and every deviation is captured as a telemetry event. Scrap predictions are continuously verified against actual production outcomes — not self-reported estimates.
+            The collection approach is designed so checklist steps, operator confirmations, and deviations can be logged once deployments are live. Until then, pricing and value framing should stay anchored to published baselines and clearly labeled assumptions.
           </p>
           <ul className="flex flex-col gap-2.5 text-sm text-muted">
             {[
-              'One facility running real jobs produces more defensible evidence than any theoretical proof.',
-              'Actual-vs-predicted scrap ratios are computed from existing production telemetry — no additional instrumentation required.',
-              'Each facility that goes live compounds the evidence base and tightens prediction accuracy.',
-              'Field data replaces projections: fabricators see their own numbers, not industry averages.',
+              'One facility running real jobs would produce more defensible evidence than any theoretical proof.',
+              'Baseline-to-actual comparisons should be logged from production workflows, not inferred from self-reported estimates.',
+              'Each live facility can strengthen the evidence base and tighten future pricing assumptions.',
+              'Until customer evidence exists, public claims should stay explicitly modeled and assumption-led.',
             ].map((item) => (
               <li key={item} className="flex gap-3"><span className="text-accent">›</span>{item}</li>
             ))}
@@ -222,10 +222,10 @@ export default function BoardStrategyPage() {
             Execution validation is margin-expansion infrastructure, not optional tooling. It improves cost structure, throughput predictability, compliance traceability, and planning accuracy simultaneously.
           </p>
           <p className="text-sm text-muted leading-relaxed mb-4">
-            The remaining gap is not algorithmic — it is deployment. The telemetry infrastructure, validation logic, and feedback loops already exist. Value compounds with each facility that goes live, each job that generates field evidence, and each scrap prediction verified against actual outcomes.
+            The remaining gap is not algorithmic — it is deployment. Value compounds with each facility that goes live, each job that generates field evidence, and each baseline model that gets tightened through measured operating results.
           </p>
           <p className="text-sm text-muted leading-relaxed">
-            The strategic question is not whether execution digitizes. It is who owns the execution layer that anchors the rest of the fabrication stack — and who has the field evidence to prove it works.
+            The strategic question is not whether execution digitizes. It is who owns the execution layer that anchors the rest of the fabrication stack — and who will turn deployment into defensible field evidence first.
           </p>
         </section>
       </div>

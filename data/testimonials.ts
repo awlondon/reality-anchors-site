@@ -123,17 +123,6 @@ export const testimonials: Testimonial[] = [
     pages: ['regime:machine-calibration'],
   },
 
-  // ── Regime: Fleet Grip ──
-  {
-    id: 'fleet-supervisor-heavy',
-    quote:
-      'When every machine is doing its own thing across two yards, you need drift visibility before it turns into scrap. Centralized monitoring changes the equation.',
-    attribution: 'Representative scenario',
-    company: 'Heavy civil contractor',
-    backgroundSrc: '/images/cnc-precision.jpg',
-    pages: ['regime:fleet-grip'],
-  },
-
   // ── Regime: AR Execution ──
   {
     id: 'project-engineer-ar',

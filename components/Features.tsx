@@ -47,15 +47,6 @@ const displayOverrides: Record<
     accent: 'bg-indigo-500/20 text-indigo-200 border-indigo-400/40',
     imageMobile: '/assets/regimes/machine-calibration-mobile.svg',
   },
-  'fleet-grip': {
-    stat: 'Advanced safety reserved',
-    statTwo: 'Packaged separately from base plans',
-    cta: 'Explore Fleet Safety Layer',
-    href: '/commercial/',
-    bg: 'from-zinc-900 via-neutral-800 to-slate-950',
-    accent: 'bg-amber-500/20 text-amber-200 border-amber-400/40',
-    imageMobile: '/assets/regimes/fleet-grip-mobile.svg',
-  },
   'ar-execution': {
     stat: 'Operator-confirmed steps',
     statTwo: 'Validation before irreversible work',
@@ -168,7 +159,7 @@ export default function Features() {
             Less repetitive setup. Faster data collection. Mixed hardware that just works.
           </h2>
           <p className="mt-4 max-w-2xl text-muted">
-            Reality Anchors eliminates the busywork of configuring every camera and re-entering job specs. Set up
+            Reality Anchors reduces the busywork of configuring every camera and re-entering job specs. Set up
             once, capture everywhere, and let the system handle orchestration across the compatible hardware your team
             already owns.
           </p>

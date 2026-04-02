@@ -199,19 +199,16 @@ AnnualReworkSavings =
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">5. Plan Designations and Enforcement Status</h2>
           <p className="text-muted text-sm mb-6">
-            Public pricing uses &quot;included in [Plan]&quot; language to show the intended commercial boundary for each module.
+            Public pricing uses &quot;included in [Plan]&quot; language to show the intended commercial boundary for each capability.
             Where product-level gates are still rolling out, that status is disclosed here rather than implied away.
           </p>
           <div className="table-scroll-wrapper overflow-x-auto mb-5">
             <table className="ra-table">
-              <thead><tr><th>Module</th><th>Included in</th><th>Enforcement status</th><th>Current note</th></tr></thead>
+              <thead><tr><th>Capability</th><th>Included in</th><th>Enforcement status</th><th>Current note</th></tr></thead>
               <tbody>
                 {pricingModuleStatus.map((module) => (
-                  <tr key={module.id}>
-                    <td>
-                      <div className="font-semibold text-txt">{module.name}</div>
-                      <div className="font-mono text-[11px] text-muted/70">{module.id}</div>
-                    </td>
+                  <tr key={module.name}>
+                    <td className="font-semibold text-txt">{module.name}</td>
                     <td className="text-muted text-sm">{module.includedIn}</td>
                     <td className="text-sm">
                       <span

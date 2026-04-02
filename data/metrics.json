@@ -21,7 +21,7 @@
     "C": [
       { "value": "99%", "label": "Data accuracy target" },
       { "value": "Up to 8%", "label": "Scrap reduction target" },
-      { "value": "Up to 40%", "label": "RFI reduction target" },
+      { "value": "14 days", "label": "Calibration lock-in target" },
       { "value": "Up to 7x", "label": "Modeled first-year ROI" }
     ]
   },

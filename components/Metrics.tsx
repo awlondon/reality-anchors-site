@@ -63,7 +63,7 @@ export default function Metrics() {
           variants={fadeUp}
           className="text-sm text-muted mb-12 text-center"
         >
-          Every metric verified against actual production data — not projections.
+          Representative design targets built from published industry baselines and conservative operating assumptions.
         </motion.p>
 
         <motion.div

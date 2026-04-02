@@ -10,7 +10,6 @@ export const HOME_EXPERIMENT: ExperimentConfig = {
         'structural-fabrication',
         'multi-project-optimization',
         'machine-calibration',
-        'fleet-grip',
         'ar-execution',
         'ai-governance',
       ],
@@ -18,7 +17,6 @@ export const HOME_EXPERIMENT: ExperimentConfig = {
         'structural-fabrication',
         'multi-project-optimization',
         'machine-calibration',
-        'fleet-grip',
         'ar-execution',
         'ai-governance',
       ],
@@ -28,7 +26,6 @@ export const HOME_EXPERIMENT: ExperimentConfig = {
         'machine-calibration',
         'ai-governance',
         'ar-execution',
-        'fleet-grip',
       ],
     },
     heroOverride: {

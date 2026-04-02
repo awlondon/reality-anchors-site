@@ -11,7 +11,6 @@ export function reorderRegimes<T extends RegimeLike>(regimes: T[], intent: Inten
       'structural-fabrication',
       'multi-project-optimization',
       'machine-calibration',
-      'fleet-grip',
       'ar-execution',
       'ai-governance',
     ],
@@ -21,7 +20,6 @@ export function reorderRegimes<T extends RegimeLike>(regimes: T[], intent: Inten
       'ai-governance',
       'machine-calibration',
       'ar-execution',
-      'fleet-grip',
     ],
     high: [
       'ai-governance',
@@ -29,7 +27,6 @@ export function reorderRegimes<T extends RegimeLike>(regimes: T[], intent: Inten
       'machine-calibration',
       'multi-project-optimization',
       'ar-execution',
-      'fleet-grip',
     ],
   };
 

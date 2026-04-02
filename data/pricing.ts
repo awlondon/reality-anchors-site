@@ -14,13 +14,12 @@ export interface PricingTier {
     overage: string;
   };
   highlights: string[];
-  moduleIds: string[];
+  includedCapabilities: string[];
   cta: string;
   highlight?: boolean;
 }
 
 export interface PricingModuleStatus {
-  id: string;
   name: string;
   includedIn: string;
   enforcementStatus: string;
@@ -75,11 +74,12 @@ export const pricingTiers: PricingTier[] = [
     },
     highlights: [
       'One-camera baseline',
-      'Includes ar_execution + daily_dashboards',
+      'Guided validation workflows',
+      'Daily bench reporting',
       'Written review date before conversion',
       'Fastest path to first validated workflow',
     ],
-    moduleIds: ['ar_execution', 'daily_dashboards'],
+    includedCapabilities: ['Guided validation workflows', 'Daily bench reporting'],
     cta: 'Explore Pilot',
   },
   {
@@ -98,11 +98,17 @@ export const pricingTiers: PricingTier[] = [
     },
     highlights: [
       'Mixed fleet orchestration',
-      'Includes analytics_qa + custom_calibration',
+      'Analytics and QA review',
+      'Custom calibration controls',
       'Per-bench economics visibility',
       'Clear upgrade path for LiDAR precision',
     ],
-    moduleIds: ['ar_execution', 'daily_dashboards', 'analytics_qa', 'custom_calibration'],
+    includedCapabilities: [
+      'Guided validation workflows',
+      'Daily bench reporting',
+      'Analytics and QA review',
+      'Custom calibration controls',
+    ],
     cta: 'Explore Production',
     highlight: true,
   },
@@ -122,16 +128,17 @@ export const pricingTiers: PricingTier[] = [
     },
     highlights: [
       'Compliance-grade records',
-      'Includes compliance_export + audit_trails',
+      'Compliance evidence export',
+      'Audit-ready traceability',
       'Deployment governance for larger fleets',
     ],
-    moduleIds: [
-      'ar_execution',
-      'daily_dashboards',
-      'analytics_qa',
-      'custom_calibration',
-      'compliance_export',
-      'audit_trails',
+    includedCapabilities: [
+      'Guided validation workflows',
+      'Daily bench reporting',
+      'Analytics and QA review',
+      'Custom calibration controls',
+      'Compliance evidence export',
+      'Audit-ready traceability',
     ],
     cta: 'Explore Enterprise',
   },
@@ -144,49 +151,43 @@ export const pricingNarrative = {
   bullets: [
     'Pilot and beta evaluations include a documented review date, tier boundary, and conversion expectation before activation.',
     'Every bench includes one reference camera. Context cameras ($200/mo) and LiDAR-equipped devices ($450/mo) are added per device when wider coverage or precision depth is needed.',
-    'Plan-specific modules use "included in [Plan]" language. Where feature gates are still rolling out, the pricing page calls that out explicitly instead of pretending enforcement is already complete.',
+    'Plan-specific capabilities use "included in [Plan]" language. Where feature gates are still rolling out, the pricing page calls that out explicitly instead of pretending enforcement is already complete.',
     'Advanced safety workflows and stronger protection boundaries are scoped separately from the base offer until the technical and legal limits are explicit.',
   ],
 };
 
 export const pricingModuleStatus: PricingModuleStatus[] = [
   {
-    id: 'ar_execution',
     name: 'AR Execution Guidance',
     includedIn: 'Pilot, Production, Enterprise',
     enforcementStatus: 'Available now',
     note: 'Core workflow module already live across plans.',
   },
   {
-    id: 'daily_dashboards',
     name: 'Daily Dashboards',
     includedIn: 'Pilot, Production, Enterprise',
     enforcementStatus: 'Available now',
     note: 'Core reporting module already live across plans.',
   },
   {
-    id: 'analytics_qa',
     name: 'Analytics & QA',
     includedIn: 'Production, Enterprise',
     enforcementStatus: 'Progressive enforcement',
     note: 'Public plan designation is live; feature-gate wiring is still rolling out.',
   },
   {
-    id: 'custom_calibration',
     name: 'Custom Calibration',
     includedIn: 'Production, Enterprise',
     enforcementStatus: 'Progressive enforcement',
     note: 'Custom profile gating is documented but not fully wired yet.',
   },
   {
-    id: 'compliance_export',
     name: 'Compliance Export',
     includedIn: 'Enterprise',
     enforcementStatus: 'Progressive enforcement',
     note: 'Enterprise designation is public; export gating is still being wired.',
   },
   {
-    id: 'audit_trails',
     name: 'Audit Trails',
     includedIn: 'Enterprise',
     enforcementStatus: 'Progressive enforcement',

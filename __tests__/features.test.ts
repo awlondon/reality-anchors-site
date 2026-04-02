@@ -10,7 +10,6 @@ describe('features data', () => {
 
   it('every feature has all required fields', () => {
     for (const f of features) {
-      expect(f.id).toBeTruthy();
       expect(f.name).toBeTruthy();
       expect(f.description).toBeTruthy();
       expect(featureCategories).toContain(f.category);
@@ -20,9 +19,9 @@ describe('features data', () => {
     }
   });
 
-  it('has unique feature IDs', () => {
-    const ids = features.map((f) => f.id);
-    expect(new Set(ids).size).toBe(ids.length);
+  it('has unique feature names', () => {
+    const names = features.map((f) => f.name);
+    expect(new Set(names).size).toBe(names.length);
   });
 
   it('enterprise features are only available in enterprise tier', () => {

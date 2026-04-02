@@ -27,10 +27,10 @@
       "safety checks"
     ],
     "dataSources": [
-      "tablet OCR",
-      "BLE bend telemetry",
-      "operator correction logs",
-      "scrap remainder scans"
+      "job packets",
+      "operator confirmations",
+      "run summaries",
+      "material remainder records"
     ],
     "pipeline": [
       "capture",
@@ -71,10 +71,10 @@
       "safety checks"
     ],
     "dataSources": [
-      "job schedule imports",
-      "leftover tags",
-      "purchase order logs",
-      "bench throughput events"
+      "job schedules",
+      "material inventory records",
+      "purchase history",
+      "throughput summaries"
     ],
     "pipeline": [
       "capture",
@@ -115,9 +115,9 @@
       "safety checks"
     ],
     "dataSources": [
-      "BLE angle packets",
-      "manual overrides",
-      "maintenance notes",
+      "calibration checks",
+      "operator overrides",
+      "maintenance records",
       "run outcomes"
     ],
     "pipeline": [
@@ -130,50 +130,6 @@
     "roi": "Designed to reduce drift volatility and corrective reruns during high-throughput shifts.",
     "animationPreset": "minimal",
     "workcellIds": ["rebar-cut-bend", "plate-press-brake"]
-  },
-  {
-    "id": "fleet-grip",
-    "title": "Fleet / Grip",
-    "description": "Improve fleet safety with early alerts tied to changing road, load, and operating conditions.",
-    "image": "/assets/regimes/fleet-grip.svg",
-    "tier": "Specialty",
-    "learnMoreHref": "/regimes/fleet-grip",
-    "metrics": [
-      {
-        "label": "Slip alert target",
-        "value": "< 2.5s lead time"
-      },
-      {
-        "label": "Surface model target",
-        "value": "> 90%"
-      },
-      {
-        "label": "Harsh event target",
-        "value": "Up to -19%"
-      }
-    ],
-    "anchors": [
-      "input quality",
-      "operating context",
-      "workflow readiness",
-      "safety checks"
-    ],
-    "dataSources": [
-      "IMU telemetry",
-      "wheel speed",
-      "steering angle",
-      "weather stream"
-    ],
-    "pipeline": [
-      "capture",
-      "review",
-      "guide",
-      "confirm",
-      "report"
-    ],
-    "roi": "Designed to improve incident prevention and insurance telemetry quality for mixed terrain operations.",
-    "animationPreset": "scaleIn",
-    "workcellIds": []
   },
   {
     "id": "ar-execution",
@@ -203,10 +159,10 @@
       "safety checks"
     ],
     "dataSources": [
-      "AR mapping",
-      "object detection",
-      "gesture events",
-      "deviation logs"
+      "visual guidance checkpoints",
+      "operator gestures",
+      "step confirmations",
+      "deviation records"
     ],
     "pipeline": [
       "capture",
@@ -227,15 +183,15 @@
     "learnMoreHref": "/regimes/ai-governance",
     "metrics": [
       {
-        "label": "Quorum agreement target",
+        "label": "Policy coverage target",
         "value": "> 96%"
       },
       {
-        "label": "Schema validity target",
+        "label": "Review trace completeness",
         "value": "> 99%"
       },
       {
-        "label": "Rollback trigger",
+        "label": "Exception response target",
         "value": "< 300ms"
       }
     ],
@@ -246,10 +202,10 @@
       "safety checks"
     ],
     "dataSources": [
-      "multi-model outputs",
-      "shadow eval logs",
-      "latency traces",
-      "validation failures"
+      "review decisions",
+      "audit events",
+      "latency summaries",
+      "validation exceptions"
     ],
     "pipeline": [
       "capture",

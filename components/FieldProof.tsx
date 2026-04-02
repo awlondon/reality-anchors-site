@@ -7,16 +7,16 @@ import { fadeUp, stagger } from '@/lib/motion';
 import { trackEvent } from '@/lib/analytics';
 
 const bullets = [
-  'Imports cut lists from existing job sheets \u2014 photo OCR, CSV, or manual entry.',
+  'Imports cut lists from existing job sheets \u2014 photo-assisted entry, CSV, or manual entry.',
   'Applies stretch allowances and bend deduction rules automatically per bar mark.',
-  'Runs cutting-stock optimization to sequence cuts and minimize drop-off waste.',
+  'Sequences cuts to minimize drop-off waste and reduce setup churn.',
   'Works on standard tablets. Fully functional offline \u2014 syncs when connected.',
 ];
 
 const specRows = [
-  { label: 'IMPORT', value: 'Photo OCR \u00b7 CSV \u00b7 Manual entry' },
+  { label: 'IMPORT', value: 'Photo assist \u00b7 CSV \u00b7 Manual entry' },
   { label: 'STRETCH', value: 'Auto-applied per bar mark + diameter' },
-  { label: 'SEQUENCE', value: 'Cutting-stock optimizer \u00b7 1D bin-packing' },
+  { label: 'SEQUENCE', value: 'Cut sequencing \u00b7 drop-off minimization' },
   { label: 'VALIDATE', value: 'Hold-point checks against live job context' },
   { label: 'LOG', value: 'Timestamped \u00b7 per-operator \u00b7 per-machine' },
   { label: 'EXPORT', value: 'Audit trail \u00b7 ERP feed \u00b7 QA report' },

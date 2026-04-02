@@ -139,7 +139,7 @@ export default function CommercialPage() {
           <div className="border border-line bg-card rounded-2xl p-7">
             <h2 className="text-lg font-semibold text-txt mb-3">Step 2 — Align subscription to value</h2>
             <p className="text-muted text-sm mb-6">
-              Your subscription is typically set at 8–20% of modeled annual savings. This keeps upside strongly in your favor while supporting continuous product development and support.
+              Your subscription is typically set at 8–15% of modeled annual savings. This keeps upside strongly in your favor while supporting continuous product development and support.
             </p>
 
             <h3 className="text-sm font-semibold text-muted uppercase tracking-wide mb-3">Per-bench monthly pricing</h3>
@@ -166,7 +166,7 @@ export default function CommercialPage() {
               <div>
                 <h3 className="text-sm font-semibold text-muted uppercase tracking-wide mb-3">60-day validation window</h3>
                 <ul className="flex flex-col gap-2">
-                  {['Onboarding instruments baseline metrics', 'Modeled assumptions validated against observed performance', 'Subscription tier recalibrated if materially misaligned'].map((i) => (
+                  {['Onboarding instruments baseline metrics', 'Logged operating results reviewed against the baseline model', 'Subscription tier recalibrated if materially misaligned'].map((i) => (
                     <li key={i} className="flex gap-3 text-sm text-muted"><span className="text-accent">›</span>{i}</li>
                   ))}
                 </ul>

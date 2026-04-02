@@ -111,17 +111,17 @@ export default function Tiers() {
                   Included in this plan
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {tier.moduleIds.map((moduleId) => (
+                  {tier.includedCapabilities.map((capability) => (
                     <span
-                      key={moduleId}
+                      key={capability}
                       className="rounded-md border border-accent/30 bg-accent/10 px-2.5 py-1 font-mono text-[11px] text-accent-2"
                     >
-                      {moduleId}
+                      {capability}
                     </span>
                   ))}
                 </div>
                 <p className="mt-3 text-[11px] leading-relaxed text-muted/70">
-                  These module IDs show the public plan designation. Where access gates are still rolling out, the pricing
+                  These capability labels show the public plan designation. Where access gates are still rolling out, the pricing
                   methodology page calls that out explicitly.
                 </p>
               </div>

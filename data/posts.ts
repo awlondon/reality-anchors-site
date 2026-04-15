@@ -19,9 +19,9 @@ export interface BlogPost {
 export const posts: BlogPost[] = [
   {
     slug: 'reality-anchors-for-fabrication',
-    title: 'Reality Anchors for Fabrication: Calibrated Capture for Rebar Workcells',
+    title: 'Reality Anchors for Fabrication: Guided Execution for Rebar Workcells',
     description:
-      'What "Reality Anchors" means in fabrication: start with your job specs, capture structured evidence, and improve every rebar run without pretending the bench is fully autonomous on day one.',
+      'What "Reality Anchors" means in fabrication: start with your job specs, build structured evidence, and improve every rebar run without pretending the bench is fully autonomous on day one.',
     date: '2026-03-14',
     author: 'Reality Anchors',
     tags: ['reality-anchors', 'fabrication', 'rebar'],
@@ -38,7 +38,7 @@ export const posts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'A fabrication workflow already knows a lot before a camera ever turns on. Bar size, shape code, tolerance, machine profile, operator signoff rules, and work order context are not guesses. Reality Anchors software starts with those job specs and uses structured capture to verify that each step actually happened the way it was supposed to.',
+        text: 'A fabrication workflow already knows a lot before a camera ever turns on. Bar size, shape code, operator signoff rules, and work order context are not guesses. Reality Anchors software starts with those job specs and uses structured capture to verify that each step actually happened the way it was supposed to.',
       },
       {
         type: 'list',
@@ -61,7 +61,7 @@ export const posts: BlogPost[] = [
         items: [
           'Step 1: one-camera baseline for structured capture at the bench.',
           'Step 2: add context cameras where throughput or coverage makes them useful.',
-          'Step 3: add LiDAR only for precision depth checks that justify the extra cost.',
+          'Step 3: add precision depth devices only where they create real operational value.',
           'Step 4: upload verified captures so the next run starts with better reference data.',
         ],
       },
@@ -75,13 +75,13 @@ export const posts: BlogPost[] = [
       },
       {
         type: 'paragraph',
-        text: 'Public pricing should mirror this reality. Pilot gets the smallest validated capture loop, Production adds analytics and calibration controls, and Enterprise adds governance and audit exports. The point is not to sell autonomy theater. The point is to make the capture path honest, measurable, and expandable.',
+        text: 'Public pricing should mirror this reality. Pilot gets the smallest validated execution loop, Production adds analytics and performance controls, and Enterprise adds governance and audit exports. The point is not to sell autonomy theater. The point is to make the execution path honest, measurable, and expandable.',
       },
     ],
   },
   {
     slug: 'calibrated-validation-vs-best-guess-filtering',
-    title: 'Calibrated Validation vs. Best-Guess Filtering',
+    title: 'Structured Validation vs. Best-Guess Filtering',
     description:
       'Why fabrication validation needs to be stricter than "looks about right" — and what changes when it is.',
     date: '2026-03-14',
@@ -112,7 +112,7 @@ export const posts: BlogPost[] = [
       },
       {
         type: 'heading',
-        text: 'What changes with strict, calibrated validation',
+        text: 'What changes with strict, structured validation',
       },
       {
         type: 'paragraph',
@@ -159,14 +159,14 @@ export const posts: BlogPost[] = [
         type: 'list',
         items: [
           'Preventable miscuts and rework events by bench.',
-          'Declared-versus-observed execution drift.',
+          'Gaps between planned and actual execution outcomes.',
           'Offcut reuse quality and remnant visibility.',
           'Time spent on repetitive setup versus productive work.',
         ],
       },
       {
         type: 'paragraph',
-        text: 'Bench-level economics make pricing and rollout conversations more honest because buyers can see exactly what is being measured and where a calibrated capture workflow changes the result.',
+        text: 'Bench-level economics make pricing and rollout conversations more honest because buyers can see exactly what is being measured and where a structured execution workflow changes the result.',
       },
     ],
   },

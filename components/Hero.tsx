@@ -20,9 +20,9 @@ const StructuredFieldBackground = dynamic(() => import('@/components/StructuredF
 });
 
 const EYEBROW: Record<string, string> = {
-  A: 'Calibrated Capture for Fabrication',
-  B: 'Fabrication Capture Software',
-  C: 'Mixed-Camera Validation Platform',
+  A: 'Execution Guidance for Fabrication',
+  B: 'Fabrication Execution Software',
+  C: 'Fabrication Execution Platform',
 };
 
 const CTA_CONFIG: Record<
@@ -42,7 +42,7 @@ export default function Hero() {
   const headline = override?.headline ?? 'Every Cut Measured. Every Bend Verified. Every Run Proven.';
   const subhead =
     override?.subhead ??
-    'Your bench, your cameras, your data. Start with one reference camera and a reality anchor in frame. The system determines bar size and scale from measured objects, then builds proof you can measure.';
+    'Your bench, your cameras, your data. Start with one camera and expand only when the workflow earns it. The system verifies work automatically, then builds proof you can measure.';
   const eyebrow = EYEBROW[variant] ?? EYEBROW.B;
   const ctas = CTA_CONFIG[variant] ?? CTA_CONFIG.B;
   const heroKPIs = siteMetrics.heroVariants?.[variant] ?? siteMetrics.hero;
@@ -271,7 +271,7 @@ export default function Hero() {
               clipRule="evenodd"
             />
           </svg>
-          Operators confirm every step. 1 reference camera included. Add devices only when value justifies it.
+          Operators confirm every step. First camera included. Add devices only when value justifies it.
         </motion.p>
 
         {/* KPIs */}

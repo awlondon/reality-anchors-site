@@ -22,7 +22,7 @@ const CORE_LOOP = [
   {
     step: 'Validate',
     headline: 'In-process verification before the action is irreversible',
-    copy: 'Each step is checked against the live job context, measured reality anchors, machine profile, and tolerance envelope. Deviations are caught before they turn into scrap, delay, or rework.',
+    copy: 'Each step is checked against the live job context and the current specification. Deviations are caught before they turn into scrap, delay, or rework.',
     metric: '8%',
     metricLabel: 'Max scrap reduction',
   },
@@ -44,12 +44,12 @@ const TECH_CAPABILITIES = [
   {
     title: 'Edge inference',
     description:
-      'Deterministic on-device measurement and validation run at the workstation. Decisions happen in milliseconds, not cloud round-trips.',
+      'All processing runs at the workstation. Decisions happen in milliseconds, not cloud round-trips.',
   },
   {
-    title: 'Reality anchor measurement',
+    title: 'Automatic measurement',
     description:
-      'Any identified object of known dimensions can establish scale in-frame. The platform uses that measured reference as a ruler for everything else it validates.',
+      'The platform establishes accurate, reliable measurements automatically — no manual input or external tooling required.',
   },
   {
     title: 'Immutable audit trail',
@@ -59,7 +59,7 @@ const TECH_CAPABILITIES = [
   {
     title: 'Versioned machine profiles',
     description:
-      'Machine calibration data is tracked over time. Drift is visible, and profile changes require controlled release — no silent overrides.',
+      'Machine settings are tracked over time, and profile changes require controlled release — no silent overrides.',
   },
   {
     title: 'Role-based access',
@@ -112,7 +112,7 @@ export default function PlatformPage() {
             Upstream systems generate intent &mdash; schedules, cut lists, specifications.
             Downstream reality is irreversible &mdash; cuts, bends, welds, pours.
             The platform sits at the point of execution: guiding the action, validating it against
-            the spec, measuring against reality anchors in-frame, and recording the outcome.
+            the spec, verifying against the live specification, and recording the outcome.
           </p>
         </div>
       </section>
@@ -172,7 +172,7 @@ export default function PlatformPage() {
               {
                 label: 'Connected Worker',
                 role: 'Digitize SOPs, training, and general work instructions.',
-                relation: 'Reality Anchors is fabrication-specific: tied to specifications, tolerances, and irreversible actions.',
+                relation: 'Reality Anchors is fabrication-specific: tied to specifications, quality requirements, and irreversible actions.',
               },
               {
                 label: 'ERP / Detailing',
@@ -200,8 +200,8 @@ export default function PlatformPage() {
           </h2>
           <p className="text-muted mb-10 max-w-2xl">
             The Guide &rarr; Validate &rarr; Record pattern is workcell-agnostic. Each deployment
-            configures the inputs, constraints, tolerances, and logging schema for a specific
-            fabrication context.
+            is configured for a specific fabrication context — inputs, parameters, and logging
+            requirements adapted to the workflow.
           </p>
 
           <div className="grid md:grid-cols-2 gap-4">

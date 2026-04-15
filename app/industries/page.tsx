@@ -83,7 +83,7 @@ export default function IndustriesPage() {
               },
               {
                 step: 'Validate',
-                copy: 'Each step is checked against the live job and machine profile before it becomes irreversible.',
+                copy: 'Each step is checked against the live job and current specification before it becomes irreversible.',
               },
               {
                 step: 'Record',

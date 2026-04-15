@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Fabrication Execution Blog',
   description:
-    'Technical notes and field perspectives on fabrication capture, calibrated validation, scrap reduction, and Reality Anchors deployment strategy.',
+    'Technical notes and field perspectives on fabrication execution, structured validation, scrap reduction, and Reality Anchors deployment strategy.',
   alternates: { canonical: '/blog/' },
 };
 
@@ -21,7 +21,7 @@ export default function BlogIndex() {
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-accent">Resources</p>
             <h1 className="mb-4 text-4xl font-bold leading-tight text-txt md:text-5xl">Fabrication Execution Blog</h1>
             <p className="max-w-2xl text-lg text-muted">
-              Fabrication capture insights, calibrated validation notes, pricing logic, and technical positioning
+              Fabrication execution insights, structured validation notes, pricing logic, and technical positioning
               from the Reality Anchors team.
             </p>
           </header>

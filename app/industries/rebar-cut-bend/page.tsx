@@ -14,12 +14,12 @@ const regimes = getRegimesByWorkcell('rebar-cut-bend');
 export const metadata: Metadata = {
   title: 'Rebar Cut & Bend Fabrication Capture Software',
   description:
-    'Calibrated capture and execution validation software for rebar cut and bend workflows. Start with one camera, expand to mixed coverage, and add LiDAR only when precision depth matters.',
+    'Execution guidance and validation software for rebar cut and bend workflows. Start with one camera, expand coverage, and add precision depth only where it creates real value.',
   alternates: { canonical: '/industries/rebar-cut-bend/' },
   openGraph: {
     title: 'Rebar Cut & Bend Fabrication Capture Software | Reality Anchors',
     description:
-      'Calibrated rebar fabrication capture with one-camera baselines, mixed-camera coverage, and optional LiDAR precision.',
+      'Rebar fabrication guidance with expandable coverage, operator-confirmed steps, and auditable outcomes.',
   },
 };
 
@@ -65,10 +65,9 @@ export default function RebarCutBendPage() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{workcell.description}</p>
           <div className="mt-6 max-w-2xl rounded-2xl border border-accent/20 bg-card/70 px-5 py-4">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">Reality Anchor</p>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">Automatic Measurement</p>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              Place a known object in frame and the system uses it as a ruler for everything else it validates. In the
-              rebar workflow, bar size is determined from measured signals rather than user declaration alone.
+              The system establishes accurate measurements automatically and verifies bar size reliably — no manual callouts or declarations required.
             </p>
           </div>
 
@@ -105,11 +104,10 @@ export default function RebarCutBendPage() {
       <section className="bg-bg py-20">
         <div className="mx-auto max-w-5xl px-6">
           <h2 className="mb-3 text-2xl font-semibold text-txt md:text-3xl">
-            The capability ladder from baseline capture to precision depth
+            Start simple. Add capability as it earns its place.
           </h2>
           <p className="mb-12 max-w-2xl text-muted">
-            Start with a one-camera baseline, then add context and precision only where they create real operational
-            value.
+            Start with one camera, then expand coverage only where it creates real operational value.
           </p>
 
           <div className="grid gap-6 md:grid-cols-4">

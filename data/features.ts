@@ -56,7 +56,7 @@ export const features: Feature[] = [
   {
     name: 'Custom Calibration',
     description:
-      'Stays calibrated to your specific machines and tolerances so validation matches the real bench.',
+      'Adapts to your specific equipment so validation stays accurate across your operation.',
     category: 'Advanced',
     tiers: { pilot: false, production: true, enterprise: true },
   },

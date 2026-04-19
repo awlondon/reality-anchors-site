@@ -51,7 +51,7 @@ export const deviceAddOns: DeviceAddOn[] = [
     name: 'LiDAR-Equipped Device',
     price: '$450/device/mo',
     monthlyUsd: 450,
-    description: 'Sub-millimetre precision depth for tighter bend verification or spacing checks.',
+    description: 'Precision depth measurement for operations where accuracy creates measurable value.',
     valueAnchor: 'Precision depth where accuracy earns its keep',
     capabilityStep: '03',
   },
@@ -65,7 +65,7 @@ export const pricingTiers: PricingTier[] = [
     price: '$1,200/bench/mo',
     badge: 'Start Here',
     description:
-      'Start with calibrated capture on one bench. Pilot includes the baseline workflow modules you need to prove fit before you expand.',
+      'Start with guided execution on one bench. Pilot includes the baseline workflow modules you need to prove fit before you expand.',
     fit: 'Single benches, small crews, and beta evaluations that need a clean path into paid production use.',
     includedUsage: {
       cameras: '1 reference camera (included)',
@@ -89,7 +89,7 @@ export const pricingTiers: PricingTier[] = [
     price: '$3,200/bench/mo',
     badge: 'Recommended',
     description:
-      'Scale from a single reference camera into mixed-camera coverage. Production includes the analytics and calibration controls teams expect before wider rollout.',
+      'Scale from one camera into broader coverage. Production includes the analytics and performance controls teams expect before wider rollout.',
     fit: 'Fabrication yards, multi-bench shops, and operators who need repeatable validation with cleaner economics.',
     includedUsage: {
       cameras: '1 reference camera (included) — add context or LiDAR devices as needed',
@@ -97,17 +97,17 @@ export const pricingTiers: PricingTier[] = [
       overage: 'Transparent add-ons for higher camera density or heavier storage volumes',
     },
     highlights: [
-      'Mixed fleet orchestration',
+      'Expandable coverage across devices',
       'Analytics and QA review',
-      'Custom calibration controls',
+      'Equipment-matched validation',
       'Per-bench economics visibility',
-      'Clear upgrade path for LiDAR precision',
+      'Clear path to precision depth',
     ],
     includedCapabilities: [
       'Guided validation workflows',
       'Daily bench reporting',
       'Analytics and QA review',
-      'Custom calibration controls',
+      'Equipment-matched validation',
     ],
     cta: 'Explore Production',
     highlight: true,
@@ -136,7 +136,7 @@ export const pricingTiers: PricingTier[] = [
       'Guided validation workflows',
       'Daily bench reporting',
       'Analytics and QA review',
-      'Custom calibration controls',
+      'Equipment-matched validation',
       'Compliance evidence export',
       'Audit-ready traceability',
     ],
@@ -150,7 +150,7 @@ export const pricingNarrative = {
   body: 'A bench is one active fabrication station with its own operators, capture workflow, and validation history. Pricing follows the bench so buyers can connect setup effort, included usage, and measured value without guessing what is bundled.',
   bullets: [
     'Pilot and beta evaluations include a documented review date, tier boundary, and conversion expectation before activation.',
-    'Every bench includes one reference camera. Context cameras ($200/mo) and LiDAR-equipped devices ($450/mo) are added per device when wider coverage or precision depth is needed.',
+    'Every bench includes one camera. Coverage devices ($200/mo) and precision depth devices ($450/mo) are added per device when the workflow benefits from them.',
     'Plan-specific capabilities use "included in [Plan]" language. Where feature gates are still rolling out, the pricing page calls that out explicitly instead of pretending enforcement is already complete.',
     'Advanced safety workflows and stronger protection boundaries are scoped separately from the base offer until the technical and legal limits are explicit.',
   ],
@@ -176,10 +176,10 @@ export const pricingModuleStatus: PricingModuleStatus[] = [
     note: 'Public plan designation is live; feature-gate wiring is still rolling out.',
   },
   {
-    name: 'Custom Calibration',
+    name: 'Equipment-Matched Validation',
     includedIn: 'Production, Enterprise',
     enforcementStatus: 'Progressive enforcement',
-    note: 'Custom profile gating is documented but not fully wired yet.',
+    note: 'Equipment profile gating is documented but not fully wired yet.',
   },
   {
     name: 'Compliance Export',

@@ -24,11 +24,11 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Reality Anchors | Fabrication Capture & Execution Validation Software',
+    default: 'Reality Anchors | Fabrication Execution Software',
     template: '%s | Reality Anchors',
   },
   description:
-    'Calibrated capture and execution validation software for fabrication teams. Start with one camera, bring your own compatible hardware, and add LiDAR only when precision depth matters.',
+    'Execution guidance and validation software for fabrication teams. Guides operators, validates work before irreversible actions, and records every outcome.',
   metadataBase: new URL('https://realityanchorsltd.com'),
   openGraph: {
     siteName: 'Reality Anchors',

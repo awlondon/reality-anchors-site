@@ -23,7 +23,7 @@ const BROWSER_REQS = [
 const MOBILE_REQS = [
   { label: 'OS', detail: 'Android 10 (API level 29) or later' },
   { label: 'Camera', detail: 'Rear-facing camera, 12 MP or higher recommended' },
-  { label: 'Depth sensor', detail: 'Optional — LiDAR or depth sensor enables advanced measurement features' },
+  { label: 'Depth sensor', detail: 'Optional — enables enhanced capture capabilities' },
   { label: 'Connectivity', detail: 'Wi-Fi or cellular data (for cloud upload)' },
   { label: 'Storage', detail: 'Minimum 2 GB free for local capture buffer' },
 ];

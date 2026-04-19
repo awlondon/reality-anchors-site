@@ -18,14 +18,14 @@ import { faqStructuredData } from '@/data/faq';
 import { getDividersForPage } from '@/data/photoDividers';
 
 export const metadata: Metadata = {
-  title: 'Fabrication Capture Software for Rebar and Industrial Workcells',
+  title: 'Fabrication Execution Software for Rebar and Industrial Workcells',
   description:
-    'Reality Anchors is fabrication capture software for calibrated validation in rebar and industrial workcells. Start with one camera, use your own hardware, and add LiDAR only when precision depth matters.',
+    'Reality Anchors is fabrication execution software for rebar and industrial workcells. Guides operators, validates work before irreversible actions, and records every outcome.',
   alternates: { canonical: '/' },
   openGraph: {
     title: 'Reality Anchors | Fabrication Capture Software',
     description:
-      'Calibrated capture and execution validation for fabrication teams using mixed camera fleets and customer-supplied hardware.',
+      'Execution guidance and validation for fabrication teams. Validates work before irreversible actions and records every outcome.',
   },
 };
 
@@ -43,7 +43,7 @@ export default async function Home() {
             name: 'Reality Anchors',
             url: 'https://realityanchorsltd.com',
             description:
-              'Calibrated capture and execution validation for steel fabrication. Mixed camera fleets, customer-supplied hardware, and measurable results that improve with every run.',
+              'Execution guidance and validation for steel fabrication. Customer-supplied hardware, operator-confirmed steps, and measurable results that improve with every run.',
           }),
         }}
       />

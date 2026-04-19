@@ -30,14 +30,14 @@ export const HOME_EXPERIMENT: ExperimentConfig = {
     },
     heroOverride: {
       A: {
-        headline: 'Calibrated capture for fabrication teams that need proof, not day-one autonomy.',
+        headline: 'Structured execution for fabrication teams that need proof, not day-one autonomy.',
         subhead:
           'Start with your own cameras, validate every run against your job specs, and build measurable proof from every bench.',
       },
       B: {
         headline: 'Start with one camera. Add coverage when the workflow earns it.',
         subhead:
-          'Reality Anchors makes one-camera deployment practical first, then expands into mixed-camera coverage and optional LiDAR only where precision depth matters.',
+          'Reality Anchors makes one-camera deployment practical first, then expands into additional coverage and optional precision depth only where it creates real value.',
       },
       C: {
         headline:

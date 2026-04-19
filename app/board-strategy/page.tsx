@@ -157,13 +157,13 @@ export default function BoardStrategyPage() {
         <section className="border border-line bg-card rounded-2xl p-8">
           <h2 className="text-xl font-semibold text-txt mb-4">Per-Bench Unit Economics: Land and Expand</h2>
           <p className="text-sm text-muted leading-relaxed mb-5">
-            Revenue per station scales with the customer&apos;s own investment in capture accuracy. Each bench starts with a base subscription and one reference camera. As teams add context cameras and LiDAR devices, per-bench ARPU expands without requiring new contracts or tier changes.
+            Revenue per station scales with the customer&apos;s own investment in execution coverage. Each bench starts with a base subscription and one camera. As teams add coverage and precision depth devices, per-bench ARPU expands without requiring new contracts or tier changes.
           </p>
           <div className="table-scroll-wrapper overflow-x-auto mb-5">
             <table className="ra-table">
               <thead><tr><th>Configuration</th><th>Monthly / bench</th><th>Annual / bench</th><th>Revenue driver</th></tr></thead>
               <tbody>
-                <tr><td>Base (1 reference camera)</td><td className="font-mono text-accent-2">$1,200</td><td className="font-mono">$14,400</td><td>Entry — calibrated capture from day one</td></tr>
+                <tr><td>Base (1 camera)</td><td className="font-mono text-accent-2">$1,200</td><td className="font-mono">$14,400</td><td>Entry — guided execution from day one</td></tr>
                 <tr><td>+ 1 context camera</td><td className="font-mono text-accent-2">$1,400</td><td className="font-mono">$16,800</td><td>Wider coverage, multi-angle validation</td></tr>
                 <tr><td>+ 2 context + 1 LiDAR</td><td className="font-mono text-accent-2">$2,050</td><td className="font-mono">$24,600</td><td>Full fleet with precision depth</td></tr>
               </tbody>

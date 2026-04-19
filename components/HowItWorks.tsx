@@ -12,7 +12,7 @@ const steps = [
     number: '01',
     title: 'One Camera',
     description:
-      'Start with a single reference camera and a known object in frame. Reality anchors establish real-world scale from day one so capture stays tied to the physical bench, not manual guesswork.',
+      'Start with a single camera. The system establishes reliable measurements automatically so capture stays tied to the physical bench, not manual guesswork.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -25,7 +25,7 @@ const steps = [
     number: '02',
     title: 'Add Context',
     description:
-      'Bring a second camera for wider context or coverage. Mixed device types work together, and measured signals can determine bar size instead of depending on user declaration. +$200/device/mo.',
+      'Bring a second camera for wider context or coverage. Mixed device types work together, verifying work consistently without depending on manual entry. +$200/device/mo.',
     icon: (
       <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10" aria-hidden="true">
         <circle cx="20" cy="20" r="20" fill="#0d1520" stroke="#1e3048" strokeWidth="1" />
@@ -87,8 +87,7 @@ export default function HowItWorks() {
             Start simple. Add capability as you need it.
           </h2>
           <p className="mt-3 max-w-xl text-muted">
-            Begin with one camera and a reality anchor. Scale to mixed fleets and LiDAR precision only when your
-            operation demands it.
+            Begin with one camera. Scale to additional coverage only when your operation demands it.
           </p>
         </motion.div>
 
